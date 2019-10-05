@@ -1,0 +1,101 @@
+<head></head>
+<style></style>
+<body>
+    <div style="padding: 20px; color: white">
+        Select file:
+        <select onchange="load(this)">
+            <option value="task_restart_384">task_restart_384</option>
+            <option value="task_restart_385">task_restart_385</option>
+            <option value="task_restart_386">task_restart_386</option>
+            <option value="task_restart_387">task_restart_387</option>
+            <option value="task_restart_388">task_restart_388</option>
+            <option value="task_restart_389">task_restart_389</option>
+        </select>
+    </div>
+    <div id="graph"></div>
+    <script src="//unpkg.com/3d-force-graph"></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+
+    <script>
+
+        function load(value){
+            draw(value.value)
+        }
+
+        draw("graph");
+
+        function draw(name){
+            let div = document.getElementById("graph");
+            d3.json(name+".json", function (error, d) {
+                let myGraph = ForceGraph3D();
+                myGraph(div).graphData(d).forceEngine("d3");
+
+                myGraph.nodeColor(function (d) {
+                    //return d3.rgb(255, 255, 255);
+                    //return d3.rgb(120, 130, 255);
+                    if(d.highlight){return d3.rgb(200, 75, 75)}
+                    return d3.rgb(120, 130, 255);
+                });
+                myGraph.nodeVal(function (d) {
+                    console.log(4);
+                    console.log(d.highlight);
+                    if(d.highlight){return 300;}
+                    return 4;
+                });
+
+                myGraph.d3Force("charge").strength(function (d) {
+                    return -1000;
+                });
+                myGraph.d3Force("link").distance(function (d) {
+                    return 500;
+                });
+                myGraph.d3Force("link").strength(function (d) {
+                    return 0.3;
+                });
+                // myGraph.d3Force('collide', d3.forceCollide(myGraph.nodeRelSize(function (d) {
+                //     if(d.highlight){return 30}
+                //     return 4;
+                // })));
+
+                let previous = 0;
+                let interval = setInterval(function () {
+                    p = d.nodes[0].x;
+                    if (previous !== p) {
+                        previous = p;
+                    } else {
+
+                        let newNodes = [];
+                        d.nodes.forEach(function (node) {
+                            newNodes.push({
+                                id: node.id,
+                                x: node.x,
+                                y: node.y,
+                                z: node.z
+                            });
+                        });
+
+                        let newLinks = [];
+                        d.links.forEach(function (link) {
+                            newLinks.push({
+                                source: link.source.id,
+                                target: link.target.id
+                            })
+                        });
+                        let graph = {
+                            nodes: newNodes,
+                            links: newLinks
+                        };
+                        clearInterval(interval);
+                    }
+                }, 2000);
+            });
+        }
+
+
+        function highlightToColor(hightlight) {
+            if(hightlight){return "red";}
+            return "blue";
+        }
+
+</script>
+</body>
