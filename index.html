@@ -26,7 +26,7 @@
 
         function draw(name){
             let div = document.getElementById("graph");
-            d3.json(name+".json", function (error, d) {
+            d3.json("https://guardeec.github.io/"+name+".json", function (error, d) {
                 let myGraph = ForceGraph3D();
                 myGraph(div).graphData(d).forceEngine("d3");
 
