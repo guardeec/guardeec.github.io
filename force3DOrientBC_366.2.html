@@ -1,0 +1,76 @@
+<head></head>
+<style></style>
+<body>
+    <div id="graph"></div>
+    <script src="//unpkg.com/3d-force-graph"></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+
+    <script>
+        let div = document.getElementById("graph");
+        d3.json("https://guardeec.github.io/graphBC_366_2.json", function (error, d) {
+
+            d = normal(d);
+            let myGraph = ForceGraph3D();
+            myGraph(div).graphData(d).forceEngine("d3");
+
+            myGraph.nodeColor(function (d) {
+                return d.color;
+            });
+
+            myGraph.nodeVal(function (d) {
+                return d.size;
+            });
+
+            myGraph.nodeOpacity(1);
+
+            myGraph.d3Force("charge").strength(function (d) {
+                return -1000;
+            });
+
+            myGraph.d3Force("link").distance(function (d) {
+                return 500;
+            });
+            myGraph.d3Force("link").strength(function (d) {
+                return 0.3;
+            });
+            myGraph.d3Force('collide', d3.forceCollide(myGraph.nodeRelSize()));
+
+            myGraph.onNodeClick(node => {
+                console.log(node, 1)
+            });
+
+            myGraph.linkOpacity(0.1)
+
+        });
+
+
+        function normal(d) {
+            let max = Math.max.apply(null, d.nodes.map(node=>node.value));
+            let min = Math.min.apply(null, d.nodes.filter(node=>node.value>0).map(node=>node.value));
+            console.log(min);
+            d.nodes = d.nodes.map(node=>{return{id:node.id,
+                color:floatToGradient(node.value, max),
+                size: floatToSize(node.value, max),
+                opacity: floatToOpacity(node.value, max)
+            }});
+            return d;
+        }
+
+        function floatToOpacity(value, max) {
+            return 1.0;
+        }
+
+        function floatToSize(value, max) {
+            return value/max*10000;
+            //return Math.pow(value/max+1, 13)+1;
+        }
+
+        function floatToGradient(value, max) {
+            let color = d3.scalePow().domain([0,max])
+                .interpolate(d3.interpolateHcl)
+                .range([d3.rgb('#0025ff'), d3.rgb('#ff0a00')]);
+            return color(value);
+        }
+
+</script>
+</body>
