@@ -30,7 +30,7 @@
         function draw(){
             let div = document.getElementById("graph");
 
-            d3.json("https://guardeec.github.io/graph.json", function (error, d) {
+            d3.json("https://guardeec.github.io/bc_pr_salsa.json", function (error, d) {
 
                 let absoluteMax = 5000;
                 let colorScale = d3.scaleLinear().domain([0,absoluteMax]).range(["blue", "red"]);
