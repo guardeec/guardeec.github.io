@@ -1,0 +1,153 @@
+<head></head>
+<style></style>
+<body>
+    <div style="padding: 20px; background-color: rgba(230,236,255,0.93)">
+        Select file:
+        <select onchange="load(this)">
+            <option value="bc">BC</option>
+            <option value="pr">PR</option>
+            <option value="salsa_hub">SALSA_HUB</option>
+            <option value="salsa_auth">SALSA_AUTH</option>
+        </select>
+    </div>
+    <div id="graph"></div>
+    <script src="//unpkg.com/3d-force-graph"></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+
+    <script>
+
+        // function load(value){
+        //     draw(value.value)
+        // }
+
+        let type = "BC";
+        function load(value){
+            type = value.value;
+        }
+
+        draw();
+
+        function draw(){
+            let div = document.getElementById("graph");
+
+            d3.json("https://guardeec.github.io/graph.json", function (error, d) {
+
+                let absoluteMax = 5000;
+                let colorScale = d3.scaleLinear().domain([0,absoluteMax]).range(["blue", "red"]);
+                d = scale(d, absoluteMax);
+                let currentType = "BC";
+
+
+
+
+                let myGraph = ForceGraph3D();
+                myGraph(div).graphData(d).forceEngine("d3");
+
+                myGraph.backgroundColor("#1f1e2d");
+
+
+
+
+                setInterval(function () {
+                    if(currentType!==type){
+                        currentType=type;
+                        myGraph.nodeVal(function (d) {
+                            return d[type];
+                        });
+                        myGraph.nodeColor(function (d) {
+                            return colorScale(d[type]);
+                        });
+                        d3.select(".nodes")
+                            .selectAll("circle")
+                            .attr("fill", '#f44336');
+
+                    }
+                },100);
+
+                myGraph.nodeColor(function (d) {
+                    return colorScale(d["bc"])
+                });
+                myGraph.nodeVal(function (d) {
+
+                    return d["bc"];
+                });
+                myGraph.linkOpacity(0.1);
+
+                myGraph.d3Force("charge").strength(function (d) {
+                    return -1000;
+                });
+                myGraph.d3Force("link").distance(function (d) {
+                    return 500;
+                });
+                myGraph.d3Force("link").strength(function (d) {
+                    return 0.3;return d[type];
+                });
+
+
+                let previous = 0;
+                let interval = setInterval(function () {
+                    p = d.nodes[0].x;
+                    if (previous !== p) {
+                        previous = p;
+                    } else {
+
+                        let newNodes = [];
+                        d.nodes.forEach(function (node) {
+                            newNodes.push({
+                                id: node.id,
+                                x: node.x,
+                                y: node.y,
+                                z: node.z
+                            });
+                        });
+
+                        let newLinks = [];
+                        d.links.forEach(function (link) {
+                            newLinks.push({
+                                source: link.source.id,
+                                target: link.target.id
+                            })
+                        });
+                        let graph = {
+                            nodes: newNodes,
+                            links: newLinks
+                        };
+                        clearInterval(interval);
+                    }
+                }, 2000);
+            });
+        }
+
+        function scale(graph, absoluteMax) {
+            let maxBC = 0;
+            let maxPR = 0;
+            let max_s_h = 0;
+            let max_s_a = 0;
+            graph.nodes.forEach(node=>{
+                if(maxBC<node.bc){maxBC=node.bc}
+                if(maxPR<node.pr){maxPR=node.pr}
+                if(max_s_h<node.salsa_hub){max_s_h=node.salsa_hub}
+                if(max_s_a<node.salsa_auth){max_s_a=node.salsa_auth}
+            });
+
+            let bc = d3.scaleLinear().domain([0, maxBC]).range([0, absoluteMax]);
+            let pr = d3.scaleLinear().domain([0, maxPR]).range([0, absoluteMax]);
+            let s_h = d3.scaleLinear().domain([0, max_s_h]).range([0, absoluteMax]);
+            let s_a = d3.scaleLinear().domain([0, max_s_a]).range([0, absoluteMax]);
+
+            graph.nodes = graph.nodes.map(node =>  {
+                return {
+                    id: node.id,
+                    bc: bc(node.bc),
+                    pr: pr(node.pr),
+                    salsa_hub: s_h(node.salsa_hub),
+                    salsa_auth: s_a(node.salsa_auth)
+                };
+            });
+            return graph;
+        }
+
+
+
+</script>
+</body>
