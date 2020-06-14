@@ -1,0 +1,80 @@
+<head></head>
+<style>
+    body{
+        background: rgb(0,0,15);
+    }
+    font{
+        color: white;
+    }
+</style>
+<body>
+<div style="padding: 20px; color: white">
+    Select file:
+    <select onchange="load(this)">
+        <option value="task_USERS_TNULL.json">task_USERS_TNULL.json</option>
+        <option value="task_USERS_BIGFEST.json">task_USERS_BIGFEST.json</option>
+        <option value="task_USERS_HCAKBARS.json">task_USERS_HCAKBARS.json</option>
+        <option value="task_USERS_LENTACH.json">task_USERS_LENTACH.json</option>
+        <option value="task_USERS_MCELROY.json">task_USERS_MCELROY.json</option>
+        <option value="task_USERS_MHL.json">task_USERS_MHL.json</option>
+        <option value="task_USERS_SEVCABEL.json">task_USERS_SEVCABEL.json</option>
+        <option value="task_USERS_TPROGER.json">task_USERS_TPROGER.json</option>
+        <option value="task_USERS_VARENNE.json">task_USERS_VARENNE.json</option>
+        <option value="task_USERS_VELO.json">task_USERS_VELO.json</option>
+        <option value="task_bots_MARSHRUTKA_highQuality.json">task_bots_MARSHRUTKA_highQuality.json</option>
+        <option value="task_bots_MARSHRUTKA_lowQuality.json">task_bots_MARSHRUTKA_lowQuality.json</option>
+        <option value="task_bots_OLENI_highQuality.json">task_bots_OLENI_highQuality.json</option>
+        <option value="task_bots_OLENI_lowQuality.json">task_bots_OLENI_lowQuality.json</option>
+        <option value="task_bots_OLENI_midQuality.json">task_bots_OLENI_midQuality.json</option>
+        <option value="task_bots_PARIK_highQuality2.json">task_bots_PARIK_highQuality2.json</option>
+        <option value="task_bots_PARIK_lowQuality3.json">task_bots_PARIK_lowQuality3.json</option>
+        <option value="task_bots_PARIK_midQuality.json">task_bots_PARIK_midQuality.json</option>
+        <option value="task_max_diana.json">task_max_diana.json</option>
+    </select>
+</div>
+<div id="graph"></div>
+<script src="//unpkg.com/3d-force-graph"></script>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+
+<script>
+
+    function load(value){
+        draw(value.value)
+    }
+
+    draw("task_USERS_TNULL.json");
+
+    function draw(name){
+        let div = document.getElementById("graph");
+        d3.json("https://guardeec.github.io/bots/"+name, function (error, d) {
+            let max = Math.max.apply(null, d.nodes.map(node=>node.pr));
+            let color = d3.scalePow().domain([0,max])
+                .interpolate(d3.interpolateHcl)
+                .range([d3.rgb('#0025ff'), d3.rgb('#ff0a00')]);
+            let size = d3.scaleLinear().domain([0,max]).range([1,1000]);
+
+            let myGraph = ForceGraph3D();
+            myGraph(div).graphData(d).forceEngine("d3");
+
+            myGraph.nodeColor(function (d) {
+                return color(d.pr);
+            });
+            myGraph.nodeVal(function (d) {
+                console.log(size(d.pr));
+                return size(d.pr);
+            });
+
+            myGraph.d3Force("charge").strength(function (d) {
+                return -1000;
+            });
+            myGraph.d3Force("link").distance(function (d) {
+                return 500;
+            });
+            myGraph.d3Force("link").strength(function (d) {
+                return 0.3;
+            });
+        });
+    }
+
+</script>
+</body>

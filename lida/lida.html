@@ -1,0 +1,63 @@
+<head></head>
+<style>
+    body{
+        background: rgb(0,0,15);
+    }
+    font{
+        color: white;
+    }
+</style>
+<body>
+    <div style="padding: 20px; color: white">
+        Select file:
+        <select onchange="load(this)">
+            <option value="task_restart_384">task_restart_384</option>
+            <option value="task_restart_385">task_restart_385</option>
+            <option value="task_restart_386">task_restart_386</option>
+            <option value="task_restart_387">task_restart_387</option>
+            <option value="task_restart_388">task_restart_388</option>
+            <option value="task_restart_389">task_restart_389</option>
+        </select>
+    </div>
+    <div id="graph"></div>
+    <script src="//unpkg.com/3d-force-graph"></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+
+    <script>
+
+        function load(value){
+            draw(value.value)
+        }
+
+        draw("task_restart_384");
+
+        function draw(name){
+            let div = document.getElementById("graph");
+            d3.json("https://guardeec.github.io/lida/"+name+".json", function (error, d) {
+                let myGraph = ForceGraph3D();
+                myGraph(div).graphData(d).forceEngine("d3");
+
+                myGraph.nodeColor(function (d) {
+                    if(d.highlight){return d3.rgb(200, 75, 75)}
+                    return d3.rgb(120, 130, 255);
+                });
+
+                myGraph.nodeVal(function (d) {
+                    if(d.highlight){return 300;}
+                    return 4;
+                });
+
+                myGraph.d3Force("charge").strength(function (d) {
+                    return -1000;
+                });
+                myGraph.d3Force("link").distance(function (d) {
+                    return 500;
+                });
+                myGraph.d3Force("link").strength(function (d) {
+                    return 0.3;
+                });
+            });
+        }
+
+</script>
+</body>

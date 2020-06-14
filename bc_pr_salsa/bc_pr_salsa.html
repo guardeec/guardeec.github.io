@@ -16,10 +16,6 @@
 
     <script>
 
-        // function load(value){
-        //     draw(value.value)
-        // }
-
         let type = "BC";
         function load(value){
             type = value.value;
@@ -30,23 +26,15 @@
         function draw(){
             let div = document.getElementById("graph");
 
-            d3.json("https://guardeec.github.io/bc_pr_salsa.json", function (error, d) {
+            d3.json("https://guardeec.github.io/bc_pr_salsa/bc_pr_salsa.json", function (error, d) {
 
                 let absoluteMax = 5000;
                 let colorScale = d3.scaleLinear().domain([0,absoluteMax]).range(["blue", "red"]);
                 d = scale(d, absoluteMax);
                 let currentType = "BC";
-
-
-
-
                 let myGraph = ForceGraph3D();
                 myGraph(div).graphData(d).forceEngine("d3");
-
                 myGraph.backgroundColor("#1f1e2d");
-
-
-
 
                 setInterval(function () {
                     if(currentType!==type){
@@ -84,37 +72,37 @@
                 });
 
 
-                let previous = 0;
-                let interval = setInterval(function () {
-                    p = d.nodes[0].x;
-                    if (previous !== p) {
-                        previous = p;
-                    } else {
-
-                        let newNodes = [];
-                        d.nodes.forEach(function (node) {
-                            newNodes.push({
-                                id: node.id,
-                                x: node.x,
-                                y: node.y,
-                                z: node.z
-                            });
-                        });
-
-                        let newLinks = [];
-                        d.links.forEach(function (link) {
-                            newLinks.push({
-                                source: link.source.id,
-                                target: link.target.id
-                            })
-                        });
-                        let graph = {
-                            nodes: newNodes,
-                            links: newLinks
-                        };
-                        clearInterval(interval);
-                    }
-                }, 2000);
+                // let previous = 0;
+                // let interval = setInterval(function () {
+                //     p = d.nodes[0].x;
+                //     if (previous !== p) {
+                //         previous = p;
+                //     } else {
+                //
+                //         let newNodes = [];
+                //         d.nodes.forEach(function (node) {
+                //             newNodes.push({
+                //                 id: node.id,
+                //                 x: node.x,
+                //                 y: node.y,
+                //                 z: node.z
+                //             });
+                //         });
+                //
+                //         let newLinks = [];
+                //         d.links.forEach(function (link) {
+                //             newLinks.push({
+                //                 source: link.source.id,
+                //                 target: link.target.id
+                //             })
+                //         });
+                //         let graph = {
+                //             nodes: newNodes,
+                //             links: newLinks
+                //         };
+                //         clearInterval(interval);
+                //     }
+                // }, 2000);
             });
         }
 
