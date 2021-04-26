@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CanBusVis</title>
+</head>
+<body>
+    <div style="padding: 20px; color: white">
+        Select file:
+        <select onchange="load(this)">
+            <option value="correlated_signal_attack_1_masquerade_modified_merged.csv.json">correlated_signal_attack_1_masquerade</option>
+            <option value="correlated_signal_attack_1_modified_merged.csv.json">correlated_signal_attack_1</option>
+            <option value="correlated_signal_attack_2_masquerade_modified_merged.csv.json">correlated_signal_attack_2_masquerade</option>
+            <option value="correlated_signal_attack_2_modified_merged.csv.json">correlated_signal_attack_2</option>
+            <option value="correlated_signal_attack_3_masquerade_modified_merged.csv.json">correlated_signal_attack_3_masquerade</option>
+            <option value="correlated_signal_attack_3_modified_merged.csv.json">correlated_signal_attack_3</option>
+            <option value="fuzzing_attack_1_modified_merged.csv.json">fuzzing_attack_1</option>
+            <option value="fuzzing_attack_2_modified_merged.csv.json">fuzzing_attack_2</option>
+            <option value="fuzzing_attack_3_modified_merged.csv.json">fuzzing_attack_3</option>
+            <option value="max_engine_coolant_temp_attack_masquerade_modified_merged.csv.json">max_engine_coolant_temp_attack_masquerade</option>
+            <option value="max_engine_coolant_temp_attack_modified_merged.csv.json">max_engine_coolant_temp_attack</option>
+            <option value="max_speedometer_attack_1_masquerade_modified_merged.csv.json">max_speedometer_attack_1_masquerade</option>
+            <option value="max_speedometer_attack_1_modified_merged.csv.json">max_speedometer_attack_1</option>
+            <option value="max_speedometer_attack_2_masquerade_modified_merged.csv.json">max_speedometer_attack_2_masquerade</option>
+            <option value="max_speedometer_attack_2_modified_merged.csv.json">max_speedometer_attack_2</option>
+            <option value="max_speedometer_attack_3_masquerade_modified_merged.csv.json">max_speedometer_attack_3_masquerade</option>
+            <option value="max_speedometer_attack_3_modified_merged.csv.json">max_speedometer_attack_3</option>
+            <option value="reverse_light_off_attack_1_masquerade_modified_merged.csv.json">reverse_light_off_attack_1_masquerade</option>
+            <option value="reverse_light_off_attack_1_modified_merged.csv.json">reverse_light_off_attack_1</option>
+            <option value="reverse_light_off_attack_2_masquerade_modified_merged.csv.json">reverse_light_off_attack_2_masquerade</option>
+            <option value="reverse_light_off_attack_2_modified_merged.csv.json">reverse_light_off_attack_2</option>
+            <option value="reverse_light_off_attack_3_masquerade_modified_merged.csv.json">reverse_light_off_attack_3_masquerade</option>
+            <option value="reverse_light_off_attack_3_modified_merged.csv.json">reverse_light_off_attack_3</option>
+            <option value="reverse_light_on_attack_1_masquerade_modified_merged.csv.json">reverse_light_on_attack_1_masquerade</option>
+            <option value="reverse_light_on_attack_1_modified_merged.csv.json">reverse_light_on_attack_1</option>
+            <option value="reverse_light_on_attack_2_masquerade_modified_merged.csv.json">reverse_light_on_attack_2_masquerade</option>
+            <option value="reverse_light_on_attack_2_modified_merged.csv.json">reverse_light_on_attack_2</option>
+            <option value="reverse_light_on_attack_3_masquerade_modified_merged.csv.json">reverse_light_on_attack_3_masquerade</option>
+            <option value="reverse_light_on_attack_3_modified_merged.csv.json">reverse_light_on_attack_3</option>
+        </select>
+        <select onchange="select_cl(this)">
+            <option value="task_USERS_TNULL.json">logan</option>
+            <option value="task_USERS_TNULL.json">nn_orig</option>
+            <option value="task_USERS_TNULL.json">nn_fuzzed</option>
+        </select>
+    </div>
+    <div id="canvas" style="text-align: center">
+        <svg width="2000" height="2000">
+            <g transform="translate(0, 0)"></g>
+        </svg>
+    </div>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://d3js.org/d3-scale-chromatic.v0.3.min.js"></script>
+    <script>
+
+
+        var classifier = 2
+        var file = "correlated_signal_attack_1_masquerade_modified_merged.csv.json"
+        function select_cl(cl) {
+            switch (cl.value) {
+                case "logan":
+                    classifier = 2
+                    break
+                case "nn_orig":
+                    classifier = 3
+                    break
+                case "nn_fuzzed":
+                    classifier = 4
+                    break
+            }
+            draw()
+        }
+
+        function load(f) {
+            file = f.value
+            draw()
+        }
+
+        draw()
+
+        function draw() {
+
+            d3.select("svg").selectAll("*").remove()
+
+            d3.json(file, function (data) {
+                let devices = [];
+                data.forEach(function (block) {
+                    Object.keys(block).forEach(function (device) {
+                        if (!devices.includes(device)) {
+                            devices.push(device)
+                        }
+                    })
+                });
+                let intervals = data.length;
+                let ring = [];
+                let circleLine = [];
+                let cl_errors = [];
+
+                let maxTrafficPerDeviceInBlock = 0;
+                let maxTrafficPerBlock = 0;
+                for (let i = 0; i < intervals; i++) {
+                    let blockSum = 0;
+                    Object.keys(data[i]).forEach(function (device) {
+                        let sum = data[i][device].reduce(function (p1, p2) {
+                            return p1 + p2[1]
+                        }, 0);
+                        blockSum += sum;
+                        if (sum > maxTrafficPerDeviceInBlock) {
+                            maxTrafficPerDeviceInBlock = sum
+                        }
+                    });
+                    if (maxTrafficPerBlock < blockSum) {
+                        maxTrafficPerBlock = blockSum;
+                    }
+                }
+
+                let pallete = d3.scaleOrdinal(d3["schemeSet2"]);
+
+                for (let i = 0; i < intervals; i++) {
+                    ring.push({
+                        start: 2 * Math.PI / intervals * (i),
+                        end: 2 * Math.PI / intervals * (i + 1),
+                        innerR: 300, outerR: 310,
+                        fill: "grey",
+                        //                fill: "blue",
+                        opacity: 0.9 / intervals * (i + 1),
+                        stroke: "white",
+                        strokeWidth: 5
+                    });
+                    let blockSum = 0;
+                    let supportRingBlockSum = 0;
+                    devices.forEach(function (device, q) {
+                        if (data[i][device].length > 0) {
+
+                            let supportRingHeight = 0;
+                            data[i][device].forEach(function (packetCount) {
+                                supportRingHeight += 300 / maxTrafficPerDeviceInBlock * packetCount[1];
+                                supportRingBlockSum += packetCount[1];
+                            });
+                            ring.push({
+                                start: 0,
+                                end: 360,
+                                innerR: 311 + supportRingHeight + 0,
+                                outerR: 311 + supportRingHeight + 3,
+                                fill: "grey",
+                                opacity: 0.1,
+                                stroke: "white"
+                            });
+
+                        }
+                    });
+
+
+                }
+
+                for (let i = 0; i < intervals; i++) {
+
+
+                    let blockSum = 0;
+
+
+                    devices.forEach(function (device, q) {
+                        if (data[i][device].length > 0) {
+                            let barHeight = 0;
+                            data[i][device].forEach(function (packetCount) {
+                                let color = "lightgrey"
+                                let start = (2 * Math.PI / intervals * i) + (2 * Math.PI / intervals / devices.length * (q))
+                                let end = (2 * Math.PI / intervals * i) + (2 * Math.PI / intervals / devices.length * (q + 1))
+                                let innerR = 311 + barHeight
+                                let outerR = 311 + 300 / maxTrafficPerDeviceInBlock * packetCount[1] + barHeight
+
+                                rad = (start + (end - start) / 2) - Math.PI / 2
+                                middle = outerR
+                                x = middle * Math.cos(rad)
+                                y = middle * Math.sin(rad)
+
+                                if (packetCount[classifier][0] > 0) {
+                                    color = "lightblue"
+                                    cl_errors.push({
+                                        x: x,
+                                        y: y,
+                                        fill: "lightblue",
+                                        r: packetCount[classifier][0]
+                                    });
+                                }
+                                if (packetCount[classifier][3] > 0) {
+                                    color = "red"
+                                    cl_errors.push({
+                                        x: x,
+                                        y: y,
+                                        fill: "red",
+                                        r: packetCount[classifier][0]
+                                    });
+                                }
+                                if (packetCount[classifier][2] > 0) {
+                                    color = "orange"
+                                    cl_errors.push({
+                                        x: x,
+                                        y: y,
+                                        fill: "orange",
+                                        r: packetCount[classifier][0]
+                                    });
+                                }
+
+                                if (300 / maxTrafficPerDeviceInBlock * packetCount[1] > 1) {
+                                    ring.push({
+                                        start: (2 * Math.PI / intervals * i) + (2 * Math.PI / intervals / devices.length * (q)),
+                                        end: (2 * Math.PI / intervals * i) + (2 * Math.PI / intervals / devices.length * (q + 1)),
+                                        innerR: 311 + barHeight,
+                                        outerR: 311 + 300 / maxTrafficPerDeviceInBlock * packetCount[1] + barHeight,
+                                        // fill: pallete(q),
+                                        fill: color,
+                                        opacity: 1,
+                                        stroke: "white",
+                                        strokeWidth: 1,
+                                        device: device
+                                    });
+                                }
+                                barHeight += 300 / maxTrafficPerDeviceInBlock * packetCount[1];
+                                blockSum += packetCount[1];
+                            });
+
+                            ring.push({
+                                start: (2 * Math.PI / intervals * i) + (2 * Math.PI / intervals / devices.length * (q)),
+                                end: (2 * Math.PI / intervals * i) + (2 * Math.PI / intervals / devices.length * (q + 1)),
+                                innerR: 311 + barHeight,
+                                outerR: 311 + barHeight + 3,
+                                fill: "black",
+                                opacity: 1,
+                                stroke: "white",
+                                strokeWidth: 1,
+                                device: device
+                            });
+                        }
+                        ring.push({
+                            start: (2 * Math.PI / intervals * i) + (2 * Math.PI / intervals / devices.length * (q)),
+                            end: (2 * Math.PI / intervals * i) + (2 * Math.PI / intervals / devices.length * (q + 1)),
+                            innerR: 0,
+                            outerR: 611,
+                            fill: "grey",
+                            opacity: 0,
+                            number: q,
+                            stroke: "white",
+                            strokeWidth: 0
+                        });
+                    });
+                    circleLine.push([(Math.PI * 2 / intervals * i) + (Math.PI * 2 / intervals) / 2, 100 + 200 / maxTrafficPerBlock * blockSum]);
+                }
+
+                let arcGenerator = d3.arc()
+                    .innerRadius(function (d) {
+                        return d.innerR;
+                    })
+                    .outerRadius(function (d) {
+                        return d.outerR;
+                    })
+                    .startAngle(function (d) {
+                        return d.start;
+                    })
+                    .endAngle(function (d) {
+                        return d.end;
+                    });
+
+                let pointers = [];
+                for (let i = 0; i < intervals; i++) {
+                    pointers.push(
+                        {
+                            start: (2 * Math.PI / intervals * i),
+                            end: (2 * Math.PI / intervals * i) + (2 * Math.PI / intervals / devices.length),
+                            innerR: 300,
+                            outerR: 310,
+                            fill: "red",
+                            opacity: 0
+                        }
+                    );
+                }
+                let point = d3.select('svg').append('g').attr('transform', 'translate(1000, 1000)').attr('id', 'pointer')
+                    .selectAll('path')
+                    .data(pointers)
+                    .enter()
+                    .append('path')
+                    .style("fill", function (d) {
+                        return d.fill;
+                    })
+                    .style("opacity", function (d) {
+                        return d.opacity;
+                    })
+                    .attr('d', arcGenerator);
+
+                let previosAngle = 0;
+                let g = d3.select('g')
+                    .selectAll('path')
+                    .data(ring)
+                    .enter()
+                    .append('path')
+                    .style("fill", function (d) {
+                        return d.fill;
+                    })
+                    .style("opacity", function (d) {
+                        return d.opacity;
+                    })
+                    .attr('d', arcGenerator)
+                    .style("stroke", function (d) {
+                        return d.stroke;
+                    })
+                    .style("stroke-width", function (d) {
+                        return d.strokeWidth;
+                    })
+                    .on('click', function (d) {
+                        // point.style("transform", "rotate(" + 0 + "deg)")
+                        // previosAngle = 360 / intervals / devices.length * d.number;
+                        // d3.select('#pointer').transition().duration(500).attr("transform", "translate(1000,1000) rotate(" + previosAngle + ")")
+                        alert("can_id=\"" + devices[d.number] + "\"")
+                    });
+
+                circleLine.push(circleLine[0]);
+                let radialLineGenerator = d3.radialLine().curve(d3.curveCatmullRom);
+                let radialLine = radialLineGenerator(circleLine);
+                d3.select('g')
+                    .append('path')
+                    .style("fill", "none")
+                    .style("stroke-width", 5)
+                    .style("stroke", "#999")
+                    //            .style("stroke", "orange")
+                    .attr('d', radialLine);
+                circleLine = data.map(function (t, i) {
+                    return [Math.PI * 2 / intervals * i, 100]
+                });
+                circleLine.push(circleLine[0]);
+                radialLine = radialLineGenerator(circleLine);
+                d3.select('g')
+                    .append('path')
+                    .style("fill", "none")
+                    .style("stroke-width", 5)
+                    .style("opacity", 0.3)
+                    .style("stroke", "#999")
+                    .style("stroke-dasharray", ("20, 10"))
+                    .attr('d', radialLine);
+
+                cl_errors.forEach(cl => {
+                    d3.select('g')
+                        .append('circle')
+                        .style("fill", cl.fill)
+                        .style("opacity", 0.5)
+                        .attr("r", 2)
+                        .attr("cx", cl.x)
+                        .attr("cy", cl.y)
+                })
+            });
+        }
+    </script>
+</body>
+</html>
