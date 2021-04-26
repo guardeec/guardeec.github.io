@@ -46,7 +46,7 @@
 
     function draw(name){
         let div = document.getElementById("graph");
-        d3.json(name, function (error, d) {
+        d3.json("https://guardeec.github.io/bots/"+name, function (error, d) {
             let max = Math.max.apply(null, d.nodes.map(node=>node.pr));
             let color = d3.scalePow().domain([0,max])
                 .interpolate(d3.interpolateHcl)
