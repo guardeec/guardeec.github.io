@@ -40,9 +40,9 @@
 
     //d3.json("https://guardeec.github.io/arelight_graph/diff_ru.json", function (error, classes) {
     //d3.json("https://guardeec.github.io/arelight_graph/diff_ua.json", function (error, classes) {
-    // d3.json("https://guardeec.github.io/arelight_graph/same.json", function (error, classes) {
+    d3.json("https://guardeec.github.io/arelight_graph/same.json", function (error, classes) {
     // d3.json("https://guardeec.github.io/arelight_graph/only_ru.json", function (error, classes) {
-    d3.json("https://guardeec.github.io/arelight_graph/only_ua.json", function (error, classes) {
+    //d3.json("https://guardeec.github.io/arelight_graph/only_ua.json", function (error, classes) {
         if (error) throw error;
         function calculate_opacity(d) {
             var target = d.target.data.name, weight = undefined, sent = undefined
