@@ -1,0 +1,174 @@
+[
+    {
+        "w": 0.8253968253968254,
+        "imports": [
+            {
+                "name": "GPE.Ukraine",
+                "w": 0.2777777777777778,
+                "sent": "pos"
+            },
+            {
+                "name": "GPE.US",
+                "w": 0.07142857142857142,
+                "sent": "pos"
+            }
+        ],
+        "name": "GPE.UK"
+    },
+    {
+        "w": 0.6428571428571428,
+        "imports": [
+            {
+                "name": "GPE.UK",
+                "w": 0.2222222222222222,
+                "sent": "pos"
+            },
+            {
+                "name": "ORG.NATO",
+                "w": 0.07142857142857142,
+                "sent": "pos"
+            }
+        ],
+        "name": "GPE.Ukraine"
+    },
+    {
+        "w": 0.07142857142857142,
+        "imports": [
+            {
+                "name": "GPE.UK",
+                "w": 0.07142857142857142,
+                "sent": "neu"
+            }
+        ],
+        "name": "GPE.India"
+    },
+    {
+        "w": 0.14285714285714285,
+        "imports": [
+            {
+                "name": "GPE.Ukraine",
+                "w": 0.07142857142857142,
+                "sent": "pos"
+            }
+        ],
+        "name": "ORG.NATO"
+    },
+    {
+        "w": 0.14285714285714285,
+        "imports": [
+            {
+                "name": "GPE.UK",
+                "w": 0.07142857142857142,
+                "sent": "pos"
+            }
+        ],
+        "name": "GPE.US"
+    },
+    {
+        "w": 0.49999999999999994,
+        "imports": [
+            {
+                "name": "PERSON.Judi Love",
+                "w": 0.07142857142857142,
+                "sent": "neu"
+            },
+            {
+                "name": "PERSON.David Mitchell’s",
+                "w": 0.14285714285714285,
+                "sent": "neg"
+            }
+        ],
+        "name": "PERSON.Guz Khan"
+    },
+    {
+        "w": 0.49999999999999994,
+        "imports": [
+            {
+                "name": "PERSON.Guz Khan",
+                "w": 0.14285714285714285,
+                "sent": "neu"
+            },
+            {
+                "name": "PERSON.David Mitchell’s",
+                "w": 0.14285714285714285,
+                "sent": "neg"
+            }
+        ],
+        "name": "PERSON.Judi Love"
+    },
+    {
+        "w": 0.5714285714285714,
+        "imports": [
+            {
+                "name": "PERSON.Guz Khan",
+                "w": 0.14285714285714285,
+                "sent": "neu"
+            },
+            {
+                "name": "PERSON.Judi Love",
+                "w": 0.14285714285714285,
+                "sent": "neg"
+            }
+        ],
+        "name": "PERSON.David Mitchell’s"
+    },
+    {
+        "w": 0.2857142857142857,
+        "imports": [
+            {
+                "name": "PERSON.Petey Piranha",
+                "w": 0.07142857142857142,
+                "sent": "neu"
+            },
+            {
+                "name": "PERSON.Wiggler",
+                "w": 0.07142857142857142,
+                "sent": "neu"
+            }
+        ],
+        "name": "PERSON.Kamek"
+    },
+    {
+        "w": 0.2857142857142857,
+        "imports": [
+            {
+                "name": "PERSON.Kamek",
+                "w": 0.07142857142857142,
+                "sent": "neu"
+            },
+            {
+                "name": "PERSON.Wiggler",
+                "w": 0.07142857142857142,
+                "sent": "neu"
+            }
+        ],
+        "name": "PERSON.Petey Piranha"
+    },
+    {
+        "w": 0.2857142857142857,
+        "imports": [
+            {
+                "name": "PERSON.Kamek",
+                "w": 0.07142857142857142,
+                "sent": "neu"
+            },
+            {
+                "name": "PERSON.Petey Piranha",
+                "w": 0.07142857142857142,
+                "sent": "neu"
+            }
+        ],
+        "name": "PERSON.Wiggler"
+    },
+    {
+        "w": 0.1111111111111111,
+        "imports": [
+            {
+                "name": "GPE.UK",
+                "w": 0.1111111111111111,
+                "sent": "pos"
+            }
+        ],
+        "name": "GPE.France"
+    }
+]

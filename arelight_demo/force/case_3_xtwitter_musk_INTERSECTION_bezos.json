@@ -1,0 +1,26 @@
+{
+    "nodes": [
+        {
+            "id": "GPE.Manchester",
+            "c": 0.42857142857142855
+        },
+        {
+            "id": "GPE.York",
+            "c": 0.42857142857142855
+        }
+    ],
+    "links": [
+        {
+            "source": "GPE.Manchester",
+            "target": "GPE.York",
+            "c": 0.21428571428571427,
+            "sent": "neu"
+        },
+        {
+            "source": "GPE.York",
+            "target": "GPE.Manchester",
+            "c": 0.21428571428571427,
+            "sent": "neu"
+        }
+    ]
+}

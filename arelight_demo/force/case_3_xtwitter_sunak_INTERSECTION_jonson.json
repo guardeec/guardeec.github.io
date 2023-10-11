@@ -1,0 +1,174 @@
+{
+    "nodes": [
+        {
+            "id": "GPE.UK",
+            "c": 0.8253968253968254
+        },
+        {
+            "id": "GPE.Ukraine",
+            "c": 0.6428571428571428
+        },
+        {
+            "id": "GPE.India",
+            "c": 0.07142857142857142
+        },
+        {
+            "id": "ORG.NATO",
+            "c": 0.14285714285714285
+        },
+        {
+            "id": "GPE.US",
+            "c": 0.14285714285714285
+        },
+        {
+            "id": "PERSON.Guz Khan",
+            "c": 0.49999999999999994
+        },
+        {
+            "id": "PERSON.Judi Love",
+            "c": 0.49999999999999994
+        },
+        {
+            "id": "PERSON.David Mitchell’s",
+            "c": 0.5714285714285714
+        },
+        {
+            "id": "PERSON.Kamek",
+            "c": 0.2857142857142857
+        },
+        {
+            "id": "PERSON.Petey Piranha",
+            "c": 0.2857142857142857
+        },
+        {
+            "id": "PERSON.Wiggler",
+            "c": 0.2857142857142857
+        },
+        {
+            "id": "GPE.France",
+            "c": 0.1111111111111111
+        }
+    ],
+    "links": [
+        {
+            "source": "GPE.UK",
+            "target": "GPE.Ukraine",
+            "c": 0.2222222222222222,
+            "sent": "pos"
+        },
+        {
+            "source": "GPE.Ukraine",
+            "target": "GPE.UK",
+            "c": 0.2777777777777778,
+            "sent": "pos"
+        },
+        {
+            "source": "GPE.UK",
+            "target": "GPE.India",
+            "c": 0.07142857142857142,
+            "sent": "neu"
+        },
+        {
+            "source": "ORG.NATO",
+            "target": "GPE.Ukraine",
+            "c": 0.07142857142857142,
+            "sent": "pos"
+        },
+        {
+            "source": "GPE.Ukraine",
+            "target": "ORG.NATO",
+            "c": 0.07142857142857142,
+            "sent": "pos"
+        },
+        {
+            "source": "GPE.UK",
+            "target": "GPE.US",
+            "c": 0.07142857142857142,
+            "sent": "pos"
+        },
+        {
+            "source": "GPE.US",
+            "target": "GPE.UK",
+            "c": 0.07142857142857142,
+            "sent": "pos"
+        },
+        {
+            "source": "PERSON.Guz Khan",
+            "target": "PERSON.Judi Love",
+            "c": 0.14285714285714285,
+            "sent": "neu"
+        },
+        {
+            "source": "PERSON.Guz Khan",
+            "target": "PERSON.David Mitchell’s",
+            "c": 0.14285714285714285,
+            "sent": "neu"
+        },
+        {
+            "source": "PERSON.Judi Love",
+            "target": "PERSON.Guz Khan",
+            "c": 0.07142857142857142,
+            "sent": "neu"
+        },
+        {
+            "source": "PERSON.Judi Love",
+            "target": "PERSON.David Mitchell’s",
+            "c": 0.14285714285714285,
+            "sent": "neg"
+        },
+        {
+            "source": "PERSON.David Mitchell’s",
+            "target": "PERSON.Judi Love",
+            "c": 0.14285714285714285,
+            "sent": "neg"
+        },
+        {
+            "source": "PERSON.Kamek",
+            "target": "PERSON.Petey Piranha",
+            "c": 0.07142857142857142,
+            "sent": "neu"
+        },
+        {
+            "source": "PERSON.Kamek",
+            "target": "PERSON.Wiggler",
+            "c": 0.07142857142857142,
+            "sent": "neu"
+        },
+        {
+            "source": "PERSON.Petey Piranha",
+            "target": "PERSON.Kamek",
+            "c": 0.07142857142857142,
+            "sent": "neu"
+        },
+        {
+            "source": "PERSON.Petey Piranha",
+            "target": "PERSON.Wiggler",
+            "c": 0.07142857142857142,
+            "sent": "neu"
+        },
+        {
+            "source": "PERSON.Wiggler",
+            "target": "PERSON.Kamek",
+            "c": 0.07142857142857142,
+            "sent": "neu"
+        },
+        {
+            "source": "PERSON.Wiggler",
+            "target": "PERSON.Petey Piranha",
+            "c": 0.07142857142857142,
+            "sent": "neu"
+        },
+        {
+            "source": "PERSON.David Mitchell’s",
+            "target": "PERSON.Guz Khan",
+            "c": 0.14285714285714285,
+            "sent": "neg"
+        },
+        {
+            "source": "GPE.UK",
+            "target": "GPE.France",
+            "c": 0.1111111111111111,
+            "sent": "pos"
+        }
+    ]
+}

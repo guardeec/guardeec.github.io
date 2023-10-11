@@ -1,0 +1,36 @@
+{
+    "nodes": [
+        {
+            "id": "GPE.UK",
+            "c": 1.3888888888888888
+        },
+        {
+            "id": "GPE.Ukraine",
+            "c": 1.3571428571428572
+        },
+        {
+            "id": "GPE.France",
+            "c": 0.031746031746031744
+        }
+    ],
+    "links": [
+        {
+            "source": "GPE.UK",
+            "target": "GPE.Ukraine",
+            "c": 0.7777777777777778,
+            "sent": "pos"
+        },
+        {
+            "source": "GPE.Ukraine",
+            "target": "GPE.UK",
+            "c": 0.5793650793650793,
+            "sent": "pos"
+        },
+        {
+            "source": "GPE.UK",
+            "target": "GPE.France",
+            "c": 0.031746031746031744,
+            "sent": "pos"
+        }
+    ]
+}

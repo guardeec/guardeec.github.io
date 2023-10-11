@@ -1,0 +1,24 @@
+[
+    {
+        "w": 0.5714285714285714,
+        "imports": [
+            {
+                "name": "GPE.York",
+                "w": 0.2857142857142857,
+                "sent": "neu"
+            }
+        ],
+        "name": "GPE.Manchester"
+    },
+    {
+        "w": 0.5714285714285714,
+        "imports": [
+            {
+                "name": "GPE.Manchester",
+                "w": 0.2857142857142857,
+                "sent": "neu"
+            }
+        ],
+        "name": "GPE.York"
+    }
+]

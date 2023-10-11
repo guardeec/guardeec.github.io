@@ -1,0 +1,135 @@
+[
+    {
+        "w": 0.05555555555555555,
+        "name": "GPE.Ukraine"
+    },
+    {
+        "w": 0.05555555555555555,
+        "imports": [
+            {
+                "name": "GPE.Ukraine",
+                "w": 0.05555555555555555,
+                "sent": "pos"
+            }
+        ],
+        "name": "ORG.NATO"
+    },
+    {
+        "w": 0.2222222222222222,
+        "imports": [
+            {
+                "name": "PERSON.Petey Piranha",
+                "w": 0.05555555555555555,
+                "sent": "neu"
+            },
+            {
+                "name": "PERSON.Wiggler",
+                "w": 0.05555555555555555,
+                "sent": "neu"
+            }
+        ],
+        "name": "PERSON.Kamek"
+    },
+    {
+        "w": 0.2222222222222222,
+        "imports": [
+            {
+                "name": "PERSON.Kamek",
+                "w": 0.05555555555555555,
+                "sent": "neu"
+            },
+            {
+                "name": "PERSON.Wiggler",
+                "w": 0.05555555555555555,
+                "sent": "neu"
+            }
+        ],
+        "name": "PERSON.Petey Piranha"
+    },
+    {
+        "w": 0.2222222222222222,
+        "imports": [
+            {
+                "name": "PERSON.Kamek",
+                "w": 0.05555555555555555,
+                "sent": "neu"
+            },
+            {
+                "name": "PERSON.Petey Piranha",
+                "w": 0.05555555555555555,
+                "sent": "neu"
+            }
+        ],
+        "name": "PERSON.Wiggler"
+    },
+    {
+        "w": 1.0555555555555556,
+        "imports": [
+            {
+                "name": "PERSON.Judi Love",
+                "w": 0.3888888888888889,
+                "sent": "neu"
+            },
+            {
+                "name": "PERSON.David Mitchell’s",
+                "w": 0.05555555555555558,
+                "sent": "neg"
+            }
+        ],
+        "name": "PERSON.Guz Khan"
+    },
+    {
+        "w": 1.0,
+        "imports": [
+            {
+                "name": "PERSON.Guz Khan",
+                "w": 0.33333333333333337,
+                "sent": "neu"
+            },
+            {
+                "name": "PERSON.David Mitchell’s",
+                "w": 0.2222222222222222,
+                "sent": "neg"
+            }
+        ],
+        "name": "PERSON.Judi Love"
+    },
+    {
+        "w": 0.6111111111111112,
+        "imports": [
+            {
+                "name": "PERSON.Guz Khan",
+                "w": 0.2777777777777778,
+                "sent": "neu"
+            },
+            {
+                "name": "PERSON.Judi Love",
+                "w": 0.05555555555555558,
+                "sent": "neg"
+            }
+        ],
+        "name": "PERSON.David Mitchell’s"
+    },
+    {
+        "w": 0.2222222222222222,
+        "imports": [
+            {
+                "name": "GPE.US",
+                "w": 0.1111111111111111,
+                "sent": "pos"
+            }
+        ],
+        "name": "GPE.UK"
+    },
+    {
+        "w": 0.2222222222222222,
+        "imports": [
+            {
+                "name": "GPE.UK",
+                "w": 0.1111111111111111,
+                "sent": "pos"
+            }
+        ],
+        "name": "GPE.US"
+    }
+]
