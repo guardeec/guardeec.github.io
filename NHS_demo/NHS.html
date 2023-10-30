@@ -67,7 +67,6 @@
             index_value: "index_value"
         };
 
-
         d3.csv("https://guardeec.github.io/NHS_demo/txt/"+data_name).then(data => {
             txt_container = d3.select("#txt_container")
             data.forEach(function(row) {
@@ -87,7 +86,7 @@
 
 
 
-        const margin = {top: 0, right: 10, bottom: 10, left: 10},
+        const margin = {top: 30, right: 50, bottom: 10, left: 50},
         width = 960 - margin.left - margin.right,
         height = 800 - margin.top - margin.bottom;
 
@@ -98,6 +97,16 @@
             .append("g")
             .attr("transform", `translate(${margin.left},${margin.top})`);
 
+        columnParams.sankeyColumns.forEach((columnName, i) => {
+            console.log(columnName)
+            svg.append("text")
+                .attr("x", (width / (columnParams.sankeyColumns.length - 1)) * i)  // Distribute the labels across the width
+                .attr("y", 0)
+                .attr("dy", "-1em")  // Position above the diagram
+                .attr("text-anchor", "middle")
+                .attr("font-weight", "bold")
+                .text(columnName);
+        });
 
         d3.csv("https://guardeec.github.io/NHS_demo/vis/"+data_name).then(data => {
             const nodes = [];
@@ -142,46 +151,44 @@
             });
 
             links.forEach(link => {
-    link.flowIdentifier = link.source.id + "_" + link.target.id;  // Create a unique identifier for each link.
-});
+                link.flowIdentifier = link.source.id + "_" + link.target.id;  // Create a unique identifier for each link.
+            });
 
-          function highlightFlow(flowIdentifier, highlight = true) {
-    svg.selectAll(".link")
-        .filter(d =>
-            d.flowIdentifier.split("_")[1].includes(flowIdentifier.split("_")[0]) ||
-            d.flowIdentifier.split("_")[0].includes(flowIdentifier.split("_")[1])
-        )
-        .attr("stroke", highlight ? "#f00" : "#888");
-}
+            function highlightFlow(flowIdentifier, highlight = true) {
+                svg.selectAll(".link")
+                    .filter(d =>
+                        d.flowIdentifier.split("_")[1].includes(flowIdentifier.split("_")[0]) ||
+                        d.flowIdentifier.split("_")[0].includes(flowIdentifier.split("_")[1])
+                    )
+                    .attr("stroke", highlight ? "#f00" : "#888");
+            }
 
-svg.append("g")
-    .selectAll(".link")
-    .data(graph.links)
-    .join("path")
-    .attr("class", "link")
-    .attr("d", d3.sankeyLinkHorizontal())
-    .attr("stroke-width", d => Math.max(1, d.width))
-    .attr("fill", "none")
-    .attr("stroke", "#888")
-    .attr("stroke-opacity", 0.5)
-    .on('click', function(event, d) {
-        console.log(d.number);
-    })
-    .on("mouseover", function(event, d) {
-        console.log(d.flowIdentifier)
-        highlightFlow(d.flowIdentifier); // Highlight only the links of this flow.
-        hide_text(d.number);
-        console.log(d.number);
+            svg.append("g")
+                .selectAll(".link")
+                .data(graph.links)
+                .join("path")
+                .attr("class", "link")
+                .attr("d", d3.sankeyLinkHorizontal())
+                .attr("stroke-width", d => Math.max(1, d.width))
+                .attr("fill", "none")
+                .attr("stroke", "#888")
+                .attr("stroke-opacity", 0.5)
+                .on('click', function(event, d) {
+                    console.log(d.number);
+                })
+                .on("mouseover", function(event, d) {
+                    console.log(d.flowIdentifier)
+                    highlightFlow(d.flowIdentifier); // Highlight only the links of this flow.
+                    hide_text(d.number);
+                    console.log(d.number);
 
-        d3.select(this).attr("stroke", "#f00")
-    })
-    .on("mouseout", function(event, d) {
-        highlightFlow(d.flowIdentifier, false); // Remove the highlight from the links of this flow.
-        show_text();
-        d3.select(this).attr("stroke", "#888")
-    });
-
-
+                    d3.select(this).attr("stroke", "#f00")
+                })
+                .on("mouseout", function(event, d) {
+                    highlightFlow(d.flowIdentifier, false); // Remove the highlight from the links of this flow.
+                    show_text();
+                    d3.select(this).attr("stroke", "#888")
+                });
 
             const node = svg.append("g")
                 .selectAll(".node")
@@ -202,8 +209,6 @@ svg.append("g")
                 .attr("text-anchor", d => d.x0 < width / 2 ? "start" : "end")
                 .text(d => d.name);
         });
-
-
 
 
     </script>
