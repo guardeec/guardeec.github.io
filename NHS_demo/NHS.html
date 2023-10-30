@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+    <style>
+        /* Some basic styling for the Sankey */
+        /*.link {*/
+        /*    fill: none;*/
+        /*    stroke: #000;*/
+        /*    stroke-opacity: 0.2;*/
+        /*}*/
+
+        .node rect {
+            fill: #999;
+            stroke: #fff;
+            stroke-width: 2px;
+        }
+
+        .node text {
+            font: 12px sans-serif;
+            pointer-events: none;
+        }
+    </style>
+
+    <body>
+
+        <head>
+          <title>Demo NHS</title>
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        </head>
+
+        <div class="container">
+          <h1>Demo NHS</h1>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div>
+                        <div id="dataset_folder">
+<!--                            Here is your datasets from folder &lt;!&ndash;INSERT_FOLDER_NAME&ndash;&gt;-->
+                        </div>
+                        <div style="padding-top: 10px" align="center" id="txt_container">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-8">
+                    <div align="center" id="svg_container">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-sankey/0.12.3/d3-sankey.min.js"></script>
+    <script>
+        data_name = "NHS.csv"
+        const columnParams = {
+            // sankeyColumns: ["column1", "column2", "column3", "column4"],
+            sankeyColumns: ["data_type_META", "data_type", "purpose", "purpose_META"],
+            numberColumn: "paragraph",
+            index_value: "index_value"
+        };
+
+
+        d3.csv("https://guardeec.github.io/NHS_demo/txt/"+data_name).then(data => {
+            txt_container = d3.select("#txt_container")
+            data.forEach(function(row) {
+                txt_container.append("div")
+                    .attr("id", "txtline_" + row.row)  // Set the id to "txt" + row_number
+                    .attr("style", "text-align: left;")
+                    .text(row.row + ". " + row.text);  // Set the inner text to the text from the CSV}
+            });
+        });
+        function hide_text(number){
+            d3.selectAll("div[id^='txtline_']").style("display", "none");
+            d3.selectAll("div[id^='txtline_"+number+"']").style("display", "block");
+        }
+        function show_text(){
+            d3.selectAll("div[id^='txtline_']").style("display", "block");
+        }
+
+
+
+        const margin = {top: 0, right: 10, bottom: 10, left: 10},
+        width = 960 - margin.left - margin.right,
+        height = 800 - margin.top - margin.bottom;
+
+        const svg = d3.select("#svg_container")
+            .append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+            .attr("transform", `translate(${margin.left},${margin.top})`);
+
+
+        d3.csv("https://guardeec.github.io/NHS_demo/vis/"+data_name).then(data => {
+            const nodes = [];
+            const links = [];
+
+            data.forEach(row => {
+                for(let i = 0; i < columnParams.sankeyColumns.length - 1; i++) {
+                    const source = `${i}-${row[columnParams.sankeyColumns[i]]}`;
+                    const target = `${i + 1}-${row[columnParams.sankeyColumns[i + 1]]}`;
+
+                    if (!nodes.find(d => d.id === source)) {
+                        nodes.push({ id: source, name: row[columnParams.sankeyColumns[i]] });
+                    }
+
+                    if (!nodes.find(d => d.id === target)) {
+                        nodes.push({ id: target, name: row[columnParams.sankeyColumns[i + 1]] });
+                    }
+
+                    const link = links.find(d => d.source.id === source && d.target.id === target);
+                    if (link) {
+                        link.value += 1;
+                    } else {
+                        links.push({ source, target, value: 1, number: row[columnParams.numberColumn], index_value: row[columnParams.index_value] });
+                    }
+                }
+            });
+
+            console.log(nodes)
+            console.log(links)
+
+            // Set up Sankey layout
+            const sankey = d3.sankey()
+                .nodeWidth(15)
+                .nodePadding(10)
+                .size([width, height])
+                .nodeId(d => d.id)
+                .links(links);
+
+            const graph = sankey({
+                nodes: nodes.map(d => Object.assign({}, d)),
+                links: links.map(d => Object.assign({}, d))
+            });
+
+            links.forEach(link => {
+    link.flowIdentifier = link.source.id + "_" + link.target.id;  // Create a unique identifier for each link.
+});
+
+          function highlightFlow(flowIdentifier, highlight = true) {
+    svg.selectAll(".link")
+        .filter(d =>
+            d.flowIdentifier.split("_")[1].includes(flowIdentifier.split("_")[0]) ||
+            d.flowIdentifier.split("_")[0].includes(flowIdentifier.split("_")[1])
+        )
+        .attr("stroke", highlight ? "#f00" : "#888");
+}
+
+svg.append("g")
+    .selectAll(".link")
+    .data(graph.links)
+    .join("path")
+    .attr("class", "link")
+    .attr("d", d3.sankeyLinkHorizontal())
+    .attr("stroke-width", d => Math.max(1, d.width))
+    .attr("fill", "none")
+    .attr("stroke", "#888")
+    .attr("stroke-opacity", 0.5)
+    .on('click', function(event, d) {
+        console.log(d.number);
+    })
+    .on("mouseover", function(event, d) {
+        console.log(d.flowIdentifier)
+        highlightFlow(d.flowIdentifier); // Highlight only the links of this flow.
+        hide_text(d.number);
+        console.log(d.number);
+
+        d3.select(this).attr("stroke", "#f00")
+    })
+    .on("mouseout", function(event, d) {
+        highlightFlow(d.flowIdentifier, false); // Remove the highlight from the links of this flow.
+        show_text();
+        d3.select(this).attr("stroke", "#888")
+    });
+
+
+
+            const node = svg.append("g")
+                .selectAll(".node")
+                .data(graph.nodes)
+                .join("g")
+                .attr("class", "node");
+
+            node.append("rect")
+                .attr("x", d => d.x0)
+                .attr("y", d => d.y0)
+                .attr("height", d => d.y1 - d.y0)
+                .attr("width", d => d.x1 - d.x0);
+
+            node.append("text")
+                .attr("x", d => d.x0 < width / 2 ? d.x1 + 6 : d.x0 - 6)
+                .attr("y", d => (d.y1 + d.y0) / 2)
+                .attr("dy", "0.35em")
+                .attr("text-anchor", d => d.x0 < width / 2 ? "start" : "end")
+                .text(d => d.name);
+        });
+
+
+
+
+    </script>
+    </body>
+
+</html>

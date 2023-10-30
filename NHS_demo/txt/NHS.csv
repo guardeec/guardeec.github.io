@@ -1,0 +1,208 @@
+row,text
+0,Privacy policy
+1,
+2,"Please read this privacy policy carefully before using this site, mobile application or other digital service."
+3,
+4,"The Department of Health and Social Care (We, Us, Our or DHSC) is committed to protecting and respecting your privacy."
+5,
+6,SCOPE OF POLICY
+7,
+8,"For the purpose of this document, the Data Protection Legislation shall mean any data protection or privacy legislation from time to time in force in the UK including the Data Protection Act 2018, and the UK General Data Protection Regulation and any successor legislation."
+9,
+10,"This policy (together with Our end-user licence agreement (EULA) and our Website Terms and Conditions and any additional terms of use incorporated by reference into the EULA, (together Our Terms of Use) applies to your use of:"
+11,
+12,"All Better Health Mobile Applications hosted on Better Health (App Site(s)) or any other mobile application software provided by DHSC (DHSC Apps) with which you have not been asked to agree to a separate Privacy Policy; collectively referred to as (App(s)), once you have downloaded or streamed a copy of the App onto your mobile telephone, tablet or handheld device (Device)."
+13,"Any of the services accessible through the App(s) or any website services provided by DHSC (Services) that are available on the App Site(s) or other websites of Ours (Services Site(s)), unless the EULA or Website Terms and Conditions states that a separate privacy policy applies to a particular Service, in which case that privacy policy only applies."
+14,"Any ‘Chatbot(s)’, ‘Voice Skill(s)’ or ‘Action(s)’ made available through third party platforms that are also subject to the Privacy Policy of that provider which you will have been asked to agree to as part of your use of that platform."
+15,"This policy sets out the basis on which any personal data We collect from you, or that you provide to Us, will be processed by Us. Please read the following carefully to understand Our views and practices regarding your personal data and how We will treat it."
+16,
+17,"For the purpose of the Data Protection Legislation, the Controller is the Department of Health and Social Care of:"
+18,
+19,39 Victoria Street
+20,London
+21,SW1H 0EU
+22,United Kingdom
+23,
+24,The Data Protection Officer for the Department of Health and Social Care is Mr Lee Cramp.
+25,
+26,INFORMATION WE MAY COLLECT ABOUT YOU
+27,
+28,We may collect and process the following data about you:
+29,
+30,Information you give Us (Submitted information):
+31,
+32,"You may give Us information about you by filling in forms on DHSC App Site(s) and/or Services Site(s), (collectively, Our Site(s)), or by corresponding with Us by phone, e-mail or otherwise. This includes information you provide when you register to Our Site(s), subscribe to any of Our Services, participate in discussion boards (or other social media functions on or linked to Our Site(s)), enter a competition, promotion or survey or carry out any other activity and when you report a problem with Our Site(s). The information you give Us may include your name, address, e-mail address and phone number, age, username, password, personal description, and any other information you provide."
+33,
+34,Information We collect about you.
+35,
+36,"With regard to each of your visits to Our Site(s) or services, We may automatically collect the following information about you:"
+37,
+38,"Technical information, including the type of mobile device you use, mobile network information, your mobile operating system, the type of mobile browser you use (Device Information);"
+39,Details of your use of any of Our App(s) or your visits to any of Our Site(s) and the resources that you access (Log Information);
+40,"Internet Protocol (IP) address used to connect your computer to the Internet, your login information, browser type and version, time zone setting, browser plug-in types and versions, operating system and platform, information about your visit, including the full Uniform Resource Locators (URL) clickstream to, through and from Our Site(s), (including date and time); product you viewed or search for; page response times, download errors, length of visits to certain pages, page interaction information, and methods used to browse away from the page and any phone number used to call Our customer service number (Other Information)."
+41,"Location Information. We may also use GPS technology to determine your current location. Some of Our location-enabled Services require your personal data for the feature to work. If you wish to use the particular feature, you will be asked to consent to your data being used for this purpose. You can enable or disable location services when you use our Service at any time through your mobile device settings (Location Information)."
+42,Our App(s) and Our Site(s) may collect information about user demographics through Google Analytics Demographics and Interest Reporting. This information will only be used for internal reporting and not shared with third parties. You can opt out by following the How to opt out of Our use of SDKs section below for our App(s) or exiting Our Site(s).
+43,"Activity data. Some of our Apps, Chatbot(s), Skill(s) and Action(s) are designed to track your activity. We may collect your activity data (for example, steps, location, distance, pace activity time) either when you manually input your activity data into the App or when you employ features in the App or the Services that are designed to capture your activity data."
+44,"Contact information. In some of our App(s), Chatbot(s), Skill(s) and Actions you have the option of providing contact information to Us in order to get help from a human operator. We will not collect this information unless You specifically elect to share this information with us."
+45,"Conversational engagements. We may use information We collect or You provide to us through our Chatbot(s), Skill(s) and Action(s) to tailor and optimise your experience within the relevant platform and to provide the most relevant information, support and advice around the relevant subject matter."
+46,Information we receive from other sources.
+47,
+48,"We may receive information about you if you use any of the Services Sites We operate or the other Services We provide. In this case We will have informed you when We collected that data that it may be shared internally and combined with data collected on Our Site(s). We are also working closely with third parties (including, for example, business partners, sub-contractors, delivery services, analytics providers, search information providers) and may receive information about you from them."
+49,
+50,Cookies
+51,
+52,Our Site(s) uses cookies to distinguish you from other users of Our Site(s). This helps Us to provide you with a good experience when you browse Our Sites(s) and also allows Us to improve Our Sites(s). For detailed information on the cookies We use and the purposes for which We use them see the section “Information about Our use of Cookies” below.
+53,
+54,Software Developer Kits (SDK)
+55,
+56,Our Apps use SDKs to distinguish you from other users of Our Apps. This helps Us collect information about how you are using Our Apps so We can ensure We are providing you with a good experience when using Our Apps and allows Us to improve Our Apps in future. For detailed information on the SDKs We use and the purposes for which We use them see the section “Information about Our use of SDKs” below.
+57,
+58,Uses made of the information
+59,
+60,We use information held about you in the following ways:
+61,
+62,Information you give to Us.
+63,
+64,We may use this information:
+65,
+66,"to carry out Our obligations arising from any contracts entered into between you and Us and to provide you with the information, products and services that you request from Us;"
+67,to provide you with information about other Department of Health and Social Care and its executive agencies’ services We offer that we feel may be of interest to you. You can opt out of receiving any communication We send you relating to this at any time;
+68,"if you are an existing customer, We will only contact you by electronic means (e-mail or SMS) with information about services We feel may be of benefit to you. If you are a new customer, We will contact you by electronic means only if you have consented to this. If you do not want Us to use your data in this way, please tick the relevant box situated on the form on which We collect your data (the registration form);"
+69,to notify you about changes to Our Service;
+70,to ensure that content from Our Sites(s) is presented in the most effective manner for you and for your computer.
+71,Information We collect about you.
+72,
+73,We may use this information:
+74,
+75,"to administer Our Site(s) and for internal operations, including troubleshooting, data analysis, testing, research, statistical and survey purposes;"
+76,to improve Our Site(s) to ensure that content is presented in the most effective manner for you and for your Device/computer;
+77,"to allow you to participate in interactive features of Our service, when you choose to do so;"
+78,as part of Our efforts to keep Our Site(s) safe and secure;
+79,to make suggestions and recommendations to you and other users of Our Site(s) about services that may interest you or them.
+80,to provide you with targeted advertising that We feel may be of interest to you.
+81,for research purposes carried out internally or by trusted third parties
+82,Information We receive from other sources.
+83,
+84,We may combine this information with information you give to Us and information We collect about you. We may use this information and the combined information for the purposes set out above (depending on the types of information We receive).
+85,
+86,Disclosure of your information
+87,
+88,We may share your information with selected third parties including but not limited to:
+89,
+90,"Business partners, suppliers and sub-contractors for the performance of any contract We enter into with you."
+91,"Local councils with which We collaborate to advise and support them in the delivery of their public health function, but only in an anonymised manner."
+92,Analytics and search engine providers that assist Us in the improvement and optimisation of Our Site(s).
+93,We may disclose your personal information to third parties:
+94,
+95,"If DHSC or substantially all of its assets are transferred to a third party organisation, in which case personal data held by it about its customers will be one of the transferred assets."
+96,"If We are under a duty to disclose or share your personal data in order to comply with any legal obligation, or in order to enforce or apply Our terms of use [Please see Our EULA pages and Our Terms and Conditions pages] and other agreements; or to protect the rights, property, or safety of DHSC, Our customers, or others"
+97,Where We store your personal data
+98,
+99,"All information you provide to Us is stored on secure servers held in both the European Economic Area (EEA) and GDPR compliant international data processors only. Where international data processors are used, all appropriate technical and legal safeguards will be put in place to ensure that you are afforded the same level of protection as within the EEA."
+100,
+101,"Where We have given you (or where you have chosen) a password which enables you to access certain parts of Our Site(s), you are responsible for keeping this password confidential. We ask you not to share a password with anyone."
+102,
+103,"Unfortunately, the transmission of information via the internet is not completely secure. Although We will do Our best to protect your personal data, We cannot guarantee the security of your data transmitted to Our Site(s); any transmission is at your own risk. Once We have received your information, We will use strict procedures and security features to try to prevent unauthorised access."
+104,
+105,Your rights
+106,
+107,You have the right to ask Us not to process your personal data for marketing purposes. We will usually inform you (before collecting your data) if We intend to use your data for such purposes or if We intend to disclose your information to any third party for such purposes. You can exercise your right to prevent such processing by checking certain boxes on the forms We use to collect your data. You can also exercise the right at any time by contacting Us at betterhealth@dhsc.gov.uk
+108,
+109,"Our Site(s) may, from time to time, contain links to and from the websites of Our partner networks and affiliates. If you follow a link to any of these websites, please note that these websites have their own privacy policies and that We do not accept any responsibility or liability for these policies. Please check these policies before you submit any personal data to these websites."
+110,
+111,Access to information
+112,
+113,The Data Protection Legislation gives you the right to access information held about you. Your right of access can be exercised in accordance with the Data Protection Legislation.
+114,
+115,Changes to Our privacy policy
+116,
+117,"Any changes We may make to Our privacy policy in the future will be posted on this page and, where appropriate, notified to you by email. Please check back frequently to see any updates or changes to Our privacy policy."
+118,
+119,Contact
+120,
+121,"Questions, comments and requests regarding this privacy policy are welcomed and should be addressed to:"
+122,
+123,betterhealth@dhsc.gov.uk;
+124,
+125,or
+126,
+127,Data Protection Officer
+128,
+129,Department of Health and Social Care
+130,
+131,39 Victoria Street
+132,London
+133,SW1H 0EU
+134,United Kingdom
+135,
+136,Information about Our use of cookies
+137,
+138,"Our Site(s) uses cookies to distinguish you from other users of Our Site(s). This helps Us to provide you with a good experience when you browse Our Site(s) and also allows us to improve Our Site(s). By continuing to browse Our Site(s), you are agreeing to Our use of cookies."
+139,
+140,A cookie is a small file of letters and numbers that We store on your browser or the hard drive of your computer if you agree. Cookies contain information that is transferred to your computer's hard drive.
+141,
+142,We use the following cookies:
+143,
+144,"Strictly necessary cookies. These are cookies that are required for the operation of Our Site(s). They include, for example, cookies that enable you to log into secure areas of Our Site(s)."
+145,"Analytical/performance cookies. They allow Us to recognise and count the number of visitors and to see how visitors move around Our Site(s) when they are using it/them. This helps Us to improve the way Our Site(s) work, for example, by ensuring that users are finding what they are looking for easily."
+146,ScorecardResearch use information collected through these cookies to help RhythmOne (please see the Advertising cookies section below) understand how widely its advertising services are used on the Internet. To refuse these cookies visit ScorecardResearch.
+147,"Functionality cookies. These are used to recognise you when you return to Our Site(s). This enables Us to personalise Our content for you, greet you by name and remember your preferences (for example, your choice of language or region)."
+148,"Targeting cookies. These cookies record your visit to Our Site(s), the pages you have visited and the links you have followed. We will use this information to make Our Site(s) more relevant to your interests. We may also share this information with third parties for this purpose."
+149,Advertising cookies.
+150,​​AppNexus
+151,
+152,"​This is a technology platform (Platform or AppNexus Platform) that We use to buy, sell, and deliver online advertising, including interest-based advertising, mostly through real-time bidding. In other words, the AppNexus Platform does not itself buy, sell, or deliver ads, but provides technology that other companies use for those purposes. The AppNexus Platform is designed to enable other companies (their clients) to buy, sell, or deliver advertising using “Platform Data” that clients may collect using the Platform, derive from their use of the Platform, or acquire from other sources and then use on the Platform. Read more about AppNexus and its cookie policy."
+153,"You can click below to opt out of having the Platform used to select ads for your browser based on your online web browsing behaviour. When you opt-out, an opt-out cookie (from adnxs.com) will be stored in your web browser. The Platform will know the choice you have made when it sees your opt-out cookie, and will apply your choice to all companies’ use of the Platform. If you block or delete the opt-out cookie, the Platform will not see your choice. Read about how to refuse AppNexus cookies at any time."
+154,"The opt-out cookie may not work if your browser is configured to block third-party cookies. If you delete your cookies, you will need to opt out again. There are browser plugins to help you preserve your opt-out cookies."
+155,
+156,"The opt-out only applies to the browser in which you set it. For example, if you set the opt-out while using Firefox, but then use Chrome, the opt-out will not be active in Chrome. To opt out in Chrome, you will need to repeat the opt-out process."
+157,
+158,"The opt-out does not block or delete cookies, or prevent the use of cookies or other technologies for purposes other than selecting ads based on your interests as inferred by your online behaviour. If you opt-out, data may still be collected about your web browsing activities and you will still see advertising. Ads may be selected, for example, based on the content of the web page in which they are shown. If you wish to block or delete cookies altogether, you can use web browser settings to do so."
+159,
+160,"Please note that third parties (including, for example, providers of external services like web traffic analysis services) may also use cookies, over which We have no control. These cookies are likely to be analytical/performance cookies or targeting cookies."
+161,
+162,"You block cookies by activating the setting on your browser that allows you to refuse the setting of all or some cookies. However, if you use your browser settings to block all cookies (including essential cookies) you may not be able to access all or parts of Our Site(s)."
+163,
+164,"Find out how to allow, block, delete and manage the cookies on all standard web browsers."
+165,
+166,"If you use a Device to browse Our Site(s) or other sites that use cookies, please refer to your handset manual for guidance."
+167,
+168,Information about Our use of SDKs
+169,
+170,"Our Apps use SDKs to distinguish you from other users of Our Apps. This helps Us collect information about how you are using Our Apps so We can ensure We are providing you with a good experience when using Our Apps and allows Us to improve Our Apps in future. By downloading Our Apps, you are agreeing to Our use of SDKs."
+171,
+172,A SDK is a piece of computer code that is used in mobile applications that allows certain software packages to run. We use the following SDKs:
+173,
+174,Analytics SDKs - Google Analytics
+175,
+176,"Analytics SDKs collect information about app usage including data about how many users are using Our Apps, the number of sessions running on Our App and how long each session is, from where in the world these users are logged in from, how many times Our App is crashing, what operating systems and devices are running Our App, and how many times certain of Our App features are used."
+177,Interest-based advertising SDKs - RhythmOne
+178,
+179,"To identify the interests of users, so that We can deliver advertising that is more relevant to your interests. Read more on RhythmOne and its privacy practices."
+180,How to opt out of Our use of SDKs
+181,
+182,Analytics and Advertising tracking SDKs
+183,
+184,"As these features are critical to Our ability to provide users with free, high quality mobile applications it is not possible to opt out from tracking features. Downloading Our Apps is deemed acceptance of these terms. However, if you are concerned about this type of tracking having downloaded Our App(s) We would recommend deletion of the app, from which time We will no longer be able to track usage."
+185,Interest-based advertising SDKs
+186,
+187,"You can opt out from receiving Targeted Advertising based on data collected via your mobile applications by following your Device maker’s most current published instructions, such as the examples below (current as of the date of this version of Our Privacy Policy):"
+188,Android
+189,
+190,Google Settings > Services > Ads > Opt out of interest-based ads
+191,iOS
+192,
+193,"Devices with iOS 6 and above use Apple’s Advertising Identifier. To learn more about limiting ad tracking using this identifier, visit the Settings menu on your Device as follows:"
+194,iOS 7 or higher – Choose Settings > Privacy > Advertising > Limit Ad Tracking
+195,iOS 6 – Choose Settings > General > About > Advertising
+196,"When you opt out, We will stop"
+197,(a) collecting information about your interests via Our Apps and
+198,(b) serving you Targeted Ads based on the data collected via Our Apps.
+199,
+200,"Please note that opting out of either Browser-Based or Mobile Application-Based Data Collection does not mean you will not see ads online from DHSC or other digital advertising companies, but only that DHSC will not tailor ads based on your interests."
+201,
+202,Information on third-party platforms
+203,
+204,"Some of Our products are available through platforms that have been created and are managed by other organisations, before making use of these products We recommend that You familiarise yourself with the relevant Privacy Policy for these services."
+205,
+206,"Where such products are offered, We will make clear to You that a third-party platform is being used."
