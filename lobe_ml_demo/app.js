@@ -96,12 +96,17 @@ async function predict() {
 }
 
 async function runModel() {
+    const clickSound = document.getElementById('clickSound'); // Get the audio element
     while (true) {
         const { label, confidence } = await predict();
         modelOutput.innerText = `Label: ${label}, Confidence: ${confidence.toFixed(3)}`;
 
+        if (label !== "no") {
+            clickSound.play();
+        }
+
         // Wait for 0.5 seconds before processing the next frame
-        await new Promise(resolve => setTimeout(resolve, 500));
+        await new Promise(resolve => setTimeout(resolve, 100));
     }
 }
 
