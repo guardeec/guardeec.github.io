@@ -3,15 +3,49 @@
 <head>
     <title>Is it cold?</title>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+        h2 {
+            font-size: 24px;
+            margin-top: 20px;
+        }
+        #webcam {
+            margin-top: 10px;
+            border-radius: 15px; /* Rounded corners */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        #toggleCamera {
+            display: block; /* Make button full width and move it below the video */
+            margin: 10px auto; /* Center the button */
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        #toggleCamera:hover {
+            background-color: #45a049;
+        }
+        #modelOutput {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+    </style>
 </head>
 <body>
-<h2>Video Stream from Camera</h2>
-<video id="webcam" autoplay playsinline width="640" height="480"></video>
-<button id="toggleCamera">Toggle Camera</button>
+    <h2>Video Stream from Camera</h2>
+    <video id="webcam" autoplay playsinline width="640" height="480"></video>
+    <button id="toggleCamera">Toggle Camera</button>
 
-<h2>Model Output</h2>
-<div id="modelOutput">Model output will be displayed here...</div>
+    <h2>Model Output</h2>
+    <div id="modelOutput">Model output will be displayed here...</div>
 
-<script src="https://guardeec.github.io/lobe_ml_demo/app.js"></script>
+    <script src="https://guardeec.github.io/lobe_ml_demo/app.js"></script>
 </body>
 </html>

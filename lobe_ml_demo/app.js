@@ -99,7 +99,9 @@ async function runModel() {
     while (true) {
         const { label, confidence } = await predict();
         modelOutput.innerText = `Label: ${label}, Confidence: ${confidence.toFixed(3)}`;
-        await tf.nextFrame(); // This gives the browser a chance to handle other tasks, including garbage collection
+
+        // Wait for 0.5 seconds before processing the next frame
+        await new Promise(resolve => setTimeout(resolve, 500));
     }
 }
 
