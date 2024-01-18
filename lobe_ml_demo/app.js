@@ -59,6 +59,14 @@ document.getElementById('toggleCamera').addEventListener('click', () => {
     setupCamera(newFacingMode);
 });
 
+document.getElementById('startButton').addEventListener('click', function() {
+    this.style.display = 'none'; // Hide the button
+    init(); // Start the model
+    // Optionally, play a silent sound to unlock audio context
+    const clickSound = document.getElementById('clickSound');
+    clickSound.play().then(() => clickSound.pause());
+});
+
 
 function preprocessImage(imageTensor) {
     if (!signature || !signature.inputs || !signature.inputs.Image_1) {
@@ -97,15 +105,18 @@ async function predict() {
 
 async function runModel() {
     const clickSound = document.getElementById('clickSound'); // Get the audio element
+
     while (true) {
         const { label, confidence } = await predict();
         modelOutput.innerText = `Label: ${label}, Confidence: ${confidence.toFixed(3)}`;
 
+        // Play the click sound if label is not "no"
         if (label !== "no") {
-            clickSound.play();
+            // Catch any errors during playback
+            clickSound.play().catch(e => console.error('Error playing sound:', e));
         }
 
-        // Wait for 0.5 seconds before processing the next frame
+        // Wait for 0.1 seconds before processing the next frame
         await new Promise(resolve => setTimeout(resolve, 100));
     }
 }
@@ -118,7 +129,4 @@ async function init() {
     runModel();
 }
 
-init().catch(error => {
-    console.error('Failed to initialize', error);
-});
 
