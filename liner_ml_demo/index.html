@@ -53,7 +53,6 @@
     const MODEL_FOLDER = 'https://guardeec.github.io/liner_ml_demo/model.json';
 
     let currentStream;
-    let model;
 
     ////////////////////////////////
     ////////    USE THIS FUNCTION FOR INTERACTIONS
@@ -114,11 +113,11 @@
         if (currentStream) {
             currentStream.getTracks().forEach(track => track.stop());
         }
-        startVideo();
+        startVideo('user');
     }
 
     document.addEventListener("DOMContentLoaded", function() {
-        startVideo();
+        startVideo('environment');
         startPredicting();
     });
 </script>
