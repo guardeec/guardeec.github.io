@@ -17,8 +17,8 @@
         }
         video {
             max-width: 90%;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            border-radius: 15px; /* Rounded corners */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
         }
         button {
             margin: 20px 0;
@@ -40,7 +40,7 @@
 
 <h2>HAT OR NOT???</h2>
 
-<video id="video" autoplay></video>
+<video id="video" autoplay playsinline></video>
 <button onclick="switchCamera()">Switch Camera</button>
 <p id="result"></p>
 
