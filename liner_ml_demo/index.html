@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Model Prediction</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        video {
+            max-width: 90%;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        button {
+            margin: 20px 0;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+        }
+        p {
+            font-size: 18px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+<h2>HAT OR NOT?</h2>
+
+<video id="video" autoplay></video>
+<button onclick="switchCamera()">Switch Camera</button>
+<p id="result"></p>
+
+<script>
+    ////////////////////////////////
+    ////////    SPECIFY PARAMETERS
+    ////////////////////////////////
+    const PROCESSING_SPEED = 100;
+    const CLASSES = ["no", "hat"];
+    const MODEL_FOLDER = 'https://guardeec.github.io/liner_ml_demo/model.json';
+
+    let currentStream;
+
+    ////////////////////////////////
+    ////////    USE THIS FUNCTION FOR INTERACTIONS
+    ////////////////////////////////
+    function interaction(predictedClass, classScores) {
+        console.log(classScores);
+        document.getElementById("result").innerHTML = `Prediction: ${predictedClass}, Confidence: ${classScores[0]}`;
+        document.body.style.backgroundColor = predictedClass === "hat" ? "red" : "white";
+    }
+
+    ////////////////////////////////
+    ////////    VIDEO CAPTURE AND PREDICTION LOGIC
+    ////////////////////////////////
+    async function startVideo() {
+        try {
+            currentStream = await navigator.mediaDevices.getUserMedia({ video: true });
+            document.getElementById('video').srcObject = currentStream;
+        } catch (err) {
+            console.error('Error accessing the camera:', err);
+        }
+    }
+
+    async function startPredicting() {
+        const model = await tf.loadGraphModel(MODEL_FOLDER);
+        setInterval(async () => {
+            const example = tf.browser.fromPixels(video).cast('float32');
+            const prediction = await model.predict(example.expandDims());
+            const classScores = await prediction.data();
+            const maxScoreId = classScores.indexOf(Math.max(...classScores));
+            const predictedClass = CLASSES[maxScoreId];
+
+            interaction(predictedClass, classScores);
+        }, PROCESSING_SPEED);
+    }
+
+    function switchCamera() {
+        if (currentStream) {
+            currentStream.getTracks().forEach(track => track.stop());
+        }
+        startVideo();
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        startVideo();
+        startPredicting();
+    });
+</script>
+</body>
+</html>
