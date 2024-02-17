@@ -38,7 +38,7 @@
 </head>
 <body>
 
-<h2>HAT OR NOT?</h2>
+<h2>HAT OR NOT??</h2>
 
 <video id="video" autoplay></video>
 <button onclick="switchCamera()">Switch Camera</button>
@@ -48,7 +48,7 @@
     ////////////////////////////////
     ////////    SPECIFY PARAMETERS
     ////////////////////////////////
-    const PROCESSING_SPEED = 100;
+    const PROCESSING_SPEED = 2000;
     const CLASSES = ["no", "hat"];
     const MODEL_FOLDER = 'https://guardeec.github.io/liner_ml_demo/model.json';
 
@@ -76,27 +76,16 @@
         }
     }
 
-    async function loadModel() {
-        model = await tf.loadGraphModel(MODEL_FOLDER);
-        // Optionally perform a warm-up prediction here
-    }
-
     async function startPredicting() {
-        await loadModel(); // Ensure model is loaded once
-        setInterval(() => {
-            tf.tidy(() => { // Use tf.tidy to dispose of intermediate tensors
-                const example = tf.browser.fromPixels(video).cast('float32').div(tf.scalar(255)); // Normalize pixels
-                const prediction = model.predict(example.expandDims());
-                prediction.data().then(classScores => {
-                    const maxScoreId = classScores.indexOf(Math.max(...classScores));
-                    const predictedClass = CLASSES[maxScoreId];
+        const model = await tf.loadGraphModel(MODEL_FOLDER);
+        setInterval(async () => {
+            const example = tf.browser.fromPixels(video).cast('float32');
+            const prediction = await model.predict(example.expandDims());
+            const classScores = await prediction.data();
+            const maxScoreId = classScores.indexOf(Math.max(...classScores));
+            const predictedClass = CLASSES[maxScoreId];
 
-                    interaction(predictedClass, classScores);
-
-                    // Explicitly dispose of the prediction tensor
-                    prediction.dispose();
-                });
-            });
+            interaction(predictedClass, classScores);
         }, PROCESSING_SPEED);
     }
 
