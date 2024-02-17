@@ -41,7 +41,7 @@
 <h2>HAT OR NOT???</h2>
 
 <video id="video" autoplay playsinline></video>
-<button onclick="switchCamera()">Switch Camera</button>
+<!--<button onclick="switchCamera()">Switch Camera</button>-->
 <p id="result"></p>
 
 <script>
@@ -51,6 +51,8 @@
     const PROCESSING_SPEED = 2000;
     const CLASSES = ["no", "hat"];
     const MODEL_FOLDER = 'https://guardeec.github.io/liner_ml_demo/model.json';
+    // const mode = 'environment' // back camera
+    const camera_mode = 'user' // front camera
 
     let currentStream;
 
@@ -109,15 +111,15 @@
         }, PROCESSING_SPEED);
     }
 
-    function switchCamera() {
-        if (currentStream) {
-            currentStream.getTracks().forEach(track => track.stop());
-        }
-        startVideo('user');
-    }
+    // function switchCamera() {
+    //     if (currentStream) {
+    //         currentStream.getTracks().forEach(track => track.stop());
+    //     }
+    //     startVideo('user');
+    // }
 
     document.addEventListener("DOMContentLoaded", function() {
-        startVideo('environment');
+        startVideo(camera_mode);
         startPredicting();
     });
 </script>
