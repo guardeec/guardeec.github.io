@@ -38,7 +38,7 @@
 </head>
 <body>
 
-<h2>HAT OR NOT??</h2>
+<h2>HAT OR NOT???</h2>
 
 <video id="video" autoplay></video>
 <button onclick="switchCamera()">Switch Camera</button>
@@ -67,14 +67,35 @@
     ////////////////////////////////
     ////////    VIDEO CAPTURE AND PREDICTION LOGIC
     ////////////////////////////////
-    async function startVideo() {
+    async function startVideo(facingMode = 'user') {
+        // Stop any existing video tracks to free up the camera
+        if (currentStream) {
+            currentStream.getTracks().forEach(track => {
+                track.stop();
+            });
+        }
+
         try {
-            currentStream = await navigator.mediaDevices.getUserMedia({ video: true });
-            document.getElementById('video').srcObject = currentStream;
+            // Request access to the camera with the specified facing mode
+            const stream = await navigator.mediaDevices.getUserMedia({
+                video: { facingMode }
+            });
+
+            const videoElement = document.getElementById('video');
+            videoElement.srcObject = stream;
+            currentStream = stream;
+
+            // Return a promise that resolves when the video is ready to play
+            return new Promise(resolve => {
+                videoElement.onloadedmetadata = () => {
+                    resolve(videoElement);
+                };
+            });
         } catch (err) {
             console.error('Error accessing the camera:', err);
         }
     }
+
 
     async function startPredicting() {
         const model = await tf.loadGraphModel(MODEL_FOLDER);
