@@ -1,0 +1,146 @@
+{
+    "data_types": [
+        {
+            "data_class": "name",
+            "data_mentioned_in_text": "We exclusively process data that we need for (improving) our services, and carefully handle all information gathered about you and your usage of our services.",
+            "purpose_class": "improve_products_and_services",
+            "purpose_mentioned_in_text": "We exclusively process data that we need for (improving) our services",
+            "line_number": [
+                12
+            ]
+        },
+        {
+            "data_class": "name",
+            "data_mentioned_in_text": "For a successful delivery it is important that we share you name, address and residential details with PostNL.",
+            "purpose_class": "provide_services_and_fulfill_contractual_obligations",
+            "purpose_mentioned_in_text": "For a successful delivery it is important that we share you name, address and residential details with PostNL.",
+            "line_number": [
+                54
+            ]
+        },
+        {
+            "data_class": "physical_address",
+            "data_mentioned_in_text": "For a successful delivery it is important that we share you name, address and residential details with PostNL.",
+            "purpose_class": "provide_services_and_fulfill_contractual_obligations",
+            "purpose_mentioned_in_text": "For a successful delivery it is important that we share you name, address and residential details with PostNL.",
+            "line_number": [
+                54
+            ]
+        },
+        {
+            "data_class": "payment_information",
+            "data_mentioned_in_text": "Ingenico processes your name, address and payment information like your creditcard or bankaccount number.",
+            "purpose_class": "provide_services_and_fulfill_contractual_obligations",
+            "purpose_mentioned_in_text": "Ingenico processes your name, address and payment information like your creditcard or bankaccount number.",
+            "line_number": [
+                45
+            ]
+        },
+        {
+            "data_class": "purchase_history",
+            "data_mentioned_in_text": "Your personal data is securely sent and stored, Exact online has implemented fitting technical and organisational measures to protect your personal data.",
+            "purpose_class": "corporate_governance",
+            "purpose_mentioned_in_text": "This data is used for the administration of sales invoices.",
+            "line_number": [
+                87
+            ]
+        },
+        {
+            "data_class": "ip_address",
+            "data_mentioned_in_text": "Information automatically gathered by our website is processed with the sole purpose of providing you with and/or to further improve our services.",
+            "purpose_class": "improve_products_and_services",
+            "purpose_mentioned_in_text": "Information automatically gathered by our website is processed with the sole purpose of providing you with and/or to further improve our services.",
+            "line_number": [
+                117
+            ]
+        }
+    ],
+    "TP_sharing": [
+        {
+            "purpose_class": "provide_services_and_fulfill_contractual_obligations",
+            "purpose_mentioned_in_text": "Tilaa has the ability to access our servers and offer (technical) support.",
+            "third_party_sharing_practice_class": "performance_of_contract",
+            "third_party_sharing_practice_mentioned_in_text": "Tilaa has the ability to access our servers and offer (technical) support.",
+            "line_number": [
+                27
+            ]
+        },
+        {
+            "purpose_class": "corporate_governance",
+            "purpose_mentioned_in_text": "These third parties are all obligated to a duty of confidentiality based on the agreement we have with them, an oath or legal obligation.",
+            "third_party_sharing_practice_class": "regulatory_compliance",
+            "third_party_sharing_practice_mentioned_in_text": "Your data is not shared with third parties, with any other purpose than to fulfil accountancy and administrative obligations.",
+            "line_number": [
+                111
+            ]
+        }
+    ],
+    "TP_name": [
+        {
+            "third_party_sharing_practice_class": "performance_of_contract",
+            "third_party_sharing_practice_mentioned_in_text": "Tilaa has the ability to access our servers and offer (technical) support.",
+            "third_party_name": "Tilaa",
+            "third_party_name_mentioned_in_text": "Our webshop has been in-house developed and is hosted by Tilaa.",
+            "line_number": [
+                27
+            ]
+        },
+        {
+            "third_party_sharing_practice_class": "performance_of_contract",
+            "third_party_sharing_practice_mentioned_in_text": "Ingenico processes your name, address and payment information like your creditcard or bankaccount number.",
+            "third_party_name": "Ingenico Ogone",
+            "third_party_name_mentioned_in_text": "To process your payments we use a payment service provider. The platform for this is: Ingenico Ogone.",
+            "line_number": [
+                45
+            ]
+        },
+        {
+            "third_party_sharing_practice_class": "performance_of_contract",
+            "third_party_sharing_practice_mentioned_in_text": "For a successful delivery it is important that we share you name, address and residential details with PostNL.",
+            "third_party_name": "PostNL",
+            "third_party_name_mentioned_in_text": "For the delivery we use the services of PostNL.",
+            "line_number": [
+                54
+            ]
+        }
+    ],
+    "your_rights": [
+        {
+            "rights_class": "access_to_information",
+            "rights_mentioned_in_text": "At all times you maintain the right to view the data we process that has a relation or may be reducible to your person.",
+            "line_number": [
+                138
+            ]
+        },
+        {
+            "rights_class": "data_correction",
+            "rights_mentioned_in_text": "At all times you maintain the right to have the data we process that has a relation or may be reducible to your person be adjusted.",
+            "line_number": [
+                144
+            ]
+        },
+        {
+            "rights_class": "data_portability",
+            "rights_mentioned_in_text": "At all times you maintain the right to request for the data we process that has a relation or may be reducible to your person be processed by a third party of choice.",
+            "line_number": [
+                156
+            ]
+        },
+        {
+            "rights_class": "content_removal_erasure",
+            "rights_mentioned_in_text": "This means that we maintain and keep your client profile until you make it known to us that you no longer desire to use our services.",
+            "line_number": [
+                129
+            ]
+        }
+    ],
+    "your_responsibilities": [
+        {
+            "responsibilities_class": "data_sharing",
+            "responsibilities_mentioned_in_text": "We do not use this data for (addressed) marketing purposes. If you share information with us and we use this information to - not based on a request contact you at a later time, we will first ask for explicit consent.",
+            "line_number": [
+                111
+            ]
+        }
+    ]
+}

@@ -1,0 +1,154 @@
+{
+    "data_types": [
+        {
+            "data_class": "date_of_birth",
+            "data_mentioned_in_text": "date and time of access of the site",
+            "purpose_class": "Provide_services_and_fulfill_contractual_obligations",
+            "purpose_mentioned_in_text": "The PII collected by Alpine may be used by Alpine for any lawful purpose, including to communicate with you, respond to your requests, and analyze and improve Alpines websites, its business and/or its service to you.",
+            "line_number": [
+                18,
+                30
+            ]
+        },
+        {
+            "data_class": "ip_address",
+            "data_mentioned_in_text": "the Internet protocol address of the computer that you are using",
+            "purpose_class": "Provide_services_and_fulfill_contractual_obligations",
+            "purpose_mentioned_in_text": "The PII collected by Alpine may be used by Alpine for any lawful purpose, including to communicate with you, respond to your requests, and analyze and improve Alpines websites, its business and/or its service to you.",
+            "line_number": [
+                18,
+                30
+            ]
+        },
+        {
+            "data_class": "operating_system",
+            "data_mentioned_in_text": "your browser software and operating system",
+            "purpose_class": "Provide_services_and_fulfill_contractual_obligations",
+            "purpose_mentioned_in_text": "The PII collected by Alpine may be used by Alpine for any lawful purpose, including to communicate with you, respond to your requests, and analyze and improve Alpines websites, its business and/or its service to you.",
+            "line_number": [
+                18,
+                30
+            ]
+        },
+        {
+            "data_class": "name",
+            "data_mentioned_in_text": "information such as your name",
+            "purpose_class": "Provide_services_and_fulfill_contractual_obligations",
+            "purpose_mentioned_in_text": "The PII collected by Alpine may be used by Alpine for any lawful purpose, including to communicate with you, respond to your requests, and analyze and improve Alpines websites, its business and/or its service to you.",
+            "line_number": [
+                18,
+                30
+            ]
+        },
+        {
+            "data_class": "physical_address",
+            "data_mentioned_in_text": "postal address",
+            "purpose_class": "Provide_services_and_fulfill_contractual_obligations",
+            "purpose_mentioned_in_text": "The PII collected by Alpine may be used by Alpine for any lawful purpose, including to communicate with you, respond to your requests, and analyze and improve Alpines websites, its business and/or its service to you.",
+            "line_number": [
+                18,
+                30
+            ]
+        },
+        {
+            "data_class": "email_address",
+            "data_mentioned_in_text": "email address",
+            "purpose_class": "Provide_services_and_fulfill_contractual_obligations",
+            "purpose_mentioned_in_text": "The PII collected by Alpine may be used by Alpine for any lawful purpose, including to communicate with you, respond to your requests, and analyze and improve Alpines websites, its business and/or its service to you.",
+            "line_number": [
+                18,
+                30
+            ]
+        }
+    ],
+    "TP_sharing": [
+        {
+            "purpose_class": "Provide_services_and_fulfill_contractual_obligations",
+            "purpose_mentioned_in_text": "Alpine may also use your PII to send you e-mails or other communications on behalf of third parties.",
+            "third_party_sharing_practice_class": "Third_party_platforms_integration",
+            "third_party_sharing_practice_mentioned_in_text": "Alpine may also use your PII to send you e-mails or other communications on behalf of third parties.",
+            "line_number": [
+                30
+            ]
+        },
+        {
+            "purpose_class": "Provide_services_and_fulfill_contractual_obligations",
+            "purpose_mentioned_in_text": "Subject to applicable laws, Alpine may sometimes seek to share the PII it has collected with a third party, and may also sometimes seek to share such PII with companies that are affiliated with Alpine.",
+            "third_party_sharing_practice_class": "Affiliates_and_subsidiaries",
+            "third_party_sharing_practice_mentioned_in_text": "Subject to applicable laws, Alpine may sometimes seek to share the PII it has collected with a third party, and may also sometimes seek to share such PII with companies that are affiliated with Alpine.",
+            "line_number": [
+                33
+            ]
+        },
+        {
+            "purpose_class": "Provide_services_and_fulfill_contractual_obligations",
+            "purpose_mentioned_in_text": "Alpine may sometimes use a third party, located either within or outside the United States, to provide certain services on its behalf, such as processing transactions, sending e-mails or performing statistical analyses of activity on this website.",
+            "third_party_sharing_practice_class": "Performance_of_contract",
+            "third_party_sharing_practice_mentioned_in_text": "Alpine may sometimes use a third party, located either within or outside the United States, to provide certain services on its behalf, such as processing transactions, sending e-mails or performing statistical analyses of activity on this website.",
+            "line_number": [
+                33
+            ]
+        },
+        {
+            "purpose_class": "Provide_services_and_fulfill_contractual_obligations",
+            "purpose_mentioned_in_text": "Alpine may sometimes share PII with sponsors of promotions on the Alpine site, or with or with sponsors or advertisers of premium content.",
+            "third_party_sharing_practice_class": "Consumer_retention_rewards_program",
+            "third_party_sharing_practice_mentioned_in_text": "Alpine may sometimes share PII with sponsors of promotions on the Alpine site, or with or with sponsors or advertisers of premium content.",
+            "line_number": [
+                33
+            ]
+        }
+    ],
+    "TP_name": [
+        {
+            "third_party_sharing_practice_class": "Third_party_platforms_integration",
+            "third_party_sharing_practice_mentioned_in_text": "Alpine may also use your PII to send you e-mails or other communications on behalf of third parties.",
+            "third_party_name": "Unknown",
+            "third_party_name_mentioned_in_text": "on behalf of third parties",
+            "line_number": [
+                30
+            ]
+        },
+        {
+            "third_party_sharing_practice_class": "Performance_of_contract",
+            "third_party_sharing_practice_mentioned_in_text": "Alpine may sometimes use a third party, located either within or outside the United States, to provide certain services on its behalf.",
+            "third_party_name": "Unknown",
+            "third_party_name_mentioned_in_text": "a third party, located either within or outside the United States",
+            "line_number": [
+                33
+            ]
+        }
+    ],
+    "your_rights": [
+        {
+            "rights_class": "Access_to_information",
+            "rights_mentioned_in_text": "You may update and/or correct the PII collected on the site, or seek to have such information deleted from Alpines records.",
+            "line_number": [
+                42
+            ]
+        },
+        {
+            "rights_class": "Opt_out_marketing",
+            "rights_mentioned_in_text": "All e-mail newsletters and promotional offers will provide you with an opportunity to opt out of receiving future issues of such newsletters or to opt out of receiving future promotional offers with respect to such brand.",
+            "line_number": [
+                30
+            ]
+        },
+        {
+            "rights_class": "Opt_out_marketing",
+            "rights_mentioned_in_text": "You may also, at any time, opt-out of receiving any third-party offers from this site by sending an e-mail to {removed hyperref}.",
+            "line_number": [
+                30
+            ]
+        }
+    ],
+    "your_responsibilities": [
+        {
+            "responsibilities_class": "Data_protection",
+            "responsibilities_mentioned_in_text": "You must also seek to protect against unauthorized access to any passwords and/or accounts that you use in connection with this website.",
+            "line_number": [
+                24
+            ]
+        }
+    ]
+}

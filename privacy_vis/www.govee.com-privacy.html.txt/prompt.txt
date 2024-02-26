@@ -1,0 +1,208 @@
+Generate a JSON representation of: (a) all the data types and (b) all purposes of collection and (c) all third party sharing practices and (d) name of companies with which data are shared and (e) all user rights mentions and (f) all user responsibilities mentioned in the given privacy policy paragraph. If a data type is used for more than one purpose or if more than one data type is used for a single purpose, duplicate the records accordingly - similar for third party sharing practices.
+
+------- Instruction:
+1. Find in the text which data types the company collects and provide their corresponding purposes of collection. Data types can be one of these classes (use exactly the same class name) (for "data_class" in JSON):
+- "name"
+- "contact_information"
+- "physical_address"
+- "date_of_birth"
+- "photo_profile_picture"
+- "gender"
+- "biometric"
+- "personal_description"
+- "social_media_profiles"
+- "account_credentials"
+- "user_name"
+- "password"
+- "phone_number"
+- "email_address"
+- "age"
+- "payment_information"
+- "purchase_history"
+- "credit_related_information"
+- "page_response_times"
+- "cookie_information"
+- "ip_address"
+- "health_data"
+- "health_activity_data"
+- "weight"
+- "height"
+- "body_temperature"
+- "bmi"
+- "menstrual_cycle_dates"
+- "pregnancy"
+- "other_health_related_information"
+- "users_location"
+- "device_location"
+- "language"
+- "temperature"
+- "humidity"
+- "ambient_light"
+- "movement"
+- "smoke_carbon_monoxide_levels"
+- "general_environmental_data"
+- "device_type"
+- "operating_system"
+- "application"
+- "video_card"
+- "sound_card"
+- "memory"
+- "browser_type"
+- "enabled_device_accessibility_features"
+- "browser_plugin_types_and_versions"
+- "battery_level"
+- "device_signals__wifi__bluetooth_"
+- "technical_information__general_"
+- "mobile_network_information"
+- "time_zone"
+- "the_number_of_sessions_on_app"
+- "usage_activity_data"
+- "users_on_the_app"
+- "error_reports"
+- "advertisement_engagement"
+- "behaviours"
+- "visits_to_site"
+- "resources_you_access"
+- "details_of_use_of_apps"
+- "product_view_or_searched_for"
+- "length_of_visits_to_certain_pages"
+- "page_interaction_information"
+- "methods_used_to_browse_away_from_the_page"
+- "websites_visited"
+- "steps"
+- "pace"
+- "distance"
+- "url_clickstream_to_and_from"
+- "communications_between_players"
+- "friend_relationships"
+- "conversational_data__general_"
+- "Social meta data"
+- "audio"
+- "video"
+- "comments"
+- "metadata_general"
+- "hashtag"
+- "Sexual Orientation"
+- "Political views"
+- "racial or ethnic origin"
+- "philosophical beliefs"
+- "trade union membership"
+- "Social Security Number"
+2. For each data type, categorize the purpose of collection into one of the following classes (use exactly the same class name) (for "purpose_class" in JSON):
+- "personalisation"
+- "interaction"
+- "display"
+- "marketing"
+- "improve_products_and_services"
+- "provide_services_and_fulfill_contractual_obligations"
+- "preserve_system_integrity"
+- "provide_business_services"
+- "troubleshoot"
+- "communicate_with_user"
+- "connect_with_other_users"
+- "promotions"
+- "changes_to_terms"
+- "user_safety"
+- "service_security"
+- "defend_legal_rights"
+- "corporate_governance"
+- "research"
+- "market_research"
+3. For each purpose, categorize the third party sharing practices into one of the following classes (use exactly the same class name) (for "third_party_sharing_practice_class" in JSON):
+- "regulatory_compliance"
+- "performance_of_contract"
+- "prevent_harm"
+- "invesitigate  harm"
+- "aggregated_information"
+- "merger_and_acquisition"
+- "affiliates_and_subsidiaries"
+- "third_party_platforms_integration"
+- "consumer_retention_rewards_program"
+4. For each third party sharing practice find the name of the company or government body with which data are shared (for "third_party_name" in JSON). If name is not mentioned - set name as "Unknown".
+5. Categorize the user rights into one of the following classes (use exactly the same class name) (for "rights_class" in JSON):
+- "opt_out_marketing"
+- "access_to_information"
+- "data_correction"
+- "third_party_data_sharing"
+- "cookie_preference"
+- "content_removal_erasure"
+- "automatic_decision_making"
+- "data_processing_complaint"
+- "data_portability"
+- "limit_use_or_disclosure_of_sensitive_personal_information"
+- "opt_out_of_push_notification"
+- "arbitration_opt-out"
+6. Categorize the user responsibilities into one of the following classes (use exactly the same class name) (for "responsibilities_class" in JSON):
+- "visitors_consent"
+- "others_right_to_privacy"
+- "data_sharing"
+- "additional_users_data_responsibilities"
+- "data_processor"
+- "data_protection"
+- "childrens_accounts"
+- "user_content_intellectual_property_ip"
+- "user_content_harm"
+- "beta confidentiality "
+- "user_indemnity"
+
+---------- Privacy Policy Paragraph (number in beginning is the number of line):
+3. Govee - Making Life Smarter Govee - Making Life Smarter EnglishPrivacy.
+6. Govee protects personal information and will never sell, rent or share your information in any way and under any situation without your own authorization.
+9. Cookies and IP Addresses.
+12. Govee is firmly committed to our customers privacy. Cookies are a small piece of information stored by your internet browser to your computers hard {removed hyperref} browser is usually set up to initially accept cookies. If you set your browser to reject cookies, the site will not be able to recognize your account and anypersonalization. We do not and cannot use cookies to gather your confidential information that may be stored on your hard drive. Third Party advertisers also help us display tailored content to our customers and serve ads on our behalf. These advertisers may also utilize cookies and/or web beacons to measure effectiveness, efficiencies, etc. of the sites.
+15. Third party links.
+18. Occasionally, at our discretion, we may include or offer third party products or services on our website. These third party sites have separate and independent privacy policies. We therefore have no responsibility or liability for the content and activities of these linked sites. Nonetheless, we seek to protect the integrity of our site and welcome any feedback about these sites.
+21. California Online Privacy Protection Act Compliance.
+24. Because we value your privacy we have taken the necessary precautions to be in compliance with the California Online Privacy Protection Act. We therefore willnot distribute your personal information to outside parties without your {removed hyperref} part of the California Online Privacy Protection Act, all users of our site may make any changes to their information at anytime by logging into their control panel and going to the Edit Profile page.
+27. Childrens Online Privacy Protection Act Compliance.
+30. We are in compliance with the requirements of COPPA (Childrens Online Privacy Protection Act), we do not collect any information from anyone under 13 years of age. Our website, products and services are all directed to people who are at least 13 years old or older.
+33. COMPANY {removed href} RGBIC {removed href} About Us {removed href} Community {removed href} Terms of Use {removed href} Privacy Policy {removed href} Compliance Statement SUPPORT {removed href} Download Govee App {removed href} FAQ {removed href} Rapid Replacement {removed href} {removed hyperref} US / CA 1 (855) 925 3570.
+36. Mon-Fri 9 AM-5 PM (EST) MEDIA {removed href} Blogs {removed href} Partner with Us SUBSCRIBEAccess exclusive offers, news and more.
+39. Your Country... SUBSCRIBE.
+42. FOLLOW US {removed href} {removed href} {removed href} {removed href} {removed href} Copyright 2021 Intellirocks Tech. Co., Ltd. All rights reserved.
+
+
+--------- Example of a JSON structure:
+{
+  "data_types": [
+    {
+      "data_class": "Name",
+      "data_mentioned_in_text": "...",
+      "purpose_class": "Provide Services and fulfill contractual obligations",
+      "purpose_mentioned_in_text": "...",
+      "line_number": [...]
+    },
+  ],
+"TP_sharing": [
+    {
+      "purpose_class": "Provide Services and fulfill contractual obligations",
+      "purpose_mentioned_in_text": "...",
+      "third_party_sharing_practice_class": "Research",
+      "third_party_sharing_practice_mentioned_in_text": "...",
+      "line_number": [...]
+    },
+  ],
+"TP_name": [
+    {
+      "third_party_sharing_practice_class": "Research",
+      "third_party_sharing_practice_mentioned_in_text": "...",
+      "third_party_name": "Google",
+      "third_party_name_mentioned_in_text": "....",
+      "line_number": [...]
+    },
+  ],
+“your_rights”: [
+   {
+      "rights_class": "Content Removal/ Erasure",
+      "rights_mentioned_in_text": "...",
+      "line_number": [...]
+   },
+  ],
+“your_responsibilities”:[
+   {
+      "responsibilities_class": "Children's accounts",
+      "responsibilities_mentioned_in_text": "...",
+      "line_number": [...]
+   },
+  ],
+}

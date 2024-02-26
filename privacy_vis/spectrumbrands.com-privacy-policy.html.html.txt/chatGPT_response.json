@@ -1,0 +1,134 @@
+{
+    "data_types": [
+        {
+            "data_class": "name",
+            "data_mentioned_in_text": "such as your first and last name",
+            "purpose_class": "communicate_with_user",
+            "purpose_mentioned_in_text": "We receive personal identifiers (such as your name, phone number, email address, billing address, shipping address, password, device ids, and IP address)... respond to requests, send you newsletters and other requested information... contact you or others about an order or delivery...",
+            "line_number": [
+                36,
+                27
+            ]
+        },
+        {
+            "data_class": "phone_number",
+            "data_mentioned_in_text": "your telephone number",
+            "purpose_class": "communicate_with_user",
+            "purpose_mentioned_in_text": "We receive personal identifiers... and use them to... contact you or others about an order or delivery, facilitate surveys, product reviews, product ratings, promotions, sweepstakes, and contests...",
+            "line_number": [
+                36,
+                27
+            ]
+        },
+        {
+            "data_class": "email_address",
+            "data_mentioned_in_text": "your e-mail address",
+            "purpose_class": "communicate_with_user",
+            "purpose_mentioned_in_text": "We receive personal identifiers... and use them to... send you newsletters and other requested information...",
+            "line_number": [
+                36,
+                27
+            ]
+        },
+        {
+            "data_class": "physical_address",
+            "data_mentioned_in_text": "your postal address",
+            "purpose_class": "provide_services_and_fulfill_contractual_obligations",
+            "purpose_mentioned_in_text": "We receive personal identifiers... and use them to... fulfill and deliver orders for products and services...",
+            "line_number": [
+                36,
+                27
+            ]
+        },
+        {
+            "data_class": "payment_information",
+            "data_mentioned_in_text": "We may receive your payment card related information when you make payments to us",
+            "purpose_class": "provide_services_and_fulfill_contractual_obligations",
+            "purpose_mentioned_in_text": "We may receive your payment card related information when you make payments to us, and we will provide it to our payment processor.",
+            "line_number": [
+                42,
+                27
+            ]
+        },
+        {
+            "data_class": "purchase_history",
+            "data_mentioned_in_text": "information about completed purchases",
+            "purpose_class": "improve_products_and_services",
+            "purpose_mentioned_in_text": "We collect and generate commercial transaction information... to improve our service and product offerings...",
+            "line_number": [
+                45,
+                27
+            ]
+        },
+        {
+            "data_class": "ip_address",
+            "data_mentioned_in_text": "We and our service providers and third-party partners may collect your IP address",
+            "purpose_class": "personalisation",
+            "purpose_mentioned_in_text": "We and our service providers and third-party partners will use the information... to draw inferences about your preferences... to help us provide you with personalized content and offers...",
+            "line_number": [
+                63,
+                69
+            ]
+        },
+        {
+            "data_class": "cookie_information",
+            "data_mentioned_in_text": "We and our service providers... may automatically collect Personal Information using cookies and similar technology...",
+            "purpose_class": "personalisation",
+            "purpose_mentioned_in_text": "We use this information... to tailor your experience on our Sites and our marketing efforts...",
+            "line_number": [
+                57,
+                27
+            ]
+        }
+    ],
+    "TP_sharing": [
+        {
+            "purpose_class": "provide_services_and_fulfill_contractual_obligations",
+            "purpose_mentioned_in_text": "We also share any of your Personal Information with third parties to help us provide products and services to you...",
+            "third_party_sharing_practice_class": "performance_of_contract",
+            "third_party_sharing_practice_mentioned_in_text": "help us provide products and services to you such as fulfilling and delivering orders, processing payments...",
+            "line_number": [
+                105
+            ]
+        },
+        {
+            "purpose_class": "research",
+            "purpose_mentioned_in_text": "We currently use Google Analytics to collect and process certain website usage data.",
+            "third_party_sharing_practice_class": "aggregated_information",
+            "third_party_sharing_practice_mentioned_in_text": "We de-identify and/or aggregate data we receive and may use and disclose it for any business or commercial purpose.",
+            "line_number": [
+                93,
+                78
+            ]
+        }
+    ],
+    "TP_name": [
+        {
+            "third_party_sharing_practice_class": "aggregated_information",
+            "third_party_sharing_practice_mentioned_in_text": "We currently use Google Analytics to collect and process certain website usage data.",
+            "third_party_name": "Google",
+            "third_party_name_mentioned_in_text": "We currently use Google Analytics to collect and process certain website usage data.",
+            "line_number": [
+                78
+            ]
+        }
+    ],
+    "your_rights": [
+        {
+            "rights_class": "access_to_information",
+            "rights_mentioned_in_text": "you may have the right to review, correct, and delete Personal Information we have about you...",
+            "line_number": [
+                132
+            ]
+        }
+    ],
+    "your_responsibilities": [
+        {
+            "responsibilities_class": "childrens_accounts",
+            "responsibilities_mentioned_in_text": "We do not intentionally collect Personal Information from users of this Site who are under the age of thirteen (13).",
+            "line_number": [
+                18
+            ]
+        }
+    ]
+}

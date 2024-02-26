@@ -1,0 +1,152 @@
+{
+    "data_types": [
+        {
+            "data_class": "name",
+            "data_mentioned_in_text": "including your name",
+            "purpose_class": "provide_services_and_fulfill_contractual_obligations",
+            "purpose_mentioned_in_text": "register to use our Site, subscribe to our service, post material, request further services",
+            "line_number": [
+                27,
+                42
+            ]
+        },
+        {
+            "data_class": "physical_address",
+            "data_mentioned_in_text": "address",
+            "purpose_class": "provide_services_and_fulfill_contractual_obligations",
+            "purpose_mentioned_in_text": "register to use our Site, subscribe to our service, post material, request further services",
+            "line_number": [
+                27,
+                42
+            ]
+        },
+        {
+            "data_class": "email_address",
+            "data_mentioned_in_text": "email address",
+            "purpose_class": "provide_services_and_fulfill_contractual_obligations",
+            "purpose_mentioned_in_text": "register to use our Site, subscribe to our service, post material, request further services",
+            "line_number": [
+                27,
+                42
+            ]
+        },
+        {
+            "data_class": "phone_number",
+            "data_mentioned_in_text": "telephone number",
+            "purpose_class": "provide_services_and_fulfill_contractual_obligations",
+            "purpose_mentioned_in_text": "register to use our Site, subscribe to our service, post material, request further services",
+            "line_number": [
+                27,
+                42
+            ]
+        },
+        {
+            "data_class": "payment_information",
+            "data_mentioned_in_text": "credit or debit card number",
+            "purpose_class": "provide_services_and_fulfill_contractual_obligations",
+            "purpose_mentioned_in_text": "register to use our Site, subscribe to our service, post material, request further services",
+            "line_number": [
+                27,
+                42
+            ]
+        },
+        {
+            "data_class": "cookie_information",
+            "data_mentioned_in_text": "cookies, flash cookies, web beacons",
+            "purpose_class": "personalisation",
+            "purpose_mentioned_in_text": "store information about your preferences, customize our Site according to your individual interests",
+            "line_number": [
+                63,
+                72
+            ]
+        },
+        {
+            "data_class": "usage_activity_data",
+            "data_mentioned_in_text": "estimate our audience size and usage patterns",
+            "purpose_class": "improve_products_and_services",
+            "purpose_mentioned_in_text": "improve our Site and to deliver a better and more personalized service",
+            "line_number": [
+                63,
+                72
+            ]
+        },
+        {
+            "data_class": "ip_address",
+            "data_mentioned_in_text": "The information we collect automatically",
+            "purpose_class": "improve_products_and_services",
+            "purpose_mentioned_in_text": "improve our Site and to deliver a better and more personalized service",
+            "line_number": [
+                66,
+                72
+            ]
+        }
+    ],
+    "TP_sharing": [
+        {
+            "purpose_class": "personalisation",
+            "purpose_mentioned_in_text": "store information about your preferences, customize our Site according to your individual interests",
+            "third_party_sharing_practice_class": "affiliates_and_subsidiaries",
+            "third_party_sharing_practice_mentioned_in_text": "To our subsidiaries and affiliates",
+            "line_number": [
+                72,
+                147
+            ]
+        },
+        {
+            "purpose_class": "provide_services_and_fulfill_contractual_obligations",
+            "purpose_mentioned_in_text": "for any other purpose with your consent",
+            "third_party_sharing_practice_class": "merger_and_acquisition",
+            "third_party_sharing_practice_mentioned_in_text": "To a buyer or other successor in the event of a merger, divestiture, restructuring, reorganization, dissolution or other sale or transfer of some or all of our assets",
+            "line_number": [
+                129,
+                153
+            ]
+        },
+        {
+            "purpose_class": "provide_services_and_fulfill_contractual_obligations",
+            "purpose_mentioned_in_text": "To fulfill any other purpose for which you provide it",
+            "third_party_sharing_practice_class": "performance_of_contract",
+            "third_party_sharing_practice_mentioned_in_text": "To fulfill the purpose for which you provide it",
+            "line_number": [
+                108,
+                159
+            ]
+        }
+    ],
+    "TP_name": [
+        {
+            "third_party_sharing_practice_class": "affiliates_and_subsidiaries",
+            "third_party_sharing_practice_mentioned_in_text": "To our subsidiaries and affiliates",
+            "third_party_name": "Unknown",
+            "third_party_name_mentioned_in_text": "subdivisions, affiliates and/or subsidiaries of the company are not explicitly named",
+            "line_number": [
+                147
+            ]
+        }
+    ],
+    "your_rights": [
+        {
+            "rights_class": "data_correction",
+            "rights_mentioned_in_text": "correct or delete any personal information",
+            "line_number": [
+                213
+            ]
+        },
+        {
+            "rights_class": "content_removal_erasure",
+            "rights_mentioned_in_text": "correct or delete any personal information",
+            "line_number": [
+                213
+            ]
+        }
+    ],
+    "your_responsibilities": [
+        {
+            "responsibilities_class": "data_protection",
+            "responsibilities_mentioned_in_text": "ensure we have an up-to-date active and deliverable e-mail address for you",
+            "line_number": [
+                255
+            ]
+        }
+    ]
+}

@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+    /* Some basic styling for the Sankey */
+    /*.link {*/
+    /*    fill: none;*/
+    /*    stroke: #000;*/
+    /*    stroke-opacity: 0.2;*/
+    /*}*/
+
+    .node rect {
+        fill: #444444;
+        stroke: #fff;
+        stroke-width: 2px;
+    }
+
+    .node text {
+        font: 12px sans-serif;
+        pointer-events: none;
+    }
+
+    .highlighted {
+        background-color: #f3db62;
+    }
+
+
+</style>
+
+<body style="background-color: white;">
+
+<head>
+    <title>Demo</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<div class="container">
+    <h1>Demo</h1>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-4">
+            <div>
+                <div id="dataset_folder">
+                    <!--                            Here is your datasets from folder &lt;!&ndash;INSERT_FOLDER_NAME&ndash;&gt;-->
+                </div>
+                <div id="textContainer" style="
+                    width: 300px;
+                    height: 500px;
+                    overflow: auto;
+                    border: 1px solid #cccccc; /* Lighter border color */
+                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+                    border-radius: 8px; /* Rounded corners */
+                    padding: 10px; /* Padding inside the container */
+                    background-color: #f9f9f9; /* Light background color */
+                    font-family: Arial, sans-serif; /* Modern font */
+                    font-size: 14px; /* Readable font size */
+                    color: #333333; /* Darker text for better readability */
+                    line-height: 1.6; /* Spacing between lines */
+                ">
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-8">
+            <div align="left"><h3>Data collection:</h3></div>
+            <div align="center" id="svg_container_1">
+            </div>
+            <div align="center" id="svg_container_2">
+                <div class="col-sm-6">
+                    <div align="left"><h3>Your rights:</h3></div>
+                    <row id="svg_container_2a"></row>
+                </div>
+                <div class="col-sm-6">
+                    <div align="left"><h3>Your responsibilities:</h3></div>
+                    <row id="svg_container_2b"></row>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3-sankey/0.12.3/d3-sankey.min.js"></script>
+<script>
+    const data_name = "vis_policy.json"
+
+    const margin = {top: 30, right: 50, bottom: 10, left: 50},
+        width = 960 - margin.left - margin.right,
+        height = window.innerHeight * 0.6 - margin.top - margin.bottom,
+        bar_margin_X = 400,
+        bar_width = 20,
+        bar_max_height = height,
+        buttons_containers_height = window.innerHeight * 0.2
+
+    function resizeTextContainer(newWidth, newHeight) {
+        const container = document.getElementById('textContainer');
+        container.style.width = newWidth + 'px';
+        container.style.height = newHeight + 'px';
+    }
+
+    resizeTextContainer(300, height + buttons_containers_height)
+
+    d3.json(data_name).then(data => {
+        const svg = d3.select("#svg_container_1")
+            .append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height)
+            .append("g")
+            .attr("transform", `translate(${margin.left},${margin.top})`);
+        insertText(data["policy_text"])
+
+
+        // draw_hierarchical_bar(svg, data, "data_purpose", "md", "d", 0, "left")
+        // draw_hierarchical_bar(svg, data, "data_purpose", "mp", "p", bar_margin_X, "left")
+        // draw_hierarchical_bar(svg, data, "purpose_share", "ms", "s", bar_margin_X * 2, "right")
+        // draw_hierarchical_bar(svg, data, "share_name", "mn", "n", bar_margin_X * 3, "right")
+
+        draw_hierarchical_bar(svg, data["data_purpose"], "md", "d", 0, "left")
+        draw_hierarchical_bar(svg, [...data["data_purpose"], ...data["purpose_share"]], "mp", "p", bar_margin_X * 0.66 * 1, "left")
+        draw_hierarchical_bar(svg, [...data["purpose_share"], ...data["share_name"]], "ms", "s", bar_margin_X * 0.66 * 2, "right")
+        draw_hierarchical_bar(svg, data["share_name"], "mn", "n", bar_margin_X * 0.66 * 3, "right")
+
+
+        draw_lines(svg, data, "data_purpose", "md", "d", "mp", "p")
+        draw_lines(svg, data, "purpose_share", "mp", "p", "ms", "s")
+        draw_lines(svg, data, "share_name", "ms", "s", "mn", "n")
+
+        generate_button_boxes("#svg_container_2a", data["user_rights"])
+        generate_button_boxes("#svg_container_2b", data["user_responsibilities"])
+
+        // recomposition()
+    })
+
+
+    // function recomposition() {
+    //     d3.selectAll('text').each(function () {
+    //         this.parentNode.appendChild(this);
+    //     });
+    //     d3.selectAll('path').each(function () {
+    //         // Move each path element to the start of its parent node
+    //         let firstChild = this.parentNode.firstChild;
+    //         if (firstChild) {
+    //             this.parentNode.insertBefore(this, firstChild);
+    //         }
+    //     });
+    // }
+
+
+    function generate_button_boxes(target_container, data) {
+        console.log(data)
+        var container = d3.select(target_container);
+        var buttons = container.selectAll("button")
+            .data(data)
+            .enter()
+            .append("button")
+            .text(function (d) {
+                return d["n"];
+            })
+            .attr("id", function (d) {
+                return d["n"];
+            })
+            .on("click", function (event, d) {
+                handleLineClick(d["r"], d["n"], "btn");
+            })
+            .style("background-color", "#4CAF50") // Green background
+            .style("color", "white")              // White text
+            .style("padding", "10px 20px")        // Padding
+            .style("margin", "5px")               // Margin
+            .style("border", "none")              // No border
+            .style("border-radius", "5px")        // Rounded corners
+            .style("cursor", "pointer")           // Pointer cursor on hover
+            .style("font-size", "16px");          // Font size;
+    }
+
+
+    function insertText(lines) {
+        const container = d3.select(`#${"textContainer"}`);
+        container.html('');
+        lines.forEach(line => {
+            container.append('div').text(line);
+        });
+    }
+
+
+    let highlightedLineId = null;
+
+    function handleLineClick(lineId, lineName, type) {
+
+
+        const container = document.getElementById("textContainer");
+        const lines = container.getElementsByTagName('div');
+        const allSvgLines = d3.selectAll("path");
+        const allButtons = d3.selectAll("button");
+
+        if (highlightedLineId === lineId) {
+            // Toggle off the highlight if the same line is clicked
+            lines[lineId].classList.remove('highlighted');
+            allSvgLines.transition().duration(500).style("stroke-opacity", function (d) {
+                return parseFloat(this.getAttribute("const_opacity"))
+            });
+            allButtons.transition().duration(500).style("opacity", 1);
+            highlightedLineId = null;
+        } else {
+            // Remove highlighting from the previously highlighted line
+            if (highlightedLineId !== null && highlightedLineId < lines.length) {
+                lines[highlightedLineId].classList.remove('highlighted');
+            }
+            // Highlight the new line
+            lines[lineId].classList.add('highlighted');
+
+            allSvgLines.transition().duration(500).style("stroke-opacity", 0.1); // Dim all lines
+            allButtons.transition().duration(500).style("opacity", 0.3);
+
+            if (type === "line") {
+                d3.select("#" + lineName).transition().duration(500).style("stroke-opacity", 1);
+            } else {
+                d3.select("#" + lineName).transition().duration(500).style("opacity", 1);
+            }
+
+            highlightedLineId = lineId;
+            // Scroll to the highlighted line
+            scrollToLine(lineId);
+        }
+    }
+
+
+    function scrollToLine(lineIndex) {
+        const container = document.getElementById("textContainer");
+        const lines = container.getElementsByTagName('div');
+        if (lineIndex < lines.length) {
+            let cumulativeHeight = 0;
+            for (let i = 0; i < lineIndex; i++) {
+                cumulativeHeight += lines[i].offsetHeight;
+            }
+            container.scrollTo({
+                top: cumulativeHeight,
+                behavior: 'smooth'
+            });
+        }
+    }
+
+
+    function draw_lines(svg, data, line_name, MA, A, MB, B) {
+
+        console.log(svg, data, line_name, MA, A, MB, B)
+
+        console.log(data)
+        data[line_name].forEach(line_item => {
+
+            let points = [
+                getRectangleCenter(A + "___" + line_item[A]),
+                getRectangleCenter(MA + "___" + line_item[MA]),
+                getRectangleCenter(MB + "___" + line_item[MB]),
+                getRectangleCenter(B + "___" + line_item[B])
+            ];
+            console.log(MA, A, MB, B)
+            console.log(A + "___" + line_item[A], MA + "___" + line_item[MA])
+            console.log(points)
+            points[1]["x"] += bar_margin_X / 4
+            points[2]["x"] -= bar_margin_X / 4
+            console.log(line_item)
+            drawBezierCurve_v2(svg, points, 10, line_item["c"], line_item["o"] + 0.3, line_name + "___" + line_item[A] + "__" + line_item[B], line_item["r"])
+        })
+
+        svg.selectAll('path').each(function () {
+            let firstChild = this.parentNode.firstChild;
+            if (firstChild) {
+                this.parentNode.insertBefore(this, firstChild);
+            }
+        });
+
+        function drawBezierCurve_v2(svg, points, thickness, color, opacity, id, r) {
+            const lineGenerator = d3.line()
+                .curve(d3.curveBasis) // Using a B-spline curve
+                .x(d => d.x)
+                .y(d => d.y);
+
+
+            // Check if a line with the same points already exists
+            let existingLine = svg.selectAll('path').filter(function () {
+                let currentData = d3.select(this).datum();
+                return JSON.stringify(currentData) === JSON.stringify(points);
+            });
+
+            if (!existingLine.empty()) {
+                // If exists, shift the Y coordinates of points for the new line
+                let shiftAmount = thickness;
+                points = points.map(p => ({x: p.x, y: p.y + shiftAmount}));
+            }
+
+            // Draw the line
+            svg.append("path")
+                .datum(points) // Bind data to the line
+                .attr("fill", "none")
+                .attr("stroke", color)
+                .attr("stroke-width", thickness)
+                .attr("stroke-opacity", opacity)
+                .attr("d", lineGenerator)
+                .attr("id", id + "_" + r)
+                .attr("policy_idx", r)
+                .attr("const_opacity", opacity)
+                .on("click", function (event, d) {
+                    event.stopPropagation(); // Prevent event bubbling
+                    handleLineClick(r, id + "_" + r, "line"); // Assuming 'r' is the correct line index
+                });
+        }
+
+
+        function getRectangleCenter(id) {
+            const rect = d3.select(`#${id}`);
+            if (!rect.empty()) {
+                const x = +rect.attr("x");
+                const y = +rect.attr("y");
+                const width = +rect.attr("width");
+                const height = +rect.attr("height");
+
+                return {x: x + width / 2, y: y + height / 2};
+            } else {
+                console.log("cant find " + `#${id}`)
+                return null; // Rectangle with given id not found
+            }
+        }
+    }
+
+    function draw_hierarchical_bar(svg, data, meta, entity, X) {
+        let position_margin = bar_width * 1.3
+
+        let meta_class_length = calculateFrequency(data, meta)
+        const singe_meta_bar_height = bar_max_height * 0.8 / data.length
+        const singe_meta_bar_margin = bar_max_height * 0.2 / data.length
+        let meta_bar_end = 0
+
+
+        Object.keys(meta_class_length).forEach(meta_item => {
+            let current_meta_bar_height = singe_meta_bar_height * meta_class_length[meta_item]
+            drawRectangleRound(svg, X, meta_bar_end, meta + "___" + meta_item, "lightgrey", 0.8, current_meta_bar_height, bar_width * 1.6)
+
+            let entites = data.filter(i => {
+                return i[meta] === meta_item
+            })
+            let entity_class_length = calculateFrequency(entites, entity)
+            const singe_entity_bar_height = current_meta_bar_height * 0.8 / Object.keys(entity_class_length).length
+            const singe_entity_bar_margin = current_meta_bar_height * 0.2 / Object.keys(entity_class_length).length
+
+            let entity_bar_end = meta_bar_end
+            Object.keys(entity_class_length).forEach(entity_item => {
+
+                entity_bar_end += singe_entity_bar_margin / 2
+
+                let current_entity_bar_height = singe_entity_bar_height
+                drawRectangle(svg, X - bar_width + position_margin, entity_bar_end, entity + "___" + entity_item, "darkblue", 1, current_entity_bar_height, bar_width)
+                entity_bar_end += current_entity_bar_height + singe_entity_bar_margin / 2
+            })
+
+            meta_bar_end += current_meta_bar_height + singe_meta_bar_margin
+        })
+
+        function calculateFrequency(data, name) {
+            console.log(data)
+            const frequency = {};
+            data.forEach(item => {
+                if (frequency[item[name]]) {
+                    frequency[item[name]]++;
+                } else {
+                    frequency[item[name]] = 1;
+                }
+            });
+            return frequency;
+        }
+
+        function getTextWidth(text, font) {
+                    var canvas = document.createElement("canvas");
+                    var context = canvas.getContext("2d");
+                    context.font = font;
+                    var metrics = context.measureText(text);
+                    return metrics.width;
+                }
+        function drawRectangle(svg, x, y, id, color, opacity, height, bar_width) {
+            svg.append("rect")
+                .attr("x", x)
+                .attr("y", y)
+                .attr("id", id)
+                .attr("width", bar_width) // Assuming a fixed width; you can also pass this as a parameter
+                .attr("height", height)
+                .attr("fill", color)
+                .attr("opacity", opacity)
+                .on("mouseover", handleMouseOver)
+                .on("mouseout", handleMouseOut);
+
+            // Append text background (initially hidden)
+            var textBg = svg.append("rect")
+                .attr("id", "bg-" + id)
+                .attr("rx", 6) // For rounded corners
+                .attr("ry", 6) // For rounded corners
+                .attr("fill", "white") // Background color
+                .style("opacity", 0) // Initially invisible
+                .style("display", "none"); // Initially not displayed
+
+            var text = svg.append("text")
+                .attr("x", x + bar_width / 2) // Adjust to position the text in the center of the rectangle
+                .attr("y", y + 15) // Adjust for vertical centering
+                .attr("text-anchor", "middle") // Ensure the text is centered
+                .attr("alignment-baseline", "middle") // Vertically center the text
+                .text(id.split("___")[1]) // Replace with your text
+                .style("font-size", "14px") // Adjust the font size
+                .style("font-family", "Arial, sans-serif") // Set the font family
+                .style("fill", "lightgray") // Set the text color
+                // .style("font-weight", "bold") // Make the text bold
+                .style("text-shadow", "1px 1px 2px black");
+
+
+            function handleMouseOver(event, d) {
+
+
+
+                text.transition()
+                    .duration(300)
+                    .style("font-size", "20px") // Larger font size
+                    .style("fill", "white"); // Darker text color
+
+                // Calculate background size and position
+
+                var bbox = text.node().getBBox();
+
+                var textContent = text.text();
+                var textWidth = getTextWidth(textContent, "14px Arial");
+                bbox_width = textWidth
+                textBg.attr("x", bbox.x - bbox_width / 2)
+                    .attr("y", bbox.y - 5)
+                    .attr("width", bbox.width + bbox_width)
+                    .attr("height", bbox.height + 10)
+                    .style("display", "")
+                    .transition()
+                    .duration(300)
+                    .style("fill", "black")
+                    .style("opacity", 0.8); // Make background visible
+
+                // d3.selectAll("rect[id*='bg-']").raise();
+
+                d3.selectAll("text").filter(function () {
+                    return this.textContent.includes('___');
+                }).raise();
+            }
+
+            // Mouseout event handler
+            function handleMouseOut(event, d) {
+                textBg.transition()
+                    .duration(300)
+                    .style("opacity", 0) // Make background invisible
+                    .on("end", function () {
+                        textBg.style("display", "none");
+                    });
+
+                text.transition()
+                    .duration(300)
+                    .style("font-size", "14px") // Original font size
+                    .style("fill", "white"); // Original text color
+
+
+            }
+        }
+
+        function drawRectangleRound(svg, x, y, id, color, opacity, height, bar_width) {
+            svg.append("rect")
+                .attr("x", x)
+                .attr("y", y)
+                .attr("id", id)
+                .attr("width", bar_width) // Assuming a fixed width; you can also pass this as a parameter
+                .attr("height", height)
+                .attr("fill", color)
+                .attr("opacity", opacity)
+                .attr("rx", 8) // Set horizontal corner radius
+                .attr("ry", 8) // Set vertical corner radius
+                .on("mouseover", handleMouseOver)
+                .on("mouseout", handleMouseOut);
+
+            // Append text background (initially hidden)
+            var textBg = svg.append("rect")
+                .attr("id", "bg-" + id)
+                .attr("rx", 6) // For rounded corners
+                .attr("ry", 6) // For rounded corners
+                .attr("fill", "white") // Background color
+                .style("opacity", 0) // Initially invisible
+                .style("display", "none"); // Initially not displayed
+
+            var text = svg.append("text")
+                .attr("x", x + bar_width / 2) // Adjust to position the text in the center of the rectangle
+                .attr("y", y ) // Adjust for vertical centering
+                .attr("text-anchor", "middle") // Ensure the text is centered
+                .attr("alignment-baseline", "middle") // Vertically center the text
+                .text(id.split("___")[1]) // Replace with your text
+                .style("font-size", "14px") // Adjust the font size
+                .style("font-family", "Arial, sans-serif") // Set the font family
+                .style("fill", "lightblue") // Set the text color
+                // .style("font-weight", "bold") // Make the text bold
+                .style("text-shadow", "1px 1px 2px black");
+
+            function handleMouseOver(event, d) {
+                text.transition()
+                    .duration(300)
+                    .style("font-size", "20px") // Larger font size
+                    .style("fill", "white"); // Darker text color
+
+                // Calculate background size and position
+                var bbox = text.node().getBBox();
+                var textContent = text.text();
+                var textWidth = getTextWidth(textContent, "14px Arial");
+                bbox_width = textWidth
+                textBg.attr("x", bbox.x - bbox_width / 2)
+                    .attr("y", bbox.y - 5)
+                    .attr("width", bbox.width + bbox_width)
+                    .attr("height", bbox.height + 10)
+                    .style("display", "")
+                    .transition()
+                    .duration(300)
+                    .style("fill", "black")
+                    .style("opacity", 0.8); // Make background visible
+
+                // d3.selectAll("rect[id*='bg-']").raise();
+
+                d3.selectAll("text").filter(function () {
+                    return this.textContent.includes('___');
+                }).raise();
+            }
+
+            // Mouseout event handler
+            function handleMouseOut(event, d) {
+                textBg.transition()
+                    .duration(300)
+                    .style("opacity", 0) // Make background invisible
+                    .on("end", function () {
+                        textBg.style("display", "none");
+                    });
+
+                text.transition()
+                    .duration(300)
+                    .style("font-size", "14px") // Original font size
+                    .style("fill", "lightblue"); // Original text color
+
+
+            }
+        }
+
+    }
+
+
+</script>
+</body>
+
+</html>

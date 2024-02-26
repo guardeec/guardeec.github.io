@@ -1,0 +1,92 @@
+{
+    "data_types": [
+        {
+            "data_class": "name",
+            "data_mentioned_in_text": "identifying information such as your name",
+            "purpose_class": "provide_services_and_fulfill_contractual_obligations",
+            "purpose_mentioned_in_text": "We collect your personal information in order to provide and continually improve our products and services.",
+            "line_number": [
+                69,
+                369
+            ]
+        },
+        {
+            "data_class": "payment_information",
+            "data_mentioned_in_text": "payment information",
+            "purpose_class": "purchase_and_delivery_of_products_and_services",
+            "purpose_mentioned_in_text": "We use your personal information to take and handle orders, deliver products and services, process payments",
+            "line_number": [
+                99,
+                372
+            ]
+        },
+        {
+            "data_class": "contact_information",
+            "data_mentioned_in_text": "identifying information such as your... phone numbers",
+            "purpose_class": "communicate_with_user",
+            "purpose_mentioned_in_text": "We use your personal information to communicate with you in relation to Amazon Services via different channels (e. g., by phone, email, chat).",
+            "line_number": [
+                114,
+                369
+            ]
+        }
+    ],
+    "TP_sharing": [
+        {
+            "purpose_class": "provide_services_and_fulfill_contractual_obligations",
+            "purpose_mentioned_in_text": "We share customers personal information only as described below and with subsidiaries",
+            "third_party_sharing_practice_class": "affiliates_and_subsidiaries",
+            "third_party_sharing_practice_mentioned_in_text": "with subsidiaries",
+            "line_number": [
+                138
+            ]
+        },
+        {
+            "purpose_class": "provide_services_and_fulfill_contractual_obligations",
+            "purpose_mentioned_in_text": "For example, you can order products from third parties through our stores",
+            "third_party_sharing_practice_class": "performance_of_contract",
+            "third_party_sharing_practice_mentioned_in_text": "services, products, applications, or skills provided by third parties",
+            "line_number": [
+                144
+            ]
+        }
+    ],
+    "TP_name": [
+        {
+            "third_party_sharing_practice_class": "affiliates_and_subsidiaries",
+            "third_party_sharing_practice_mentioned_in_text": "with subsidiaries",
+            "third_party_name": "Unknown",
+            "third_party_name_mentioned_in_text": "with subsidiaries {removed hyperref}, Inc. controls that either are subject to this Privacy Notice or follow practices",
+            "line_number": [
+                138
+            ]
+        },
+        {
+            "third_party_sharing_practice_class": "performance_of_contract",
+            "third_party_sharing_practice_mentioned_in_text": "THIRD-PARTY SERVICE PROVIDERS.",
+            "third_party_name": "Unknown",
+            "third_party_name_mentioned_in_text": "We employ other companies and individuals to perform functions on our behalf.",
+            "line_number": [
+                147
+            ]
+        }
+    ],
+    "your_rights": [
+        {
+            "rights_class": "access_to_information",
+            "rights_mentioned_in_text": "You can access your information, including your name, address, payment options",
+            "line_number": [
+                204
+            ]
+        }
+    ],
+    "your_responsibilities": [
+        {
+            "responsibilities_class": "data_protection",
+            "responsibilities_mentioned_in_text": "It is important for you to protect against unauthorized access to your password and to your computers, devices, and applications.",
+            "line_number": [
+                183
+            ]
+        }
+    ]
+}

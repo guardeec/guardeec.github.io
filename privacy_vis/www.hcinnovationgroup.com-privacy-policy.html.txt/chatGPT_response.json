@@ -1,0 +1,175 @@
+{
+    "data_types": [
+        {
+            "data_class": "cookie_information",
+            "data_mentioned_in_text": "Endeavor Business Media uses cookies",
+            "purpose_class": "provide_services_and_fulfill_contractual_obligations",
+            "purpose_mentioned_in_text": "essential in order to enable you to move around the website and use its features",
+            "line_number": [
+                24,
+                33,
+                36,
+                39
+            ]
+        },
+        {
+            "data_class": "ip_address",
+            "data_mentioned_in_text": "including the IP address of the computer",
+            "purpose_class": "improve_products_and_services",
+            "purpose_mentioned_in_text": "improve our understanding of our web traffic and visitor behavior",
+            "line_number": [
+                27
+            ]
+        },
+        {
+            "data_class": "usage_activity_data",
+            "data_mentioned_in_text": "monitor the use of the Web Sites and collect usage data",
+            "purpose_class": "marketing",
+            "purpose_mentioned_in_text": "provide offers and information of interest to you",
+            "line_number": [
+                27,
+                30
+            ]
+        },
+        {
+            "data_class": "contact_information",
+            "data_mentioned_in_text": "We may use your contact information to send notices for subscription renewal",
+            "purpose_class": "communicate_with_user",
+            "purpose_mentioned_in_text": "send you e-newsletters or other promotional e-mails",
+            "line_number": [
+                90
+            ]
+        },
+        {
+            "data_class": "contact_information",
+            "data_mentioned_in_text": "We may use your contact information to send notices for subscription renewal",
+            "purpose_class": "marketing",
+            "purpose_mentioned_in_text": "send you e-newsletters or other promotional e-mails",
+            "line_number": [
+                90
+            ]
+        },
+        {
+            "data_class": "email_address",
+            "data_mentioned_in_text": "e-mail address, as well as demographic information",
+            "purpose_class": "provide_services_and_fulfill_contractual_obligations",
+            "purpose_mentioned_in_text": "The information we collect is used to respond to your specific requests",
+            "line_number": [
+                93
+            ]
+        },
+        {
+            "data_class": "name",
+            "data_mentioned_in_text": "Personal Data, such as your name, address",
+            "purpose_class": "corporate_governance",
+            "purpose_mentioned_in_text": "we reserve the right to disclose your Personal Data if we are required to do so by law",
+            "line_number": [
+                96
+            ]
+        },
+        {
+            "data_class": "contact_information",
+            "data_mentioned_in_text": "information such as name, postal address, email address, account name, or telephone number",
+            "purpose_class": "personalisation",
+            "purpose_mentioned_in_text": "to enable you to use our Web Sites, to create an account or profile",
+            "line_number": [
+                231,
+                99
+            ]
+        }
+    ],
+    "TP_sharing": [
+        {
+            "purpose_class": "improve_products_and_services",
+            "purpose_mentioned_in_text": "improve our understanding of our web traffic and visitor behavior",
+            "third_party_sharing_practice_class": "aggregated_information",
+            "third_party_sharing_practice_mentioned_in_text": "We may disclose aggregated information about users",
+            "line_number": [
+                96
+            ]
+        }
+    ],
+    "TP_name": [
+        {
+            "third_party_sharing_practice_class": "aggregated_information",
+            "third_party_sharing_practice_mentioned_in_text": "We may use pixel tags, either provided by us or by our third-party advertisers",
+            "third_party_name": "AdRoll",
+            "third_party_name_mentioned_in_text": "we use third party advertising service companies, such as AdRoll",
+            "line_number": [
+                30
+            ]
+        },
+        {
+            "third_party_sharing_practice_class": "aggregated_information",
+            "third_party_sharing_practice_mentioned_in_text": "We may use pixel tags, either provided by us or by our third-party advertisers",
+            "third_party_name": "Feathr",
+            "third_party_name_mentioned_in_text": "third-party advertisers, such as AdRoll and Feathr",
+            "line_number": [
+                72
+            ]
+        },
+        {
+            "third_party_sharing_practice_class": "aggregated_information",
+            "third_party_sharing_practice_mentioned_in_text": "We use Google Analytics for this purpose",
+            "third_party_name": "Google Analytics",
+            "third_party_name_mentioned_in_text": "We use Google Analytics for this purpose",
+            "line_number": [
+                45,
+                48
+            ]
+        }
+    ],
+    "your_rights": [
+        {
+            "rights_class": "opt_out_marketing",
+            "rights_mentioned_in_text": "All promotional e-mails you receive from us will include an option to opt out of similar e-mail communications in the future",
+            "line_number": [
+                90
+            ]
+        },
+        {
+            "rights_class": "access_to_information",
+            "rights_mentioned_in_text": "We want to assure you that you have access to your Personal Data that we collect and store",
+            "line_number": [
+                189
+            ]
+        },
+        {
+            "rights_class": "data_correction",
+            "rights_mentioned_in_text": "Customers may correct or amend information that is inaccurate",
+            "line_number": [
+                189
+            ]
+        },
+        {
+            "rights_class": "content_removal_erasure",
+            "rights_mentioned_in_text": "You have the right to request that Personal Data held about you is deleted.",
+            "line_number": [
+                333
+            ]
+        }
+    ],
+    "your_responsibilities": [
+        {
+            "responsibilities_class": "visitors_consent",
+            "responsibilities_mentioned_in_text": "By using our Web Sites, you are consenting to our processing of your information",
+            "line_number": [
+                180
+            ]
+        },
+        {
+            "responsibilities_class": "data_protection",
+            "responsibilities_mentioned_in_text": "Passwords may be used by a Site to protect your personal data",
+            "line_number": [
+                153
+            ]
+        },
+        {
+            "responsibilities_class": "childrens_accounts",
+            "responsibilities_mentioned_in_text": "Our Web Sites are not intended for children under 16 years of age",
+            "line_number": [
+                195
+            ]
+        }
+    ]
+}

@@ -1,0 +1,72 @@
+{
+    "data_types": [
+        {
+            "data_class": "contact_information",
+            "data_mentioned_in_text": "Common examples of personal data could include names, identification numbers, contact information",
+            "purpose_class": "provide_services_and_fulfill_contractual_obligations",
+            "purpose_mentioned_in_text": "evaluating and/or processing your booking/reservation whereby you will be given access to possible rewards, discounts, privileges, promotions, offers, services and/or products",
+            "line_number": [
+                30,
+                42
+            ]
+        },
+        {
+            "data_class": "name",
+            "data_mentioned_in_text": "Common examples of personal data could include names, identification numbers, contact information",
+            "purpose_class": "marketing",
+            "purpose_mentioned_in_text": "providing and sending you marketing, advertising and/or promotional information and materials relating to your purchases as well as products, and/or services",
+            "line_number": [
+                30,
+                51
+            ]
+        }
+    ],
+    "TP_sharing": [
+        {
+            "purpose_class": "provide_services_and_fulfill_contractual_obligations",
+            "purpose_mentioned_in_text": "disclosing the personal data you have provided to us to our third party service providers, agents and/or our affiliates or related corporations, and/or other third parties",
+            "third_party_sharing_practice_class": "performance_of_contract",
+            "third_party_sharing_practice_mentioned_in_text": "In order to conduct our business operations more smoothly",
+            "line_number": [
+                72
+            ]
+        }
+    ],
+    "TP_name": [
+        {
+            "third_party_sharing_practice_class": "performance_of_contract",
+            "third_party_sharing_practice_mentioned_in_text": "disclosing the personal data you have provided to us to our third party service providers, agents and/or our affiliates or related corporations, and/or other third parties",
+            "third_party_name": "Unknown",
+            "third_party_name_mentioned_in_text": "OBBO Partners",
+            "line_number": [
+                42,
+                72
+            ]
+        }
+    ],
+    "your_rights": [
+        {
+            "rights_class": "access_to_information",
+            "rights_mentioned_in_text": "You may request to access and/or correct the personal data currently in our possession or control by submitting a written request to us",
+            "line_number": [
+                108
+            ]
+        },
+        {
+            "rights_class": "data_correction",
+            "rights_mentioned_in_text": "For a request to correct personal data, once we have sufficient information from you to deal with the request, we will: correct your personal data within 30 days",
+            "line_number": [
+                117
+            ]
+        }
+    ],
+    "your_responsibilities": [
+        {
+            "responsibilities_class": "data_protection",
+            "responsibilities_mentioned_in_text": "However, this means that you must also update us of any changes in your personal data that you had initially provided us with",
+            "line_number": [
+                147
+            ]
+        }
+    ]
+}

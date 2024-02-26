@@ -1,0 +1,216 @@
+{
+    "data_types": [
+        {
+            "data_class": "email_address",
+            "data_mentioned_in_text": "Email address",
+            "purpose_class": "provide_services_and_fulfill_contractual_obligations",
+            "purpose_mentioned_in_text": "Most of the times we need this information to comply with the agreements ensuing from the Terms of Use or other agreements we made.",
+            "line_number": [
+                99,
+                120
+            ]
+        },
+        {
+            "data_class": "name",
+            "data_mentioned_in_text": "First name and last name",
+            "purpose_class": "provide_services_and_fulfill_contractual_obligations",
+            "purpose_mentioned_in_text": "Most of the times we need this information to comply with the agreements ensuing from the Terms of Use or other agreements we made.",
+            "line_number": [
+                102,
+                120
+            ]
+        },
+        {
+            "data_class": "phone_number",
+            "data_mentioned_in_text": "Phone number",
+            "purpose_class": "provide_services_and_fulfill_contractual_obligations",
+            "purpose_mentioned_in_text": "Most of the times we need this information to comply with the agreements ensuing from the Terms of Use or other agreements we made.",
+            "line_number": [
+                105,
+                120
+            ]
+        },
+        {
+            "data_class": "physical_address",
+            "data_mentioned_in_text": "Address, State, Province, ZIP/Postal code, City",
+            "purpose_class": "provide_services_and_fulfill_contractual_obligations",
+            "purpose_mentioned_in_text": "Most of the times we need this information to comply with the agreements ensuing from the Terms of Use or other agreements we made.",
+            "line_number": [
+                108,
+                120
+            ]
+        },
+        {
+            "data_class": "ip_address",
+            "data_mentioned_in_text": "IP-address",
+            "purpose_class": "improve_products_and_services",
+            "purpose_mentioned_in_text": "We simply need this information to improve the Service.",
+            "line_number": [
+                111,
+                126
+            ]
+        },
+        {
+            "data_class": "technical_information__general_",
+            "data_mentioned_in_text": "Internet browser and device type",
+            "purpose_class": "improve_products_and_services",
+            "purpose_mentioned_in_text": "We simply need this information to improve the Service.",
+            "line_number": [
+                114,
+                126
+            ]
+        },
+        {
+            "data_class": "payment_information",
+            "data_mentioned_in_text": "Bank information",
+            "purpose_class": "provide_services_and_fulfill_contractual_obligations",
+            "purpose_mentioned_in_text": "Most of the times we need this information to comply with the agreements ensuing from the Terms of Use or other agreements we made.",
+            "line_number": [
+                117,
+                120
+            ]
+        }
+    ],
+    "TP_sharing": [
+        {
+            "purpose_class": "provide_services_and_fulfill_contractual_obligations",
+            "purpose_mentioned_in_text": "We may employ third party companies and individuals to facilitate our Service (Service Providers), to provide the Service on our behalf, to perform Service-related services or to assist us in analyzing how our Service is used.",
+            "third_party_sharing_practice_class": "performance_of_contract",
+            "third_party_sharing_practice_mentioned_in_text": "These third parties have access to your Personal Data only to perform these tasks on our behalf and are obligated not to disclose or use it for any other purpose.",
+            "line_number": [
+                228,
+                231
+            ]
+        }
+    ],
+    "TP_name": [
+        {
+            "third_party_sharing_practice_class": "performance_of_contract",
+            "third_party_sharing_practice_mentioned_in_text": "Google Analytics",
+            "third_party_name": "Google",
+            "third_party_name_mentioned_in_text": "Google Analytics is a web analytics service offered by Google that tracks and reports website traffic.",
+            "line_number": [
+                237,
+                243,
+                246
+            ]
+        },
+        {
+            "third_party_sharing_practice_class": "performance_of_contract",
+            "third_party_sharing_practice_mentioned_in_text": "Google Ads (AdWords)",
+            "third_party_name": "Google",
+            "third_party_name_mentioned_in_text": "Google Ads (AdWords) remarketing service is provided by Google Inc.",
+            "line_number": [
+                261,
+                264
+            ]
+        },
+        {
+            "third_party_sharing_practice_class": "performance_of_contract",
+            "third_party_sharing_practice_mentioned_in_text": "Facebook",
+            "third_party_name": "Facebook",
+            "third_party_name_mentioned_in_text": "Facebook remarketing service is provided by Facebook Inc.",
+            "line_number": [
+                276,
+                279
+            ]
+        },
+        {
+            "third_party_sharing_practice_class": "performance_of_contract",
+            "third_party_sharing_practice_mentioned_in_text": "Stripe",
+            "third_party_name": "Stripe",
+            "third_party_name_mentioned_in_text": "Stripe. Their Privacy Policy can be viewed at",
+            "line_number": [
+                297,
+                303,
+                306
+            ]
+        },
+        {
+            "third_party_sharing_practice_class": "performance_of_contract",
+            "third_party_sharing_practice_mentioned_in_text": "PayPal / Braintree",
+            "third_party_name": "PayPal",
+            "third_party_name_mentioned_in_text": "PayPal / Braintree. Their Privacy Policy can be viewed at",
+            "line_number": [
+                297,
+                309,
+                312
+            ]
+        }
+    ],
+    "your_rights": [
+        {
+            "rights_class": "access_to_information",
+            "rights_mentioned_in_text": "Right to view. You have the right to request us to show, at any time, which information we have about you.",
+            "line_number": [
+                348,
+                351
+            ]
+        },
+        {
+            "rights_class": "data_correction",
+            "rights_mentioned_in_text": "Right to rectify. You have the right to have your personal information corrected if this information is incorrect or outdated or not complete.",
+            "line_number": [
+                354,
+                357
+            ]
+        },
+        {
+            "rights_class": "third_party_data_sharing",
+            "rights_mentioned_in_text": "Right to object. You have the right to object to the processing of your personal information, if you do not agree with the way in which we process your personal data.",
+            "line_number": [
+                360,
+                363
+            ]
+        },
+        {
+            "rights_class": "data_portability",
+            "rights_mentioned_in_text": "Right to data portability. You have the right to request us to provide you with the data that you have provided to us in a machine-readable format, so that you can store this data in a database of you or another party.",
+            "line_number": [
+                366,
+                369
+            ]
+        },
+        {
+            "rights_class": "limit_use_or_disclosure_of_sensitive_personal_information",
+            "rights_mentioned_in_text": "Right to limit how to process your personal information. You have the right to request a restriction on the processing of your data.",
+            "line_number": [
+                372,
+                375
+            ]
+        },
+        {
+            "rights_class": "content_removal_erasure",
+            "rights_mentioned_in_text": "Right to be forgotten. You have the right to ask us to remove all personal information that we have from you.",
+            "line_number": [
+                378,
+                381
+            ]
+        },
+        {
+            "rights_class": "data_processing_complaint",
+            "rights_mentioned_in_text": "Right to make a complaint. You have the right to make a complaint about the way we handle your data.",
+            "line_number": [
+                384,
+                387
+            ]
+        }
+    ],
+    "your_responsibilities": [
+        {
+            "responsibilities_class": "data_protection",
+            "responsibilities_mentioned_in_text": "The security of your data is important to us.",
+            "line_number": [
+                210
+            ]
+        },
+        {
+            "responsibilities_class": "childrens_accounts",
+            "responsibilities_mentioned_in_text": "Our Service does not address anyone under the age of 18 (Children).",
+            "line_number": [
+                324,
+                327
+            ]
+        }
+    ]
+}

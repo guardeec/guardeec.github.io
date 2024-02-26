@@ -1,0 +1,199 @@
+{
+    "data_types": [
+        {
+            "data_class": "ip_address",
+            "data_mentioned_in_text": "IP address",
+            "purpose_class": "personalisation",
+            "purpose_mentioned_in_text": "to load the Site accurately for you",
+            "line_number": [
+                21,
+                24
+            ]
+        },
+        {
+            "data_class": "ip_address",
+            "data_mentioned_in_text": "IP address",
+            "purpose_class": "improve_products_and_services",
+            "purpose_mentioned_in_text": "perform analytics on Site usage to optimize our Site",
+            "line_number": [
+                21,
+                24
+            ]
+        },
+        {
+            "data_class": "cookie_information",
+            "data_mentioned_in_text": "cookie information",
+            "purpose_class": "personalisation",
+            "purpose_mentioned_in_text": "to load the Site accurately for you",
+            "line_number": [
+                21,
+                24
+            ]
+        },
+        {
+            "data_class": "cookie_information",
+            "data_mentioned_in_text": "cookie information",
+            "purpose_class": "improve_products_and_services",
+            "purpose_mentioned_in_text": "perform analytics on Site usage to optimize our Site",
+            "line_number": [
+                21,
+                24
+            ]
+        },
+        {
+            "data_class": "name",
+            "data_mentioned_in_text": "name",
+            "purpose_class": "provide_services_and_fulfill_contractual_obligations",
+            "purpose_mentioned_in_text": "to provide products or services to you to fulfill our contract",
+            "line_number": [
+                39,
+                42
+            ]
+        },
+        {
+            "data_class": "billing_address",
+            "data_mentioned_in_text": "billing address",
+            "purpose_class": "provide_services_and_fulfill_contractual_obligations",
+            "purpose_mentioned_in_text": "to provide products or services to you to fulfill our contract",
+            "line_number": [
+                39,
+                42
+            ]
+        },
+        {
+            "data_class": "shipping_address",
+            "data_mentioned_in_text": "shipping address",
+            "purpose_class": "provide_services_and_fulfill_contractual_obligations",
+            "purpose_mentioned_in_text": "to provide products or services to you to fulfill our contract",
+            "line_number": [
+                39,
+                42
+            ]
+        },
+        {
+            "data_class": "payment_information",
+            "data_mentioned_in_text": "payment information (including credit card numbers",
+            "purpose_class": "provide_services_and_fulfill_contractual_obligations",
+            "purpose_mentioned_in_text": "to provide products or services to you to fulfill our contract",
+            "line_number": [
+                39,
+                42
+            ]
+        },
+        {
+            "data_class": "email_address",
+            "data_mentioned_in_text": "email address",
+            "purpose_class": "provide_services_and_fulfill_contractual_obligations",
+            "purpose_mentioned_in_text": "to provide products or services to you to fulfill our contract",
+            "line_number": [
+                39,
+                42
+            ]
+        },
+        {
+            "data_class": "email_address",
+            "data_mentioned_in_text": "email address",
+            "purpose_class": "communicate_with_user",
+            "purpose_mentioned_in_text": "communicate with you",
+            "line_number": [
+                39,
+                42
+            ]
+        },
+        {
+            "data_class": "phone_number",
+            "data_mentioned_in_text": "phone number",
+            "purpose_class": "provide_services_and_fulfill_contractual_obligations",
+            "purpose_mentioned_in_text": "to provide products or services to you to fulfill our contract",
+            "line_number": [
+                39,
+                42
+            ]
+        },
+        {
+            "data_class": "phone_number",
+            "data_mentioned_in_text": "phone number",
+            "purpose_class": "communicate_with_user",
+            "purpose_mentioned_in_text": "communicate with you",
+            "line_number": [
+                39,
+                42
+            ]
+        }
+    ],
+    "TP_sharing": [
+        {
+            "purpose_class": "improve_products_and_services",
+            "purpose_mentioned_in_text": "perform analytics on Site usage to optimize our Site",
+            "third_party_sharing_practice_class": "third_party_platforms_integration",
+            "third_party_sharing_practice_mentioned_in_text": "shared with our processor Shopify",
+            "line_number": [
+                30
+            ]
+        },
+        {
+            "purpose_class": "provide_services_and_fulfill_contractual_obligations",
+            "purpose_mentioned_in_text": "to provide products or services to you to fulfill our contract, to process your payment information, arrange for shipping, and provide you with invoices and/or order confirmations",
+            "third_party_sharing_practice_class": "third_party_platforms_integration",
+            "third_party_sharing_practice_mentioned_in_text": "shared with our processor Shopify",
+            "line_number": [
+                48
+            ]
+        }
+    ],
+    "TP_name": [
+        {
+            "third_party_sharing_practice_class": "third_party_platforms_integration",
+            "third_party_sharing_practice_mentioned_in_text": "shared with our processor Shopify",
+            "third_party_name": "Shopify",
+            "third_party_name_mentioned_in_text": "shared with our processor Shopify",
+            "line_number": [
+                30,
+                48
+            ]
+        }
+    ],
+    "your_rights": [
+        {
+            "rights_class": "access_to_information",
+            "rights_mentioned_in_text": "you have the right to access the Personal Information we hold about you",
+            "line_number": [
+                198,
+                207
+            ]
+        },
+        {
+            "rights_class": "data_portability",
+            "rights_mentioned_in_text": "to port it to a new service",
+            "line_number": [
+                198,
+                207
+            ]
+        },
+        {
+            "rights_class": "data_correction",
+            "rights_mentioned_in_text": "to ask that your Personal Information be corrected, updated, or erased",
+            "line_number": [
+                198,
+                207
+            ]
+        },
+        {
+            "rights_class": "content_removal_erasure",
+            "rights_mentioned_in_text": "to ask that your Personal Information be corrected, updated, or erased",
+            "line_number": [
+                198,
+                207
+            ]
+        }
+    ],
+    "your_responsibilities": [
+        {
+            "responsibilities_class": "visitors_consent",
+            "responsibilities_mentioned_in_text": "Your consent",
+            "line_number": [
+                141
+            ]
+        }
+    ]
+}

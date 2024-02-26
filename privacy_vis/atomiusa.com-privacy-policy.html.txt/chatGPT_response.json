@@ -1,0 +1,200 @@
+{
+    "data_types": [
+        {
+            "data_class": "name",
+            "data_mentioned_in_text": "your name",
+            "purpose_class": "provide_services_and_fulfill_contractual_obligations",
+            "purpose_mentioned_in_text": "We use personal and non-personal information to deliver the basic functionality of the Products/Services; provide functionality to certain features that you choose to use; allow you to create, modify, and view your account information; and allow you to customize, rate, and review the Products/Services.",
+            "line_number": [
+                66
+            ]
+        },
+        {
+            "data_class": "email_address",
+            "data_mentioned_in_text": "email address",
+            "purpose_class": "provide_services_and_fulfill_contractual_obligations",
+            "purpose_mentioned_in_text": "We may use any means that you have provided us to contact you, such as the email address you use to register for and log in to your account.",
+            "line_number": [
+                66
+            ]
+        },
+        {
+            "data_class": "physical_address",
+            "data_mentioned_in_text": "street address",
+            "purpose_class": "provide_services_and_fulfill_contractual_obligations",
+            "purpose_mentioned_in_text": "When you register or update your account, make a purchase online...",
+            "line_number": [
+                33
+            ]
+        },
+        {
+            "data_class": "phone_number",
+            "data_mentioned_in_text": "mobile, home, and work phone numbers",
+            "purpose_class": "provide_services_and_fulfill_contractual_obligations",
+            "purpose_mentioned_in_text": "...you may provide us personal information such as... mobile, home, and work phone numbers...",
+            "line_number": [
+                33
+            ]
+        },
+        {
+            "data_class": "payment_information",
+            "data_mentioned_in_text": "payment information",
+            "purpose_class": "provide_services_and_fulfill_contractual_obligations",
+            "purpose_mentioned_in_text": "make a purchase online",
+            "line_number": [
+                33
+            ]
+        },
+        {
+            "data_class": "account_credentials",
+            "data_mentioned_in_text": "account information, such as user ID, password",
+            "purpose_class": "provide_services_and_fulfill_contractual_obligations",
+            "purpose_mentioned_in_text": "When you register or update your account...",
+            "line_number": [
+                33
+            ]
+        },
+        {
+            "data_class": "ip_address",
+            "data_mentioned_in_text": "IP address",
+            "purpose_class": "provide_services_and_fulfill_contractual_obligations",
+            "purpose_mentioned_in_text": "We may track your IP address ... to make our cloud platform work more efficiently and provide you with more customized Products/Services.",
+            "line_number": [
+                75
+            ]
+        },
+        {
+            "data_class": "photo_profile_picture",
+            "data_mentioned_in_text": "images that you associate with account users",
+            "purpose_class": "provide_services_and_fulfill_contractual_obligations",
+            "purpose_mentioned_in_text": "You may also provide other information that potentially could be used to identify you, such as the names and images that you associate with account users...",
+            "line_number": [
+                33
+            ]
+        },
+        {
+            "data_class": "users_location",
+            "data_mentioned_in_text": "your locations",
+            "purpose_class": "provide_services_and_fulfill_contractual_obligations",
+            "purpose_mentioned_in_text": "account users, your locations, devices, scenes, device configuration details...",
+            "line_number": [
+                33
+            ]
+        },
+        {
+            "data_class": "device_information",
+            "data_mentioned_in_text": "devices, device configuration details",
+            "purpose_class": "provide_services_and_fulfill_contractual_obligations",
+            "purpose_mentioned_in_text": "...devices, scenes, device configuration details...",
+            "line_number": [
+                33
+            ]
+        },
+        {
+            "data_class": "audio",
+            "data_mentioned_in_text": "audio/video recordings",
+            "purpose_class": "provide_services_and_fulfill_contractual_obligations",
+            "purpose_mentioned_in_text": "...audio/video recordings. Further, you may upload/share/post on our website...",
+            "line_number": [
+                33
+            ]
+        }
+    ],
+    "TP_sharing": [
+        {
+            "purpose_class": "provide_services_and_fulfill_contractual_obligations",
+            "purpose_mentioned_in_text": "we may also share some personal information with third parties for these purposes.",
+            "third_party_sharing_practice_class": "performance_of_contract",
+            "third_party_sharing_practice_mentioned_in_text": "See the Your Choices section below for information about how you can opt-out of certain communications.",
+            "line_number": [
+                72
+            ]
+        },
+        {
+            "purpose_class": "improve_products_and_services",
+            "purpose_mentioned_in_text": "This information allows us to personalize the Products/Services; analyze how you use the Products/Services...",
+            "third_party_sharing_practice_class": "aggregated_information",
+            "third_party_sharing_practice_mentioned_in_text": "We may track your IP address and MAC address to make our cloud platform work more efficiently and provide you with more customized Products/Services.",
+            "line_number": [
+                75
+            ]
+        },
+        {
+            "purpose_class": "marketing",
+            "purpose_mentioned_in_text": "Our site tracks your IP address and MAC address for marketing purposes",
+            "third_party_sharing_practice_class": "aggregated_information",
+            "third_party_sharing_practice_mentioned_in_text": "Your personal and non-personal information may be provided to our partners for use in their promotional and/or marketing practices.",
+            "line_number": [
+                102
+            ]
+        },
+        {
+            "purpose_class": "defend_legal_rights",
+            "purpose_mentioned_in_text": "establish, exercise or defend a legal claim",
+            "third_party_sharing_practice_class": "investigate_harm",
+            "third_party_sharing_practice_mentioned_in_text": "We use personal information to... protect against, identify and prevent fraud, criminal liability and other liabilities.",
+            "line_number": [
+                81
+            ]
+        }
+    ],
+    "TP_name": [
+        {
+            "third_party_sharing_practice_class": "affiliates_and_subsidiaries",
+            "third_party_sharing_practice_mentioned_in_text": "We may share the information we collect about you with our corporate family, including our affiliates and subsidiaries.",
+            "third_party_name": "Unknown",
+            "third_party_name_mentioned_in_text": "our corporate family, including our affiliates and subsidiaries.",
+            "line_number": [
+                90
+            ]
+        },
+        {
+            "third_party_sharing_practice_class": "third_party_platforms_integration",
+            "third_party_sharing_practice_mentioned_in_text": "Some third-party services that you choose to integrate with the Services may transmit personal information into your account with us.",
+            "third_party_name": "Unknown",
+            "third_party_name_mentioned_in_text": "third-party services",
+            "line_number": [
+                39
+            ]
+        }
+    ],
+    "your_rights": [
+        {
+            "rights_class": "access_to_information",
+            "rights_mentioned_in_text": "Using the Products/Services, you can access and may be able to edit or remove the personal information you have provided to us.",
+            "line_number": [
+                156
+            ]
+        },
+        {
+            "rights_class": "opt_out_marketing",
+            "rights_mentioned_in_text": "You can also contact us to change your privacy preferences. ... You may not opt-out of administrative emails for your registered account...",
+            "line_number": [
+                141
+            ]
+        }
+    ],
+    "your_responsibilities": [
+        {
+            "responsibilities_class": "data_protection",
+            "responsibilities_mentioned_in_text": "Your accounts privacy and security is protected by your password.",
+            "line_number": [
+                126
+            ]
+        },
+        {
+            "responsibilities_class": "user_content_intellectual_property_ip",
+            "responsibilities_mentioned_in_text": "you may upload/share/post on our website or through our Products/Services.",
+            "line_number": [
+                33
+            ]
+        },
+        {
+            "responsibilities_class": "childrens_accounts",
+            "responsibilities_mentioned_in_text": "The Products/Services are directed to a general audience and are not intended for children under the age of 13.",
+            "line_number": [
+                162
+            ]
+        }
+    ]
+}

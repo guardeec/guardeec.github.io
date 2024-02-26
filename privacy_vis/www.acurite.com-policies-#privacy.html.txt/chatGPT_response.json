@@ -1,0 +1,139 @@
+{
+    "data_types": [
+        {
+            "data_class": "name",
+            "data_mentioned_in_text": "We collect personal information such as your name",
+            "purpose_class": "provide_services_and_fulfill_contractual_obligations",
+            "purpose_mentioned_in_text": "We use that information along with your payment information to complete your transaction",
+            "line_number": [
+                210
+            ]
+        },
+        {
+            "data_class": "email_address",
+            "data_mentioned_in_text": "We collect personal information such as ... e-mail",
+            "purpose_class": "provide_services_and_fulfill_contractual_obligations",
+            "purpose_mentioned_in_text": "We use that information along with your payment information to complete your transaction",
+            "line_number": [
+                210
+            ]
+        },
+        {
+            "data_class": "phone_number",
+            "data_mentioned_in_text": "We collect personal information such as ... phone number when you shop on the website",
+            "purpose_class": "provide_services_and_fulfill_contractual_obligations",
+            "purpose_mentioned_in_text": "We use that information along with your payment information to complete your transaction",
+            "line_number": [
+                210
+            ]
+        },
+        {
+            "data_class": "payment_information",
+            "data_mentioned_in_text": "We use that information along with your payment information to complete your transaction",
+            "purpose_class": "provide_services_and_fulfill_contractual_obligations",
+            "purpose_mentioned_in_text": "We use that information along with your payment information to complete your transaction",
+            "line_number": [
+                210
+            ]
+        },
+        {
+            "data_class": "cookie_information",
+            "data_mentioned_in_text": "We also keep track of individual visitors to our website through the use of cookies",
+            "purpose_class": "improve_products_and_services",
+            "purpose_mentioned_in_text": "This information is used to help improve the site and administer the site",
+            "line_number": [
+                234
+            ]
+        }
+    ],
+    "TP_sharing": [
+        {
+            "purpose_class": "provide_services_and_fulfill_contractual_obligations",
+            "purpose_mentioned_in_text": "You may also choose to share your information from the My AcuRite service through non-affiliated, 3rd party weather monitoring services",
+            "third_party_sharing_practice_class": "third_party_platforms_integration",
+            "third_party_sharing_practice_mentioned_in_text": "You may also choose to share your information from the My AcuRite service through non-affiliated, 3rd party weather monitoring services",
+            "line_number": [
+                210
+            ]
+        },
+        {
+            "purpose_class": "corporate_governance",
+            "purpose_mentioned_in_text": "Additionally, we might buy or sell businesses or assets",
+            "third_party_sharing_practice_class": "merger_and_acquisition",
+            "third_party_sharing_practice_mentioned_in_text": "In the event of a corporate sale, merger, reorganization, sale of assets, dissolution, or similar event, the information we have collected may be part of the transferred assets",
+            "line_number": [
+                210
+            ]
+        },
+        {
+            "purpose_class": "defend_legal_rights",
+            "purpose_mentioned_in_text": "We may also disclose information to others if we are required to do so by law",
+            "third_party_sharing_practice_class": "regulatory_compliance",
+            "third_party_sharing_practice_mentioned_in_text": "We may also disclose information to others if we are required to do so by law",
+            "line_number": [
+                210
+            ]
+        }
+    ],
+    "TP_name": [
+        {
+            "third_party_sharing_practice_class": "third_party_platforms_integration",
+            "third_party_sharing_practice_mentioned_in_text": "You may also choose to share your information from the My AcuRite service through non-affiliated, 3rd party weather monitoring services",
+            "third_party_name": "Unknown",
+            "third_party_name_mentioned_in_text": "",
+            "line_number": [
+                210
+            ]
+        },
+        {
+            "third_party_sharing_practice_class": "merger_and_acquisition",
+            "third_party_sharing_practice_mentioned_in_text": "In the event of a corporate sale, merger, reorganization, sale of assets, dissolution, or similar event, the information we have collected may be part of the transferred assets",
+            "third_party_name": "Unknown",
+            "third_party_name_mentioned_in_text": "",
+            "line_number": [
+                210
+            ]
+        },
+        {
+            "third_party_sharing_practice_class": "regulatory_compliance",
+            "third_party_sharing_practice_mentioned_in_text": "We may also disclose information to others if we are required to do so by law",
+            "third_party_name": "Unknown",
+            "third_party_name_mentioned_in_text": "",
+            "line_number": [
+                210
+            ]
+        }
+    ],
+    "your_rights": [
+        {
+            "rights_class": "data_correction",
+            "rights_mentioned_in_text": "You can submit a data deletion request for any data associated with your account",
+            "line_number": [
+                222
+            ]
+        },
+        {
+            "rights_class": "content_removal_erasure",
+            "rights_mentioned_in_text": "You can submit a data deletion request for any data associated with your account",
+            "line_number": [
+                222
+            ]
+        }
+    ],
+    "your_responsibilities": [
+        {
+            "responsibilities_class": "data_protection",
+            "responsibilities_mentioned_in_text": "You will be responsible for the security of your password",
+            "line_number": [
+                399
+            ]
+        },
+        {
+            "responsibilities_class": "childrens_accounts",
+            "responsibilities_mentioned_in_text": "We do not knowingly collect personal information from persons under age 13 (in which case we will terminate and delete your account and all information contained therein) without prior parental consent",
+            "line_number": [
+                255
+            ]
+        }
+    ]
+}

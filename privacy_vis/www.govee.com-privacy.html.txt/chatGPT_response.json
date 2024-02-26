@@ -1,0 +1,73 @@
+{
+    "data_types": [
+        {
+            "data_class": "cookie_information",
+            "data_mentioned_in_text": "Cookies are a small piece of information stored by your internet browser to your computers hard drive. We do not and cannot use cookies to gather your confidential information that may be stored on your hard drive.",
+            "purpose_class": "personalisation",
+            "purpose_mentioned_in_text": "personalization",
+            "line_number": [
+                12
+            ]
+        },
+        {
+            "data_class": "ip_address",
+            "data_mentioned_in_text": "Cookies and IP Addresses.",
+            "purpose_class": "improve_products_and_services",
+            "purpose_mentioned_in_text": "These advertisers may also utilize cookies and/or web beacons to measure effectiveness, efficiencies, etc. of the sites.",
+            "line_number": [
+                9,
+                12
+            ]
+        }
+    ],
+    "TP_sharing": [
+        {
+            "purpose_class": "improve_products_and_services",
+            "purpose_mentioned_in_text": "Third Party advertisers also help us display tailored content to our customers and serve ads on our behalf",
+            "third_party_sharing_practice_class": "third_party_platforms_integration",
+            "third_party_sharing_practice_mentioned_in_text": "Third Party advertisers also help us display tailored content to our customers and serve ads on our behalf",
+            "line_number": [
+                12
+            ]
+        },
+        {
+            "purpose_class": "improve_products_and_services",
+            "purpose_mentioned_in_text": "We therefore have no responsibility or liability for the content and activities of these linked sites.",
+            "third_party_sharing_practice_class": "affiliates_and_subsidiaries",
+            "third_party_sharing_practice_mentioned_in_text": "These third party sites have separate and independent privacy policies.",
+            "line_number": [
+                18
+            ]
+        }
+    ],
+    "TP_name": [
+        {
+            "third_party_sharing_practice_class": "third_party_platforms_integration",
+            "third_party_sharing_practice_mentioned_in_text": "Third Party advertisers",
+            "third_party_name": "Unknown",
+            "third_party_name_mentioned_in_text": "",
+            "line_number": [
+                12
+            ]
+        }
+    ],
+    "your_rights": [
+        {
+            "rights_class": "access_to_information",
+            "rights_mentioned_in_text": "all users of our site may make any changes to their information at anytime by logging into their control panel and going to the Edit Profile page.",
+            "line_number": [
+                24
+            ]
+        }
+    ],
+    "your_responsibilities": [
+        {
+            "responsibilities_class": "childrens_accounts",
+            "responsibilities_mentioned_in_text": "We are in compliance with the requirements of COPPA (Childrens Online Privacy Protection Act), we do not collect any information from anyone under 13 years of age.",
+            "line_number": [
+                27,
+                30
+            ]
+        }
+    ]
+}

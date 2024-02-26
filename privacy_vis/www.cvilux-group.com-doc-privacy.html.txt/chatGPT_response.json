@@ -1,0 +1,99 @@
+{
+    "data_types": [
+        {
+            "data_class": "cookie_information",
+            "data_mentioned_in_text": "CviLux will record your pattern through cookie",
+            "purpose_class": "personalisation",
+            "purpose_mentioned_in_text": "offer the best user interface",
+            "line_number": [
+                3
+            ]
+        },
+        {
+            "data_class": "name",
+            "data_mentioned_in_text": "such as name",
+            "purpose_class": "provide_services_and_fulfill_contractual_obligations",
+            "purpose_mentioned_in_text": "provide better services such as job applications, purchases",
+            "line_number": [
+                45,
+                48
+            ]
+        },
+        {
+            "data_class": "contact_information",
+            "data_mentioned_in_text": "such as name, address, telephone number, e-mail address",
+            "purpose_class": "provide_services_and_fulfill_contractual_obligations",
+            "purpose_mentioned_in_text": "for contacting you",
+            "line_number": [
+                45,
+                48
+            ]
+        }
+    ],
+    "TP_sharing": [
+        {
+            "purpose_class": "provide_services_and_fulfill_contractual_obligations",
+            "purpose_mentioned_in_text": "services provided by third parties",
+            "third_party_sharing_practice_class": "performance_of_contract",
+            "third_party_sharing_practice_mentioned_in_text": "services provided by third parties",
+            "line_number": [
+                60
+            ]
+        },
+        {
+            "purpose_class": "provide_services_and_fulfill_contractual_obligations",
+            "purpose_mentioned_in_text": "required by applicable laws, regulations, legal processes, enforceable governmental requirements, and functional authorities",
+            "third_party_sharing_practice_class": "regulatory_compliance",
+            "third_party_sharing_practice_mentioned_in_text": "required by applicable laws, regulations, legal processes, enforceable governmental requirements",
+            "line_number": [
+                63
+            ]
+        }
+    ],
+    "TP_name": [
+        {
+            "third_party_sharing_practice_class": "performance_of_contract",
+            "third_party_sharing_practice_mentioned_in_text": "services provided by third parties",
+            "third_party_name": "Unknown",
+            "third_party_name_mentioned_in_text": "services provided by third parties",
+            "line_number": [
+                60
+            ]
+        },
+        {
+            "third_party_sharing_practice_class": "regulatory_compliance",
+            "third_party_sharing_practice_mentioned_in_text": "functional authorities",
+            "third_party_name": "functional authorities",
+            "third_party_name_mentioned_in_text": "functional authorities",
+            "line_number": [
+                63
+            ]
+        },
+        {
+            "third_party_sharing_practice_class": "regulatory_compliance",
+            "third_party_sharing_practice_mentioned_in_text": "based on good faith to detect or prevent possible illegal acts",
+            "third_party_name": "Unknown",
+            "third_party_name_mentioned_in_text": "based on good faith to detect or prevent possible illegal acts",
+            "line_number": [
+                63
+            ]
+        }
+    ],
+    "your_rights": [
+        {
+            "rights_class": "data_correction",
+            "rights_mentioned_in_text": "You may notify us to keep your profile updated and ensure the correctness of your personal information",
+            "line_number": [
+                72
+            ]
+        },
+        {
+            "rights_class": "content_removal_erasure",
+            "rights_mentioned_in_text": "If you wish to delete and stop us from using your personal information",
+            "line_number": [
+                72
+            ]
+        }
+    ],
+    "your_responsibilities": []
+}

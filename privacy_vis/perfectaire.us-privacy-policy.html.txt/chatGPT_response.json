@@ -1,0 +1,117 @@
+{
+    "data_types": [
+        {
+            "data_class": "name",
+            "data_mentioned_in_text": "your name",
+            "purpose_class": "provide_services_and_fulfill_contractual_obligations",
+            "purpose_mentioned_in_text": "register your Perfect product",
+            "line_number": [
+                27
+            ]
+        },
+        {
+            "data_class": "physical_address",
+            "data_mentioned_in_text": "home or work address",
+            "purpose_class": "provide_services_and_fulfill_contractual_obligations",
+            "purpose_mentioned_in_text": "register your Perfect product",
+            "line_number": [
+                27
+            ]
+        },
+        {
+            "data_class": "phone_number",
+            "data_mentioned_in_text": "phone number",
+            "purpose_class": "provide_services_and_fulfill_contractual_obligations",
+            "purpose_mentioned_in_text": "register your Perfect product",
+            "line_number": [
+                27
+            ]
+        },
+        {
+            "data_class": "email_address",
+            "data_mentioned_in_text": "email address",
+            "purpose_class": "provide_services_and_fulfill_contractual_obligations",
+            "purpose_mentioned_in_text": "register your Perfect product",
+            "line_number": [
+                27
+            ]
+        },
+        {
+            "data_class": "device_location",
+            "data_mentioned_in_text": "where your Device and Perfect Product is used",
+            "purpose_class": "provide_services_and_fulfill_contractual_obligations",
+            "purpose_mentioned_in_text": "deliver services to you",
+            "line_number": [
+                27,
+                54
+            ]
+        }
+    ],
+    "TP_sharing": [
+        {
+            "purpose_class": "provide_services_and_fulfill_contractual_obligations",
+            "purpose_mentioned_in_text": "We may use your personal information to: Deliver services to you",
+            "third_party_sharing_practice_class": "performance_of_contract",
+            "third_party_sharing_practice_mentioned_in_text": "Our service providers, dealers, distributors, agents or contractors who are contractually restricted from using or disclosing your information except as necessary to perform services on our behalf",
+            "line_number": [
+                51,
+                81
+            ]
+        },
+        {
+            "purpose_class": "provide_services_and_fulfill_contractual_obligations",
+            "purpose_mentioned_in_text": "We may use your personal information to: Deliver services to you",
+            "third_party_sharing_practice_class": "regulatory_compliance",
+            "third_party_sharing_practice_mentioned_in_text": "Comply with legal obligations",
+            "line_number": [
+                51,
+                87
+            ]
+        },
+        {
+            "purpose_class": "service_security",
+            "purpose_mentioned_in_text": "Detect, prevent and respond to fraud, intellectual property infringement and violations of law",
+            "third_party_sharing_practice_class": "prevent_harm",
+            "third_party_sharing_practice_mentioned_in_text": "Investigate suspected or actual illegal activity, and prevent property and personal injury or financial loss",
+            "line_number": [
+                69,
+                90
+            ]
+        }
+    ],
+    "TP_name": [
+        {
+            "third_party_sharing_practice_class": "performance_of_contract",
+            "third_party_sharing_practice_mentioned_in_text": "Our service providers, dealers, distributors, agents or contractors who are contractually restricted from using or disclosing your information except as necessary to perform services on our behalf",
+            "third_party_name": "Unknown",
+            "third_party_name_mentioned_in_text": "-",
+            "line_number": [
+                81
+            ]
+        }
+    ],
+    "your_rights": [
+        {
+            "rights_class": "opt_out_marketing",
+            "rights_mentioned_in_text": "unless you opt-out from such marketing communications",
+            "line_number": [
+                66
+            ]
+        },
+        {
+            "rights_class": "third_party_data_sharing",
+            "rights_mentioned_in_text": "California residents may request and obtain information we shared with third parties for direct marketing use",
+            "line_number": [
+                111
+            ]
+        },
+        {
+            "rights_class": "data_correction",
+            "rights_mentioned_in_text": "You may request to update, correct, change, or delete your Personal Information at any time",
+            "line_number": [
+                117
+            ]
+        }
+    ],
+    "your_responsibilities": []
+}

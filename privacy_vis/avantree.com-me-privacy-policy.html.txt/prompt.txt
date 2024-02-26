@@ -1,0 +1,230 @@
+Generate a JSON representation of: (a) all the data types and (b) all purposes of collection and (c) all third party sharing practices and (d) name of companies with which data are shared and (e) all user rights mentions and (f) all user responsibilities mentioned in the given privacy policy paragraph. If a data type is used for more than one purpose or if more than one data type is used for a single purpose, duplicate the records accordingly - similar for third party sharing practices.
+
+------- Instruction:
+1. Find in the text which data types the company collects and provide their corresponding purposes of collection. Data types can be one of these classes (use exactly the same class name) (for "data_class" in JSON):
+- "name"
+- "contact_information"
+- "physical_address"
+- "date_of_birth"
+- "photo_profile_picture"
+- "gender"
+- "biometric"
+- "personal_description"
+- "social_media_profiles"
+- "account_credentials"
+- "user_name"
+- "password"
+- "phone_number"
+- "email_address"
+- "age"
+- "payment_information"
+- "purchase_history"
+- "credit_related_information"
+- "page_response_times"
+- "cookie_information"
+- "ip_address"
+- "health_data"
+- "health_activity_data"
+- "weight"
+- "height"
+- "body_temperature"
+- "bmi"
+- "menstrual_cycle_dates"
+- "pregnancy"
+- "other_health_related_information"
+- "users_location"
+- "device_location"
+- "language"
+- "temperature"
+- "humidity"
+- "ambient_light"
+- "movement"
+- "smoke_carbon_monoxide_levels"
+- "general_environmental_data"
+- "device_type"
+- "operating_system"
+- "application"
+- "video_card"
+- "sound_card"
+- "memory"
+- "browser_type"
+- "enabled_device_accessibility_features"
+- "browser_plugin_types_and_versions"
+- "battery_level"
+- "device_signals__wifi__bluetooth_"
+- "technical_information__general_"
+- "mobile_network_information"
+- "time_zone"
+- "the_number_of_sessions_on_app"
+- "usage_activity_data"
+- "users_on_the_app"
+- "error_reports"
+- "advertisement_engagement"
+- "behaviours"
+- "visits_to_site"
+- "resources_you_access"
+- "details_of_use_of_apps"
+- "product_view_or_searched_for"
+- "length_of_visits_to_certain_pages"
+- "page_interaction_information"
+- "methods_used_to_browse_away_from_the_page"
+- "websites_visited"
+- "steps"
+- "pace"
+- "distance"
+- "url_clickstream_to_and_from"
+- "communications_between_players"
+- "friend_relationships"
+- "conversational_data__general_"
+- "Social meta data"
+- "audio"
+- "video"
+- "comments"
+- "metadata_general"
+- "hashtag"
+- "Sexual Orientation"
+- "Political views"
+- "racial or ethnic origin"
+- "philosophical beliefs"
+- "trade union membership"
+- "Social Security Number"
+2. For each data type, categorize the purpose of collection into one of the following classes (use exactly the same class name) (for "purpose_class" in JSON):
+- "personalisation"
+- "interaction"
+- "display"
+- "marketing"
+- "improve_products_and_services"
+- "provide_services_and_fulfill_contractual_obligations"
+- "preserve_system_integrity"
+- "provide_business_services"
+- "troubleshoot"
+- "communicate_with_user"
+- "connect_with_other_users"
+- "promotions"
+- "changes_to_terms"
+- "user_safety"
+- "service_security"
+- "defend_legal_rights"
+- "corporate_governance"
+- "research"
+- "market_research"
+3. For each purpose, categorize the third party sharing practices into one of the following classes (use exactly the same class name) (for "third_party_sharing_practice_class" in JSON):
+- "regulatory_compliance"
+- "performance_of_contract"
+- "prevent_harm"
+- "invesitigate  harm"
+- "aggregated_information"
+- "merger_and_acquisition"
+- "affiliates_and_subsidiaries"
+- "third_party_platforms_integration"
+- "consumer_retention_rewards_program"
+4. For each third party sharing practice find the name of the company or government body with which data are shared (for "third_party_name" in JSON). If name is not mentioned - set name as "Unknown".
+5. Categorize the user rights into one of the following classes (use exactly the same class name) (for "rights_class" in JSON):
+- "opt_out_marketing"
+- "access_to_information"
+- "data_correction"
+- "third_party_data_sharing"
+- "cookie_preference"
+- "content_removal_erasure"
+- "automatic_decision_making"
+- "data_processing_complaint"
+- "data_portability"
+- "limit_use_or_disclosure_of_sensitive_personal_information"
+- "opt_out_of_push_notification"
+- "arbitration_opt-out"
+6. Categorize the user responsibilities into one of the following classes (use exactly the same class name) (for "responsibilities_class" in JSON):
+- "visitors_consent"
+- "others_right_to_privacy"
+- "data_sharing"
+- "additional_users_data_responsibilities"
+- "data_processor"
+- "data_protection"
+- "childrens_accounts"
+- "user_content_intellectual_property_ip"
+- "user_content_harm"
+- "beta confidentiality "
+- "user_indemnity"
+
+---------- Privacy Policy Paragraph (number in beginning is the number of line):
+3. {removed href}.
+6. {removed href}.
+9. Privacy Policy.
+12. {number list}.
+15. {list item} {removed href} Home.
+18. {list item} PRIVACY POLICY.
+21. PRIVACY POLICY.
+24. This privacy policy only covers information collected on this website and does not cover any information collected offline by Avantree. All Avantree websites are currently covered by this privacy policy.
+27. SECURITY.
+30. Personal information provided on the website and online credit card transactions is transmitted through a secure server. We are committed to handling your personal information with high standards of information security. We take appropriate physical, electronic, and administrative steps to maintain the security and accuracy of personally identifiable information we collect, including limiting the number of people who have physical access to our database servers, as well as employing electronic security systems and password protections that guard against unauthorized access. Our website uses encryption technology, like Secure Sockets Layer (SSL), to protect your personal information during data transport. SSL encrypts ordering information such as your name, address, and credit card number. Our Customer Care center and stores also operate over a private, secure network. Please note that email is not encrypted and is not considered to be a secure means of transmitting credit card information.
+33. PRIVACY POLICY.
+36. To help us achieve our goal of providing the highest quality products and services, we use information from our interactions with you and other customers, as well as from other parties. Because we respect your privacy, we have implemented procedures to ensure that your personal information is handled in a safe, secure, and responsible manner.
+39. We have posted this privacy policy in order to explain our information collection practices and the choices you have about the way information is collected and used.
+42. As we continue to develop our website and take advantage of advances in technology to improve the services we offer, this privacy policy likely will change. We, therefore, encourage you to refer to this policy on an ongoing basis so that you understand our current privacy policy.
+45. THE INFORMATION WE COLLECT.
+48. Generally, you may browse the website without providing any personally identifiable information. However, we may ask you to provide personally identifiable information at various times and places on this website. In some cases, if you choose not to provide us with the requested information, you may not be able to access all parts of this website or participate in all of its features.
+51. We receive and store any personally identifiable information you enter on the website, whenever you shop with Avantree online, through our catalogs, or in our stores, or information you give us in any other way, such as by subscribing to our catalogs, email, or mobile messaging. For example, we may collect the following personally identifiable information: your name, address, telephone number, mobile telephone number, drivers license number, birth date, and email address. If you use a credit or debit card or pay by check, we will also include your account number.
+54. If you use one of our services or participate in one of our surveys, promotions, or sweepstakes, we may ask for additional information, such as your age, interests, or product preferences.
+57. From your purchases and other interactions with us, we obtain information concerning the specific products or services you purchase or use.
+60. When you visit this website, our web server automatically collects anonymous information such as log data and IP addresses and may collect general information concerning your location. We may use the automatically collected information for a number of purposes, such as improving our site design, product assortments, customer service, and special promotions.
+63. HOW WE USE THE INFORMATION WE COLLECT.
+66. We use the information we collect for various purposes, including:
+69. {number list}.
+72. {list item} To complete your purchase transactions.
+75. {list item} To provide the services you request.
+78. {list item} To send you our catalogs and other offerings by mail.
+81. {list item} To identify your product and service preferences, so we can notify you of new or additional products, services, and promotions that might be of interest to you.
+84. {list item} To notify you of product recalls or provide other information concerning products you have purchased.
+87. {list item} To improve our merchandise selections, customer service, and overall shopping experience.
+90. ONLINE ACCOUNT REGISTRATION.
+93. To make online shopping faster and easier, you may register on the Avantree website. As a registered customer, you only have to enter your shipping addresses and billing information once; they will be securely stored with us for your future use. Using your name and a password of your choice, you may access your account online at any time to add, delete, or change information.
+96. If you are using a public computer, we strongly encourage you to LOG OUT at the conclusion of your session. Your information will still be stored with us but it will not be accessible to anyone else from that computer.
+99. EMAILS.
+102. You will receive promotional emails from us only if you have asked to receive them. If you do not want to receive an email from Avantree or its affiliates you can click on the Unsubscribe link at the bottom of any email communication sent by us. Please allow us 3 business days from when the request was received to complete the removal, as some of our promotions may already have been in process before you submitted your request.
+105. ACCEPTANCE.
+108. By using this website, you accept the policies set forth in this Privacy Policy.
+
+
+--------- Example of a JSON structure:
+{
+  "data_types": [
+    {
+      "data_class": "Name",
+      "data_mentioned_in_text": "...",
+      "purpose_class": "Provide Services and fulfill contractual obligations",
+      "purpose_mentioned_in_text": "...",
+      "line_number": [...]
+    },
+  ],
+"TP_sharing": [
+    {
+      "purpose_class": "Provide Services and fulfill contractual obligations",
+      "purpose_mentioned_in_text": "...",
+      "third_party_sharing_practice_class": "Research",
+      "third_party_sharing_practice_mentioned_in_text": "...",
+      "line_number": [...]
+    },
+  ],
+"TP_name": [
+    {
+      "third_party_sharing_practice_class": "Research",
+      "third_party_sharing_practice_mentioned_in_text": "...",
+      "third_party_name": "Google",
+      "third_party_name_mentioned_in_text": "....",
+      "line_number": [...]
+    },
+  ],
+“your_rights”: [
+   {
+      "rights_class": "Content Removal/ Erasure",
+      "rights_mentioned_in_text": "...",
+      "line_number": [...]
+   },
+  ],
+“your_responsibilities”:[
+   {
+      "responsibilities_class": "Children's accounts",
+      "responsibilities_mentioned_in_text": "...",
+      "line_number": [...]
+   },
+  ],
+}

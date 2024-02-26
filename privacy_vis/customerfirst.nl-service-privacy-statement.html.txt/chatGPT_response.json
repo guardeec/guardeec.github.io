@@ -1,0 +1,58 @@
+{
+    "data_types": [
+        {
+            "data_class": "cookie_information",
+            "data_mentioned_in_text": "Cookies zijn kleine stukjes informatie (bestandjes)",
+            "purpose_class": "personalisation",
+            "purpose_mentioned_in_text": "om het navigeren in de website te vergemakkelijken",
+            "line_number": [
+                15,
+                18,
+                21
+            ]
+        },
+        {
+            "data_class": "cookie_information",
+            "data_mentioned_in_text": "Cookies zijn kleine stukjes informatie (bestandjes)",
+            "purpose_class": "improve_products_and_services",
+            "purpose_mentioned_in_text": "om het gebruik van de website te kunnen analyseren en om daarmee de website te kunnen optimaliseren",
+            "line_number": [
+                15,
+                18,
+                21
+            ]
+        },
+        {
+            "data_class": "user_name",
+            "data_mentioned_in_text": "als u ingelogd bent bij BBP Media B. V. kan uw gebruikersnaam bewaard worden in een cookie",
+            "purpose_class": "interaction",
+            "purpose_mentioned_in_text": "als u ingelogd bent bij BBP Media B. V.",
+            "line_number": [
+                24
+            ]
+        },
+        {
+            "data_class": "email_address",
+            "data_mentioned_in_text": "Websites van BBP Media B. V. die advertenties bevatten maken tevens gebruik van cookies",
+            "purpose_class": "marketing",
+            "purpose_mentioned_in_text": "gebruik van cookies om informatie te verzamelen over haar klanten, voor doeleinden van gerichte communicatie, waaronder het verstrekken van service-informatie rond onze producten en gerichte marketingactiviteiten",
+            "line_number": [
+                21,
+                24
+            ]
+        },
+        {
+            "data_class": "cookie_information",
+            "data_mentioned_in_text": "deze cookies worden niet door BBP Media bv zelf geplaatst maar door het bedrijf dat de advertenties verzorgt",
+            "purpose_class": "display",
+            "purpose_mentioned_in_text": "Deze houden bij welke advertenties al aan u vertoond zijn",
+            "line_number": [
+                24
+            ]
+        }
+    ],
+    "TP_sharing": [],
+    "TP_name": [],
+    "your_rights": [],
+    "your_responsibilities": []
+}

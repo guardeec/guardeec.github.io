@@ -1,0 +1,139 @@
+{
+    "policy_text": [
+        "When you surf our website, CviLux will record your pattern through cookie, which will let us to offer the best user interface; we have no intention to invade your privacy when you surf our website. If you would not like to offer us the cookie record, you can cancel or limit the usage of cookie on the setting of your browser. About the setting, please check help of your browser. I accept.",
+        "{number list}.",
+        "{list item} {removed href} Language.",
+        "{number list}.",
+        "{list item} {removed href} Home.",
+        "{list item} Privacy Policy.",
+        "Privacy Policy.",
+        "Privacy Policy.",
+        "CviLux respects your personal privacy. This privacy policy is established to protect your personal information.",
+        "{bullet list}.",
+        "{list item} The Application of this Policy:",
+        "You are using the website of CviLux and its subsidiaries (hereinafter collectively referred to as CviLux) where personal information will be collected, processed, utilized, and protected.",
+        "{list item} Collection and acquisition of personal information.",
+        "{bullet list}.",
+        "{list item} In this Privacy Policy, Personal Information means information that identifies an individual, such as name, address, telephone number, e-mail address, and other contact or identification information.",
+        "{list item} When you are using CviLuxs website, your personal information will be collected for us to provide better services such as job applications, purchases, and for contacting you.",
+        "{list item} When you use the website, we will be able to record your browsing behavior by means of cookies to provide the best user experience; we do not intend to infringe on your privacy during your use of the website. If you do not wish to be tracked by cookies, you can cancel or restrict the use of cookies by changing your browser settings. Please refer to your browser for the setting method.",
+        "{list item} Use of personal information:",
+        "{bullet list}.",
+        "{list item} The personal information collected may be used to answer, send, reply to, or provide the services you need (including services provided by third parties) and to improve the websites user experience.",
+        "{list item} Your personal information will never be disclosed, sold or provided to third parties, unless required by applicable laws, regulations, legal processes, enforceable governmental requirements, and functional authorities in accordance with their investigations or duties, or based on good faith to detect or prevent possible illegal acts.",
+        "{list item} Third parties include but not limited to CviLux, its subsidiaries, and the accredited general agencies and distributors.",
+        "{list item} Update or deletion of personal information:",
+        "You may notify us to keep your profile updated and ensure the correctness of your personal information. You may also notify us If you wish to delete and stop us from using your personal information.",
+        "{list item} Update on the Privacy Policy:",
+        "This Privacy Policy may be updated at any time, and CviLux has the right to update this policy without prior notice. It is recommended that you review the latest Privacy Policy when you return to the website.",
+        "{list item} Contact CviLux.",
+        "If you have any questions or suggestions about this Privacy Policy or personal information, please feel free to contact us by email. Thank you very much."
+    ],
+    "data_purpose": [
+        {
+            "md": "network_information",
+            "d": "cookie_information",
+            "mp": "user_experience",
+            "p": "personalisation",
+            "r": 0,
+            "c": "#bf4040",
+            "o": 1.0
+        },
+        {
+            "md": "id",
+            "d": "name",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 14,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "id",
+            "d": "name",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 15,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "id",
+            "d": "contact_information",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 14,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "id",
+            "d": "contact_information",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 15,
+            "c": "#808080",
+            "o": 0.0
+        }
+    ],
+    "purpose_share": [
+        {
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "ms": "legal",
+            "s": "performance_of_contract",
+            "r": 19,
+            "c": "#837c7c",
+            "o": 0.527213324212933
+        },
+        {
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "ms": "legal",
+            "s": "regulatory_compliance",
+            "r": 20,
+            "c": "#a55a5a",
+            "o": 0.7921542838152107
+        }
+    ],
+    "share_name": [
+        {
+            "ms": "legal",
+            "s": "performance_of_contract",
+            "mn": "Unknown",
+            "n": "unknown",
+            "r": 19,
+            "c": "#FF0000",
+            "o": 0.7
+        },
+        {
+            "ms": "legal",
+            "s": "regulatory_compliance",
+            "mn": "Named",
+            "n": "functional_authorities",
+            "r": 20,
+            "c": "#808080",
+            "o": 0.3
+        },
+        {
+            "ms": "legal",
+            "s": "regulatory_compliance",
+            "mn": "Unknown",
+            "n": "unknown",
+            "r": 20,
+            "c": "#FF0000",
+            "o": 0.7
+        }
+    ],
+    "user_rights": [
+        {
+            "n": "data_correction",
+            "r": 23
+        },
+        {
+            "n": "content_removal_erasure",
+            "r": 23
+        }
+    ],
+    "user_responsibilities": []
+}

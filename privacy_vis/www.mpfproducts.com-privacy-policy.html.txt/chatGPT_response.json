@@ -1,0 +1,115 @@
+{
+    "data_types": [
+        {
+            "data_class": "name",
+            "data_mentioned_in_text": "we may ask you for your name",
+            "purpose_class": "provide_services_and_fulfill_contractual_obligations",
+            "purpose_mentioned_in_text": "When ordering or registering, we may ask you for your name",
+            "line_number": [
+                75
+            ]
+        },
+        {
+            "data_class": "email_address",
+            "data_mentioned_in_text": "e-mail address",
+            "purpose_class": "provide_services_and_fulfill_contractual_obligations",
+            "purpose_mentioned_in_text": "we may ask you for your e-mail address",
+            "line_number": [
+                75
+            ]
+        },
+        {
+            "data_class": "physical_address",
+            "data_mentioned_in_text": "mailing address",
+            "purpose_class": "provide_services_and_fulfill_contractual_obligations",
+            "purpose_mentioned_in_text": "we may ask you for your mailing address",
+            "line_number": [
+                75
+            ]
+        },
+        {
+            "data_class": "phone_number",
+            "data_mentioned_in_text": "phone number",
+            "purpose_class": "provide_services_and_fulfill_contractual_obligations",
+            "purpose_mentioned_in_text": "we may ask you for your phone number",
+            "line_number": [
+                75
+            ]
+        },
+        {
+            "data_class": "payment_information",
+            "data_mentioned_in_text": "credit card information",
+            "purpose_class": "provide_services_and_fulfill_contractual_obligations",
+            "purpose_mentioned_in_text": "we may ask you for your credit card information",
+            "line_number": [
+                75
+            ]
+        },
+        {
+            "data_class": "cookie_information",
+            "data_mentioned_in_text": "we use cookies to enhance your experience and gather information about visitors and visits to our websites",
+            "purpose_class": "improve_products_and_services",
+            "purpose_mentioned_in_text": "we use cookies to enhance your experience and gather information about visitors and visits to our websites",
+            "line_number": [
+                81
+            ]
+        }
+    ],
+    "TP_sharing": [
+        {
+            "purpose_class": "provide_services_and_fulfill_contractual_obligations",
+            "purpose_mentioned_in_text": "assist us in operating our website, conducting our business, or servicing you",
+            "third_party_sharing_practice_class": "performance_of_contract",
+            "third_party_sharing_practice_mentioned_in_text": "website hosting partners and other parties who assist us in operating our website, conducting our business, or servicing you",
+            "line_number": [
+                126
+            ]
+        },
+        {
+            "purpose_class": "improve_products_and_services",
+            "purpose_mentioned_in_text": "contract with third-party service providers to assist us in better understanding our site visitors",
+            "third_party_sharing_practice_class": "research",
+            "third_party_sharing_practice_mentioned_in_text": "We may contract with third-party service providers to assist us in better understanding our site visitors",
+            "line_number": [
+                117
+            ]
+        }
+    ],
+    "TP_name": [
+        {
+            "third_party_sharing_practice_class": "performance_of_contract",
+            "third_party_sharing_practice_mentioned_in_text": "does not include MPF Products. It also does not include website hosting partners and other parties who assist us",
+            "third_party_name": "Unknown",
+            "third_party_name_mentioned_in_text": "Does not include MPF Products. It also does not include website hosting partners and other parties who assist us",
+            "line_number": [
+                126
+            ]
+        },
+        {
+            "third_party_sharing_practice_class": "research",
+            "third_party_sharing_practice_mentioned_in_text": "We may contract with third-party service providers to assist us in better understanding our site visitors",
+            "third_party_name": "Unknown",
+            "third_party_name_mentioned_in_text": "These service providers are not permitted to use the information collected on our behalf except to help us conduct and improve our business",
+            "line_number": [
+                117
+            ]
+        }
+    ],
+    "your_rights": [
+        {
+            "rights_class": "opt_out_marketing",
+            "rights_mentioned_in_text": "If you would no longer like to receive promotional e-mail from us",
+            "line_number": [
+                102
+            ]
+        },
+        {
+            "rights_class": "content_removal_erasure",
+            "rights_mentioned_in_text": "To delete all of your online account information from our database, sign into the My Account section of our site and remove your shipping addresses, billing addresses payment information",
+            "line_number": [
+                135
+            ]
+        }
+    ],
+    "your_responsibilities": []
+}

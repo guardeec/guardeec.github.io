@@ -1,0 +1,43 @@
+{
+    "data_types": [],
+    "TP_sharing": [
+        {
+            "purpose_class": "provide_services_and_fulfill_contractual_obligations",
+            "purpose_mentioned_in_text": "When you provide us with personal information to complete a transaction, verify your credit card, place an order, arrange for a delivery or return a purchase...",
+            "third_party_sharing_practice_class": "regulatory_compliance",
+            "third_party_sharing_practice_mentioned_in_text": "We may disclose your personal information if we are required by law to do so...",
+            "line_number": [
+                18,
+                33
+            ]
+        }
+    ],
+    "TP_name": [
+        {
+            "third_party_sharing_practice_class": "regulatory_compliance",
+            "third_party_sharing_practice_mentioned_in_text": "We may disclose your personal information if we are required by law to do so...",
+            "third_party_name": "Unknown",
+            "third_party_name_mentioned_in_text": "",
+            "line_number": [
+                33
+            ]
+        }
+    ],
+    "your_rights": [
+        {
+            "rights_class": "opt_out_marketing",
+            "rights_mentioned_in_text": "If after you opt-in, you change your mind, you may withdraw your consent for us to contact you, for the continued collection, use or disclosure of your information...",
+            "line_number": [
+                27
+            ]
+        },
+        {
+            "rights_class": "access_to_information",
+            "rights_mentioned_in_text": "If you would like to: access, correct, amend or delete any personal information we have about you...",
+            "line_number": [
+                66
+            ]
+        }
+    ],
+    "your_responsibilities": []
+}

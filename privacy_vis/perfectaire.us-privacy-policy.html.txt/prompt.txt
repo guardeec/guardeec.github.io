@@ -1,0 +1,237 @@
+Generate a JSON representation of: (a) all the data types and (b) all purposes of collection and (c) all third party sharing practices and (d) name of companies with which data are shared and (e) all user rights mentions and (f) all user responsibilities mentioned in the given privacy policy paragraph. If a data type is used for more than one purpose or if more than one data type is used for a single purpose, duplicate the records accordingly - similar for third party sharing practices.
+
+------- Instruction:
+1. Find in the text which data types the company collects and provide their corresponding purposes of collection. Data types can be one of these classes (use exactly the same class name) (for "data_class" in JSON):
+- "name"
+- "contact_information"
+- "physical_address"
+- "date_of_birth"
+- "photo_profile_picture"
+- "gender"
+- "biometric"
+- "personal_description"
+- "social_media_profiles"
+- "account_credentials"
+- "user_name"
+- "password"
+- "phone_number"
+- "email_address"
+- "age"
+- "payment_information"
+- "purchase_history"
+- "credit_related_information"
+- "page_response_times"
+- "cookie_information"
+- "ip_address"
+- "health_data"
+- "health_activity_data"
+- "weight"
+- "height"
+- "body_temperature"
+- "bmi"
+- "menstrual_cycle_dates"
+- "pregnancy"
+- "other_health_related_information"
+- "users_location"
+- "device_location"
+- "language"
+- "temperature"
+- "humidity"
+- "ambient_light"
+- "movement"
+- "smoke_carbon_monoxide_levels"
+- "general_environmental_data"
+- "device_type"
+- "operating_system"
+- "application"
+- "video_card"
+- "sound_card"
+- "memory"
+- "browser_type"
+- "enabled_device_accessibility_features"
+- "browser_plugin_types_and_versions"
+- "battery_level"
+- "device_signals__wifi__bluetooth_"
+- "technical_information__general_"
+- "mobile_network_information"
+- "time_zone"
+- "the_number_of_sessions_on_app"
+- "usage_activity_data"
+- "users_on_the_app"
+- "error_reports"
+- "advertisement_engagement"
+- "behaviours"
+- "visits_to_site"
+- "resources_you_access"
+- "details_of_use_of_apps"
+- "product_view_or_searched_for"
+- "length_of_visits_to_certain_pages"
+- "page_interaction_information"
+- "methods_used_to_browse_away_from_the_page"
+- "websites_visited"
+- "steps"
+- "pace"
+- "distance"
+- "url_clickstream_to_and_from"
+- "communications_between_players"
+- "friend_relationships"
+- "conversational_data__general_"
+- "Social meta data"
+- "audio"
+- "video"
+- "comments"
+- "metadata_general"
+- "hashtag"
+- "Sexual Orientation"
+- "Political views"
+- "racial or ethnic origin"
+- "philosophical beliefs"
+- "trade union membership"
+- "Social Security Number"
+2. For each data type, categorize the purpose of collection into one of the following classes (use exactly the same class name) (for "purpose_class" in JSON):
+- "personalisation"
+- "interaction"
+- "display"
+- "marketing"
+- "improve_products_and_services"
+- "provide_services_and_fulfill_contractual_obligations"
+- "preserve_system_integrity"
+- "provide_business_services"
+- "troubleshoot"
+- "communicate_with_user"
+- "connect_with_other_users"
+- "promotions"
+- "changes_to_terms"
+- "user_safety"
+- "service_security"
+- "defend_legal_rights"
+- "corporate_governance"
+- "research"
+- "market_research"
+3. For each purpose, categorize the third party sharing practices into one of the following classes (use exactly the same class name) (for "third_party_sharing_practice_class" in JSON):
+- "regulatory_compliance"
+- "performance_of_contract"
+- "prevent_harm"
+- "invesitigate  harm"
+- "aggregated_information"
+- "merger_and_acquisition"
+- "affiliates_and_subsidiaries"
+- "third_party_platforms_integration"
+- "consumer_retention_rewards_program"
+4. For each third party sharing practice find the name of the company or government body with which data are shared (for "third_party_name" in JSON). If name is not mentioned - set name as "Unknown".
+5. Categorize the user rights into one of the following classes (use exactly the same class name) (for "rights_class" in JSON):
+- "opt_out_marketing"
+- "access_to_information"
+- "data_correction"
+- "third_party_data_sharing"
+- "cookie_preference"
+- "content_removal_erasure"
+- "automatic_decision_making"
+- "data_processing_complaint"
+- "data_portability"
+- "limit_use_or_disclosure_of_sensitive_personal_information"
+- "opt_out_of_push_notification"
+- "arbitration_opt-out"
+6. Categorize the user responsibilities into one of the following classes (use exactly the same class name) (for "responsibilities_class" in JSON):
+- "visitors_consent"
+- "others_right_to_privacy"
+- "data_sharing"
+- "additional_users_data_responsibilities"
+- "data_processor"
+- "data_protection"
+- "childrens_accounts"
+- "user_content_intellectual_property_ip"
+- "user_content_harm"
+- "beta confidentiality "
+- "user_indemnity"
+
+---------- Privacy Policy Paragraph (number in beginning is the number of line):
+3. PRIVACY STATEMENT.
+6. (EFFECTIVE DATE: MARCH 19, 2019).
+9. Perfect Aire LLC, its subsidiaries and affiliates (collectively Perfect, our, us, or we), are committed to protecting the privacy users of our Perfect Aire website or mobile application (app). This Privacy Statement describes how we collect and use personal and other information about you from your use of the website/ mobile application and the rights you may have with respect to such information.
+12. By downloading and using the App or website on your mobile phone/tablet device/desktop computer (Device) or accessing or using any other services we offer in connection with our products and services (collectively, our Services), you agree to allow us to collect and process information as described in this Privacy Statement.
+15. This Privacy Statement applies to your use of our Services, which are authorized only in Canada and the United States of America.
+18. INFORMATION WE COLLECT AND HOW WE COLLECT IT.
+21. To better provide you an efficient and customized experience we collect two types of information about our you: (a) Personal Information, and (b) Non-Personal Information.
+24. PERSONAL INFORMATION.
+27. Personal Information means any information or set of information that identifies or could be used by Perfect to identify you and includes, but is not limited to, your name, home or work address, phone number, email address and where your Device and Perfect Product is used. We collect Personal Information that you provide to us voluntarily when you contact us about your Perfect product Services; register your Perfect product; download, activate, set-up and use our App; and by choosing to allow location-based automation from your Device.
+30. NON-PERSONAL INFORMATION.
+33. When you use the App or website, we may collect certain information that, by itself or in combination with other information, does not identify you personally (Non-Personal Information). Non-Personal Information includes, but is not limited to, information about your Device and your use of the App or website, and about your Perfect product such as its location temperature, temperature settings, performance and operation. We also may collect data about the location of your Device and your Perfect Product.
+36. We may combine your Personal Information and aggregated Non-Personal Information to improve the services provided by our App and website. If we combine any Non-Personal Information with your Personal Information, the combined information will be treated as Personal Information under this Privacy Policy for as long as it remains combined.
+39. CHILDREN.
+42. Our Services are not intended for use by individuals under the age of 13 and we will not knowingly collect personal information from individuals under such age for any purpose, nor will we accept registration from such individuals.
+45. HOW WE USE THE INFORMATION WE COLLECT.
+48. {number list}.
+51. {list item} We may use your personal information to:
+54. Deliver services to you or carry out transactions you have requested, including, but not limited to, providing information on our products and services, registering your Perfect products, providing warranty and product support, and answering your communications.
+57. {list item} Administer and protect the App and website, including troubleshooting, maintenance and support.
+60. {list item} Perform business analyses or for other purposes that help us to develop and improve the quality of our business, products, website and App.
+63. {list item} Conduct research to help us analyze purchasing preferences and measure the effectiveness of our advertising and marketing activities.
+66. {list item} Inform you of our products or services which may be of interest to you unless you opt-out from such marketing communications sent via e-mail at any time, free of charge by using the unsubscribe link in any e-mail marketing materials you receive from us, or by contacting us using the information listed below.
+69. {list item} Detect, prevent and respond to fraud, intellectual property infringement and violations of law.
+72. HOW WE SHARE INFORMATION.
+75. We may share your Personal Information with our affiliated companies (Affiliates) to help us improve our App, website, products and services. Other than an Affiliate, we will not sell, license or share your Personal Information except to:
+78. {number list}.
+81. {list item} Our service providers, dealers, distributors, agents or contractors who are contractually restricted from using or disclosing your information except as necessary to perform services on our behalf or to comply with any legal requirements;
+84. {list item} Refer you with a local dealer or installer upon your request;
+87. {list item} Comply with legal obligations;
+90. {list item} Investigate suspected or actual illegal activity, and prevent property and personal injury or financial loss; or.
+93. {list item} In connection with the sale or transfer of all or a portion of our business or assets.
+96. HOW WE PROTECT INFORMATION.
+99. We take the security of your Personal Information seriously. We maintain physical, administrative, and technical safeguards designed to maintain the confidentiality and security of your Personal Information. However, we cannot guarantee the security of your Personal Information when you transmit to us your Personal Information through the internet or the App of if you circumvent of any security measures in the App or website.
+102. YOUR CHOICES.
+105. To enable operation of the App, you must either expressly choose to create an account in the Application or choose to link your Device to your Denali product. If you have an account in the App and linked your Device to your Denali product but no longer wish to receive the benefits of the App and permanently remove your Personal Information, you may disable the App and delete your account at any time by following the instructions within the App manual and such deletion will not be undone. (remove?).
+108. CALIFORNIA RESIDENTS.
+111. Once each year, California residents may request and obtain information we shared with third parties for direct marketing use within the prior calendar year in accordance with Californias Shine the Light Law. If applicable, this information would include a list of the categories of Personal Information that was shared and the names and addresses of all third parties with whom we shared this information in the immediately preceding calendar year. If you are a California resident and would like a copy of this notice, please submit a written request to us in the manner provided below.
+114. CORRECT, CHANGE OR DELETE YOUR INFORMATION.
+117. You may request to update, correct, change, or delete your Personal Information at any time. We will use reasonable efforts to timely update and/or remove information subject to our verification of your identity. To correct, change, or delete your Personal Information, check the settings of the App as in some cases you may be able to make such correction, change or deletion, or you can submit a written request to us in the manner provided below.
+120. CHANGES TO OUR PRIVACY STATEMENT.
+123. We reserve the right to change this Privacy Statement from time to time. Any changes to this Privacy Statement will be posted online and/or indicated in the text description of an update of the App. This Privacy Statement, as amended, will remain in effect as long as you are a user of our Services, including the App or website.
+126. HOW TO CONTACT US.
+129. All requests and questions relating to or referenced in this Privacy Statement may be sent by U. S. Mail to Perfect Aire LLC, 5401 Dansher Road, Countryside, IL 60525 or by email to {removed hyperref}.
+
+
+--------- Example of a JSON structure:
+{
+  "data_types": [
+    {
+      "data_class": "Name",
+      "data_mentioned_in_text": "...",
+      "purpose_class": "Provide Services and fulfill contractual obligations",
+      "purpose_mentioned_in_text": "...",
+      "line_number": [...]
+    },
+  ],
+"TP_sharing": [
+    {
+      "purpose_class": "Provide Services and fulfill contractual obligations",
+      "purpose_mentioned_in_text": "...",
+      "third_party_sharing_practice_class": "Research",
+      "third_party_sharing_practice_mentioned_in_text": "...",
+      "line_number": [...]
+    },
+  ],
+"TP_name": [
+    {
+      "third_party_sharing_practice_class": "Research",
+      "third_party_sharing_practice_mentioned_in_text": "...",
+      "third_party_name": "Google",
+      "third_party_name_mentioned_in_text": "....",
+      "line_number": [...]
+    },
+  ],
+“your_rights”: [
+   {
+      "rights_class": "Content Removal/ Erasure",
+      "rights_mentioned_in_text": "...",
+      "line_number": [...]
+   },
+  ],
+“your_responsibilities”:[
+   {
+      "responsibilities_class": "Children's accounts",
+      "responsibilities_mentioned_in_text": "...",
+      "line_number": [...]
+   },
+  ],
+}

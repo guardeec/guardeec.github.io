@@ -1,0 +1,119 @@
+{
+    "data_types": [
+        {
+            "data_class": "name",
+            "data_mentioned_in_text": "The personal information which you may provide to us may include your name.",
+            "purpose_class": "provide_services_and_fulfill_contractual_obligations",
+            "purpose_mentioned_in_text": "The personal information which you may provide to us may include your name.",
+            "line_number": [
+                33
+            ]
+        },
+        {
+            "data_class": "physical_address",
+            "data_mentioned_in_text": "The personal information which you may provide to us may include your name, address.",
+            "purpose_class": "provide_services_and_fulfill_contractual_obligations",
+            "purpose_mentioned_in_text": "The personal information which you may provide to us may include your name, address.",
+            "line_number": [
+                33
+            ]
+        },
+        {
+            "data_class": "phone_number",
+            "data_mentioned_in_text": "The personal information which you may provide to us may include your name, address, telephone number.",
+            "purpose_class": "provide_services_and_fulfill_contractual_obligations",
+            "purpose_mentioned_in_text": "The personal information which you may provide to us may include your name, address, telephone number.",
+            "line_number": [
+                33
+            ]
+        },
+        {
+            "data_class": "email_address",
+            "data_mentioned_in_text": "The personal information which you may provide to us may include your name, address, telephone number, e-mail address.",
+            "purpose_class": "provide_services_and_fulfill_contractual_obligations",
+            "purpose_mentioned_in_text": "The personal information which you may provide to us may include your name, address, telephone number, e-mail address.",
+            "line_number": [
+                33
+            ]
+        },
+        {
+            "data_class": "credit_related_information",
+            "data_mentioned_in_text": "The personal information which you may provide to us may include... credit card information.",
+            "purpose_class": "provide_services_and_fulfill_contractual_obligations",
+            "purpose_mentioned_in_text": "The personal information which you may provide to us may include... credit card information.",
+            "line_number": [
+                33
+            ]
+        },
+        {
+            "data_class": "ip_address",
+            "data_mentioned_in_text": "Your IP address is the identifier assigned to your particular computer or other device when you access the Internet.",
+            "purpose_class": "improve_products_and_services",
+            "purpose_mentioned_in_text": "Your IP address... may be used by us... for security, credit or fraud prevention purposes.",
+            "line_number": [
+                162,
+                132
+            ]
+        },
+        {
+            "data_class": "ip_address",
+            "data_mentioned_in_text": "Your IP address is the identifier assigned to your particular computer or other device when you access the Internet.",
+            "purpose_class": "service_security",
+            "purpose_mentioned_in_text": "Your IP address... may be used by us... for security, credit or fraud prevention purposes.",
+            "line_number": [
+                162,
+                132
+            ]
+        }
+    ],
+    "TP_sharing": [
+        {
+            "purpose_class": "provide_services_and_fulfill_contractual_obligations",
+            "purpose_mentioned_in_text": "We may send your personal information to other group companies, affiliates and third parties to help us process your personal information for the purposes set out in this policy.",
+            "third_party_sharing_practice_class": "affiliates_and_subsidiaries",
+            "third_party_sharing_practice_mentioned_in_text": "We may send your personal information to other group companies, affiliates and third parties to help us process your personal information for the purposes set out in this policy.",
+            "line_number": [
+                42
+            ]
+        },
+        {
+            "purpose_class": "provide_services_and_fulfill_contractual_obligations",
+            "purpose_mentioned_in_text": "We may send your personal information to other group companies, affiliates and third parties to help us process your personal information for the purposes set out in this policy.",
+            "third_party_sharing_practice_class": "third_party_platforms_integration",
+            "third_party_sharing_practice_mentioned_in_text": "We may send your personal information to... third parties to help us process your personal information for the purposes set out in this policy.",
+            "line_number": [
+                42
+            ]
+        }
+    ],
+    "TP_name": [
+        {
+            "third_party_sharing_practice_class": "affiliates_and_subsidiaries",
+            "third_party_sharing_practice_mentioned_in_text": "We may send your personal information to other group companies, affiliates and third parties.",
+            "third_party_name": "Strategic America",
+            "third_party_name_mentioned_in_text": "Strategic America and Keystone Heating Air Conditioning Co., Inc (collectively known as Strategic America",
+            "line_number": [
+                15,
+                42
+            ]
+        }
+    ],
+    "your_rights": [
+        {
+            "rights_class": "access_to_information",
+            "rights_mentioned_in_text": "If you would like to review, correct and update the personal information you have provided to us through this Site, you can please contact us.",
+            "line_number": [
+                264
+            ]
+        }
+    ],
+    "your_responsibilities": [
+        {
+            "responsibilities_class": "data_protection",
+            "responsibilities_mentioned_in_text": "BY USING OR ACCESSING THE SITE, YOU SIGNIFY YOUR AGREEMENT TO BE BOUND BY OUR POLICY.",
+            "line_number": [
+                18
+            ]
+        }
+    ]
+}

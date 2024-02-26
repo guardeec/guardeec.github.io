@@ -1,0 +1,106 @@
+{
+    "data_types": [
+        {
+            "data_class": "name",
+            "data_mentioned_in_text": "your name",
+            "purpose_class": "provide_services_and_fulfill_contractual_obligations",
+            "purpose_mentioned_in_text": "To complete your purchase transactions.",
+            "line_number": [
+                72
+            ]
+        },
+        {
+            "data_class": "physical_address",
+            "data_mentioned_in_text": "address",
+            "purpose_class": "provide_services_and_fulfill_contractual_obligations",
+            "purpose_mentioned_in_text": "To complete your purchase transactions.",
+            "line_number": [
+                72
+            ]
+        },
+        {
+            "data_class": "payment_information",
+            "data_mentioned_in_text": "credit or debit card or pay by check",
+            "purpose_class": "provide_services_and_fulfill_contractual_obligations",
+            "purpose_mentioned_in_text": "To complete your purchase transactions.",
+            "line_number": [
+                72
+            ]
+        },
+        {
+            "data_class": "phone_number",
+            "data_mentioned_in_text": "telephone number, mobile telephone number",
+            "purpose_class": "provide_services_and_fulfill_contractual_obligations",
+            "purpose_mentioned_in_text": "To complete your purchase transactions.",
+            "line_number": [
+                72
+            ]
+        },
+        {
+            "data_class": "email_address",
+            "data_mentioned_in_text": "email address",
+            "purpose_class": "provide_services_and_fulfill_contractual_obligations",
+            "purpose_mentioned_in_text": "To complete your purchase transactions.",
+            "line_number": [
+                72
+            ]
+        },
+        {
+            "data_class": "age",
+            "data_mentioned_in_text": "birth date",
+            "purpose_class": "provide_services_and_fulfill_contractual_obligations",
+            "purpose_mentioned_in_text": "To complete your purchase transactions.",
+            "line_number": [
+                72
+            ]
+        },
+        {
+            "data_class": "age",
+            "data_mentioned_in_text": "birth date",
+            "purpose_class": "personalisation",
+            "purpose_mentioned_in_text": "To identify your product and service preferences, so we can notify you of new or additional products, services, and promotions that might be of interest to you.",
+            "line_number": [
+                81
+            ]
+        },
+        {
+            "data_class": "email_address",
+            "data_mentioned_in_text": "email address",
+            "purpose_class": "marketing",
+            "purpose_mentioned_in_text": "You will receive promotional emails from us only if you have asked to receive them.",
+            "line_number": [
+                102
+            ]
+        },
+        {
+            "data_class": "ip_address",
+            "data_mentioned_in_text": "IP addresses",
+            "purpose_class": "improve_products_and_services",
+            "purpose_mentioned_in_text": "We may use the automatically collected information for a number of purposes, such as improving our site design, product assortments, customer service, and special promotions.",
+            "line_number": [
+                60
+            ]
+        },
+        {
+            "data_class": "purchase_history",
+            "data_mentioned_in_text": "information concerning the specific products or services you purchase or use",
+            "purpose_class": "improve_products_and_services",
+            "purpose_mentioned_in_text": "From your purchases and other interactions with us, we obtain information concerning the specific products or services you purchase or use.",
+            "line_number": [
+                57
+            ]
+        }
+    ],
+    "TP_sharing": [],
+    "TP_name": [],
+    "your_rights": [
+        {
+            "rights_class": "opt_out_marketing",
+            "rights_mentioned_in_text": "If you do not want to receive an email from Avantree or its affiliates you can click on the Unsubscribe link at the bottom of any email communication sent by us.",
+            "line_number": [
+                102
+            ]
+        }
+    ],
+    "your_responsibilities": []
+}
