@@ -1,0 +1,374 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" type="text/css" href="CSS/styles_none.css"/>
+    <link rel="stylesheet" type="text/css" href="CSS/styles.css"/>
+    <link rel="icon" href="img/icon-32.png" sizes="32x32">
+    <title>Poli T&Cs</title>
+</head>
+<body>
+    <div id="container">
+        <div id="banner">
+            <img src="img/icon-192.png" alt="Poli"/>
+            <h1>Poli T&Cs</h1>
+        </div>
+
+        <div id="content_container">
+            <span id='span_json_error'></span>
+            <div id="level_1" class="main_component">
+                <h3 class="border_embedded_heading">Policy:</h3>
+                <div id="level_1_container" class="button_container"></div>
+            </div>
+            <div id="level_2" class="main_component">
+                <h3 class="border_embedded_heading">Topic:</h3>
+                <div id="level_2_container" class="button_container"></div>
+            </div>
+            <div id="level_3" class="main_component">
+                <h3 class="border_embedded_heading">Specification:</h3>
+                <div id="level_3_container" class="button_container"></div>
+            </div>
+            <div id="tandc" class="extend_component">
+                <h3>Terms and Conditions</h3>
+                <div id="tandc_content">
+                    <table>
+                        <tbody id="tandc_table"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div id="footer">
+            <p>&copy; 2024 <a href="https://www.ncl.ac.uk/" target="_blank" alt="Newcastle University">Newcastle
+                University</a></p>
+        </div>
+    </div>
+</body>
+</html>
+
+<script>
+    const jsonErrorSpan = document.getElementById('span_json_error'); // Ensure this element is created
+    const lv1Div = document.getElementById('level_1');
+    const lv2Div = document.getElementById('level_2');
+    const lv3Div = document.getElementById('level_3');
+    const tandcDiv = document.getElementById('tandc');
+
+    let jsonData = null;
+    let lv1_cnt = 0;
+    let lv2_cnt = 0;
+    let lv3_cnt = 0;
+    let lv1_idx = -1;
+    let lv2_idx = -1;
+    let lv3_idx = -1;
+    let lv1_keys = null;
+    let lv2_keys = null;
+    let lv3_keys = null;
+    let tandc_cnt = 0;
+    let lvline_cnt = 0;
+    let lvline_idx = -1;
+    let lvlines = null;
+
+    let jsonLoadedError = false;
+
+    window.onload = function () {
+        fetchJsonFromUrl('https://guardeec.github.io/poli/barclays.json');
+    };
+
+    function fetchJsonFromUrl(url) {
+        fetch(url)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                jsonData = data;
+                jsonLoadedError = false;
+                load_tandc();
+                process_level_1();
+                refresh();
+            })
+            .catch(() => {
+                jsonLoadedError = true;
+                reset();
+                remove_tandc();
+            });
+    }
+
+    function load_tandc() {
+        const tandc = jsonData.text_of_terms_and_conditions;
+        tandc_cnt = tandc.length;
+
+        const table = document.getElementById("tandc_table");
+        table.innerHTML = "";
+
+        for (let i = 0; i < tandc_cnt; i++) {
+            const newRow = document.createElement("tr");
+
+            const cell1 = document.createElement("td");
+            cell1.textContent = i + 1;
+            cell1.classList.add("line_no");
+            newRow.appendChild(cell1);
+
+            const cell2 = document.createElement("td");
+            cell2.textContent = tandc[i];
+            cell2.id = "tandc_line_" + (i + 1);
+            newRow.appendChild(cell2);
+
+            table.appendChild(newRow);
+        }
+    }
+
+    function remove_tandc() {
+        const table = document.getElementById("tandc_table");
+        table.innerHTML = "";
+    }
+
+    function reset() {
+        jsonData = null;
+        lv1_cnt = 0;
+        lv2_cnt = 0;
+        lv3_cnt = 0;
+        lv1_idx = -1;
+        lv2_idx = -1;
+        lv3_idx = -1;
+        tandc_cnt = 0;
+        lvline_cnt = 0;
+        lvline_idx = -1;
+        lvlines = null;
+        refresh();
+    }
+
+    function process_level_1() {
+        lv1_keys = Object.keys(jsonData.visualisation);
+        lv1_cnt = lv1_keys.length;
+
+        if (lv1_cnt > 0) {
+            const container = document.getElementById("level_1_container");
+            container.innerHTML = "";
+            lv1_keys.forEach((key, index) => {
+                const button = document.createElement("button");
+                button.textContent = key;
+                button.id = "btn_1_" + (index);
+                button.addEventListener("click", function () {
+                    handle_level_1(index);
+                });
+                container.appendChild(button);
+            });
+            lv1_idx = 0;
+            process_level_2();
+        } else {
+            lv1_idx = -1;
+        }
+    }
+
+    function handle_level_1(index) {
+        if (lv1_idx != index) {
+            lv1_idx = index;
+            process_level_2();
+            refresh();
+        }
+    }
+
+    function process_level_2() {
+        lv1_key = lv1_keys[lv1_idx];
+        if (jsonData.visualisation.hasOwnProperty(lv1_key)) {
+            lv2_keys = Object.keys(jsonData.visualisation[lv1_key]);
+            lv2_cnt = lv2_keys.length;
+
+            if (lv2_cnt > 0) {
+                const container = document.getElementById("level_2_container");
+                container.innerHTML = "";
+                lv2_keys.forEach((key, index) => {
+                    const button = document.createElement("button");
+                    button.textContent = key;
+                    button.id = "btn_2_" + (index);
+                    button.addEventListener("click", function () {
+                        handle_level_2(index);
+                    });
+                    container.appendChild(button);
+                });
+                lv2_idx = 0;
+                process_level_3();
+            } else {
+                lv2_idx = -1;
+                lv3_idx = -1;
+                lvline_idx = -1;
+            }
+        } else {
+            lv1_idx = -1;
+            lv2_idx = -1;
+            lv3_idx = -1;
+            lvline_idx = -1;
+        }
+    }
+
+    function handle_level_2(index) {
+        if (lv2_idx != index) {
+            lv2_idx = index;
+            process_level_3();
+            refresh();
+        }
+    }
+
+    function process_level_3() {
+        lv1_key = lv1_keys[lv1_idx];
+        if (jsonData.visualisation.hasOwnProperty(lv1_key)) {
+            lv2_key = lv2_keys[lv2_idx];
+            if (jsonData.visualisation[lv1_key].hasOwnProperty(lv2_key)) {
+                lv3_keys = Object.keys(jsonData.visualisation[lv1_key][lv2_key]);
+                lv3_cnt = lv3_keys.length;
+
+                if (lv3_cnt > 0) {
+                    const container = document.getElementById("level_3_container");
+                    container.innerHTML = "";
+                    lv3_keys.forEach((key, index) => {
+                        const button = document.createElement("button");
+                        button.textContent = key;
+                        button.id = "btn_3_" + (index);
+                        button.addEventListener("click", function () {
+                            handle_level_3(index);
+                        });
+
+                        const lines = jsonData.visualisation[lv1_key][lv2_key][key].line;
+                        const line_cnt = lines.length;
+
+                        const span = document.createElement("span");
+                        span.classList.add("notification_count");
+                        span.textContent = "1 / " + line_cnt;
+                        span.id = "notification_count_" + index;
+
+                        if (index === 0) {
+                            lvline_cnt = line_cnt;
+                            lvline_idx = 0;
+                            lvlines = lines;
+                        }
+
+                        button.appendChild(span);
+
+                        container.appendChild(button);
+                    });
+                    lv3_idx = 0;
+                } else {
+                    lv3_idx = -1;
+                    lvline_idx = -1;
+                }
+            } else {
+                lv2_idx = -1;
+                lv3_idx = -1;
+                lvline_idx = -1;
+            }
+        } else {
+            lv1_idx = -1;
+            lv2_idx = -1;
+            lv3_idx = -1;
+            lvline_idx = -1;
+        }
+    }
+
+    function handle_level_3(index) {
+        if (lv3_idx !== index) {
+            lv3_idx = index;
+
+            lv1_key = lv1_keys[lv1_idx];
+            if (jsonData.visualisation.hasOwnProperty(lv1_key)) {
+                lv2_key = lv2_keys[lv2_idx];
+                if (jsonData.visualisation[lv1_key].hasOwnProperty(lv2_key)) {
+                    lv3_keys = Object.keys(jsonData.visualisation[lv1_key][lv2_key]);
+                    lv3_key = lv3_keys[lv3_idx];
+                    if (jsonData.visualisation[lv1_key][lv2_key].hasOwnProperty(lv3_key)) {
+                        lvlines = jsonData.visualisation[lv1_key][lv2_key][lv3_key].line;
+                        lvline_cnt = lvlines.length;
+                        lvline_idx = 0;
+                    } else {
+                        lv3_idx = -1;
+                        lvline_idx = -1;
+                    }
+                } else {
+                    lv2_idx = -1;
+                    lv3_idx = -1;
+                    lvline_idx = -1;
+                }
+            } else {
+                lv1_idx = -1;
+                lv2_idx = -1;
+                lv3_idx = -1;
+                lvline_idx = -1;
+            }
+        } else {
+            lvline_idx++;
+            if (lvline_idx >= lvline_cnt) {
+                lvline_idx = 0;
+            }
+        }
+        refresh();
+    }
+
+    function refresh() {
+        jsonErrorSpan.style.display = jsonLoadedError ? "inline" : "none";
+        lv1Div.style.display = lv1_cnt > 0 ? "inline" : "none";
+        lv2Div.style.display = lv2_cnt > 0 ? "inline" : "none";
+        lv3Div.style.display = lv3_cnt > 0 ? "inline" : "none";
+        tandcDiv.style.display = tandc_cnt > 0 ? "flex" : "none";
+
+        if ((lv1_cnt > 0) && (lv1_idx >= 0)) {
+            for (let i = 0; i < lv1_cnt; i++) {
+                const lv1_btn = document.getElementById("btn_1_" + i);
+                if (i === lv1_idx) {
+                    lv1_btn.classList.add("active");
+                } else {
+                    lv1_btn.classList.remove("active");
+                }
+            }
+        }
+
+        if ((lv2_cnt > 0) && (lv2_idx >= 0)) {
+            for (let i = 0; i < lv2_cnt; i++) {
+                const lv2_btn = document.getElementById("btn_2_" + i);
+                if (i === lv2_idx) {
+                    lv2_btn.classList.add("active");
+                } else {
+                    lv2_btn.classList.remove("active");
+                }
+            }
+        }
+
+        if ((lv3_cnt > 0) && (lv3_idx >= 0)) {
+            for (let i = 0; i < lv3_cnt; i++) {
+                const lv3_btn = document.getElementById("btn_3_" + i);
+                if (i === lv3_idx) {
+                    lv3_btn.classList.add("active");
+                } else {
+                    lv3_btn.classList.remove("active");
+                }
+            }
+        }
+
+        if ((lvline_cnt > 0) && (lvline_idx >= 0)) {
+            const notification_count = document.getElementById("notification_count_" + lv3_idx);
+            notification_count.textContent = (lvline_idx + 1) + " / " + lvline_cnt;
+        }
+
+        if ((lvline_idx >= 0) && (lvlines.length > lvline_idx)) {
+            scrollToRow();
+        }
+    }
+
+    function scrollToRow() {
+        const lineFrom = lvlines[lvline_idx][0];
+        const lineTo = lvlines[lvline_idx][1];
+        const firstRow = document.getElementById("tandc_line_" + lineFrom);
+
+        for (let i = 1; i <= tandc_cnt; i++) {
+            const row = document.getElementById("tandc_line_" + i);
+            if ((i >= lineFrom) && (i <= lineTo)) {
+                row.classList.add("tc_hightlight");
+            } else {
+                row.classList.remove("tc_hightlight");
+            }
+        }
+        firstRow.scrollIntoView({behavior: 'smooth', block: 'center'});
+    }
+</script>

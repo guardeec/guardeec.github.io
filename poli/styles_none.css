@@ -1,0 +1,19 @@
+:root {
+    --body-back: #ffffff;
+    --conatiner-back: #ffffff;
+    --banner-back: #ffffff;
+    --footer-back: #ffffff;
+    --content-back: #f7f8f9;
+    --master-text: #222222;
+    --link-text: #304E9D;
+    --session-border: #304E9D;
+    --line-number: #cccccc;
+    --notification-back: #ff0000;
+    --notification-text: #ffffff;
+    --lv-1-button-back: #575500;
+    --lv-2-button-back: #6A4C93;
+    --lv-3-button-back: #226089;
+    --lv-button-text: #ffffff;
+    --tc-hightlight: khaki;
+    --error-msg: #ff0000;
+}
