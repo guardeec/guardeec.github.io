@@ -1,0 +1,2185 @@
+{
+    "policy_text": [
+        "Europe privacy policy",
+        "For individuals outside the European Economic Area, United Kingdom, and Switzerland, you can read this version\u2060 of our Privacy Policy",
+        "We at OpenAI OpCo, LLC (together with our affiliates, \u201cOpenAI\u201d, \u201cwe\u201d, \u201cour\u201d or \u201cus\u201d) respect your privacy and are strongly committed to keeping secure any information we obtain from you or about you. This Privacy Policy describes our practices with respect to Personal Data that we collect from or about you when you use our website, applications, and services (collectively, \u201cServices\u201d).",
+        "This Privacy Policy does not apply to content that we process on behalf of customers of our business offerings, such as our API. Our use of that data is governed by our customer agreements covering access to and use of those offerings.",
+        "For information about how we collect and use training information to develop our language models that power ChatGPT and other Services, and your choices with respect to that information, please see this help center article\u2060(opens in a new window).",
+        "1. Data controller",
+        "If you live in the European Economic Area (EEA) or Switzerland, OpenAI Ireland Limited, with its registered office at 1st Floor, The Liffey Trust Centre, 117-126 Sheriff Street Upper, Dublin 1, D01 YC43, Ireland, is the controller and is responsible for the processing of your Personal Data as described in this Privacy Policy.",
+        "If you live in the UK, OpenAI OpCo, LLC, with its registered office at 1960 Bryant Street, San Francisco, California 94110, United States, is the controller and is responsible for the processing of your Personal Data as described in this Privacy Policy.",
+        "2. Personal Data we collect",
+        "We collect personal data relating to you (\u201cPersonal Data\u201d) as follows:",
+        "Personal Data You Provide: We collect Personal Data if you create an account to use our Services or communicate with us as follows:",
+        "\t\u2022\tAccount Information: When you create an account with us, we will collect information associated with your account, including your name, contact information, account credentials, date of birth, payment information, and transaction history, (collectively, \u201cAccount Information\u201d).",
+        "\t\u2022\tUser Content: We collect Personal Data that you provide in the input to our Services (\u201cContent\u201d), including your prompts and other content you upload, such as files\u2060(opens in a new window), images\u2060(opens in a new window), and audio\u2060(opens in a new window), depending on the features you use.",
+        "\t\u2022\tCommunication Information: If you communicate with us, such as via email or our pages on social media sites, we may collect Personal Data like your name, contact information, and the contents of the messages you send (\u201cCommunication Information\u201d).",
+        "\t\u2022\tOther Information You Provide: We collect other information that you may provide to us, such as when you participate in our events or surveys or provide us with information to establish your identity or age (collectively, \u201cOther Information You Provide\u201d).",
+        "Personal Data We Receive from Your Use of the Services: When you visit, use, or interact with the Services, we receive the following information about your visit, use, or interactions (\u201cTechnical Information\u201d):",
+        "\t\u2022\tLog Data: We collect information that your browser or device automatically sends when you use our Services. Log data includes your Internet Protocol address, browser type and settings, the date and time of your request, and how you interact with our Services.",
+        "\t\u2022\tUsage Data: We collect information about your use of the Services, such as the types of content that you view or engage with, the features you use and the actions you take, as well as your time zone, country, the dates and times of access, user agent and version, type of computer or mobile device, and your computer connection.",
+        "\t\u2022\tDevice Information: We collect information about the device you use to access the Services, such as the name of the device, operating system, device identifiers, and browser you are using. Information collected may depend on the type of device you use and its settings.",
+        "\t\u2022\tLocation Information: We may determine the general area from which your device accesses our Services based on information like its IP address for security reasons and to make your product experience better, for example to protect your account by detecting unusual login activity or to provide more accurate responses. In addition, some of our Services allow you to choose to provide more precise location information from your device, such as location information from your device\u2019s GPS.",
+        "\t\u2022\tCookies and Similar Technologies: We use cookies and similar technologies to operate and administer our Services, and improve your experience. If you use our Services without creating an account, we may store some of the information described in this policy with cookies, for example to help maintain your preferences across browsing sessions. For details about our use of cookies, please read our Cookie Notice\u2060.",
+        "Information We Receive from Other Sources: We receive information from our trusted partners, such as security partners, to protect against fraud, abuse, and other security threats to our Services, and from marketing vendors who provide us with information about potential customers of our business services.",
+        "We also collect information from other sources, like information that is publicly available on the internet, to develop the models that power our Services. For more information on the sources of information used to develop the models that power ChatGPT and other Services, please see this help center article\u2060(opens in a new window).",
+        "3. How we use Personal Data",
+        "We may use Personal Data for the following purposes:",
+        "\t\u2022\tTo provide analyze, and maintain our Services, for example to respond to your questions for ChatGPT;",
+        "\t\u2022\tTo improve and develop our Services and conduct research, for example to develop new product features;",
+        "\t\u2022\tTo communicate with you, including to send you information about our Services and events, for example about changes or improvements to the Services;",
+        "\t\u2022\tTo prevent fraud, illegal activity, or misuses of our Services, and to protect the security of our systems and Services;",
+        "\t\u2022\tTo comply with legal obligations and to protect the rights, privacy, safety, or property of our users, OpenAI, or third parties.",
+        "We may also aggregate or de-identify Personal Data so that it no longer identifies you and use this information for the purposes described above, such as to analyze the way our Services are being used, to improve and add features to them, and to conduct research. We will maintain and use de-identified information in de-identified form and not attempt to reidentify the information, unless required by law.",
+        "As noted above, we may use Content you provide us to improve our Services, for example to train the models that power ChatGPT. Read our instructions\u2060(opens in a new window) on how you can opt out of our use of your Content to train our models.",
+        "4. Disclosure of Personal Data",
+        "We may disclose your Personal Data in the following circumstances:",
+        "\t\u2022\tVendors and Service Providers: To assist us in meeting business operations needs and to perform certain services and functions, we may disclose Personal Data to vendors and service providers, including providers of hosting services, customer service vendors, cloud services, content delivery services, support and safety monitoring services, email communication software, web analytics services, payment and transaction processors, and other information technology providers. Pursuant to our instructions, these parties will access, process, or store Personal Data only in the course of performing their duties to us.",
+        "\t\u2022\tBusiness Transfers: If we are involved in strategic transactions, reorganization, bankruptcy, receivership, or transition of service to another provider (collectively, a \u201cTransaction\u201d), your Personal Data may be disclosed in the diligence process with counterparties and others assisting with the Transaction and transferred to a successor or affiliate as part of that Transaction along with other assets.",
+        "\t\u2022\tGovernment Authorities or Other Third Parties: We may share your Personal Data, including information about your interaction with our Services, with government authorities, industry peers, or other third parties in compliance with the law (i) if required to do so to comply with a legal obligation, or in the good faith belief that such action is necessary to comply with a legal obligation, (ii) to protect and defend our rights or property, (iii) if we determine, in our sole discretion, that there is a violation of our terms, policies, or the law; (iv) to detect or prevent fraud or other illegal activity; (v) to protect the safety, security, and integrity of our products, employees, users, or the public, or (vi) to protect against legal liability.",
+        "\t\u2022\tAffiliates: We may disclose Personal Data to our affiliates, meaning an entity that controls, is controlled by, or is under common control with OpenAI. Our affiliates may use this Personal Data in a manner consistent with this Privacy Policy.",
+        "\t\u2022\tBusiness Account Administrators: When you join a ChatGPT Enterprise or business account, the administrators of that account may access and control your OpenAI account, including being able to access your Content. In addition, if you create an account using an email address belonging to your employer or another organization, we may share the fact that you have an account and certain account information, such as your email address, with your employer or organization to, for example, enable you to be added to their business account.",
+        "\t\u2022\tOther Users and Third Parties You Interact or Share Information With: Certain features allow you to interact or share information with other users or third parties. For example, you can share ChatGPT conversations with other users via shared links\u2060(opens in a new window). You can also send information to third-party applications, such as via custom actions for GPTs, or for searching the web to help answer questions that benefit from more recent information. Information you share with third parties is governed by their own terms and privacy policies, and you should make sure you understand those terms and policies before sharing information with them.",
+        "5. Retention",
+        "We\u2019ll retain your Personal Data for only as long as we need in order to provide our Services to you, or for other legitimate business purposes such as resolving disputes, safety and security reasons, or complying with our legal obligations. How long we retain Personal Data will depend on a number of factors, such as:",
+        "\t\u2022\tOur purpose for processing the data (such as whether we need to retain the data to provide our Services);",
+        "\t\u2022\tThe amount, nature, and sensitivity of the information;",
+        "\t\u2022\tThe potential risk of harm from unauthorized use or disclosure;",
+        "\t\u2022\tAny legal requirements that we are subject to.",
+        "In some cases, the length of time we retain data depends on your settings. For example, ChatGPT temporary chats will not appear in your history and will be kept up to 30 days for safety purposes. You can find more information on data controls here\u2060(opens in a new window).",
+        "6. Your rights",
+        "You have the following statutory rights in relation to your Personal Data:",
+        "\t\u2022\tAccess your Personal Data and information relating to how it is processed.",
+        "\t\u2022\tDelete your Personal Data from our records.",
+        "\t\u2022\tRectify or update your Personal Data.",
+        "\t\u2022\tTransfer your Personal Data to a third party (right to data portability).",
+        "\t\u2022\tRestrict how we process your Personal Data.",
+        "\t\u2022\tWithdraw your consent\u2014where we rely on consent as the legal basis for processing at any time.",
+        "\t\u2022\tLodge a complaint with your local data protection authority (see below).",
+        "You have the following rights to object:",
+        "\t\u2022\tObject to our processing of your Personal Data for direct marketing at any time.",
+        "\t\u2022\tObject to how we process your Personal Data when our processing is based on legitimate interests.",
+        "You can exercise some of these rights through your OpenAI account. If you are unable to exercise your rights through your account, please submit your request through privacy.openai.com\u2060(opens in a new window) or send it to dsar@openai.com\u2060.",
+        "We hope that we are able to address any questions or concerns you may have. If you have any unresolved complaints with us or our Data Protection Officer, you can reach out to the Irish Data Protection Commission\u2060(opens in a new window) as our lead supervisory authority, or your local supervisory authority\u2060(opens in a new window). For any unresolved complaints relating to the UK you can reach out to the Information Commissioner's Office\u2060(opens in a new window) and for Switzerland, to the Federal Data Protection and Information Commissioner\u2060(opens in a new window).",
+        "A note about accuracy: Services like ChatGPT generate responses by reading a user\u2019s request and, in response, predicting the words most likely to appear next. In some cases, the words most likely to appear next may not be the most factually accurate. For this reason, you should not rely on the factual accuracy of output from our models. If you notice that ChatGPT output contains factually inaccurate information about you and you would like to request a correction or removal of the information, you can submit these requests through privacy.openai.com or to dsar@openai.com\u2060, and we will consider your request based on applicable law and the technical capabilities of our models.",
+        "For information on how to exercise your rights with respect to data we have collected from the internet to train our models, please see this notice\u2060(opens in a new window).",
+        "7. Children",
+        "Our Services are not directed to, or intended for, children under 13.\u00a0 We do not knowingly collect Personal Data from children under 13. If you have reason to believe that a child under 13 has provided Personal Data to OpenAI through the Services, please email us at privacy@openai.com\u2060. We will investigate any notification and, if appropriate, delete the Personal Data from our systems. Users under 18 must have permission from their parent or guardian to use our Services.",
+        "8. Security",
+        "We implement commercially reasonable technical, administrative, and organizational measures designed to protect Personal Data from loss, misuse, and unauthorized access, disclosure, alteration, or destruction. However, no Internet or email transmission is ever fully secure or error free. Therefore, you should take special care in deciding what information you provide to the Services. In addition, we are not responsible for circumvention of any privacy settings or security measures contained on the Service, or third-party websites.",
+        "9. Legal bases for processing",
+        "Purpose of processing",
+        "Type of Personal Data processed, depending on the processing activity",
+        "Legal basis, depending on the process activity",
+        "To provide, analyze, and maintain our Services",
+        "\t\u2022\tAccount Information",
+        "\t\u2022\tUser Content",
+        "\t\u2022\tCommunication Information",
+        "\t\u2022\tOther Information You Provide",
+        "\t\u2022\tLog Data",
+        "\t\u2022\tUsage Data",
+        "\t\u2022\tDevice Information",
+        "\t\u2022\tLocation Information",
+        "\t\u2022\tCookies and Similar Technologies",
+        "Where necessary to perform a contract with you, such as processing a user\u2019s prompts to provide a response.",
+        "To improve and develop our Services and conduct research",
+        "\t\u2022\tAccount Information",
+        "\t\u2022\tUser Content",
+        "\t\u2022\tCommunication Information",
+        "\t\u2022\tOther Information You Provide",
+        "\t\u2022\tData We Receive From Other Sources",
+        "\t\u2022\tLog Data",
+        "\t\u2022\tUsage Data",
+        "\t\u2022\tDevice Information",
+        "\t\u2022\tCookies and Similar Technologies",
+        "See here\u2060(opens in a new window) for more specific information on the data used to train our models.",
+        "Where necessary for our legitimate interests and those of third parties and broader society, including in developing, improving, or promoting our Services, such as when we train and improve our models. See here\u2060(opens in a new window) for more information.",
+        "To communicate with you, including to send you information about our Services and events",
+        "\t\u2022\tAccount Information",
+        "\t\u2022\tCommunication Information",
+        "\t\u2022\tSocial Media Information",
+        "\t\u2022\tOther Information You Provide",
+        "\t\u2022\tLog Data",
+        "\t\u2022\tUsage Data",
+        "\t\u2022\tDevice Information",
+        "\t\u2022\tCookies and Similar Technologies",
+        "Where necessary to perform a contract with you, such as processing your contact information to send you a technical announcement about the Services.\u00a0",
+        "Your consent when we ask for it to process your Personal Data for a specific purpose that we communicate to you, such as processing your contact information to send you certain forms of marketing communications.",
+        "To prevent fraud, illegal activity, or misuses of our Services, and to protect the security of our systems and Services",
+        "\t\u2022\tAccount Information",
+        "\t\u2022\tUser Content",
+        "\t\u2022\tCommunication Information",
+        "\t\u2022\tSocial Media Information",
+        "\t\u2022\tOther Information You Provide",
+        "\t\u2022\tData We Receive From Other Sources",
+        "\t\u2022\tLog Data",
+        "\t\u2022\tUsage Data",
+        "\t\u2022\tDevice Information",
+        "\t\u2022\tCookies and Similar Technologies",
+        "Where necessary to comply with a legal obligation.",
+        "Where we are not under a specific legal obligation, where necessary for our legitimate interests and those of third parties, including in protecting our Services from abuse, fraud, or security risks, such as processing data from security partners to protect against fraud, abuse and security threats in our Services.",
+        "To comply with legal obligations and to protect the rights, privacy, safety, or property of our users, OpenAI, or third parties",
+        "\t\u2022\tAccount Information",
+        "\t\u2022\tUser Content",
+        "\t\u2022\tCommunication Information",
+        "\t\u2022\tSocial Media Information",
+        "\t\u2022\tOther Information You Provide",
+        "\t\u2022\tData We Receive From Other Sources",
+        "\t\u2022\tLog Data",
+        "\t\u2022\tUsage Data",
+        "\t\u2022\tDevice Information",
+        "\t\u2022\tCookies and Similar Technologies",
+        "Where necessary to comply with a legal obligation, such as retaining transaction information to comply with record-keeping obligations.",
+        "Where we are not under a specific legal obligation, where necessary for our legitimate interests and those of third parties and broader society, including in protecting our or our affiliates\u2019, users\u2019, or third parties\u2019 rights, safety, and property, such as analyzing log data to identify fraud and abuse in our Services.",
+        "10. Data transfers",
+        "OpenAI processes your Personal Data on servers located outside of the EEA, Switzerland and the UK for the purposes described in this Privacy Policy. This includes processing and storing your Personal Data in our facilities and servers in the United States. While data protection law varies by country and these countries may not offer the same level of data protection as your home country, we apply the protections described in this policy to your Personal Data regardless of where it is processed. When transferring Personal Data outside of the EEA, Switzerland or the UK, we rely on the following transfer mechanisms to comply with applicable data protection law:",
+        "\t\u2022\tWe rely on the European Commission\u2019s adequacy decisions\u2060(opens in a new window) pursuant to Article 45(1) GDPR when transferring your Personal Data to any country that has been considered to provide an adequate level of protection.",
+        "\t\u2022\tFor other jurisdictions, we rely on the Standard Contractual Clauses (\u201cSCCs\u201d) as approved by the European Commission pursuant to Article 46(2)(c) GDPR and on the UK Data Transfer Addendum.",
+        "For more information or to obtain a copy of the appropriate safeguards we have in place when transferring Personal Data, please contact us at privacy@openai.com\u2060.",
+        "11. Changes to the privacy policy",
+        "We may update this Privacy Policy from time to time. When we do, we will publish an updated version and effective date on this page, unless another type of notice is required by applicable law.",
+        "12. How to contact us",
+        "Please contact support\u2060(opens in a new window) if you have any questions or concerns not already addressed in this Privacy Policy. Alternatively, you can write to us at privacy@openai.com\u2060 or the address above under Section 1 (Data Controller).",
+        "You can contact our Data Protection Officer at dpo@openai.com\u2060 in matters related to Personal Data processing."
+    ],
+    "data_purpose": [
+        {
+            "md": "id",
+            "d": "name",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 11,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "id",
+            "d": "name",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 13,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "id",
+            "d": "name",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 24,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "id",
+            "d": "name",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 25,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "id",
+            "d": "name",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 26,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "id",
+            "d": "name",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 27,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "id",
+            "d": "name",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 28,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "id",
+            "d": "name",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 29,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "id",
+            "d": "name",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 30,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "id",
+            "d": "name",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 84,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "id",
+            "d": "name",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 95,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "id",
+            "d": "name",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 106,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "id",
+            "d": "name",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 119,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "id",
+            "d": "contact_information",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 11,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "id",
+            "d": "contact_information",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 13,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "id",
+            "d": "contact_information",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 24,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "id",
+            "d": "contact_information",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 25,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "id",
+            "d": "contact_information",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 26,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "id",
+            "d": "contact_information",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 27,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "id",
+            "d": "contact_information",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 28,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "id",
+            "d": "contact_information",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 29,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "id",
+            "d": "contact_information",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 30,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "id",
+            "d": "contact_information",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 84,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "id",
+            "d": "contact_information",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 95,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "id",
+            "d": "contact_information",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 106,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "id",
+            "d": "contact_information",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 119,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "id",
+            "d": "account_credentials",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 11,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "id",
+            "d": "account_credentials",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 24,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "id",
+            "d": "account_credentials",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 25,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "id",
+            "d": "account_credentials",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 26,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "id",
+            "d": "account_credentials",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 27,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "id",
+            "d": "account_credentials",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 28,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "id",
+            "d": "account_credentials",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 29,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "id",
+            "d": "account_credentials",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 30,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "id",
+            "d": "account_credentials",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 84,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "id",
+            "d": "account_credentials",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 95,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "id",
+            "d": "account_credentials",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 106,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "id",
+            "d": "account_credentials",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 119,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "id",
+            "d": "date_of_birth",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 11,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "id",
+            "d": "date_of_birth",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 24,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "id",
+            "d": "date_of_birth",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 25,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "id",
+            "d": "date_of_birth",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 26,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "id",
+            "d": "date_of_birth",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 27,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "id",
+            "d": "date_of_birth",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 28,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "id",
+            "d": "date_of_birth",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 29,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "id",
+            "d": "date_of_birth",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 30,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "id",
+            "d": "date_of_birth",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 84,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "id",
+            "d": "date_of_birth",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 95,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "id",
+            "d": "date_of_birth",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 106,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "id",
+            "d": "date_of_birth",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 119,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "financial",
+            "d": "payment_information",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 11,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "financial",
+            "d": "payment_information",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 24,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "financial",
+            "d": "payment_information",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 25,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "financial",
+            "d": "payment_information",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 26,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "financial",
+            "d": "payment_information",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 27,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "financial",
+            "d": "payment_information",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 28,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "financial",
+            "d": "payment_information",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 29,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "financial",
+            "d": "payment_information",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 30,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "financial",
+            "d": "payment_information",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 84,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "financial",
+            "d": "payment_information",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 95,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "financial",
+            "d": "payment_information",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 106,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "financial",
+            "d": "payment_information",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 119,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "financial",
+            "d": "purchase_history",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 11,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "financial",
+            "d": "purchase_history",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 24,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "financial",
+            "d": "purchase_history",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 25,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "financial",
+            "d": "purchase_history",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 26,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "financial",
+            "d": "purchase_history",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 27,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "financial",
+            "d": "purchase_history",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 28,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "financial",
+            "d": "purchase_history",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 29,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "financial",
+            "d": "purchase_history",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 30,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "financial",
+            "d": "purchase_history",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 84,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "financial",
+            "d": "purchase_history",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 95,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "financial",
+            "d": "purchase_history",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 106,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "financial",
+            "d": "purchase_history",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 119,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "user_created_data",
+            "d": "comments",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 12,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "user_created_data",
+            "d": "comments",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 24,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "user_created_data",
+            "d": "comments",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 25,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "user_created_data",
+            "d": "comments",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 26,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "user_created_data",
+            "d": "comments",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 27,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "user_created_data",
+            "d": "comments",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 28,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "user_created_data",
+            "d": "comments",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 29,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "user_created_data",
+            "d": "comments",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 30,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "user_created_data",
+            "d": "comments",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 84,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "user_created_data",
+            "d": "comments",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 95,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "user_created_data",
+            "d": "comments",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 106,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "user_created_data",
+            "d": "comments",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 119,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "user_created_data",
+            "d": "audio",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 12,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "user_created_data",
+            "d": "audio",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 24,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "user_created_data",
+            "d": "audio",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 25,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "user_created_data",
+            "d": "audio",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 26,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "user_created_data",
+            "d": "audio",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 27,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "user_created_data",
+            "d": "audio",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 28,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "user_created_data",
+            "d": "audio",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 29,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "user_created_data",
+            "d": "audio",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 30,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "user_created_data",
+            "d": "audio",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 84,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "user_created_data",
+            "d": "audio",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 95,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "user_created_data",
+            "d": "audio",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 106,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "user_created_data",
+            "d": "audio",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 119,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "user_created_data",
+            "d": "video",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 12,
+            "c": "#916e6e",
+            "o": 0.13687141022823307
+        },
+        {
+            "md": "user_created_data",
+            "d": "video",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 24,
+            "c": "#916e6e",
+            "o": 0.13687141022823307
+        },
+        {
+            "md": "user_created_data",
+            "d": "video",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 25,
+            "c": "#916e6e",
+            "o": 0.13687141022823307
+        },
+        {
+            "md": "user_created_data",
+            "d": "video",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 26,
+            "c": "#916e6e",
+            "o": 0.13687141022823307
+        },
+        {
+            "md": "user_created_data",
+            "d": "video",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 27,
+            "c": "#916e6e",
+            "o": 0.13687141022823307
+        },
+        {
+            "md": "user_created_data",
+            "d": "video",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 28,
+            "c": "#916e6e",
+            "o": 0.13687141022823307
+        },
+        {
+            "md": "user_created_data",
+            "d": "video",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 29,
+            "c": "#916e6e",
+            "o": 0.13687141022823307
+        },
+        {
+            "md": "user_created_data",
+            "d": "video",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 30,
+            "c": "#916e6e",
+            "o": 0.13687141022823307
+        },
+        {
+            "md": "user_created_data",
+            "d": "video",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 84,
+            "c": "#916e6e",
+            "o": 0.13687141022823307
+        },
+        {
+            "md": "user_created_data",
+            "d": "video",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 95,
+            "c": "#916e6e",
+            "o": 0.13687141022823307
+        },
+        {
+            "md": "user_created_data",
+            "d": "video",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 106,
+            "c": "#916e6e",
+            "o": 0.13687141022823307
+        },
+        {
+            "md": "user_created_data",
+            "d": "video",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 119,
+            "c": "#916e6e",
+            "o": 0.13687141022823307
+        },
+        {
+            "md": "id",
+            "d": "email_address",
+            "mp": "communication",
+            "p": "communicate_with_user",
+            "r": 13,
+            "c": "#b04f4f",
+            "o": 0.3784407227047313
+        },
+        {
+            "md": "id",
+            "d": "email_address",
+            "mp": "communication",
+            "p": "communicate_with_user",
+            "r": 24,
+            "c": "#b04f4f",
+            "o": 0.3784407227047313
+        },
+        {
+            "md": "id",
+            "d": "email_address",
+            "mp": "communication",
+            "p": "communicate_with_user",
+            "r": 27,
+            "c": "#b04f4f",
+            "o": 0.3784407227047313
+        },
+        {
+            "md": "id",
+            "d": "email_address",
+            "mp": "communication",
+            "p": "communicate_with_user",
+            "r": 30,
+            "c": "#b04f4f",
+            "o": 0.3784407227047313
+        },
+        {
+            "md": "id",
+            "d": "email_address",
+            "mp": "communication",
+            "p": "communicate_with_user",
+            "r": 84,
+            "c": "#b04f4f",
+            "o": 0.3784407227047313
+        },
+        {
+            "md": "id",
+            "d": "email_address",
+            "mp": "communication",
+            "p": "communicate_with_user",
+            "r": 95,
+            "c": "#b04f4f",
+            "o": 0.3784407227047313
+        },
+        {
+            "md": "id",
+            "d": "email_address",
+            "mp": "communication",
+            "p": "communicate_with_user",
+            "r": 106,
+            "c": "#b04f4f",
+            "o": 0.3784407227047313
+        },
+        {
+            "md": "id",
+            "d": "email_address",
+            "mp": "communication",
+            "p": "communicate_with_user",
+            "r": 119,
+            "c": "#b04f4f",
+            "o": 0.3784407227047313
+        },
+        {
+            "md": "network_information",
+            "d": "ip_address",
+            "mp": "functionality",
+            "p": "preserve_system_integrity",
+            "r": 16,
+            "c": "#ba4545",
+            "o": 0.46087003285919964
+        },
+        {
+            "md": "network_information",
+            "d": "ip_address",
+            "mp": "functionality",
+            "p": "preserve_system_integrity",
+            "r": 25,
+            "c": "#ba4545",
+            "o": 0.46087003285919964
+        },
+        {
+            "md": "network_information",
+            "d": "ip_address",
+            "mp": "functionality",
+            "p": "preserve_system_integrity",
+            "r": 26,
+            "c": "#ba4545",
+            "o": 0.46087003285919964
+        },
+        {
+            "md": "network_information",
+            "d": "ip_address",
+            "mp": "functionality",
+            "p": "preserve_system_integrity",
+            "r": 27,
+            "c": "#ba4545",
+            "o": 0.46087003285919964
+        },
+        {
+            "md": "network_information",
+            "d": "ip_address",
+            "mp": "functionality",
+            "p": "preserve_system_integrity",
+            "r": 28,
+            "c": "#ba4545",
+            "o": 0.46087003285919964
+        },
+        {
+            "md": "network_information",
+            "d": "ip_address",
+            "mp": "functionality",
+            "p": "preserve_system_integrity",
+            "r": 29,
+            "c": "#ba4545",
+            "o": 0.46087003285919964
+        },
+        {
+            "md": "network_information",
+            "d": "ip_address",
+            "mp": "functionality",
+            "p": "preserve_system_integrity",
+            "r": 30,
+            "c": "#ba4545",
+            "o": 0.46087003285919964
+        },
+        {
+            "md": "device_information",
+            "d": "browser_type",
+            "mp": "functionality",
+            "p": "preserve_system_integrity",
+            "r": 16,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "device_information",
+            "d": "browser_type",
+            "mp": "functionality",
+            "p": "preserve_system_integrity",
+            "r": 25,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "device_information",
+            "d": "browser_type",
+            "mp": "functionality",
+            "p": "preserve_system_integrity",
+            "r": 26,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "device_information",
+            "d": "browser_type",
+            "mp": "functionality",
+            "p": "preserve_system_integrity",
+            "r": 27,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "device_information",
+            "d": "browser_type",
+            "mp": "functionality",
+            "p": "preserve_system_integrity",
+            "r": 28,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "device_information",
+            "d": "browser_type",
+            "mp": "functionality",
+            "p": "preserve_system_integrity",
+            "r": 29,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "device_information",
+            "d": "browser_type",
+            "mp": "functionality",
+            "p": "preserve_system_integrity",
+            "r": 30,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "usage_information",
+            "d": "usage_activity_data",
+            "mp": "product_improvement",
+            "p": "improve_products_and_services",
+            "r": 16,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "usage_information",
+            "d": "usage_activity_data",
+            "mp": "product_improvement",
+            "p": "improve_products_and_services",
+            "r": 17,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "usage_information",
+            "d": "usage_activity_data",
+            "mp": "product_improvement",
+            "p": "improve_products_and_services",
+            "r": 25,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "usage_information",
+            "d": "usage_activity_data",
+            "mp": "product_improvement",
+            "p": "improve_products_and_services",
+            "r": 26,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "usage_information",
+            "d": "usage_activity_data",
+            "mp": "product_improvement",
+            "p": "improve_products_and_services",
+            "r": 27,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "usage_information",
+            "d": "usage_activity_data",
+            "mp": "product_improvement",
+            "p": "improve_products_and_services",
+            "r": 28,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "usage_information",
+            "d": "usage_activity_data",
+            "mp": "product_improvement",
+            "p": "improve_products_and_services",
+            "r": 29,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "usage_information",
+            "d": "usage_activity_data",
+            "mp": "product_improvement",
+            "p": "improve_products_and_services",
+            "r": 30,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "device_information",
+            "d": "device_type",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 18,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "device_information",
+            "d": "device_type",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 25,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "device_information",
+            "d": "device_type",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 26,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "device_information",
+            "d": "device_type",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 27,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "device_information",
+            "d": "device_type",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 28,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "device_information",
+            "d": "device_type",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 29,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "device_information",
+            "d": "device_type",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 30,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "location",
+            "d": "users_location",
+            "mp": "safety_and_security",
+            "p": "user_safety",
+            "r": 19,
+            "c": "#8a7474",
+            "o": 0.5865317440823377
+        },
+        {
+            "md": "location",
+            "d": "users_location",
+            "mp": "safety_and_security",
+            "p": "user_safety",
+            "r": 25,
+            "c": "#8a7474",
+            "o": 0.5865317440823377
+        },
+        {
+            "md": "location",
+            "d": "users_location",
+            "mp": "safety_and_security",
+            "p": "user_safety",
+            "r": 26,
+            "c": "#8a7474",
+            "o": 0.5865317440823377
+        },
+        {
+            "md": "location",
+            "d": "users_location",
+            "mp": "safety_and_security",
+            "p": "user_safety",
+            "r": 27,
+            "c": "#8a7474",
+            "o": 0.5865317440823377
+        },
+        {
+            "md": "location",
+            "d": "users_location",
+            "mp": "safety_and_security",
+            "p": "user_safety",
+            "r": 28,
+            "c": "#8a7474",
+            "o": 0.5865317440823377
+        },
+        {
+            "md": "location",
+            "d": "users_location",
+            "mp": "safety_and_security",
+            "p": "user_safety",
+            "r": 29,
+            "c": "#8a7474",
+            "o": 0.5865317440823377
+        },
+        {
+            "md": "location",
+            "d": "users_location",
+            "mp": "safety_and_security",
+            "p": "user_safety",
+            "r": 30,
+            "c": "#8a7474",
+            "o": 0.5865317440823377
+        },
+        {
+            "md": "location",
+            "d": "device_location",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 19,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "location",
+            "d": "device_location",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 25,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "location",
+            "d": "device_location",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 26,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "location",
+            "d": "device_location",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 27,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "location",
+            "d": "device_location",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 28,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "location",
+            "d": "device_location",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 29,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "location",
+            "d": "device_location",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 30,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "network_information",
+            "d": "cookie_information",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 20,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "network_information",
+            "d": "cookie_information",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 25,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "network_information",
+            "d": "cookie_information",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 26,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "network_information",
+            "d": "cookie_information",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 27,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "network_information",
+            "d": "cookie_information",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 28,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "network_information",
+            "d": "cookie_information",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 29,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "network_information",
+            "d": "cookie_information",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 30,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "id",
+            "d": "social_media_profiles",
+            "mp": "communication",
+            "p": "communicate_with_user",
+            "r": 13,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "id",
+            "d": "social_media_profiles",
+            "mp": "communication",
+            "p": "communicate_with_user",
+            "r": 24,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "id",
+            "d": "social_media_profiles",
+            "mp": "communication",
+            "p": "communicate_with_user",
+            "r": 27,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "id",
+            "d": "social_media_profiles",
+            "mp": "communication",
+            "p": "communicate_with_user",
+            "r": 30,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "id",
+            "d": "social_media_profiles",
+            "mp": "communication",
+            "p": "communicate_with_user",
+            "r": 84,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "id",
+            "d": "social_media_profiles",
+            "mp": "communication",
+            "p": "communicate_with_user",
+            "r": 95,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "id",
+            "d": "social_media_profiles",
+            "mp": "communication",
+            "p": "communicate_with_user",
+            "r": 106,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "id",
+            "d": "social_media_profiles",
+            "mp": "communication",
+            "p": "communicate_with_user",
+            "r": 119,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "id",
+            "d": "personal_description",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 14,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "id",
+            "d": "personal_description",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 24,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "id",
+            "d": "personal_description",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 25,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "id",
+            "d": "personal_description",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 26,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "id",
+            "d": "personal_description",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 27,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "id",
+            "d": "personal_description",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 28,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "id",
+            "d": "personal_description",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 29,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "id",
+            "d": "personal_description",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 30,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "id",
+            "d": "personal_description",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 84,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "id",
+            "d": "personal_description",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 95,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "id",
+            "d": "personal_description",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 106,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "id",
+            "d": "personal_description",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 119,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "id",
+            "d": "age",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 14,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "id",
+            "d": "age",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 24,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "id",
+            "d": "age",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 25,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "id",
+            "d": "age",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 26,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "id",
+            "d": "age",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 27,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "id",
+            "d": "age",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 28,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "id",
+            "d": "age",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 29,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "id",
+            "d": "age",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 30,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "id",
+            "d": "age",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 84,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "id",
+            "d": "age",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 95,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "id",
+            "d": "age",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 106,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "id",
+            "d": "age",
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "r": 119,
+            "c": "#808080",
+            "o": 0.0
+        },
+        {
+            "md": "network_information",
+            "d": "ip_address",
+            "mp": "functionality",
+            "p": "provide_business_services",
+            "r": 16,
+            "c": "#986767",
+            "o": 0.19461529007630113
+        },
+        {
+            "md": "network_information",
+            "d": "ip_address",
+            "mp": "functionality",
+            "p": "provide_business_services",
+            "r": 25,
+            "c": "#986767",
+            "o": 0.19461529007630113
+        },
+        {
+            "md": "network_information",
+            "d": "ip_address",
+            "mp": "functionality",
+            "p": "provide_business_services",
+            "r": 26,
+            "c": "#986767",
+            "o": 0.19461529007630113
+        },
+        {
+            "md": "network_information",
+            "d": "ip_address",
+            "mp": "functionality",
+            "p": "provide_business_services",
+            "r": 27,
+            "c": "#986767",
+            "o": 0.19461529007630113
+        },
+        {
+            "md": "network_information",
+            "d": "ip_address",
+            "mp": "functionality",
+            "p": "provide_business_services",
+            "r": 28,
+            "c": "#986767",
+            "o": 0.19461529007630113
+        },
+        {
+            "md": "network_information",
+            "d": "ip_address",
+            "mp": "functionality",
+            "p": "provide_business_services",
+            "r": 29,
+            "c": "#986767",
+            "o": 0.19461529007630113
+        },
+        {
+            "md": "network_information",
+            "d": "ip_address",
+            "mp": "functionality",
+            "p": "provide_business_services",
+            "r": 30,
+            "c": "#986767",
+            "o": 0.19461529007630113
+        }
+    ],
+    "purpose_share": [
+        {
+            "mp": "legal",
+            "p": "defend_legal_rights",
+            "ms": "legal",
+            "s": "regulatory_compliance",
+            "r": 36,
+            "c": "#b14d4d",
+            "o": 0.3930965239352865
+        },
+        {
+            "mp": "functionality",
+            "p": "provide_services_and_fulfill_contractual_obligations",
+            "ms": "service_provision",
+            "s": "affiliates_and_subsidiaries",
+            "r": 38,
+            "c": "#a95555",
+            "o": 0.828500394305008
+        },
+        {
+            "mp": "user_experience",
+            "p": "interaction",
+            "ms": "service_provision",
+            "s": "third_party_platforms_integration",
+            "r": 39,
+            "c": "#bf4040",
+            "o": 1.0
+        }
+    ],
+    "share_name": [
+        {
+            "ms": "service_provision",
+            "s": "affiliates_and_subsidiaries",
+            "mn": "Unknown",
+            "n": "unknown",
+            "r": 34,
+            "c": "#FF0000",
+            "o": 0.7
+        },
+        {
+            "ms": "corporate_transactions",
+            "s": "merger_and_acquisition",
+            "mn": "Unknown",
+            "n": "unknown",
+            "r": 35,
+            "c": "#FF0000",
+            "o": 0.7
+        },
+        {
+            "ms": "legal",
+            "s": "regulatory_compliance",
+            "mn": "Unknown",
+            "n": "unknown",
+            "r": 36,
+            "c": "#FF0000",
+            "o": 0.7
+        },
+        {
+            "ms": "prevention and investigation of harms",
+            "s": "prevent_harm",
+            "mn": "Unknown",
+            "n": "unknown",
+            "r": 36,
+            "c": "#FF0000",
+            "o": 0.7
+        },
+        {
+            "ms": "prevention and investigation of harms",
+            "s": "prevent_harm",
+            "mn": "Unknown",
+            "n": "unknown",
+            "r": 117,
+            "c": "#FF0000",
+            "o": 0.7
+        },
+        {
+            "ms": "service_provision",
+            "s": "affiliates_and_subsidiaries",
+            "mn": "Unknown",
+            "n": "unknown",
+            "r": 37,
+            "c": "#FF0000",
+            "o": 0.7
+        },
+        {
+            "ms": "service_provision",
+            "s": "affiliates_and_subsidiaries",
+            "mn": "Unknown",
+            "n": "unknown",
+            "r": 38,
+            "c": "#FF0000",
+            "o": 0.7
+        },
+        {
+            "ms": "service_provision",
+            "s": "third_party_platforms_integration",
+            "mn": "Unknown",
+            "n": "unknown",
+            "r": 39,
+            "c": "#FF0000",
+            "o": 0.7
+        }
+    ],
+    "user_rights": [
+        {
+            "n": "access_to_information",
+            "r": 49
+        },
+        {
+            "n": "content_removal_erasure",
+            "r": 50
+        },
+        {
+            "n": "data_correction",
+            "r": 51
+        },
+        {
+            "n": "data_portability",
+            "r": 52
+        },
+        {
+            "n": "limit_use_or_disclosure_of_sensitive_personal_information",
+            "r": 53
+        },
+        {
+            "n": "third_party_data_sharing",
+            "r": 54
+        },
+        {
+            "n": "data_processing_complaint",
+            "r": 55
+        },
+        {
+            "n": "opt_out_marketing",
+            "r": 57
+        },
+        {
+            "n": "opt_out_marketing",
+            "r": 58
+        },
+        {
+            "n": "opt_out_marketing",
+            "r": 31
+        },
+        {
+            "n": "opt_out_marketing",
+            "r": 104
+        },
+        {
+            "n": "access_to_information",
+            "r": 59
+        },
+        {
+            "n": "data_correction",
+            "r": 61
+        }
+    ],
+    "user_responsibilities": [
+        {
+            "n": "childrenrens_accounts",
+            "r": 64
+        },
+        {
+            "n": "data_protection",
+            "r": 66
+        },
+        {
+            "n": "others_right_to_privacy",
+            "r": 39
+        },
+        {
+            "n": "user_content_intellectual_property_ip",
+            "r": 61
+        }
+    ]
+}
