@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Workout Explorer</title>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<style>
+*{box-sizing:border-box}
+:root{--accent:#3778ff}
+body{font-family:Inter,system-ui,-apple-system,sans-serif;margin:0;padding:2rem;
+     background:#f5f7fa;color:#222;display:flex;flex-direction:column;gap:2rem}
+section{background:#fff;border-radius:16px;padding:1.5rem;box-shadow:0 6px 16px rgba(0,0,0,.06)}
+h2,h3{margin:.3rem 0 1rem}.chartWrap{position:relative}
+svg{width:100%;height:420px} #timeSvg{height:240px}
+.handle{fill:#fff;stroke:#000;cursor:ew-resize}
+.selection{fill:rgba(55,120,255,.15);stroke:var(--accent)}
+input[type=file]::-webkit-file-upload-button{font:inherit;padding:.4rem 1rem;border-radius:8px;border:1px solid #ccc;background:#eef0f3;cursor:pointer}
+select,input[type=number]{font:inherit;padding:.3rem .6rem;border-radius:8px;border:1px solid #ccc;background:#fafbfd}
+input[type=number]{width:4.5rem}
+button{font:inherit;padding:.45rem 1.1rem;border:none;border-radius:9999px;background:var(--accent);color:#fff;cursor:pointer}
+button:disabled{opacity:.5;cursor:not-allowed}
+#stats ul{margin:.4rem 0 0 1rem;padding:0;font-size:.92rem;line-height:1.4}
+.switch{display:inline-flex;align-items:center;gap:.4rem;cursor:pointer;font-size:.9rem;margin-right:1.5rem}
+.switch input{display:none}
+.switch span{width:34px;height:18px;background:#ccc;border-radius:9999px;position:relative;transition:.25s}
+.switch span::after{content:'';position:absolute;top:2px;left:2px;width:14px;height:14px;border-radius:50%;background:#fff;transition:.25s}
+.switch input:checked+span{background:var(--accent)}
+.switch input:checked+span::after{transform:translateX(16px)}
+.traj{fill:none;stroke-width:1.5}
+</style>
+</head>
+<body>
+
+<section><h2>1. Upload CSV</h2><input type="file" id="file" accept=".csv"></section>
+
+<section style="display:flex;align-items:flex-start;gap:1rem;flex-wrap:wrap">
+  <div style="display:flex;align-items:center;gap:.6rem">
+    <h2 style="margin:0">2. Pick exercise</h2>
+    <select id="exercise" disabled></select>
+  </div>
+  <div id="stats"></div>
+</section>
+
+<section>
+  <h2>3. Visualisation</h2>
+  <div style="margin-bottom:1rem;display:flex;flex-wrap:wrap;align-items:center">
+    <label class="switch"><input type="checkbox" id="warmToggle" checked><span></span> Remove warm-ups</label>
+    <label class="switch"><input type="checkbox" id="filterToggle" checked><span></span> Remove outliers <small>(may drop best&nbsp;&amp;&nbsp;low)</small></label>
+  </div>
+
+  <h3>Max weight over time</h3><div class="chartWrap"><svg id="timeSvg"></svg></div>
+  <h3>Weight × reps scatter-plot</h3><svg id="scatterSvg"></svg>
+
+  <h3 style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap">
+    Workout animation
+    <span style="font-weight:400">Duration (sec):</span>
+    <input type="number" id="animSec" min="1" value="4">
+    <button id="play" disabled>▶ Play</button>
+    <span id="frameInfo" style="font-size:.9rem;color:#555"></span>
+  </h3>
+</section>
+
+<script>
+const $=s=>document.querySelector(s);
+const fmtD=d3.timeFormat('%Y-%m-%d');
+function rmOut(a,f,k=false){if(a.length<4)return a;const v=a.map(f).sort((a,b)=>a-b),
+q1=v[Math.floor(v.length*.25)],q3=v[Math.floor(v.length*.75)],iqr=q3-q1,lo=q1-1.5*iqr,hi=q3+1.5*iqr;
+return a.filter(d=>{const x=f(d);return x>=lo&&(k||x<=hi)})}
+let rows=[],byEx=new Map(),selRows=[],timeScale,timeSvg=d3.select('#timeSvg'),
+scatterSvg=d3.select('#scatterSvg'),linesGroup,pointsByDate=new Map();
+const M={t:20,r:25,b:28,l:45},W=900,Ht=240,Hs=400,frameInfo=$('#frameInfo');
+
+$('#file').addEventListener('change',e=>{
+ const f=e.target.files[0];if(!f)return;const R=new FileReader();
+ R.onload=ev=>{
+   rows=d3.csvParse(ev.target.result,d=>{
+     d.Weight=+d.Weight;d.Reps=+d.Reps;
+     if(!d["Exercise Name"]||d.Weight===0||d.Reps===0)return null;
+     d.Order=+d["Set Order"]||1;
+     d.IsWarm=(d["Set Order"]?.trim().toUpperCase()==="W")||(/rest\s*timer/i).test(d["Exercise Name"]);
+     d.DateObj=new Date(d.Date);d.Day=d.Date.slice(0,10);return d
+   }).filter(Boolean);
+   byEx.clear();rows.forEach(r=>(byEx.get(r["Exercise Name"])||
+     byEx.set(r["Exercise Name"],[]).get(r["Exercise Name"])).push(r));
+   $('#exercise').innerHTML=[...byEx.keys()].map(e=>`<option>${e}</option>`).join('');
+   $('#exercise').disabled=false;$('#play').disabled=false;
+   $('#exercise').dispatchEvent(new Event('change'));
+ };R.readAsText(f);
+});
+
+$('#exercise').addEventListener('change',()=>{selRows=byEx.get($('#exercise').value)||[];drawTime()});
+
+function drawTime(){
+  timeSvg.selectAll('*').remove();
+  const dMax=d3.rollup(selRows,v=>d3.max(v,d=>d.Weight),d=>d.Day);
+  const data=[...dMax].map(([d,w])=>({d:new Date(d),w})).sort((a,b)=>a.d-b.d);
+  timeScale=d3.scaleTime().domain(d3.extent(data,d=>d.d)).range([M.l,W-M.r]);
+  const y=d3.scaleLinear().domain([0,d3.max(data,d=>d.w)]).nice().range([Ht-M.b,M.t]);
+  timeSvg.append('g').attr('transform',`translate(0,${Ht-M.b})`).call(d3.axisBottom(timeScale));
+  timeSvg.append('g').attr('transform',`translate(${M.l},0)`).call(d3.axisLeft(y));
+  timeSvg.append('path').datum(data).attr('fill','none').attr('stroke','var(--accent)').attr('stroke-width',2)
+         .attr('d',d3.line().x(d=>timeScale(d.d)).y(d=>y(d.w)));
+  const lblG=timeSvg.append('g').attr('pointer-events','none');
+  const l0=lblG.append('text').attr('y',M.t-5).attr('text-anchor','middle');
+  const l1=lblG.append('text').attr('y',M.t-5).attr('text-anchor','middle');
+  const brush=d3.brushX().extent([[M.l,M.t],[W-M.r,Ht-M.b]]).handleSize(8)
+              .on('brush end',({selection})=>{
+                if(!selection)return;
+                const [x0,x1]=selection;
+                l0.attr('x',x0).text(fmtD(timeScale.invert(x0)));
+                l1.attr('x',x1).text(fmtD(timeScale.invert(x1)));
+                updateScatter(timeScale.invert(x0),timeScale.invert(x1));
+              });
+  timeSvg.append('g').attr('class','brush').call(brush).call(brush.move,timeScale.range());
+}
+
+function updateScatter(start,end){
+  let win=selRows.filter(r=>r.DateObj>=start&&r.DateObj<=end);
+  if($('#warmToggle').checked) win=win.filter(r=>!r.IsWarm);
+  if(!win.length){scatterSvg.selectAll('*').remove();$('#stats').innerHTML='';return;}
+  let pts=win;
+  if($('#filterToggle').checked){
+    pts=rmOut(pts,d=>d.Reps);
+    pts=rmOut(pts,d=>d.Weight,true);
+  }
+  scatterSvg.selectAll('*').remove();
+  scatterSvg.attr('viewBox',[0,0,W,Hs]);
+  const wMin=d3.min(pts,d=>d.Weight), wMax=d3.max(pts,d=>d.Weight);
+  const x=d3.scaleLinear().domain([wMin-wMin*0.04,wMax*1.04]).range([M.l,W-M.r]);
+  const y=d3.scaleLinear().domain([0,d3.max(pts,d=>d.Reps)]).nice().range([Hs-M.b,M.t]);
+  scatterSvg.append('g').attr('transform',`translate(0,${Hs-M.b})`).call(d3.axisBottom(x));
+  scatterSvg.append('g').attr('transform',`translate(${M.l},0)`).call(d3.axisLeft(y));
+  const col=d3.scaleSequential().domain([0,d3.max(pts,d=>d.Reps)]).interpolator(d3.interpolateBlues);
+  const circles=scatterSvg.append('g').selectAll('circle').data(pts).join('circle')
+        .attr('cx',d=>x(d.Weight)).attr('cy',d=>y(d.Reps)).attr('r',4)
+        .attr('fill',d=>col(d.Reps)).attr('opacity',.9)
+        .each(function(){this.__origFill=this.getAttribute('fill')});
+  pointsByDate.clear();
+  circles.each(function(d){(pointsByDate.get(d.Date)||pointsByDate.set(d.Date,[]).get(d.Date)).push(this)});
+  if(linesGroup) linesGroup.remove();
+  linesGroup=scatterSvg.append('g').attr('class','workoutLines');
+  const best1RM=d3.max(win,d=>d.Weight*(1+d.Reps/30));
+  const dMax=d3.rollup(win,v=>d3.max(v,d=>d.Weight),d=>d.Day);
+  const series=[...dMax].map(([ts,w])=>({d:new Date(ts),w})).sort((a,b)=>a.d-b.d);
+  const first=series[0],last=series[series.length-1],days=(last.d-first.d)/864e5;
+  const slope=days?(last.w-first.w)/days*30:0;
+  const vol=d3.rollup(win,v=>d3.sum(v,d=>d.Weight*d.Reps),d=>d.Day);
+  const avgVol=d3.mean([...vol.values()]);
+  $('#stats').innerHTML=`
+    <ul>
+      <li><strong>Best est. 1 RM:</strong> ${best1RM.toFixed(1)} kg</li>
+      <li><strong>Max weight:</strong> ${first.w} kg → ${last.w} kg</li>
+      <li><strong>Increase rate:</strong> ${slope.toFixed(2)} kg / month</li>
+      <li><strong>Avg volume:</strong> ${Math.round(avgVol)} kg·reps / workout</li>
+    </ul>`;
+}
+
+$('#play').addEventListener('click',()=>{
+  const ks=[...pointsByDate.keys()].sort(); if(!ks.length)return;
+  const sec=Math.max(1,+$('#animSec').value||4), frame=1000*sec/ks.length,orig=4,big=9;
+  let prev=[];
+  scatterSvg.selectAll('circle')
+            .attr('fill',function(){return this.__origFill})
+            .attr('r',4);
+  linesGroup.selectAll('*').remove();
+  frameInfo.textContent='';
+  ks.forEach((k,i)=>setTimeout(()=>{
+    d3.selectAll(prev).attr('fill',function(){return this.__origFill}).attr('r',orig);
+    linesGroup.selectAll('*').remove();
+    frameInfo.textContent=`${fmtD(new Date(k))}  (${i+1}/${ks.length})`;
+    const draw=(idx,col,op)=>{
+      if(idx<0||idx>=ks.length)return;
+      const n=pointsByDate.get(ks[idx]);if(n.length<2)return;
+      const coords=n.sort((a,b)=>d3.select(a).datum().Order-d3.select(b).datum().Order)
+                    .map(el=>[+el.getAttribute('cx'),+el.getAttribute('cy')]);
+      linesGroup.append('path').attr('class','traj').attr('stroke',col)
+                .attr('stroke-opacity',op).attr('d',d3.line()(coords));
+    };
+    draw(i-1,'#555',.35); draw(i,'var(--accent)',.6); draw(i+1,'#555',.35);
+    const cur=pointsByDate.get(k);
+    d3.selectAll(cur).attr('fill','var(--accent)').attr('r',big);
+    prev=cur;
+  },i*frame));
+});
+
+['warmToggle','filterToggle'].forEach(id=>{
+  $(`#${id}`).addEventListener('change',()=>{
+    const sel=d3.brushSelection(timeSvg.select('.brush').node());
+    if(sel)updateScatter(timeScale.invert(sel[0]),timeScale.invert(sel[1]));
+  });
+});
+</script>
+</body>
+</html>
