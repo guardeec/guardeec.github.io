@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FAS Sites across Europe — interactive</title>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <style>
+    :root {
+      --bg: #0d1117;
+      --land: #1e252c;
+      --text: #c9d1d9;
+      --highlight: #d73939;
+      --no-data: #3a3f44;
+      --stroke: #FFFFFF;
+    }
+
+    html, body { margin: 0; padding: 0; width: 100vw; height: 100vh; }
+    body { background: var(--bg); color: var(--text); font-family: system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Ubuntu, sans-serif; }
+
+    #map-wrap { position: relative; width: 100%; height: 100%; }
+    svg#map { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+
+    .country:not(.interactive) { fill: var(--land); }
+    .interactive { stroke: var(--stroke); stroke-width: 1; cursor: pointer; transition: fill .15s; }
+    .interactive:hover { stroke-width: 1.5; }
+
+    .tooltip {
+      position: absolute; bottom: 16px; right: 16px;
+      background: rgba(0,0,0,.75); padding: .6rem 1rem .8rem; border-radius: 4px;
+      font-size: .9rem; color: var(--text); pointer-events: none; opacity: 0; transition: opacity .15s;
+      max-width: 370px; line-height: 1.35;
+      white-space: pre-line;
+    }
+
+    #controls {
+      position: absolute; top: 12px; left: 12px; z-index: 10;
+      background: rgba(0,0,0,.5); padding: .75rem 1rem; border-radius: 6px; backdrop-filter: blur(6px);
+      display: flex; flex-direction: column; gap: .4rem; font-size: .9rem;
+    }
+    #controls label { display: flex; flex-direction: column; gap: .15rem; }
+    #controls select { background: #11161d; color: var(--text); border: 1px solid #222; border-radius: 4px; padding: .25rem .4rem; font-size: .9rem; }
+
+    /* Select + help icon layout */
+    .select-with-help {
+      display: inline-flex;
+      align-items: center;
+      gap: .45rem;
+      position: relative;
+    }
+    .help-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 18px; height: 18px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.08);
+      color: var(--text);
+      font-weight: 700;
+      font-size: 12px;
+      cursor: help;
+      user-select: none;
+      border: 1px solid rgba(255,255,255,.18);
+      line-height: 1;
+    }
+    .help-icon:focus { outline: 2px solid rgba(255,255,255,.3); outline-offset: 2px; }
+
+    .help-bubble {
+      width: clamp(360px, 42vw, 640px);
+      position: absolute;
+      left: 100%;
+      margin-left: .5rem;
+      top: 300%;
+      transform: translateY(-50%);
+      display: none;
+      max-width: 280px;
+      background: rgba(0,0,0,.85);
+      color: var(--text);
+      font-size: .85rem;
+      line-height: 1.35;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 6px;
+      padding: .5rem .6rem;
+      z-index: 20;
+      box-shadow: 0 4px 14px rgba(0,0,0,.4);
+      white-space: normal;
+    }
+    /* Show bubble on hover OR when the icon has focus (keyboard) */
+    .select-with-help:hover .help-bubble,
+    .help-icon:focus + .help-bubble,
+    .help-icon:hover + .help-bubble {
+      display: block;
+    }
+
+    /* Fade for Platform & Action */
+    #controls .fade-wrap { transition: opacity .2s ease, max-height .2s ease, margin .2s ease, padding .2s ease; overflow: hidden; opacity: 1; max-height: 200px; }
+    #controls .fade-wrap.hidden { opacity: 0; max-height: 0; pointer-events: none; margin: 0; padding-top: 0; padding-bottom: 0; }
+
+    /* Options without data — red (disabled) */
+    #controls select option.no-data { color: var(--highlight); font-style: italic; }
+    #controls select option:disabled { color: var(--highlight); font-style: italic; }
+
+    #legend {
+      position: absolute; bottom: 16px; left: 16px; z-index: 10;
+      background: rgba(0,0,0,.5); padding: .5rem .75rem; border-radius: 4px; font-size: .8rem; line-height: 1.2;
+    }
+    #legend .bar { height: 10px; width: 240px; margin: .25rem 0; }
+
+    code { background: #11161d; padding: 0 .25rem; border-radius: 3px; }
+  </style>
+</head>
+<body>
+<div id="map-wrap">
+  <div id="controls">
+    <!-- Color metric — первый -->
+    <label>
+      Color metric
+      <div class="select-with-help">
+        <select id="metricSel">
+          <option value="price" selected>Price index (weighted vs world)</option>
+          <option value="age">Age (months, median)</option>
+          <option value="google">Discoverability • Google (median best rank)</option>
+          <option value="bing">Discoverability • Bing (median best rank)</option>
+          <option value="duckduckgo">Discoverability • DuckDuckGo (median best rank)</option>
+          <option value="malicious_ratio">Malicious ratio (URLScan ∪ VirusTotal)</option>
+          <option value="host_locality">Host locality ratio (WHOIS/ORG in-country)</option>
+          <option value="js_malicious_score">JS malicious behavior (median)</option>
+          <option value="sites_count">#Sites</option>
+          <option value="platforms_count">#Platforms (unique)</option>
+        </select>
+        <span id="metricHelp" class="help-icon" aria-label="What does this metric mean?" tabindex="0">?</span>
+        <div id="metricHelpBubble" class="help-bubble" role="tooltip"></div>
+      </div>
+    </label>
+
+    <!-- Platform — fade -->
+    <label id="platformLabel" class="fade-wrap">
+      Platform
+      <select id="platformSel"></select>
+    </label>
+
+    <!-- Action — fade -->
+    <label id="actionLabel" class="fade-wrap">
+      Action
+      <select id="actionSel"></select>
+    </label>
+  </div>
+
+  <svg id="map"></svg>
+  <div id="tooltip" class="tooltip"></div>
+
+  <div id="legend">
+    <div id="legend-title">Price index (weighted vs world)</div>
+    <div class="bar" id="legend-bar"></div>
+    <div>
+      <span id="legend-min">min</span>
+      &nbsp;←&nbsp;
+      <span id="legend-center">1.00</span>
+      &nbsp;→&nbsp;
+      <span id="legend-max">max</span>
+    </div>
+  </div>
+</div>
+
+<script>
+(async function () {
+  const DATA_URL = "https://guardeec.github.io/FAMOUS/vis.json";
+  const DEBUG = false; // turn on for logs
+
+  const state = { platform: "ALL", action: "ALL", metric: "price" };
+
+  const data = await fetch(DATA_URL).then(r => r.json());
+  const geo  = await d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson");
+
+  // ---- Simple English help texts for metrics ----
+  const HELP_TEXT = {
+    price:
+`Price index
+Compares the typical price of fake activity in this country to the world typical price for the selected platform & action.
+• 1.00 = same as world; >1 = more expensive; <1 = cheaper.
+• "Typical" means a robust (consumer basket) median of prices.
+• We combine platform–action pairs with weights.
+• Missing data is skipped.`,
+
+    age:
+`Age (months, median)
+The typical age of FAS (in months) since domain registration in this country.
+• We use the median age across the FAS we found.
+• Missing dates are skipped.`,
+
+    google:
+`Discoverability — Google (median best rank)
+How easy FAS are to find on Google in this country.
+• Lower rank = easier to find.
+• We take each site's best search position and use the median.`,
+
+    bing:
+`Discoverability — Bing (median best rank)
+How easy FAS are to find on Bing in this country.
+• Lower rank = easier to find.
+• We take each site's best search position and use the median.`,
+
+    duckduckgo:
+`Discoverability — DuckDuckGo (median best rank)
+How easy FAS are to find on DuckDuckGo in this country.
+• Lower rank = easier to find.
+• We take each site's best search position and use the median.`,
+
+    malicious_ratio:
+`Malicious ratio
+Share of FAS flagged as malicious by URLScan or VirusTotal.
+• We only count sites where we have a yes/no result.
+• Value = (# flagged) / (# with a result).`,
+
+    host_locality:
+`Host locality ratio
+Share of FAS whose WHOIS/organization country matches the map country.
+• We use WHOIS country when available; otherwise organization country.
+• If both are missing, the site is skipped.
+• Value = (# in-country) / (# with known country).`,
+
+    js_malicious_score:
+`JS malicious behavior (median)
+The typical JavaScript risk score (0–10) across FAS in this country.
+• Higher means riskier behavior.
+• We use the median across available scores.`,
+
+    sites_count:
+`Number of FAS
+How many FAS we found for this country (with any usable data).
+• Larger number = more FAS in our sample.`,
+
+    platforms_count:
+`Number of Platforms
+How many different social platforms are offered by FAS in this country.
+• Help shows the top 10 platforms by how many sites offer them.`
+  };
+
+  // ---- Helpers ----
+  const now = new Date();
+  const monthsBetween = (d1, d2) => Math.floor((d1 - d2) / (1000 * 60 * 60 * 24 * 30.4375));
+  const fmt2 = v => (v == null || !isFinite(v)) ? "–" : (+v).toFixed(2);   // for index/legend
+  const fmt4 = v => (v == null || !isFinite(v)) ? "–" : (+v).toFixed(4);   // for EUR
+
+  function parseBoolMaybe(v) {
+    if (v === true || v === false) return v;
+    if (v === 1 || v === 0) return !!v;
+    if (typeof v === "string") {
+      const t = v.trim().toLowerCase();
+      if (t === "true" || t === "1") return true;
+      if (t === "false" || t === "0") return false;
+    }
+    return null;
+  }
+
+  const token = s => String(s || "").toUpperCase().replace(/[^A-Z]/g, "");
+  const iso2ToNameToken = {
+    AL:"ALBANIA", AD:"ANDORRA", AT:"AUSTRIA", BE:"BELGIUM", BG:"BULGARIA", BY:"BELARUS",
+    CH:"SWITZERLAND", CY:"CYPRUS", CZ:"CZECHREPUBLIC", DE:"GERMANY", DK:"DENMARK",
+    EE:"ESTONIA", ES:"SPAIN", FI:"FINLAND", FR:"FRANCE", GB:"UNITEDKINGDOM", UK:"UNITEDKINGDOM",
+    GR:"GREECE", HR:"CROATIA", HU:"HUNGARY", IE:"IRELAND", IS:"ICELAND", IT:"ITALY",
+    LT:"LITHUANIA", LU:"LUXEMBOURG", LV:"LATVIA", MC:"MONACO", MT:"MALTA", NL:"NETHERLANDS",
+    NO:"NORWAY", PL:"POLAND", PT:"PORTUGAL", RO:"ROMANIA", RS:"SERBIA", RU:"RUSSIA",
+    SE:"SWEDEN", SI:"SLOVENIA", SK:"SLOVAKIA", SM:"SANMARINO", UA:"UKRAINE", BA:"BOSNIAANDHERZEGOVINA",
+    MK:"NORTHMACEDONIA", MD:"MOLDOVA", ME:"MONTENEGRO", XK:"KOSOVO"
+  };
+
+  // --- Geo prep
+  const features = [];
+  geo.features.forEach(f => {
+    if (f.geometry.type === 'MultiPolygon') {
+      f.geometry.coordinates.forEach(coords => {
+        features.push({ type: 'Feature', properties: f.properties, geometry: {type: 'Polygon', coordinates: coords} });
+      });
+    } else { features.push(f); }
+  });
+
+  const europe = features.filter(f => {
+    const [lon, lat] = d3.geoCentroid(f);
+    return lon > -25 && lon < 45 && lat > 30 && lat < 72;
+  });
+
+  const countryTokens = new Map();
+  europe.forEach(f => {
+    const name = f.properties.name;
+    const set = new Set();
+    set.add(token(name));
+    const a2 = f.properties.iso_a2 || f.properties.ISO_A2 || f.properties.iso2;
+    const a3 = f.properties.iso_a3 || f.properties.ISO_A3 || f.properties.iso3;
+    if (a2) { set.add(token(a2)); const nameTok = iso2ToNameToken[token(a2)]; if (nameTok) set.add(nameTok); }
+    if (a3) set.add(token(a3));
+    if (name === "Czech Republic") set.add("CZECHIA");
+    if (name === "United Kingdom") set.add("UK");
+    countryTokens.set(name, set);
+  });
+
+  function countryMatch(hostVal, countryName) {
+    const set = countryTokens.get(countryName);
+    if (!set) return false;
+    const t = token(hostVal);
+    if (set.has(t)) return true;
+    const expanded = iso2ToNameToken[t];
+    return expanded ? set.has(expanded) : false;
+  }
+
+  const svg = d3.select("#map");
+  const width = svg.node().clientWidth, height = svg.node().clientHeight;
+  const projection = d3.geoNaturalEarth1().fitSize([width, height], { type: 'FeatureCollection', features: europe });
+  const pathGen = d3.geoPath(projection);
+
+  svg.append("g").selectAll("path")
+    .data(geo.features)
+    .join("path")
+    .attr("d", pathGen)
+    .attr("fill", "var(--land)");
+
+  const gData = svg.append("g");
+  const tooltip = d3.select("#tooltip");
+
+  // ---------- Price dictionaries ----------
+  const allPlatforms = new Set();
+  const platformToActions = new Map();
+  const actionToPlatforms = new Map();
+
+  data.forEach(rec => {
+    const pMap = rec.platforms || {};
+    Object.entries(pMap).forEach(([plat, actions]) => {
+      allPlatforms.add(plat);
+      const s = platformToActions.get(plat) || new Set();
+      Object.keys(actions).forEach(act => {
+        s.add(act);
+        const ps = actionToPlatforms.get(act) || new Set();
+        ps.add(plat);
+        actionToPlatforms.set(act, ps);
+      });
+      platformToActions.set(plat, s);
+    });
+  });
+  const allActions = new Set(actionToPlatforms.keys());
+
+  const SEP = '||';
+  const pairKey   = (p, a) => `${p}${SEP}${a}`;
+  const unpairKey = k => { const [p, a] = k.split(SEP); return {p, a}; };
+
+  const worldValues = new Map();       // key -> [values...]
+  const countryPairValues = new Map(); // country -> Map(key -> [values...])
+
+  data.forEach(rec => {
+    const platforms = rec.platforms || {};
+    const countries = (rec.serp && rec.serp.countries) || rec.countries || [];
+
+    Object.entries(platforms).forEach(([plat, acts]) => {
+      Object.entries(acts).forEach(([act, obj]) => {
+        const v = obj?.median;
+        if (v == null || Number.isNaN(v)) return;
+        const k = pairKey(plat, act);
+        if (!worldValues.has(k)) worldValues.set(k, []);
+        worldValues.get(k).push(+v);
+        countries.forEach(c => {
+          if (!countryPairValues.has(c)) countryPairValues.set(c, new Map());
+          const cmap = countryPairValues.get(c);
+          if (!cmap.has(k)) cmap.set(k, []);
+          cmap.get(k).push(+v);
+        });
+      });
+    });
+  });
+
+  let totalN = 0;
+  const worldStats = new Map(); // key -> { p, a, G, n, w }
+  worldValues.forEach((arr, k) => {
+    const {p, a} = unpairKey(k);
+    const n = arr.length; if (!n) return;
+    const G = d3.median(arr);
+    worldStats.set(k, {p, a, G, n, w: 0});
+    totalN += n;
+  });
+  worldStats.forEach(s => { s.w = s.n / totalN; });
+
+  const MIN_N_COUNTRY = 3;
+
+  // ----------------- Controls -----------------
+  const platformSel  = d3.select("#platformSel");
+  const actionSel    = d3.select("#actionSel");
+  const metricSel    = d3.select("#metricSel");
+  const platformLabel= d3.select("#platformLabel");
+  const actionLabel  = d3.select("#actionLabel");
+
+  const legendTitle  = d3.select("#legend-title");
+  const legendBar    = d3.select("#legend-bar");
+  const legendMin    = d3.select("#legend-min");
+  const legendMax    = d3.select("#legend-max");
+  const legendCenter = d3.select("#legend-center");
+
+  const helpBubble = d3.select("#metricHelpBubble");
+  const helpIcon = d3.select("#metricHelp");
+
+  const ALL_PLATFORMS = "ALL";
+  const ALL_ACTIONS   = "ALL";
+
+  function options(sel, arr, current) {
+    sel.selectAll("option").remove();
+    arr.forEach(v => sel.append("option").attr("value", v.value).text(v.label));
+    sel.property("value", current);
+  }
+
+  // Initialize: ALL options, no filtering
+  options(
+    platformSel,
+    [{value: ALL_PLATFORMS, label: "ALL PLATFORMS"}]
+      .concat([...allPlatforms].sort().map(p => ({value: p, label: p}))),
+    state.platform
+  );
+  options(
+    actionSel,
+    [{value: ALL_ACTIONS, label: "ALL ACTIONS"}]
+      .concat([...allActions].sort().map(a => ({value: a, label: a}))),
+    state.action
+  );
+
+  function setHelpText() {
+    const key = state.metric;
+    helpBubble.html((HELP_TEXT[key] || "").replace(/\n/g, "<br>"));
+  }
+
+  metricSel.on("change", () => {
+    state.metric = metricSel.property("value");
+    updateControlsVisibility();
+    updateOptionStates();
+    ensureValidSelection();
+    setHelpText();
+    update();
+  });
+  platformSel.on("change", () => {
+    state.platform = platformSel.property("value");
+    updateOptionStates();
+    ensureValidSelection();
+    update();
+  });
+  actionSel.on("change", () => {
+    state.action = actionSel.property("value");
+    updateOptionStates();
+    ensureValidSelection();
+    update();
+  });
+
+  function updateControlsVisibility() {
+    const isPrice = state.metric === "price";
+    platformLabel.classed("hidden", !isPrice);
+    actionLabel.classed("hidden", !isPrice);
+  }
+
+  // ---- Global world price per update ----
+  function computeGlobalWorldPrice(platform, action) {
+    let sumW = 0, sumWLnG = 0, nPairs = 0;
+    worldStats.forEach(ws => {
+      if (platform !== "ALL" && ws.p !== platform) return;
+      if (action   !== "ALL" && ws.a !== action)   return;
+      if (!isFinite(ws.G) || ws.G <= 0) return;
+      sumWLnG += ws.w * Math.log(ws.G);
+      sumW    += ws.w;
+      nPairs  += 1;
+    });
+    if (sumW === 0 || nPairs === 0) return null;
+    return { worldPrice: Math.exp(sumWLnG / sumW), nPairs };
+  }
+
+  // ---- Country price + obsCount ----
+  function computeCountryPrice(country, platform, action) {
+    const pairMap = countryPairValues.get(country);
+    if (!pairMap) return null;
+
+    let sumW = 0, sumWLnM = 0, nPairsUsed = 0, obsCount = 0;
+
+    worldStats.forEach(ws => {
+      if (platform !== "ALL" && ws.p !== platform) return;
+      if (action   !== "ALL" && ws.a !== action)   return;
+
+      const arr = pairMap.get(pairKey(ws.p, ws.a));
+      if (!arr || arr.length < MIN_N_COUNTRY) return;
+
+      const M = d3.median(arr);
+      if (!isFinite(M) || M <= 0) return;
+
+      sumWLnM   += ws.w * Math.log(M);
+      sumW      += ws.w;
+      nPairsUsed += 1;
+
+      obsCount += arr.length;
+    });
+
+    if (sumW === 0 || nPairsUsed === 0) return null;
+    return {
+      countryPrice: Math.exp(sumWLnM / sumW),
+      nPairsUsed,
+      obsCount
+    };
+  }
+
+  function hasAnyDataFor(platform, action) {
+    for (const country of countryPairValues.keys()) {
+      const cp = computeCountryPrice(country, platform, action);
+      if (cp && isFinite(cp.countryPrice)) return true;
+    }
+    return false;
+  }
+
+  function updateOptionStates() {
+    const isPrice = state.metric === "price";
+    platformSel.selectAll("option").each(function () {
+      const opt = d3.select(this);
+      const v = opt.attr("value");
+      if (!isPrice || v === ALL_PLATFORMS) { opt.classed("no-data", false).property("disabled", false); return; }
+      const ok = hasAnyDataFor(v, state.action);
+      opt.classed("no-data", !ok).property("disabled", !ok);
+    });
+    actionSel.selectAll("option").each(function () {
+      const opt = d3.select(this);
+      const v = opt.attr("value");
+      if (!isPrice || v === ALL_ACTIONS) { opt.classed("no-data", false).property("disabled", false); return; }
+      const ok = hasAnyDataFor(state.platform, v);
+      opt.classed("no-data", !ok).property("disabled", !ok);
+    });
+  }
+
+  function ensureValidSelection() {
+    const pNode = platformSel.node();
+    if (pNode && pNode.options[pNode.selectedIndex] && pNode.options[pNode.selectedIndex].disabled) {
+      platformSel.property("value", ALL_PLATFORMS);
+    }
+    const aNode = actionSel.node();
+    if (aNode && aNode.options[aNode.selectedIndex] && aNode.options[aNode.selectedIndex].disabled) {
+      actionSel.property("value", ALL_ACTIONS);
+    }
+    state.platform = platformSel.property("value");
+    state.action   = actionSel.property("value");
+  }
+
+  // Init
+  updateControlsVisibility();
+  updateOptionStates();
+  ensureValidSelection();
+  setHelpText();
+  update();
+
+  // ---- Samples for price tooltip ----
+  function collectPriceSamples(country, platform, action) {
+    const world = [];
+    const countryVals = [];
+    const cmap = countryPairValues.get(country);
+
+    worldStats.forEach(ws => {
+      if (platform !== "ALL" && ws.p !== platform) return;
+      if (action   !== "ALL" && ws.a !== action)   return;
+
+      const wv = worldValues.get(pairKey(ws.p, ws.a)) || [];
+      for (const v of wv) if (isFinite(v) && v > 0) world.push(Math.log(v));
+
+      if (cmap) {
+        const cv = cmap.get(pairKey(ws.p, ws.a)) || [];
+        for (const v of cv) if (isFinite(v) && v > 0) countryVals.push(Math.log(v));
+      }
+    });
+
+    return {world, country: countryVals};
+  }
+
+  // ---- Mini-chart (probability histograms + KDE in log space) ----
+  function renderMiniDist(selection, worldLog, countryLog, {width = 240, height = 110, binsCount = 25} = {}) {
+    selection.selectAll("svg.minihist").remove();
+    if (!Array.isArray(worldLog) || !Array.isArray(countryLog)) return;
+    if (worldLog.length < 2 || countryLog.length < 2) return;
+
+    const svg = selection.append("svg")
+      .attr("class", "minihist")
+      .attr("width", width)
+      .attr("height", height);
+
+    const margin = { top: 6, right: 6, bottom: 14, left: 6 };
+    const w = width - margin.left - margin.right;
+    const h = height - margin.top - margin.bottom;
+    const g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+    const xmin = Math.min(d3.min(worldLog), d3.min(countryLog));
+    const xmax = Math.max(d3.max(worldLog), d3.max(countryLog));
+    if (!isFinite(xmin) || !isFinite(xmax) || xmin === xmax) return;
+
+    const x = d3.scaleLinear().domain([xmin, xmax]).range([0, w]);
+    const bin = d3.bin().domain(x.domain()).thresholds(binsCount);
+
+    const wBins = bin(worldLog);
+    const cBins = bin(countryLog);
+
+    const nW = worldLog.length;
+    const nC = countryLog.length;
+
+    function binDensity(bins, n) {
+      return bins.map(b => {
+        const width = (b.x1 - b.x0);
+        const cnt = b.length;
+        const dens = (width > 0 && n > 0) ? (cnt / (n * width)) : 0;
+        return { ...b, density: dens };
+      });
+    }
+
+    const wBinsD = binDensity(wBins, nW);
+    const cBinsD = binDensity(cBins, nC);
+
+    const gaussian = u => Math.exp(-0.5 * u * u) / Math.sqrt(2 * Math.PI);
+    const scottBandwidth = arr => {
+      if (!arr || arr.length < 2) return 1e-3;
+      const n = arr.length;
+      const mean = d3.mean(arr);
+      const sd = Math.sqrt(d3.mean(arr.map(v => (v - mean) ** 2)));
+      const h = 1.06 * sd * Math.pow(n, -1 / 5);
+      return (h > 0 && isFinite(h)) ? h : 1e-3;
+    };
+    function kde(arr, grid, h) {
+      const n = arr.length;
+      if (n < 2) return grid.map(() => 0);
+      const invNh = 1 / (n * h);
+      return grid.map(xg => {
+        let s = 0; for (let i = 0; i < n; i++) s += gaussian((xg - arr[i]) / h); return s * invNh;
+      });
+    }
+
+    const gridN = 200;
+    const grid = d3.range(gridN).map(i => xmin + (i / (gridN - 1)) * (xmax - xmin));
+    const hW = scottBandwidth(worldLog);
+    const hC = scottBandwidth(countryLog);
+    const densW = kde(worldLog, grid, hW);
+    const densC = kde(countryLog, grid, hC);
+
+    const yMax = Math.max(
+      d3.max(wBinsD, d => d.density) || 0,
+      d3.max(cBinsD, d => d.density) || 0,
+      d3.max(densW) || 0,
+      d3.max(densC) || 0,
+      1e-9
+    );
+    const y = d3.scaleLinear().domain([0, yMax]).range([h, 0]);
+
+    // world bars
+    g.append("g").selectAll("rect.world").data(wBinsD).join("rect")
+      .attr("class", "world")
+      .attr("x", d => x(d.x0))
+      .attr("y", d => y(d.density))
+      .attr("width", d => Math.max(1, x(d.x1) - x(d.x0) - 1))
+      .attr("height", d => h - y(d.density))
+      .attr("fill", "rgba(255,255,255,0.12)");
+
+    // country bars
+    g.append("g").selectAll("rect.country").data(cBinsD).join("rect")
+      .attr("class", "country")
+      .attr("x", d => x(d.x0))
+      .attr("y", d => y(d.density))
+      .attr("width", d => Math.max(1, x(d.x1) - x(d.x0) - 1))
+      .attr("height", d => h - y(d.density))
+      .attr("fill", "rgba(215,57,57,0.20)");
+
+    // KDE lines
+    const lineGen = d3.line().x((_, i) => x(grid[i])).y(d => y(d)).curve(d3.curveMonotoneX);
+    g.append("path").datum(densW).attr("fill", "none").attr("stroke", "rgba(255,255,255,0.9)").attr("stroke-width", 1.25).attr("d", lineGen);
+    g.append("path").datum(densC).attr("fill", "none").attr("stroke", "rgba(215,57,57,0.9)").attr("stroke-width", 1.25).attr("d", lineGen);
+
+    // medians (in log space)
+    const wMed = d3.median(worldLog); const cMed = d3.median(countryLog);
+    g.append("line").attr("x1", x(wMed)).attr("x2", x(wMed)).attr("y1", 0).attr("y2", h).attr("stroke", "rgba(255,255,255,0.6)").attr("stroke-dasharray", "2,2");
+    g.append("line").attr("x1", x(cMed)).attr("x2", x(cMed)).attr("y1", 0).attr("y2", h).attr("stroke", "rgba(215,57,57,0.9)");
+
+    // X axis in EUR (exp of log)
+    const ticks = x.ticks(3);
+    const fmtPrice = v => Math.exp(v).toFixed(4);
+    g.append("g").attr("transform", `translate(0,${h})`).call(d3.axisBottom(x).tickValues(ticks).tickFormat(fmtPrice)).attr("font-size", 9).attr("color", "rgba(255,255,255,0.5)");
+
+    // mini legend
+    const legend = g.append("g").attr("transform", `translate(0,0)`);
+    legend.append("rect").attr("x", 0).attr("y", -4).attr("width", 10).attr("height", 6).attr("fill", "rgba(255,255,255,0.12)");
+    legend.append("line").attr("x1", 0).attr("x2", 10).attr("y1", 7).attr("y2", 7).attr("stroke", "rgba(255,255,255,0.9)").attr("stroke-width", 1.25);
+    legend.append("text").attr("x", 14).attr("y", 2).attr("font-size", 9).attr("fill", "rgba(255,255,255,0.8)").text("world (pdf)");
+    legend.append("rect").attr("x", 92).attr("y", -4).attr("width", 10).attr("height", 6).attr("fill", "rgba(215,57,57,0.20)");
+    legend.append("line").attr("x1", 92).attr("x2", 102).attr("y1", 7).attr("y2", 7).attr("stroke", "rgba(215,57,57,0.9)").attr("stroke-width", 1.25);
+    legend.append("text").attr("x", 106).attr("y", 2).attr("font-size", 9).attr("fill", "rgba(255,255,255,0.8)").text("country (pdf)");
+  }
+
+  // ---------------- Map update ----------------
+  function update() {
+    if (DEBUG) console.log("[DEBUG] update start", { metric: state.metric, platform: state.platform, action: state.action });
+
+    const {platform, action, metric} = state;
+    const finalByCountry = new Map(); // country -> { value, ...extras }
+
+    // Bind domains to countries
+    const domainsByCountry = new Map();
+    data.forEach(rec => {
+      const cs = (rec.serp && rec.serp.countries) || rec.countries || [];
+      cs.forEach(cn => {
+        if (!domainsByCountry.has(cn)) domainsByCountry.set(cn, []);
+        domainsByCountry.get(cn).push(rec);
+      });
+    });
+
+    if (metric === "price") {
+      const gw = computeGlobalWorldPrice(platform, action);
+      if (gw) {
+        const globalWorldPrice = gw.worldPrice;
+        countryPairValues.forEach((_, country) => {
+          const cp = computeCountryPrice(country, platform, action);
+          if (!cp) return;
+          const idx = cp.countryPrice / globalWorldPrice;
+          if (!(isFinite(idx) && idx > 0)) return;
+          finalByCountry.set(country, {
+            value: idx,
+            worldPrice: globalWorldPrice,
+            countryPrice: cp.countryPrice,
+            obsCount: cp.obsCount
+          });
+        });
+      }
+    } else if (metric === "age" || metric === "google" || metric === "bing" || metric === "duckduckgo") {
+      const countryValues = new Map();
+      data.forEach(rec => {
+        const serpCountries = (rec.serp && rec.serp.countries) || [];
+        serpCountries.forEach(country => {
+          let val = null;
+          if (metric === "age") {
+            val = (rec.registration_date ? monthsBetween(now, new Date(rec.registration_date)) : null);
+          } else {
+            const best = (rec.serp && rec.serp.by_country && rec.serp.by_country[country]) ? d3.min(rec.serp.by_country[country][metric] || []) : null;
+            val = best == null ? null : best;
+          }
+          if (val == null || Number.isNaN(val)) return;
+          const obj = countryValues.get(country) || {vals: []};
+          obj.vals.push(val);
+          countryValues.set(country, obj);
+        });
+      });
+      countryValues.forEach((obj, country) => {
+        const value = d3.median(obj.vals);
+        finalByCountry.set(country, {value, n: obj.vals.length});
+      });
+    } else if (metric === "malicious_ratio") {
+      europe.forEach(f => {
+        const cn = f.properties.name;
+        const arr = domainsByCountry.get(cn) || [];
+        let denom = 0, mal = 0;
+        arr.forEach(rec => {
+          const u = parseBoolMaybe(rec.urlscan_malicious);
+          const v = parseBoolMaybe(rec.virustotal_malicious);
+          if (u === null && v === null) return;
+          denom += 1;
+          if (u === true || v === true) mal += 1;
+        });
+        if (denom > 0) {
+          finalByCountry.set(cn, { value: mal / denom, mal, total: denom });
+        }
+      });
+    } else if (metric === "host_locality") {
+      europe.forEach(f => {
+        const cn = f.properties.name;
+        const arr = domainsByCountry.get(cn) || [];
+        let denom = 0, inCountry = 0;
+        arr.forEach(rec => {
+          const src = rec.whois_country != null ? rec.whois_country : rec.org_country;
+          if (src == null) return;
+          denom += 1;
+          if (countryMatch(src, cn)) inCountry += 1;
+        });
+        if (denom > 0) {
+          finalByCountry.set(cn, { value: inCountry / denom, inCountry, total: denom });
+        }
+      });
+    } else if (metric === "js_malicious_score") {
+      europe.forEach(f => {
+        const cn = f.properties.name;
+        const arr = domainsByCountry.get(cn) || [];
+        const vals = [];
+        arr.forEach(rec => {
+          const v = rec.js_malicious_behavior_score_10;
+          const num = (v == null) ? null : +v;
+          if (num == null || !isFinite(num)) return;
+          vals.push(num);
+        });
+        if (vals.length > 0) {
+          finalByCountry.set(cn, { value: d3.median(vals), obs: vals.length });
+        }
+      });
+    } else if (metric === "sites_count") {
+      europe.forEach(f => {
+        const cn = f.properties.name;
+        const arr = domainsByCountry.get(cn) || [];
+        if (arr.length > 0) finalByCountry.set(cn, { value: arr.length });
+      });
+    } else if (metric === "platforms_count") {
+      europe.forEach(f => {
+        const cn = f.properties.name;
+        const arr = domainsByCountry.get(cn) || [];
+        const counts = new Map(); // platform -> #sites
+        arr.forEach(rec => {
+          const pMap = rec.platforms || {};
+          Object.keys(pMap).forEach(p => counts.set(p, (counts.get(p) || 0) + 1));
+        });
+        const unique = counts.size;
+        if (unique > 0) {
+          const top = [...counts.entries()]
+            .sort((a, b) => (b[1] - a[1]) || a[0].localeCompare(b[0]))
+            .slice(0, 10);
+          finalByCountry.set(cn, { value: unique, platformsTop: top });
+        }
+      });
+    }
+
+    // --- color scale ---
+    const vals = europe
+      .map(f => finalByCountry.get(f.properties.name))
+      .filter(d => d && isFinite(d.value) && (state.metric !== "price" || d.value > 0))
+      .map(d => d.value);
+
+    let color, legendGradientCSS, minVal, maxVal;
+
+    const metricLabel = {
+      price: "Price index (geo-mean vs world, weighted)",
+      age: "Age (months, median)",
+      google: "Discoverability • Google (median best rank)",
+      bing: "Discoverability • Bing (median best rank)",
+      duckduckgo: "Discoverability • DuckDuckGo (median best rank)",
+      malicious_ratio: "Malicious ratio (URLScan ∪ VirusTotal)",
+      host_locality: "Host locality ratio (WHOIS/ORG in-country)",
+      js_malicious_score: "JS malicious behavior (median)",
+      sites_count: "#Sites",
+      platforms_count: "#Platforms (unique)"
+    }[metric];
+
+    if (metric === "price") {
+      minVal = d3.min(vals); maxVal = d3.max(vals);
+      if (minVal == null || maxVal == null) { minVal = 1; maxVal = 1; }
+      const hasBelow = minVal < 1;
+      const hasAbove = maxVal > 1;
+      if (hasBelow && hasAbove) {
+        const delta = Math.max(1 - minVal, maxVal - 1);
+        const lo = Math.max(0, 1 - delta);
+        const hi = 1 + delta;
+        color = d3.scaleLinear().domain([lo, 1, hi]).range(["#2166ac", "#ffffff", "#b2182b"]).interpolate(d3.interpolateRgb).clamp(true);
+        legendGradientCSS = `linear-gradient(to right, #2166ac, #ffffff, #b2182b)`;
+        minVal = lo; maxVal = hi;
+      } else if (hasBelow && !hasAbove) {
+        color = d3.scaleLinear().domain([minVal, 1]).range(["#2166ac", "#ffffff"]).interpolate(d3.interpolateRgb).clamp(true);
+        legendGradientCSS = `linear-gradient(to right, #2166ac, #ffffff)`;
+      } else if (!hasBelow && hasAbove) {
+        color = d3.scaleLinear().domain([1, maxVal]).range(["#ffffff", "#b2182b"]).interpolate(d3.interpolateRgb).clamp(true);
+        legendGradientCSS = `linear-gradient(to right, #ffffff, #b2182b)`;
+      } else {
+        color = () => "#ffffff"; legendGradientCSS = `linear-gradient(to right, #ffffff, #ffffff)`; minVal = 1; maxVal = 1;
+      }
+      legendCenter.text("1.00");
+    } else if (
+      metric === "malicious_ratio" ||
+      metric === "host_locality" ||
+      metric === "js_malicious_score" ||
+      metric === "sites_count" ||
+      metric === "platforms_count"
+    ) {
+      minVal = d3.min(vals);
+      maxVal = d3.max(vals);
+      if (minVal == null || maxVal == null) { minVal = 0; maxVal = 1; }
+
+      if (minVal === maxVal) {
+        color = () => "#ffffff";
+        legendGradientCSS = `linear-gradient(to right, #ffffff, #ffffff)`;
+      } else {
+        color = d3.scaleLinear()
+          .domain([minVal, maxVal])
+          .range(["#ffffff", "#b2182b"])
+          .interpolate(d3.interpolateRgb)
+          .clamp(true);
+        legendGradientCSS = `linear-gradient(to right, #ffffff, #b2182b)`;
+      }
+      legendCenter.text("");
+    } else {
+      minVal = d3.min(vals); maxVal = d3.max(vals);
+      if (minVal == null || maxVal == null) { minVal = 0; maxVal = 1; }
+      const mid = (minVal + maxVal) / 2;
+      color = d3.scaleLinear().domain([minVal, mid, maxVal]).range(["#2166ac", "#ffffff", "#b2182b"]).interpolate(d3.interpolateRgb).clamp(true);
+      legendGradientCSS = `linear-gradient(to right, #2166ac, #ffffff, #b2182b)`;
+      legendCenter.text(fmt2(mid));
+    }
+
+    // Legend
+    legendTitle.text(metricLabel);
+    legendBar.style("background", legendGradientCSS);
+    legendMin.text(fmt2(minVal));
+    legendMax.text(fmt2(maxVal));
+
+    // Countries
+    const paths = gData.selectAll("path.country").data(europe, d => d.properties.name);
+    const joined = paths.join(
+      enter => enter.append("path").attr("d", pathGen),
+      update => update,
+      exit => exit.remove()
+    );
+
+    joined
+      .attr("class", d => "country" + (finalByCountry.has(d.properties.name) ? " interactive" : ""))
+      .attr("fill", d => {
+        const cName = d.properties.name;
+        const v = finalByCountry.get(cName);
+        if (!v) return "var(--no-data)";
+        return color(v.value);
+      })
+      .on("mouseenter", function (e, d) {
+        const cName = d.properties.name;
+        const v = finalByCountry.get(cName);
+        if (!v) return;
+
+        if (metric === 'price') {
+          const idx = fmt2(v.value);
+          const worldEUR = fmt4(v.worldPrice);
+          const diffEUR  = v.countryPrice - v.worldPrice;
+          const sign     = diffEUR >= 0 ? "+" : "−";
+          const absDiff  = fmt4(Math.abs(diffEUR));
+          tooltip.html(
+            `<strong>${cName}</strong>\n${metricLabel}: <b>${idx}</b> (world €${worldEUR}, ${sign}€${absDiff})\nObservations: ${v.obsCount}`
+          ).style("opacity", 1);
+
+          const {world, country} = collectPriceSamples(cName, state.platform, state.action);
+          renderMiniDist(tooltip, world, country, {width: 240, height: 110, binsCount: 25});
+
+        } else if (metric === "malicious_ratio") {
+          tooltip.html(
+            `<strong>${cName}</strong>\n${metricLabel}: <b>${fmt2(v.value)}</b>\nMalicious: ${v.mal} / ${v.total}`
+          ).style("opacity", 1);
+
+        } else if (metric === "host_locality") {
+          tooltip.html(
+            `<strong>${cName}</strong>\n${metricLabel}: <b>${fmt2(v.value)}</b>\nIn-country: ${v.inCountry} / ${v.total}`
+          ).style("opacity", 1);
+
+        } else if (metric === "js_malicious_score") {
+          tooltip.html(
+            `<strong>${cName}</strong>\n${metricLabel}: <b>${fmt2(v.value)}</b>\nObservations: ${v.obs}`
+          ).style("opacity", 1);
+
+        } else if (metric === "sites_count") {
+          tooltip.html(
+            `<strong>${cName}</strong>\n${metricLabel}: <b>${v.value}</b>`
+          ).style("opacity", 1);
+
+        } else if (metric === "platforms_count") {
+          const lines = (v.platformsTop || []).map(([p, c]) => `${p}: ${c}`).join("\n");
+          tooltip.html(
+            `<strong>${cName}</strong>\n${metricLabel}: <b>${v.value}</b>\n\n${lines}`
+          ).style("opacity", 1);
+
+        } else {
+          tooltip.html(
+            `<strong>${cName}</strong>\n${metricLabel}: <b>${fmt2(v.value)}</b>`
+          ).style("opacity", 1);
+        }
+      })
+      .on("mousemove", function (e) {
+        tooltip.style("left", (e.clientX + 12) + "px").style("top", (e.clientY + 12) + "px");
+      })
+      .on("mouseleave", function () { tooltip.style("opacity", 0); });
+  }
+
+})();
+</script>
+</body>
+</html>
