@@ -14,10 +14,10 @@
   #controls label{display:flex;flex-direction:column;font-size:.9rem}
   #controls select{background:#11161d;color:var(--text);border:1px solid #222;border-radius:4px;padding:.25rem .4rem}
   svg{position:absolute;inset:0;width:100%;height:100%}
-  .country{fill:var(--land)}            /* базовый слой */
-  .has-data{cursor:pointer}            /* слой с данными (цвет) */
-  .has-data{stroke:var(--stroke);stroke-width:1}
-  .tooltip{position:absolute;background:rgba(0,0,0,.8);padding:.6rem .8rem;border-radius:6px;pointer-events:none;opacity:0;transition:opacity .15s;font-size:.9rem;max-width:360px}
+  .base-country{fill:var(--land)}
+  .has-data{stroke:var(--stroke);stroke-width:1;cursor:pointer}
+  .no-data{pointer-events:none;stroke-width:0}
+  .tooltip{position:absolute;background:rgba(0,0,0,.85);padding:.6rem .8rem;border-radius:6px;pointer-events:none;opacity:0;transition:opacity .15s;font-size:.9rem;max-width:360px}
   #legend{position:absolute;bottom:16px;left:16px;background:rgba(0,0,0,.5);padding:.5rem .75rem;border-radius:6px;font-size:.85rem}
   #legend .bar{height:10px;width:240px;margin:.25rem 0;background:linear-gradient(to right,var(--lo),var(--mid),var(--hi))}
 </style>
@@ -39,8 +39,8 @@
       </select>
     </label>
   </div>
-  <svg id="map"></svg>
-  <div id="legend">
+  <svg id="map" aria-label="Europe map"></svg>
+  <div id="legend" aria-live="polite">
     <div><b>Discoverability (median best rank)</b></div>
     <div class="bar"></div>
     <div><span id="min">min</span> &larr; <span id="mid">median</span> &rarr; <span id="max">max</span></div>
@@ -50,9 +50,9 @@
 
 <script>
 (async function(){
-  const DATA_URL = "https://guardeec.github.io/discoverability/discoverability_by_country.json"; // положи JSON рядом или замени URL
-  const data = await fetch(DATA_URL).then(r=>r.json());
-  const geo  = await d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson");
+  const DATA_URL = "https://guardeec.github.io/discoverability/discoverability_by_country.json";
+  const data = await fetch(DATA_URL, {cache:"no-store"}).then(r=>r.json());
+  const world = await d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson");
 
   const svg = d3.select("#map");
   const tooltip = d3.select("#tooltip");
@@ -62,142 +62,202 @@
   const legendMax = d3.select("#max");
   const legendMid = d3.select("#mid");
 
-  // --- нормализация имён стран и алиасы ---
-  const token = s => String(s||"").normalize("NFKD").replace(/[\u0300-\u036f]/g,"").toUpperCase().replace(/[^A-Z]/g,"");
-  const countryKeys = Object.keys(data.countries||{});
-  const indexByToken = new Map(countryKeys.map(k => [token(k), k]));
+  const deaccent = s => String(s||"").normalize("NFKD").replace(/[\u0300-\u036f]/g,"");
+  const token = s => deaccent(s).toUpperCase().replace(/[^A-Z]/g,"");
 
-  // частые несоответствия между GeoJSON и нашими ключами
-  const manualAliases = new Map([
-    ["CZECHREPUBLIC", "Czech Republic"],   // если JSON хранит "Czech Republic"
-    ["CZECHIA", "Czech Republic"],         // если geo даёт Czechia — попробуем оба
-    ["BOSNIAANDHERZEGOVINA","Bosnia and Herzegovina"],
-    ["NORTHMACEDONIA","North Macedonia"],
-    ["UNITEDKINGDOM","United Kingdom"],
-    ["KOSOVO","Kosovo"],                   // может отсутствовать в geo, но пусть будет
-    ["RUSSIANFEDERATION","Russia"],
-    ["MOLDOVA","Moldova"],
-    ["SERBIA","Serbia"]
+  // JSON index
+  const jsonCountries = Object.keys(data.countries || {});
+  const jsonByToken = new Map(jsonCountries.map(k => [token(k), k]));
+
+  // ISO2 → JSON name (добавь/поправь при необходимости)
+  const iso2Alias = new Map([
+    ["AL","Albania"],["AD","Andorra"],["AT","Austria"],["BE","Belgium"],["BG","Bulgaria"],["BY","Belarus"],
+    ["CH","Switzerland"],["CY","Cyprus"],["CZ","Czech Republic"],["DE","Germany"],["DK","Denmark"],
+    ["EE","Estonia"],["ES","Spain"],["FI","Finland"],["FR","France"],["GB","United Kingdom"],
+    ["GR","Greece"],["HR","Croatia"],["HU","Hungary"],["IE","Ireland"],["IS","Iceland"],
+    ["IT","Italy"],["LT","Lithuania"],["LU","Luxembourg"],["LV","Latvia"],["MC","Monaco"],
+    ["MT","Malta"],["NL","Netherlands"],["NO","Norway"],["PL","Poland"],["PT","Portugal"],
+    ["RO","Romania"],["RS","Serbia"],["RU","Russia"],["SE","Sweden"],["SI","Slovenia"],
+    ["SK","Slovakia"],["SM","San Marino"],["UA","Ukraine"],["BA","Bosnia and Herzegovina"],
+    ["MK","North Macedonia"],["MD","Moldova"],["ME","Montenegro"],["XK","Kosovo"],["TR","Turkey"]
   ]);
 
-  function mapToJsonKey(geoName){
-    const t = token(geoName);
-    // прямое совпадение по токену
-    if (indexByToken.has(t)) return indexByToken.get(t);
-    // ручной алиас
-    if (manualAliases.has(t)) {
-      const aliasName = manualAliases.get(t);
-      const at = token(aliasName);
-      if (indexByToken.has(at)) return indexByToken.get(at);
+  // Ручные алиасы (Geo → JSON)
+  const manualAliases = new Map([
+    ["UNITEDKINGDOMOFGREATBRITAINANDNORTHERNIRELAND","United Kingdom"],
+    ["ENGLAND","United Kingdom"],["SCOTLAND","United Kingdom"],["WALES","United Kingdom"],["NORTHERNIRELAND","United Kingdom"],
+    ["CZECHREPUBLIC","Czech Republic"],["CZECHIA","Czech Republic"],
+    ["BOSNIAANDHERZEGOVINA","Bosnia and Herzegovina"],
+    ["NORTHMACEDONIA","North Macedonia"],["MACEDONIA","North Macedonia"],
+    ["RUSSIANFEDERATION","Russia"],
+    ["REPUBLICOFMOLDOVA","Moldova"],["MOLDOVAREPUBLICOF","Moldova"],
+    ["VATICANCITY","Vatican City"],["HOLYSEE","Vatican City"],
+    ["TURKIYE","Turkey"],
+    ["REPUBLICOFSERBIA","Serbia"],
+    ["KOSOVO","Kosovo"]
+  ]);
+
+  function mapGeoToJsonKey(props){
+  const name  = props.name || props.ADMIN || props.admin || props.NAME || props.name_long || "";
+  const admin = props.admin || props.ADMIN || "";
+  const sover = props.sovereignt || props.SOVEREIGNT || "";
+  const iso2  = (props.iso_a2 || props.ISO_A2 || props.ISO2 || "").toUpperCase();
+  const iso3  = (props.iso_a3 || props.ISO_A3 || props.ISO3 || "").toUpperCase();
+  const sub   = props.subunit || props.SUBUNIT || "";
+
+  const candidates = [admin, sover, name, sub].map(token).filter(Boolean);
+
+  // 1) прямое совпадение по JSON-токену
+  for (const t of candidates) if (jsonByToken.has(t)) return jsonByToken.get(t);
+
+  // 2) ручные алиасы (включая MALTA)
+  for (const t of candidates){
+    if (manualAliases.has(t)){
+      const alias = manualAliases.get(t);
+      const aTok = token(alias);
+      if (jsonByToken.has(aTok)) return jsonByToken.get(aTok);
     }
-    // эвристика: попробуем убрать слова "AND", "THE", "OF"
-    const slim = t.replace(/AND|THE|OF/g,'');
-    if (indexByToken.has(slim)) return indexByToken.get(slim);
-    // не нашли — вернём null
-    return null;
   }
 
-  // explode multipolygons and filter to Europe
-  const features=[];
-  geo.features.forEach(f=>{
-    if(f.geometry.type==="MultiPolygon"){
-      f.geometry.coordinates.forEach(c=>features.push({type:"Feature",properties:f.properties,geometry:{type:"Polygon",coordinates:c}}));
-    }else{features.push(f);}
+  // 3) ISO2 → JSON
+  if (iso2 && iso2Alias.has(iso2)) {
+    const alias = iso2Alias.get(iso2);
+    const aTok = token(alias);
+    if (jsonByToken.has(aTok)) return jsonByToken.get(aTok);
+  }
+
+  // 4) ISO3 → JSON  ⬅️ НОВОЕ
+  if (iso3 && iso3Alias.has(iso3)) {
+    const alias = iso3Alias.get(iso3);
+    const aTok = token(alias);
+    if (jsonByToken.has(aTok)) return jsonByToken.get(aTok);
+  }
+
+  // 5) смягчение — убираем служебные слова
+  for (const t of candidates){
+    const slim = t.replace(/AND|THE|OF/g,'');
+    if (jsonByToken.has(slim)) return jsonByToken.get(slim);
+  }
+
+  return null;
+}
+
+  // explode multipolygons; фильтруем Европу по центроиду
+  const feats=[];
+  world.features.forEach(f=>{
+    if (f.geometry.type==="MultiPolygon"){
+      f.geometry.coordinates.forEach(c=>feats.push({type:"Feature", properties:f.properties, geometry:{type:"Polygon", coordinates:c}}));
+    } else { feats.push(f); }
   });
-  const europe = features.filter(f=>{
+  const europe = feats.filter(f=>{
     const [lon,lat]=d3.geoCentroid(f);
     return lon>-25 && lon<45 && lat>30 && lat<72;
   });
 
-  const width = svg.node().clientWidth, height = svg.node().clientHeight;
-  const projection = d3.geoNaturalEarth1().fitSize([width,height],{type:"FeatureCollection",features:europe});
-  const path = d3.geoPath(projection);
+  function draw(){
+    svg.selectAll("*").remove();
+    const width  = svg.node().clientWidth;
+    const height = svg.node().clientHeight;
+    const projection = d3.geoNaturalEarth1().fitSize([width,height], {type:"FeatureCollection", features:europe});
+    const path = d3.geoPath(projection);
 
-  // базовый слой — только Европа, без обводки
-  svg.append("g")
-    .selectAll("path").data(europe)
-    .join("path").attr("d",path).attr("class","country");
+    // базовый слой
+    svg.append("g")
+      .selectAll("path").data(europe)
+      .join("path")
+      .attr("d", path)
+      .attr("class","base-country");
 
-  const gData = svg.append("g");
+    const gData = svg.append("g");
 
-  function getNodeByCountry(geoName, engine, scan){
-    const key = mapToJsonKey(geoName);
-    if (!key) return null;
-    const c = data.countries[key];
-    return (c && c[engine] && c[engine][scan]) ? c[engine][scan] : null;
-  }
+    function getNode(f, engine, scan){
+      const key = mapGeoToJsonKey(f.properties||{});
+      if (!key) return null;
+      const node = data.countries[key] && data.countries[key][engine] && data.countries[key][engine][scan];
+      return node ? {key, node} : null;
+    }
+    const medianFor = (f,e,s) => { const x=getNode(f,e,s); return x? +x.node.median : null; };
+    const valuesFor = (f,e,s) => { const x=getNode(f,e,s); return x? x.node.values : null; };
 
-  function getMedian(geoName, engine, scan){
-    const n = getNodeByCountry(geoName, engine, scan);
-    return n ? +n.median : null;
-  }
-  function getValues(geoName, engine, scan){
-    const n = getNodeByCountry(geoName, engine, scan);
-    return n ? n.values : null;
-  }
+    function computeScale(engine, scan){
+      const vals=[];
+      europe.forEach(f=>{
+        const m = medianFor(f, engine, scan);
+        if (m!=null && isFinite(m)) vals.push(+m);
+      });
+      if(!vals.length) return {color:()=>"#fff", min:0, max:1, mid:0};
+      const min = d3.min(vals), max = d3.max(vals), mid=(min+max)/2;
+      const color = d3.scaleLinear().domain([min,mid,max]).range(["#2166ac","#ffffff","#b2182b"]).clamp(true);
+      return {color,min,max,mid};
+    }
 
-  function computeScale(engine, scan){
-    const vals=[];
+    function renderMiniDist(selection, values, {width=240,height=110,bins=25}={}){
+      selection.selectAll("svg").remove();
+      if(!values || values.length<2) return;
+      const s = d3.select(selection.node()).append("svg").attr("width",width).attr("height",height);
+      const m = {top:6,right:6,bottom:14,left:6}, w=width-m.left-m.right, h=height-m.top-m.bottom;
+      const g = s.append("g").attr("transform",`translate(${m.left},${m.top})`);
+      const v = values.map(Number).filter(Number.isFinite);
+      const x = d3.scaleLinear().domain([d3.min(v), d3.max(v)]).range([0,w]);
+      const binsGen = d3.bin().domain(x.domain()).thresholds(bins);
+      const b = binsGen(v);
+      const y = d3.scaleLinear().domain([0, d3.max(b, d=>d.length)||1]).range([h,0]);
+      g.selectAll("rect").data(b).join("rect")
+        .attr("x",d=>x(d.x0)).attr("y",d=>y(d.length))
+        .attr("width",d=>Math.max(1, x(d.x1)-x(d.x0)-1)).attr("height",d=>h-y(d.length))
+        .attr("fill","rgba(215,57,57,0.25)");
+      g.append("g").attr("transform",`translate(0,${h})`).call(d3.axisBottom(x).ticks(4))
+        .attr("font-size",9).attr("color","rgba(255,255,255,0.6)");
+    }
+
+    function update(){
+      const engine = engineSel.property("value");
+      const scan   = scanSel.property("value");
+      const {color,min,max,mid}=computeScale(engine,scan);
+      legendMin.text(min?.toFixed(2) ?? "–");
+      legendMax.text(max?.toFixed(2) ?? "–");
+      legendMid.text(mid?.toFixed(2) ?? "–");
+
+      const paths = gData.selectAll("path").data(europe, d=>d.properties && (d.properties.ADMIN || d.properties.sovereignt || d.properties.name || d.properties.NAME));
+      paths.join(enter=>enter.append("path").attr("d", path))
+        .attr("class", d => (medianFor(d, engine, scan)!=null ? "has-data" : "no-data"))
+        .attr("fill", d => {
+          const m = medianFor(d, engine, scan);
+          return (m!=null && isFinite(m)) ? color(m) : "var(--no)";
+        })
+        .on("mouseenter", function(e,d){
+          const x = getNode(d, engine, scan);
+          if(!x){ tooltip.style("opacity",0); return; }
+          const m = +x.node.median;
+          const vals = x.node.values;
+          tooltip.html(`<strong>${x.key}</strong><br>Median best rank: <b>${m.toFixed(2)}</b><div id="mini"></div>`).style("opacity",1);
+          renderMiniDist(tooltip.select("#mini"), vals);
+        })
+        .on("mousemove", function(e){ tooltip.style("left",(e.clientX+12)+"px").style("top",(e.clientY+12)+"px"); })
+        .on("mouseleave", function(){ tooltip.style("opacity",0); });
+    }
+
+    engineSel.on("change", update);
+    scanSel.on("change", update);
+    update();
+
+    // Диагностика (оставил — полезно): покажет, что именно не сматчилось
+    const matched = new Set();
     europe.forEach(f=>{
-      const m = getMedian(f.properties.name, engine, scan);
-      if(m!=null && isFinite(m)) vals.push(+m);
+      const key = mapGeoToJsonKey(f.properties||{});
+      if (key) matched.add(key);
     });
-    if(!vals.length){ return {color: ()=>"#fff", min:0, max:1, mid:0}; }
-    const min=d3.min(vals), max=d3.max(vals), mid=(min+max)/2;
-    const color=d3.scaleLinear().domain([min,mid,max]).range(["#2166ac","#ffffff","#b2182b"]).clamp(true);
-    return {color,min,max,mid};
+    const jsonOnly = jsonCountries.filter(k => !matched.has(k));
+    const geoOnly = europe
+      .map(f => f.properties.ADMIN || f.properties.sovereignt || f.properties.name || f.properties.NAME)
+      .filter((v,i,arr)=>arr.indexOf(v)===i)
+      .filter(n => !mapGeoToJsonKey(world.features.find(ff=>(ff.properties.ADMIN||ff.properties.name)===n)?.properties||{}));
+    console.log("[INFO] Countries in JSON without geometry match:", jsonOnly);
+    console.log("[INFO] Geo features in Europe without JSON:", geoOnly);
   }
 
-  function renderMiniDist(selection, values, {width=240,height=110,bins=25}={}){
-    selection.selectAll("svg").remove();
-    if(!values || values.length<2) return;
-    const svg=d3.select(selection.node()).append("svg").attr("width",width).attr("height",height);
-    const margin={top:6,right:6,bottom:14,left:6}, w=width-margin.left-margin.right, h=height-margin.top-margin.bottom;
-    const g=svg.append("g").attr("transform",`translate(${margin.left},${margin.top})`);
-    const v=values.map(Number).filter(Number.isFinite);
-    const x=d3.scaleLinear().domain([d3.min(v), d3.max(v)]).range([0,w]);
-    const binsGen=d3.bin().domain(x.domain()).thresholds(bins);
-    const b=binsGen(v);
-    const y=d3.scaleLinear().domain([0,d3.max(b,d=>d.length)||1]).range([h,0]);
-    g.selectAll("rect").data(b).join("rect")
-      .attr("x",d=>x(d.x0)).attr("y",d=>y(d.length))
-      .attr("width",d=>Math.max(1,x(d.x1)-x(d.x0)-1)).attr("height",d=>h-y(d.length))
-      .attr("fill","rgba(215,57,57,0.25)");
-    g.append("g").attr("transform",`translate(0,${h})`).call(d3.axisBottom(x).ticks(4)).attr("font-size",9).attr("color","rgba(255,255,255,0.6)");
-  }
-
-  function update(){
-    const engine = engineSel.property("value");
-    const scan   = scanSel.property("value");
-    const {color,min,max,mid}=computeScale(engine,scan);
-    legendMin.text(min?.toFixed(2) ?? "–");
-    legendMax.text(max?.toFixed(2) ?? "–");
-    legendMid.text(mid?.toFixed(2) ?? "–");
-
-    const paths=gData.selectAll("path").data(europe, d=>d.properties.name);
-    paths.join(enter=>enter.append("path").attr("d",path))
-      .attr("class", d => {
-        const m = getMedian(d.properties.name, engine, scan);
-        return (m!=null && isFinite(m)) ? "has-data" : "no-data";
-      })
-      .attr("fill", d => {
-        const m = getMedian(d.properties.name, engine, scan);
-        return (m!=null && isFinite(m)) ? color(m) : "var(--no)";
-      })
-      .on("mouseenter", function(e,d){
-        const vals = getValues(d.properties.name, engine, scan);
-        const m = getMedian(d.properties.name, engine, scan);
-        if(!vals || m==null){ tooltip.style("opacity",0); return; }
-        tooltip.html(`<strong>${mapToJsonKey(d.properties.name) || d.properties.name}</strong><br>Median best rank: <b>${(+m).toFixed(2)}</b><div id="mini"></div>`).style("opacity",1);
-        renderMiniDist(tooltip.select("#mini"), vals);
-      })
-      .on("mousemove", function(e){ tooltip.style("left",(e.clientX+12)+"px").style("top",(e.clientY+12)+"px"); })
-      .on("mouseleave", function(){ tooltip.style("opacity",0); });
-  }
-
-  engineSel.on("change", update);
-  scanSel.on("change", update);
-  update();
+  draw();
+  window.addEventListener("resize", draw);
 })();
 </script>
 </body>
