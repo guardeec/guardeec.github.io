@@ -50,7 +50,7 @@
 
 <script>
 (async function(){
-  const DATA_URL = "discoverability_by_country.json"; // положи JSON рядом или замени URL
+  const DATA_URL = "https://guardeec.github.io/discoverability/discoverability_by_country.json"; // положи JSON рядом или замени URL
   const data = await fetch(DATA_URL).then(r=>r.json());
   const geo  = await d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson");
 
