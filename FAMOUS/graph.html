@@ -47,7 +47,7 @@ function applyFilter(){
 }
 
 (async()=>{
-  const data=await fetch('linkage_graph.json').then(r=>r.json());
+  const data=await fetch('https://guardeec.github.io/FAMOUS/linkage_graph.json').then(r=>r.json());
   allNodes=data.nodes;
   allLinks=data.links;
 
