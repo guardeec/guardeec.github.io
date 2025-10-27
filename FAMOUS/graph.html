@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Infrastructure Graph – Filterable Links</title>
+  <style>
+    html,body{margin:0;height:100%;overflow:hidden;font-family:sans-serif;background:#fff}
+    #graph{position:absolute;top:0;left:0;width:100%;height:100%}
+    #ui{position:absolute;top:10px;left:10px;background:rgba(255,255,255,.9);padding:8px 12px;border-radius:8px;font-size:13px;box-shadow:0 0 6px rgba(0,0,0,.25)}
+    #ui label{display:block;margin:2px 0}
+    #legend{margin-top:8px;max-height:200px;overflow-y:auto}
+    #legend div{display:flex;align-items:center;margin:2px 0}
+    #legend span{width:10px;height:10px;border-radius:2px;margin-right:6px;display:inline-block}
+  </style>
+</head>
+<body>
+  <div id="graph"></div>
+  <div id="ui">
+    <strong>Links:</strong>
+    <label><input type="checkbox" value="ip"> Shared IP</label>
+    <label><input type="checkbox" value="asn"> Shared ASN</label>
+    <label><input type="checkbox" value="subj"> Same Cert Subject</label>
+    <label><input type="checkbox" value="issu"> Same Cert Issuer</label>
+    <label><input type="checkbox" value="ns"> Overlapping NS</label>
+    <div id="legend"></div>
+  </div>
+
+  <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+  <script src="https://unpkg.com/3d-force-graph"></script>
+  <script src="https://unpkg.com/d3@7.8.5/dist/d3.min.js"></script>
+
+<script>
+const CFG = {NODE_SIZE:1, LINK_WIDTH:0.25, CHARGE:-40, LINK_DIST:120};
+let allNodes=[], allLinks=[], graph;
+
+function applyFilter(){
+  const active=new Set([...document.querySelectorAll('#ui input[type=checkbox]:checked')].map(cb=>cb.value));
+  const filteredLinks=allLinks.filter(l=>(
+      active.has('ip')&&l.ip) ||
+      (active.has('asn') && l.asn) ||
+      (active.has('subj')&&l.subj)||
+      (active.has('issu')&&l.issu)||
+      (active.has('ns')  &&l.ns  )
+  );
+  // update graph data (rebuild physics)
+  graph.graphData({nodes:allNodes, links:filteredLinks});
+}
+
+(async()=>{
+  const data=await fetch('linkage_graph.json').then(r=>r.json());
+  allNodes=data.nodes;
+  allLinks=data.links;
+
+  // legend ---------------------------------------------------------------
+  const countries=[...new Set(allNodes.map(n=>n.country))].sort();
+  const color=d3.scaleOrdinal(countries,d3.schemeSet3);
+  const leg=document.getElementById('legend');
+  countries.forEach(c=>{const d=document.createElement('div');d.innerHTML=`<span style="background:${color(c)}"></span>${c}`;leg.appendChild(d);});
+
+  // graph instance -------------------------------------------------------
+  graph=ForceGraph3D({controlType:'orbit'})(document.getElementById('graph'))
+    .graphData({nodes:allNodes, links:[]}) // start empty
+    .nodeColor(n=>color(n.country))
+    .nodeVal(CFG.NODE_SIZE)
+    .linkWidth(()=>CFG.LINK_WIDTH);
+
+  graph.d3Force('charge').strength(CFG.CHARGE);
+  graph.d3Force('link').distance(()=>CFG.LINK_DIST);
+
+  // UI listeners ---------------------------------------------------------
+  document.querySelectorAll('#ui input').forEach(cb=>cb.addEventListener('change',applyFilter));
+})();
+</script>
+</body>
+</html>
