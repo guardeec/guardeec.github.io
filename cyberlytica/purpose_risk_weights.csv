@@ -1,0 +1,66 @@
+field_id,parent_id,display_name,description,risk_band,numeric_weight_0_10
+purposes,root,,Root object: presence of purposes for which data is processed,MED,6.0
+cat_advertisement,purposes,,Category: Advertisement,HIGH,9.0
+sub_marketing,cat_advertisement,,Subcategory: Marketing,HIGH,9.0
+showing_targeted_ads,sub_marketing,,"Uses profiling and tracking across services; high risk to privacy and requires informed consent. — May refer to behaviorally targeted advertising, interest-based ads, or profiling for commercial messaging.",HIGH,9.0
+cat_communication,purposes,,Category: Communication,MED,6.0
+sub_changes_to_terms,cat_communication,,Subcategory: Changes to Terms,LOW,3.0
+notifying_of_updated_privacy_policies,sub_changes_to_terms,,"Mandatory and legally required notices; minimal privacy risk. — May refer to legal notices, changes to terms, or updates to service agreements.",LOW,3.0
+sub_communicate_with_user,cat_communication,,Subcategory: Communicate with User,LOW,3.0
+sending_service_related_emails,sub_communicate_with_user,,"Covers essential updates (e.g., password resets); low risk as it is necessary and expected. — May refer to transactional messages, account notifications, password resets, or system alerts.",LOW,3.0
+sub_communication_marketing,cat_communication,,Subcategory: Communication Marketing,HIGH,9.0
+personalized_newsletters,sub_communication_marketing,,"Involves profiling and preferences; requires explicit opt-in to comply with GDPR. — May refer to marketing emails tailored to user interests, behavior, or stated preferences.",HIGH,9.0
+sub_connect_with_other_users,cat_communication,,Subcategory: Connect with other users,MED,6.0
+user_invitations_or_messaging,sub_connect_with_other_users,,"Enables user interaction; some risk if contact details or activities are shared unintentionally. — May refer to friend invites, user-to-user messages, or content sharing features.",MED,6.0
+sub_promotions,cat_communication,,Subcategory: Promotions,HIGH,9.0
+offering_discounts_or_events,sub_promotions,,"Non-essential marketing requires consent; high risk if consent is not properly obtained or managed. — May refer to promotional offers, marketing campaigns, or special event communications.",HIGH,9.0
+cat_functionality,purposes,,Category: Functionality,MED,6.0
+sub_consent_management,cat_functionality,,Subcategory: Consent Management,LOW,3.0
+storing_user_privacy_preferences,sub_consent_management,,"Essential for upholding user rights and lawful processing; minimal privacy impact. — May refer to consent records, cookie preferences, or opt-in/opt-out tracking.",MED,6.0
+sub_preserve_system_integrity,cat_functionality,,Subcategory: Preserve System Integrity,MED,6.0
+detecting_fraud_or_abuse,sub_preserve_system_integrity,,"May involve monitoring and profiling, but typically justified for legitimate interests; moderate impact on rights. — May refer to misuse detection, fraud prevention mechanisms, or abuse monitoring systems.",HIGH,9.0
+sub_provide_business_services,cat_functionality,,Subcategory: Provide Business Services,MED,6.0
+managing_b2b_accounts,sub_provide_business_services,,"Limited to business context; usually low impact on individuals and clear lawful basis. — May refer to business client onboarding, account administration, or enterprise service provision.",MED,6.0
+sub_provide_services_and_fulfil_contractual_obligations,cat_functionality,,Subcategory: Provide Services and Fulfil Contractual Obligations,LOW,3.0
+delivering_core_services,sub_provide_services_and_fulfil_contractual_obligations,,"Processing is necessary to perform a contract; low risk if data is used solely for this purpose. — May refer to account provision, user authentication, service access, or content delivery essential to user agreement.",LOW,3.0
+sub_troubleshoot,cat_functionality,,Subcategory: Troubleshoot,LOW,3.0
+resolving_errors,sub_troubleshoot,,"Involves technical logging; usually low risk unless logs include personal identifiers. — May refer to system diagnostics, crash reports, error logging, or operational troubleshooting.",LOW,3.0
+cat_legal,purposes,,Category: Legal,MED,6.0
+sub_automated_decision_making,cat_legal,,Subcategory: Automated Decision-Making,HIGH,9.0
+making_decisions_solely_by_automated_means,sub_automated_decision_making,,"Can significantly affect individuals; requires transparency, safeguards, and human review option. — May refer to automated profiling, algorithmic decision-making, or system-based eligibility assessments.",HIGH,9.0
+sub_corporate_governance,cat_legal,,Subcategory: Corporate Governance,MED,6.0
+audits_or_compliance_reporting,sub_corporate_governance,,"Typically internal and uses limited personal data; safeguards reduce privacy impact. — May refer to internal audits, corporate disclosures, or regulatory compliance tracking.",LOW,3.0
+sub_data_subject_rights,cat_legal,,Subcategory: Data Subject Rights,LOW,3.0
+processing_access_or_erasure_requests,sub_data_subject_rights,,"Necessary to fulfill GDPR obligations; involves identity verification and data handling. — May refer to fulfilling user rights requests such as data access, correction, or deletion.",MED,6.0
+sub_defend_legal_rights,cat_legal,,Subcategory: Defend Legal Rights,LOW,3.0
+handling_claims_or_requests,sub_defend_legal_rights,,"May require extensive data review or sharing with third parties; can significantly affect rights. — May refer to legal proceedings, complaints management, or regulatory cooperation.",MED,6.0
+sub_public_interest_task,cat_legal,,Subcategory: Public Interest Task,LOW,3.0
+processing_for_public_safety_research,sub_public_interest_task,,"Permissible if based on law or task in public interest; must balance against individual rights. — May refer to public health studies, safety monitoring programs, or legally mandated data use in the public interest.",MED,6.0
+sub_record_keeping,cat_legal,,Subcategory: Record Keeping,LOW,3.0
+maintaining_tax_and_business_records,sub_record_keeping,,"Retention of data for legal or audit purposes; generally limited in scope but long-term. — May refer to data archiving for legal retention, accounting compliance, or audit preparation.",MED,6.0
+sub_regulatory_compliance,cat_legal,,Subcategory: Regulatory Compliance,LOW,3.0
+responding_to_legal_or_government_requests,sub_regulatory_compliance,,"Processing is mandated by law, often requiring sharing with authorities; impacts data subject rights. — May refer to legal disclosures, subpoenas, or regulatory information sharing.",LOW,3.0
+cat_product_improvement,purposes,,Category: Product Improvement,MED,6.0
+sub_improve_products_and_service,cat_product_improvement,,Subcategory: Improve Products and Service,MED,6.0
+analyzing_usage_trends,sub_improve_products_and_service,,"Often uses pseudonymized or aggregated data; some risk if data is linked to individuals. — May refer to service analytics, feature usage, user flow analysis, or aggregated behavioral trends.",MED,6.0
+cat_research,purposes,,Category: Research,MED,6.0
+sub_market_research,cat_research,,Subcategory: Market Research,MED,6.0
+user_surveys_and_focus_groups,sub_market_research,,"Involves direct feedback and sometimes sensitive opinions; moderate risk depending on consent and purpose. — May refer to feedback collection, usability studies, or market preference inquiries.",MED,6.0
+sub_pseudonymisation,cat_research,,Subcategory: Pseudonymisation,MED,6.0
+replacing_identifiers_in_datasets,sub_pseudonymisation,,"Used to minimize data risk; considered a safeguard if re-identification is prevented. — May refer to pseudonymisation processes, masking techniques, or data minimisation practices.",MED,6.0
+sub_research,cat_research,,Subcategory: Research,MED,6.0
+analyzing_anonymized_usage_data,sub_research,,"If data is truly anonymized, GDPR does not apply; if pseudonymized, residual risk remains. — May refer to statistical analysis, research using anonymized datasets, or aggregated insights.",MED,6.0
+sub_special_category_processing,cat_research,,Subcategory: Special Category Processing,MED,6.0
+processing_health_or_biometric_data_for_research,sub_special_category_processing,,Involves sensitive data requiring explicit consent or legal basis; strict safeguards apply. — May refer to handling of sensitive personal data under strict legal or research frameworks.,MED,6.0
+cat_safety_and_security,purposes,,Category: Safety and Security,MED,6.0
+sub_service_security,cat_safety_and_security,,Subcategory: Service Security,MED,6.0
+detecting_security_threats,sub_service_security,,"Security monitoring may involve behavior analysis; risk is mitigated by necessity and safeguards. — May refer to intrusion detection, access logs, security audits, or technical threat mitigation.",MED,6.0
+sub_user_safety,cat_safety_and_security,,Subcategory: User Safety,MED,6.0
+reporting_abuse_or_blocking_users,sub_user_safety,,"Involves processing sensitive reports; medium risk due to potential profiling or misidentification. — May refer to user safety features, content moderation, or reporting mechanisms.",MED,6.0
+cat_user_experience,purposes,,Category: User Experience,MED,6.0
+sub_display,cat_user_experience,,Subcategory: Display,MED,6.0
+adjusting_layout_for_device_type,sub_display,,"Minimal data use; typically does not impact rights or involve profiling. — May refer to responsive design, screen resolution adjustment, or UI personalization based on device data.",HIGH,9.0
+sub_interaction,cat_user_experience,,Subcategory: Interaction,MED,6.0
+tracking_clicks_and_navigation,sub_interaction,,"Behavioral tracking can lead to implicit profiling; needs lawful basis and user awareness. — May refer to monitoring user interaction, clickstream analysis, or behavioral data collection within the platform.",HIGH,9.0
+sub_personalisation,cat_user_experience,,Subcategory: Personalisation,HIGH,9.0
+recommending_content_based_on_behavior,sub_personalisation,,"Involves profiling that may affect user behavior or choices; requires transparency and potentially consent. — May refer to personalized recommendations, tailored content, or adaptation of user experience based on past behavior or preferences.",HIGH,9.0
