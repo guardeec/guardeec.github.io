@@ -275,6 +275,8 @@
 
         .found-apps-strip {
             margin-top: 14px;
+            margin-left: auto;
+            margin-right: auto;
             display: none;
             align-items: center;
             justify-content: center;
@@ -4312,6 +4314,7 @@
 
             item.addEventListener('click', (e) => {
                 if (!e.target.classList.contains('btn-delete')) {
+                    switchTopView('myapps');
                     selectApp(appId);
                 }
             });
