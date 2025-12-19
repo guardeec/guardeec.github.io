@@ -14,8 +14,8 @@
             --surface-3: #1e222a;
             --txt: #e6e7ea;
             --muted: #c4c9d4; /* Improved contrast for accessibility */
-            --brand-1: #c43b3b;
-            --brand-2: #89f7fe;
+            --brand-1: #ec1e1e;
+            --brand-2: #89d1fe;
             --btn: #2b2f39;
             --btn-active: #3d6be8;
             
@@ -123,7 +123,9 @@
 
         /* ===== Left panel ===== */
         .left-panel {
-            flex: 0 0 400px;
+            flex: 0 0 30%;
+            min-width: 0;
+            max-width: 30%;
             display: flex;
             flex-direction: column;
             gap: 16px;
@@ -499,6 +501,8 @@
             overflow: hidden;
             display: flex;
             flex-direction: column;
+            min-width: 0;
+            max-width: 100%;
         }
 
         .app-list-header {
@@ -523,6 +527,8 @@
             cursor: pointer;
             transition: all .2s ease;
             border: 2px solid transparent;
+            min-width: 0;
+            max-width: 100%;
         }
 
         .app-list-item:hover {
@@ -539,6 +545,7 @@
             display: flex;
             gap: 12px;
             align-items: flex-start;
+            min-width: 0;
         }
 
         .app-list-icon {
@@ -810,15 +817,87 @@
             letter-spacing: .2px;
         }
 
+        .app-desc-wrapper {
+            position: relative;
+            margin: 0 0 10px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            gap: 6px;
+        }
+
         .app-desc {
             font-size: 15px;
             opacity: .92;
-            margin: 0 0 10px;
-            display: -webkit-box;
-            -webkit-line-clamp: 8;
-            line-clamp: 8;
-            -webkit-box-orient: vertical;
+            margin: 0;
+            line-height: 1.6;
+            position: relative;
+            flex: 1 1 auto;
+            min-width: 0;
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
             overflow: hidden;
+        }
+
+        .app-desc:not(.expanded) {
+            display: -webkit-box;
+            -webkit-line-clamp: 4;
+            line-clamp: 4;
+            -webkit-box-orient: vertical;
+        }
+        
+        /* During animation, keep block display */
+        .app-desc[style*="max-height"] {
+            display: block !important;
+        }
+
+        .app-desc.expanded {
+            display: block;
+            -webkit-line-clamp: none;
+            line-clamp: none;
+            max-height: 2000px;
+        }
+
+        .app-desc-text {
+            display: inline;
+        }
+
+        .app-desc-toggle {
+            display: inline-block;
+            padding: 0;
+            border: none;
+            background: none;
+            color: var(--btn-active);
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: opacity 0.3s ease, color 0.2s ease;
+            opacity: 0;
+            text-decoration: none;
+            white-space: nowrap;
+            font-family: inherit;
+            flex-shrink: 0;
+            align-self: flex-start;
+            pointer-events: none;
+        }
+
+        .app-desc-toggle.visible {
+            opacity: 0.85;
+            pointer-events: auto;
+        }
+
+        .app-desc-toggle.visible:hover {
+            opacity: 1;
+            color: var(--btn-active);
+            text-decoration: underline;
+        }
+
+        .app-desc-toggle.visible:active {
+            opacity: 0.7;
+        }
+
+        /* Smooth height transition for expand/collapse */
+        .app-desc {
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
         }
 
         .app-extra {
@@ -2742,7 +2821,12 @@
                         <div class="app-icon"></div>
                         <div class="app-meta">
                             <h2 class="app-name"></h2>
-                            <p class="app-desc"></p>
+                            <div class="app-desc-wrapper">
+                                <p class="app-desc">
+                                    <span class="app-desc-text"></span>
+                                </p>
+                                <button class="app-desc-toggle" id="appDescToggle">Show more</button>
+                            </div>
                             <div class="app-extra"></div>
 
                             <div class="app-footer-row">
@@ -3234,6 +3318,95 @@
     const jsonViewEl = document.getElementById('jsonView');
     const jsonCodeEl = document.getElementById('jsonCode');
     const copyJsonBtn = document.getElementById('copyJsonBtn');
+
+    // App description expand/collapse toggle
+    const appDescToggleEl = document.getElementById('appDescToggle');
+    if (appDescToggleEl) {
+        appDescToggleEl.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            const appDescEl = appHeaderEl.querySelector('.app-desc');
+            if (appDescEl) {
+                const isExpanded = appDescEl.classList.contains('expanded');
+                if (isExpanded) {
+                    // Collapse with animation
+                    const startHeight = appDescEl.scrollHeight;
+                    
+                    // Calculate collapsed height first (before removing expanded class)
+                    const clone = appDescEl.cloneNode(true);
+                    clone.style.position = 'absolute';
+                    clone.style.visibility = 'hidden';
+                    clone.style.top = '-9999px';
+                    clone.style.width = appDescEl.offsetWidth + 'px';
+                    clone.style.display = '-webkit-box';
+                    clone.style.webkitLineClamp = '4';
+                    clone.style.maxHeight = 'none';
+                    clone.classList.remove('expanded');
+                    document.body.appendChild(clone);
+                    const collapsedHeight = clone.scrollHeight;
+                    document.body.removeChild(clone);
+                    
+                    // Ensure transition is active and set starting height
+                    appDescEl.style.transition = 'max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
+                    appDescEl.style.maxHeight = startHeight + 'px';
+                    appDescEl.style.display = 'block';
+                    // Force reflow to apply starting height
+                    void appDescEl.offsetHeight;
+                    
+                    // Remove expanded class
+                    appDescEl.classList.remove('expanded');
+                    // Force reflow again
+                    void appDescEl.offsetHeight;
+                    
+                    // Now animate to collapsed height - use requestAnimationFrame to ensure transition triggers
+                    requestAnimationFrame(() => {
+                        requestAnimationFrame(() => {
+                            appDescEl.style.maxHeight = collapsedHeight + 'px';
+                        });
+                    });
+                    
+                    appDescToggleEl.textContent = 'Show more';
+                    
+                    // Clean up after animation
+                    setTimeout(() => {
+                        if (!appDescEl.classList.contains('expanded')) {
+                            appDescEl.style.maxHeight = '';
+                            appDescEl.style.display = '';
+                            appDescEl.style.transition = '';
+                        }
+                    }, 410);
+                } else {
+                    // Expand with animation
+                    const startHeight = appDescEl.scrollHeight;
+                    // Ensure transition is active
+                    appDescEl.style.transition = 'max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
+                    appDescEl.classList.add('expanded');
+                    // Force reflow to get new height
+                    void appDescEl.offsetHeight;
+                    const endHeight = appDescEl.scrollHeight;
+                    // Set starting height
+                    appDescEl.style.maxHeight = startHeight + 'px';
+                    // Force reflow
+                    void appDescEl.offsetHeight;
+                    // Animate to full height - use requestAnimationFrame to ensure transition triggers
+                    requestAnimationFrame(() => {
+                        requestAnimationFrame(() => {
+                            appDescEl.style.maxHeight = endHeight + 'px';
+                        });
+                    });
+                    appDescToggleEl.textContent = 'Show less';
+                    
+                    // Clean up after animation
+                    setTimeout(() => {
+                        if (appDescEl.classList.contains('expanded')) {
+                            appDescEl.style.maxHeight = '';
+                            appDescEl.style.transition = '';
+                        }
+                    }, 410);
+                }
+            }
+        });
+    }
 
     const groupsEl = document.getElementById('groups');
     const MODE_ORDER = [
@@ -4422,11 +4595,50 @@
         const appIconEl = appHeaderEl.querySelector('.app-icon');
         const appNameEl = appHeaderEl.querySelector('.app-name');
         const appDescEl = appHeaderEl.querySelector('.app-desc');
+        const appDescToggleEl = appHeaderEl.querySelector('#appDescToggle');
         const appExtraEl = appHeaderEl.querySelector('.app-extra');
+
+        if (!appDescEl || !appDescToggleEl) {
+            console.warn('App description elements not found');
+            return;
+        }
 
         appIconEl.innerHTML = iconHtml;
         appNameEl.textContent = fixMojibake(name);
-        appDescEl.textContent = fixMojibake(description || '');
+        
+        // Update description text
+        const appDescTextEl = appDescEl.querySelector('.app-desc-text');
+        if (appDescTextEl) {
+            appDescTextEl.textContent = fixMojibake(description || '');
+        } else {
+            // Fallback - set text directly to paragraph
+            appDescEl.textContent = fixMojibake(description || '');
+        }
+        
+        // Reset description state
+        appDescEl.classList.remove('expanded');
+        appDescEl.style.maxHeight = '';
+        appDescToggleEl.classList.remove('visible');
+        appDescToggleEl.textContent = 'Show more';
+        
+        // Check if description is truncated and show toggle button if needed
+        setTimeout(() => {
+            if (!description || !description.trim()) {
+                appDescToggleEl.classList.remove('visible');
+                return;
+            }
+            
+            const descText = description.trim();
+            
+            // Simple check: show button if description is longer than ~180 characters
+            // (approximately 4 lines of text at 15px font size)
+            if (descText.length > 180) {
+                appDescToggleEl.classList.add('visible');
+            } else {
+                appDescToggleEl.classList.remove('visible');
+            }
+        }, 200);
+        
         appExtraEl.innerHTML = `
         <span>App ID: <code>${escapeHtml(String(id))}</code></span>
         <span>Scanned: ${escapeHtml(when)}</span>
