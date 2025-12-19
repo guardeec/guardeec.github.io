@@ -3355,7 +3355,18 @@
 
         let url = foundAppIconCache.get(id);
         if (url === undefined) {
-            url = await fetchAppIcon(id).catch(() => null);
+            try {
+                const snap = await getDoc(doc(db, 'Apps', id));
+                if (snap.exists()) {
+                    const data = snap.data() || {};
+                    url = data.logo_url || null;
+                } else {
+                    url = null;
+                }
+            } catch (err) {
+                console.warn('Failed to load icon from database for app', id, err);
+                url = null;
+            }
             foundAppIconCache.set(id, url);
         }
 
@@ -4211,11 +4222,16 @@
                 fullData.name = appData.name;
             }
             
-            if (!fullData.icon_url) {
+            if (!fullData.logo_url) {
+                // Try to get from database if not already loaded
                 try {
-                    fullData.icon_url = await fetchAppIcon(appId);
+                    const snap = await getDoc(doc(db, 'Apps', String(appId)));
+                    if (snap.exists()) {
+                        const data = snap.data() || {};
+                        fullData.logo_url = data.logo_url || null;
+                    }
                 } catch (err) {
-                    console.warn('Failed to fetch icon for app', appId, err);
+                    console.warn('Failed to load icon from database for app', appId, err);
                 }
             }
             selectedApps.set(appId, fullData);
@@ -4293,7 +4309,7 @@
             const item = document.createElement('div');
             item.className = `app-list-item ${selectedAppId === appId ? 'selected' : ''}`;
 
-            const iconUrl = appData.icon_url || null;
+            const iconUrl = appData.logo_url || null;
             const iconHtml = iconUrl
                 ? `<img src="${iconUrl}" alt="${escapeHtml(appData.name || '')} icon" loading="lazy"/>`
                 : `<span style="font-size:20px; opacity:.6;">📱</span>`;
@@ -4353,12 +4369,7 @@
         }
     }
 
-    async function fetchAppIcon(appId) {
-        const r = await fetch(`https://itunes.apple.com/lookup?id=${encodeURIComponent(appId)}`);
-        const j = await r.json();
-        const it = j?.results?.[0];
-        return it?.artworkUrl512 || it?.artworkUrl100 || null;
-    }
+    // Removed fetchAppIcon - now using logo_url from database only
 
     async function loadAndRenderApp(appId) {
         try {
@@ -4368,7 +4379,7 @@
                 return;
             }
             const data = snap.data() || {};
-            const iconUrl = data.icon_url || await fetchAppIcon(appId).catch(() => null);
+            const iconUrl = data.logo_url || null;
 
             // Сохраняем полный документ приложения (для JSON-вида)
             currentAppRaw = {id: appId, ...data};
@@ -6227,7 +6238,7 @@
             const item = document.createElement('div');
             item.className = 'category-modal-app';
             
-            const iconUrl = appData.icon_url;
+            const iconUrl = appData.logo_url;
             const appName = appData.name || appId;
             const score = appData.ranking?.overall_privacy_risk;
             
@@ -6578,10 +6589,10 @@
                     .attr('fill', '#0d0e10');
                 
                 // Icon image
-                if (app.appData.icon_url) {
+                if (app.appData.logo_url) {
                     iconItem.append('image')
                         .attr('class', 'app-icon-image')
-                        .attr('href', app.appData.icon_url)
+                        .attr('href', app.appData.logo_url)
                         .attr('x', -iconRadius)
                         .attr('y', -iconRadius)
                         .attr('width', iconRadius * 2)
@@ -6719,9 +6730,9 @@
             const iconDiv = document.createElement('div');
             iconDiv.className = 'critical-app-icon';
 
-            if (appData.icon_url) {
+            if (appData.logo_url) {
                 const img = document.createElement('img');
-                img.src = appData.icon_url;
+                img.src = appData.logo_url;
                 img.alt = appData.name || '';
                 iconDiv.appendChild(img);
             } else {
@@ -6767,7 +6778,7 @@
             const item = document.createElement('div');
             item.className = 'rose-modal-app';
             
-            const iconUrl = appData.icon_url;
+            const iconUrl = appData.logo_url;
             const appName = appData.name || appId;
             
             item.innerHTML = `
@@ -7118,8 +7129,8 @@
             subText.textContent = 'No apps retain data 5+ years';
         } else {
             // Show icon of app with max retention
-            if (appIcon && maxApp && maxApp.icon_url) {
-                appIcon.innerHTML = `<img src="${maxApp.icon_url}" alt="${escapeHtml(maxApp.name || '')}">`;
+            if (appIcon && maxApp && maxApp.logo_url) {
+                appIcon.innerHTML = `<img src="${maxApp.logo_url}" alt="${escapeHtml(maxApp.name || '')}">`;
             }
             
             bigText.textContent = `${Math.round(maxYears)} years`;
@@ -7218,7 +7229,7 @@
             const item = document.createElement('div');
             item.className = 'rose-modal-app';
             
-            const iconUrl = appData.icon_url;
+            const iconUrl = appData.logo_url;
             const appName = appData.name || appId;
             
             item.innerHTML = `
