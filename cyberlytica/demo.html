@@ -14,8 +14,8 @@
             --surface-3: #1e222a;
             --txt: #e6e7ea;
             --muted: #c4c9d4; /* Improved contrast for accessibility */
-            --brand-1: #ec1e1e;
-            --brand-2: #89d1fe;
+            --brand-1: #d72828;
+            --brand-2: #3c7bc9;
             --btn: #2b2f39;
             --btn-active: #3d6be8;
             
@@ -4237,12 +4237,12 @@
         canvas.height = cropHeight;
 
         const duration = video.duration;
-        const framesPerSecond = 4;
+        const framesPerSecond = 8;
         const frameInterval = 1 / framesPerSecond;
         const samplePoints = [];
         
-        const startTime = duration * 0.3;
-        const endTime = duration * 0.95;
+        const startTime = 0;
+        const endTime = duration;
         
         for (let time = startTime; time <= endTime; time += frameInterval) {
             samplePoints.push(time);
