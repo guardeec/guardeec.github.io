@@ -1,0 +1,52 @@
+field_id,parent_id,display_name,description,sensitivity_band,numeric_weight_0_10
+account_credentials,sub_personal_identification_data,,"Account Credentials: Login identifiers such as username/password, email address, phone number.",LOW,3.0
+sub_financial_and_transactional_data,cat_data_collected,,Subcategory: Financial and Transactional Data,MED,6.0
+financial_information,sub_financial_and_transactional_data,,"Financial Information: Payment/billing data (card, billing address, provider account), credit score/history, purchase records with timestamps/values.",MED,6.0
+sub_health_and_biometric_data,cat_data_collected,,Subcategory: Health and Biometric Data,HIGH,9.0
+biometric,sub_health_and_biometric_data,,"Biometric: Biometric identifiers (fingerprints, facial/iris patterns) used for identification.",HIGH,9.0
+health_data,sub_health_and_biometric_data,,"Health Data: Health data: diagnoses, prescriptions, medical history, self‑reported wellness; may include menstrual/reproductive indicators.",HIGH,9.0
+non_sensitive_health_data,sub_health_and_biometric_data,,"Non-sensitive Health Data: Calculated or device-reported wellness measures (e.g., BMI, weight/height, body temperature).",MED,6.0
+user_location,sub_location_and_environmental_data,,"User's Location: Geolocation from GPS, IP, manual input; time zone; mobile network; Wi‑Fi/Bluetooth signals.",MED,6.0
+sub_special_category_data,cat_data_collected,,Subcategory: Special Category Data,HIGH,9.0
+sexual_orientation,sub_special_category_data,,Sexual Orientation: Self-identified or inferred sexual preference.,HIGH,9.0
+political_views,sub_special_category_data,,Political Views: Stated or inferred political beliefs or affiliations.,HIGH,9.0
+ethnic_racial_origin,sub_special_category_data,,Ethnic/Racial Origin: Declared or inferred ethnic or racial background.,HIGH,9.0
+trade_union_membership,sub_special_category_data,,Trade Union Membership: Association with organized labor (membership/affiliation).,HIGH,9.0
+social_security_number,sub_special_category_data,,Social Security Number: National identifier used for tax or welfare purposes.,HIGH,9.0
+sex_life_information,sub_special_category_data,,"Information Relating to Your Sex Life: Information relating to sex life, including habits, partners, or preferences.",HIGH,9.0
+device_fingerprints,sub_device_intelligence,,"Device Fingerprints: Device/technical identifiers and specs: IP, model, OS, browser; app details; hardware; extensions/plugins; accessibility features; power/battery status.",LOW,3.0
+sub_behavioral_profiling,cat_inferred_data,,Subcategory: Behavioral Profiling,HIGH,9.0
+behavioral_profiles,sub_behavioral_profiling,,Behavioral Profiles: Inferred behavioral profiles predicting traits or preferences.,HIGH,9.0
+user_segments,sub_segmentation,,"User Segments: User segments/groups based on interests, spending, demographics, or behaviors.",HIGH,9.0
+sub_psychographics,cat_inferred_data,,Subcategory: Psychographics,HIGH,9.0
+psychographics,sub_psychographics,,Inferred Interests or Personality: Inferred interests or personality derived from behavior/interaction patterns.,HIGH,9.0
+personal_name,sub_personal_identification_data,,"Name: May refer to first name, surname, or full legal name; may include aliases or display names.",LOW,3.0
+physical_address,sub_personal_identification_data,,"Physical Address: May include street address, city, postal code, and country of residence.",MED,6.0
+age,sub_personal_identification_data,,Age: Refers to date of birth (DD/MM/YYYY) or age.,LOW,3.0
+profile_photo,sub_personal_identification_data,,Photo/Profile Picture: Photo/profile picture: facial image or avatar associated with the user.,MED,6.0
+gender,sub_personal_identification_data,,"Gender: May refer to gender identity or biological sex, often selected from predefined options.",LOW,3.0
+sub_location_and_environmental_data,cat_data_collected,,Subcategory: Location and Environmental Data,MED,6.0
+device_location,sub_location_and_environmental_data,,Device Location: Location of the hardware used to access the service (may differ from user’s location).,MED,6.0
+environmental_data,sub_location_and_environmental_data,,"General Environmental Data: Ambient temperature, humidity, lighting; weather/air quality; safety sensor readings.",MED,6.0
+sub_behavioral_and_usage_data,cat_data_collected,,Subcategory: Behavioral and Usage Data,LOW,3.0
+behavioral_tracking,sub_behavioral_and_usage_data,,"User Behavioral Tracking: Activity/behavior tracking: cookies, session counts, ad engagement, resource usage, browsing/search history, page duration, clickstream/URL history.",MED,6.0
+usage_data,sub_behavioral_and_usage_data,,"Usage Data: Operational usage metrics: user counts, error/crash logs, exit methods, clicks/hovers/inputs, navigation paths (referrers/exits).",LOW,3.0
+sub_activity_and_motion_data,cat_data_collected,,Subcategory: Activity and Motion Data,MED,6.0
+physical_activity,sub_activity_and_motion_data,,"User Physical Activity: Motion/activity: steps, speed, distance, accelerometer/gyroscope signals.",MED,6.0
+sub_communication_and_social_interaction_data,cat_data_collected,,Subcategory: Communication and Social Interaction Data,MED,6.0
+social_interactions,sub_communication_and_social_interaction_data,,"Social Interactions: Social graph/links; interaction metadata (frequency/timing); user-submitted text, audio, images, messages.",MED,6.0
+sub_metadata,cat_data_collected,,Subcategory: Metadata,LOW,3.0
+metadata,sub_metadata,,"Metadata: Background metadata about files, activities, communications; hashtags/labels.",LOW,3.0
+sub_third_party_and_network_data,cat_data_collected,,Subcategory: Third-Party and Network Data,LOW,3.0
+third_party_account_data,sub_third_party_and_network_data,,"Third-Party Account Data and Relationship: Accounts from external platforms (e.g., Facebook, Google), social accounts, relationships with third parties.",MED,6.0
+sub_device_intelligence,cat_security_and_auth_data,,Subcategory: Device Intelligence,MED,6.0
+data_types,root,,Root object: presence of data types collected about the user,LOW,3.0
+cat_data_collected,data_types,,Category: Data Collected,LOW,3.0
+sub_personal_identification_data,cat_data_collected,,Subcategory: Personal Identification Data,LOW,3.0
+personal_description,sub_personal_identification_data,,"Personal Description: Free-text or structured profile text, e.g., biography or preferences.",LOW,3.0
+philosophical_beliefs,sub_special_category_data,,"Philosophical Beliefs: Spiritual, ethical, or moral convictions.",HIGH,9.0
+cat_security_and_auth_data,data_types,,Category: Security & Auth Data,LOW,3.0
+sub_security_monitoring,cat_security_and_auth_data,,Subcategory: Security Monitoring,LOW,3.0
+security_logs,sub_security_monitoring,,"Security Logs: Logs of access attempts, settings changes, unusual user activities; may include session tokens and 2FA attempts.",LOW,3.0
+cat_inferred_data,data_types,,Category: Inferred Data,LOW,3.0
+sub_segmentation,cat_inferred_data,,Subcategory: Segmentation,LOW,3.0
