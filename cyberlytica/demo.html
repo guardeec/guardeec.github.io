@@ -199,6 +199,25 @@
             margin-bottom: 20px;
         }
 
+        .file-option-divider {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 8px 0 16px;
+            color: var(--muted);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: .08em;
+        }
+
+        .file-option-divider::before,
+        .file-option-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: rgba(255,255,255,0.08);
+        }
+
         .video-import-card input[type="file"] {
             display: none;
         }
@@ -3068,10 +3087,28 @@
                 🔒 <strong>Privacy:</strong> Your video is processed locally in your browser. We never upload or store your video.
             </p>
         </div>
+        <div class="video-import-help hidden" id="appListImportHelp">
+            <p style="font-size: 13px; color: var(--txt); margin: 0 0 10px;">
+                Upload a text file with your app list. Each line should look like:
+            </p>
+            <p style="font-size: 12px; color: var(--muted); margin: 0 0 10px;">
+                <strong>package.name</strong>|<strong>App Name</strong>
+            </p>
+            <p style="font-size: 12px; color: var(--muted); margin: 0; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.06);">
+                🔒 <strong>Privacy:</strong> Your file is processed locally in your browser. We never upload or store your data.
+            </p>
+        </div>
         <div class="file-input-wrapper">
             <input type="file" id="videoInput" accept="video/*">
             <label for="videoInput" class="file-label">
                 Choose Video File
+            </label>
+        </div>
+        <div class="file-option-divider">Or</div>
+        <div class="file-input-wrapper">
+            <input type="file" id="appListInput" accept=".abackup,.txt">
+            <label for="appListInput" class="file-label">
+                Choose App List File
             </label>
         </div>
         <div class="video-import-progress" id="videoImportProgress">
@@ -3291,6 +3328,7 @@
     const importAppsBtn = document.getElementById('importAppsBtn');
     const videoImportOverlay = document.getElementById('videoImportOverlay');
     const videoInput = document.getElementById('videoInput');
+    const appListInput = document.getElementById('appListInput');
     const closeVideoImport = document.getElementById('closeVideoImport');
     const videoImportProgress = document.getElementById('videoImportProgress');
     const videoImportProgressFill = document.getElementById('videoImportProgressFill');
@@ -3298,6 +3336,7 @@
     const foundAppsStrip = document.getElementById('foundAppsStrip');
     const foundAppsTrack = document.getElementById('foundAppsTrack');
     const videoImportHelp = document.getElementById('videoImportHelp');
+    const appListImportHelp = document.getElementById('appListImportHelp');
 
     const appListEl = document.getElementById('appList');
     const appHeaderEl = document.getElementById('appHeader');
@@ -3451,6 +3490,7 @@
             if (foundAppsTrack) foundAppsTrack.innerHTML = '';
         }
         if (videoImportHelp) videoImportHelp.classList.remove('hidden');
+        if (appListImportHelp) appListImportHelp.classList.add('hidden');
     }
 
     async function renderFoundAppsStripAnimate(newlyAddedId = null) {
@@ -3788,6 +3828,22 @@
         return lower === 'present' || lower === 'partial';
     }
 
+    function hasDataCollected(privacy) {
+        const dataType = privacy?.DataType || privacy?.DataTypeInfo;
+        if (!dataType || typeof dataType !== 'object') return false;
+
+        for (const [, subcats] of Object.entries(dataType)) {
+            if (!subcats || typeof subcats !== 'object') continue;
+            for (const [, items] of Object.entries(subcats)) {
+                if (!items || typeof items !== 'object') continue;
+                for (const [, field] of Object.entries(items)) {
+                    if (isDataCollectedField(field)) return true;
+                }
+            }
+        }
+        return false;
+    }
+
     function attachTooltipHandlers(el, text) {
         if (!text) return;
         el.addEventListener('mouseenter', () => {
@@ -3924,11 +3980,16 @@
     /* ===== Video Import ===== */
     importAppsBtn.addEventListener('click', () => {
         videoImportOverlay.classList.add('active');
+        resetVideoImportState();
+        videoInput.value = '';
+        if (appListInput) appListInput.value = '';
+        videoImportProgress.classList.remove('active');
     });
 
     closeVideoImport.addEventListener('click', () => {
         videoImportOverlay.classList.remove('active');
         videoInput.value = '';
+        if (appListInput) appListInput.value = '';
         videoImportProgress.classList.remove('active');
         resetVideoImportState();
     });
@@ -3937,6 +3998,7 @@
         if (e.target === videoImportOverlay) {
             videoImportOverlay.classList.remove('active');
             videoInput.value = '';
+            if (appListInput) appListInput.value = '';
             videoImportProgress.classList.remove('active');
             resetVideoImportState();
         }
@@ -3964,6 +4026,43 @@
             toastError(error.message || 'Failed to process video', 'Video Import Error');
         }
     });
+
+    if (appListInput) {
+        appListInput.addEventListener('change', async (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            videoImportOverlay.classList.add('active');
+            videoImportProgress.classList.add('active');
+            videoImportProgressFill.style.width = '0%';
+            videoImportProgressText.textContent = 'Reading app list...';
+            videoImportProgressText.style.color = '';
+            resetVideoImportState();
+            if (videoImportHelp) videoImportHelp.classList.add('hidden');
+            if (appListImportHelp) appListImportHelp.classList.remove('hidden');
+
+            try {
+                const text = await file.text();
+                const appNames = parseAppListText(text);
+                if (!appNames.length) {
+                    throw new Error('No app names found in the file.');
+                }
+
+                for (const name of appNames) {
+                    if (!name) continue;
+                    extractedApps.add(name);
+                    addExtractedAppName(name);
+                }
+
+                await validateAndAddApps();
+            } catch (error) {
+                console.error('Error processing app list file:', error);
+                videoImportProgressText.textContent = `Error: ${error.message}`;
+                videoImportProgressText.style.color = '#ef4444';
+                toastError(error.message || 'Failed to process app list', 'App List Import Error');
+            }
+        });
+    }
 
     async function checkTesseractReady() {
         if (typeof Tesseract === 'undefined') {
@@ -4050,6 +4149,23 @@
         }
     }
 
+    function parseAppListText(text) {
+        const lines = text.split(/\r?\n/);
+        const names = [];
+        for (const line of lines) {
+            const trimmed = line.trim();
+            if (!trimmed) continue;
+            if (trimmed.includes('|')) {
+                const parts = trimmed.split('|');
+                const name = (parts[1] || parts[0] || '').trim();
+                if (name) names.push(name);
+            } else {
+                names.push(trimmed);
+            }
+        }
+        return names;
+    }
+
     function levenshteinDistance(str1, str2) {
         const m = str1.length;
         const n = str2.length;
@@ -4074,6 +4190,8 @@
         
         return dp[m][n];
     }
+
+
 
     // Search for app in database by name (token-based, stricter than fuzzy-substring)
     // Goal: find apps that are in DB but OCR has small variations (e.g. "Bolt" vs "Bolt - Taxi App"),
@@ -4109,29 +4227,24 @@
         if (rTokens.length === 1) {
             const r = rTokens[0];
             if (r.length < 4) return false; // too short → avoid false positives
-            if (cTokens.includes(r)) return true;
-            if (cNorm.startsWith(r + ' ')) return true;
-            if (cNorm.startsWith(r + '-')) return true;
-
-            // Fallback: small OCR typos (relative Levenshtein), but only for >=4 chars
-            const dist = levenshteinDistance(rNorm, cNorm);
-            const maxLen = Math.max(rNorm.length, cNorm.length);
-            const rel = maxLen > 0 ? dist / maxLen : 1;
-            return rel <= 0.30;
+            // Allow only exact token match OR leading token match when candidate is short
+            if (cTokens.includes(r)) {
+                return cTokens.length <= 2;
+            }
+            if (cNorm.startsWith(r + ' ') || cNorm.startsWith(r + '-')) {
+                return cTokens.length <= 2;
+            }
+            return false;
         }
 
         // Multi-word names: require overlap on significant tokens (>=4 chars)
         if (rSig.length > 0) {
             const overlap = new Set(rSig.filter(t => cSig.includes(t))).size;
             const ratio = overlap / rSig.length;
-            if (ratio >= 0.5) return true;
+            if (overlap >= 2 && ratio >= 0.6) return true;
         }
 
-        // Conservative fuzzy fallback for multi-word names
-        const dist = levenshteinDistance(rNorm, cNorm);
-        const maxLen = Math.max(rNorm.length, cNorm.length);
-        const rel = maxLen > 0 ? dist / maxLen : 1;
-        return rel <= 0.25;
+        return false;
     }
 
     async function searchAppInDatabase(appName) {
@@ -4237,7 +4350,7 @@
         canvas.height = cropHeight;
 
         const duration = video.duration;
-        const framesPerSecond = 4;
+        const framesPerSecond = 8;
         const frameInterval = 1 / framesPerSecond;
         const samplePoints = [];
         
@@ -4373,6 +4486,7 @@
         setTimeout(() => {
             videoImportOverlay.classList.remove('active');
             videoInput.value = '';
+            if (appListInput) appListInput.value = '';
             videoImportProgress.classList.remove('active');
             videoImportProgressText.style.color = '';
         }, 2000);
@@ -4389,6 +4503,12 @@
                 return;
             }
             const fullData = {id: appId, ...snap.data()};
+
+            if (!hasDataCollected(fullData.privacy || null)) {
+                const appName = fullData.name || `App ${appId}`;
+                toastWarning(`"${appName}" skipped: no "Data collected" data available.`, 'Missing Data');
+                return;
+            }
             
             // Merge with any existing appData (like from search)
             if (appData && appData.name && !fullData.name) {
@@ -7588,6 +7708,9 @@
             sessionStorage.setItem('welcomeShown', 'true');
         }, 1500);
     }
+
+
+
 
 </script>
 </body>
