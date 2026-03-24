@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Infrastructure Network Component Packing</title>
+  <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+  <style>
+    :root {
+      --bg: #f7f8fb;
+      --panel: #ffffff;
+      --line: #d9deea;
+      --text: #1d2433;
+      --muted: #6a7487;
+      --accent: #3b82f6;
+      --accent-2: #0f766e;
+      --accent-3: #7c3aed;
+      --isolate: #cbd5e1;
+      --warning: #92400e;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background: var(--bg);
+    }
+    .wrap {
+      padding: 16px;
+      display: grid;
+      gap: 16px;
+      grid-template-rows: auto auto 1fr;
+      min-height: 100vh;
+    }
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      box-shadow: 0 6px 24px rgba(26, 31, 44, 0.05);
+    }
+    .controls {
+      padding: 14px 16px;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 16px;
+      align-items: center;
+    }
+    .control label {
+      display: block;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--muted);
+      margin-bottom: 6px;
+      letter-spacing: .02em;
+      text-transform: uppercase;
+    }
+    .note {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.45;
+      max-width: 620px;
+    }
+    .metrics-row {
+      padding: 10px 16px 16px;
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .metrics {
+      display: contents;
+    }
+    .metric {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 12px 14px;
+      min-height: 88px;
+    }
+    .metric .k {
+      font-size: 12px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .03em;
+      margin-bottom: 8px;
+      font-weight: 700;
+    }
+    .metric .v {
+      font-size: 28px;
+      font-weight: 800;
+      line-height: 1.05;
+    }
+    .metric .s {
+      margin-top: 6px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .metric select {
+      width: 100%;
+      height: 36px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 0 10px;
+      font-weight: 700;
+      background: #fff;
+    }
+    .viz {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 320px;
+      gap: 0;
+      overflow: hidden;
+    }
+    #chartWrap {
+      position: relative;
+      min-height: 680px;
+      border-right: 1px solid var(--line);
+    }
+    #chart {
+      width: 100%;
+      height: 100%;
+      min-height: 680px;
+    }
+    #tooltip {
+      position: absolute;
+      pointer-events: none;
+      background: rgba(17, 24, 39, 0.94);
+      color: white;
+      padding: 10px 12px;
+      border-radius: 10px;
+      font-size: 12px;
+      line-height: 1.45;
+      max-width: 320px;
+      opacity: 0;
+      transform: translateY(4px);
+      transition: opacity .12s ease, transform .12s ease;
+      box-shadow: 0 10px 24px rgba(0,0,0,.22);
+      z-index: 10;
+    }
+    .sidebar {
+      padding: 16px;
+      overflow: auto;
+      max-height: 760px;
+    }
+    .sidebar h3 {
+      margin: 0 0 6px 0;
+      font-size: 16px;
+    }
+    .sidebar .sub {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 14px;
+      line-height: 1.45;
+    }
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    .chip {
+      background: #eef2ff;
+      color: #3730a3;
+      border: 1px solid #c7d2fe;
+      border-radius: 999px;
+      padding: 5px 9px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .domlist {
+      border-top: 1px solid var(--line);
+      padding-top: 12px;
+      display: grid;
+      gap: 8px;
+    }
+    .dom {
+      padding: 8px 10px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      font-size: 12px;
+      line-height: 1.35;
+      background: #fafbff;
+    }
+    .dom .name { font-weight: 700; font-size: 12.5px; }
+    .dom .meta { color: var(--muted); margin-top: 3px; }
+    .legend {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      flex-wrap: wrap;
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+    .swatch { width: 12px; height: 12px; border-radius: 50%; display: inline-block; margin-right: 6px; vertical-align: middle; }
+    .empty {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 680px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .footerNote {
+      padding: 0 16px 14px;
+      color: var(--warning);
+      font-size: 12px;
+    }
+    .bubble-label {
+      fill: #0f172a;
+      text-anchor: middle;
+      font-weight: 800;
+      pointer-events: none;
+    }
+    .bubble-sub {
+      fill: #334155;
+      text-anchor: middle;
+      pointer-events: none;
+      font-weight: 600;
+    }
+    @media (max-width: 1200px) {
+      .metrics-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .viz { grid-template-columns: 1fr; }
+      #chartWrap { border-right: 0; border-bottom: 1px solid var(--line); }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="panel">
+      <div class="controls">
+      </div>
+      <div class="metrics-row">
+        <div class="metric">
+          <div class="k">Dataset</div>
+          <select id="datasetSelect">
+            <option value="dataset_1.json">2025</option>
+            <option value="dataset_2.json" selected>2026</option>
+          </select>
+          <div id="status" class="s">Loading dataset_2.json…</div>
+        </div>
+        <div class="metrics" id="metrics"></div>
+      </div>
+    </div>
+
+    <div class="panel viz">
+      <div id="chartWrap">
+        <div id="chart"></div>
+        <div id="tooltip"></div>
+      </div>
+      <div class="sidebar" id="sidebar">
+        <h3>Component details</h3>
+        <div class="sub">Click a bubble to inspect a connected component. Isolates are aggregated into one bubble to make the split between networked vs individual domains easier to read.</div>
+        <div class="chips">
+          <div class="chip">Threshold 6 by default</div>
+          <div class="chip">Only infrastructure linkage</div>
+          <div class="chip">Bubble area = domains in component</div>
+        </div>
+        <div class="sub">No component selected yet.</div>
+      </div>
+    </div>
+  </div>
+
+<script>
+const CONFIG = {
+  weights: { ip: 4, a: 3, rdns: 4, ns: 2, asn: 1.5, registrar: 1 },
+  maxFreq: { ip: 10, a: 10, rdns: 15, ns: 12, asn: 15, registrar: 12 },
+  genericSubstrings: {
+    rdns: ['myshopify.com', 'cloudflare', 'googleusercontent.com', 'bunnyinfra.net', 'ddos-guard.net'],
+    ns: ['cloudflare.com', 'dns-parking.com', 'siteground.net', 'o2switch.net', 'perfectdns.com']
+  },
+  colors: ['#dbeafe', '#93c5fd', '#60a5fa', '#2563eb']
+};
+
+let rawRows = [];
+let domains = [];
+let precomputedPairs = [];
+let currentData = null;
+let svg = null;
+let rootGroup = null;
+let zoom = d3.zoom().scaleExtent([0.5, 8]);
+let currentTransform = d3.zoomIdentity;
+
+const chartEl = document.getElementById('chart');
+const metricsEl = document.getElementById('metrics');
+const tooltipEl = document.getElementById('tooltip');
+const sidebarEl = document.getElementById('sidebar');
+const datasetSelectEl = document.getElementById('datasetSelect');
+const statusEl = document.getElementById('status');
+
+function safeString(v) {
+  if (v === null || v === undefined) return null;
+  const s = String(v).trim().toLowerCase();
+  return (!s || s === 'nan' || s === 'none' || s === 'null' || s === '[none]') ? null : s;
+}
+
+function parseList(v) {
+  if (v === null || v === undefined) return [];
+  let arr = [];
+  if (Array.isArray(v)) arr = v;
+  else if (typeof v === 'string') {
+    const s = v.trim();
+    if (!s || ['nan','none','null'].includes(s.toLowerCase())) return [];
+    if (s.startsWith('[') && s.endsWith(']')) {
+      try {
+        const parsed = JSON.parse(s.replaceAll("'", '"'));
+        arr = Array.isArray(parsed) ? parsed : s.slice(1, -1).split(/[,;]\s*/);
+      } catch {
+        arr = s.slice(1, -1).split(/[,;]\s*/);
+      }
+    } else {
+      arr = s.split(/[,;]\s*/);
+    }
+  }
+  return [...new Set(arr
+    .map(x => safeString(x))
+    .filter(Boolean)
+    .map(x => x.replace(/\.$/, ''))
+  )];
+}
+
+function summarizeInfra(rows, limit = 12) {
+  const counts = new Map();
+  const add = (kind, token) => {
+    if (!token) return;
+    const key = `${kind}::${token}`;
+    counts.set(key, (counts.get(key) || 0) + 1);
+  };
+
+  rows.forEach(row => {
+    const ip = safeString(row.ip);
+    if (ip) add('IP', ip);
+
+    parseList(row.dns_a_records).forEach(a => add('A', a));
+
+    const asn = safeString(row.asn);
+    if (asn) add('ASN', asn);
+
+    const rdns = safeString(row.reverse_dns);
+    if (rdns) add('rDNS', rdns.replace(/\.$/, ''));
+
+    const registrar = safeString(row.whois_registrar);
+    if (registrar) add('Registrar', registrar);
+
+    const nsSet = new Set([
+      ...parseList(row.dns_ns_records),
+      ...parseList(row.whois_name_servers)
+    ]);
+    nsSet.forEach(ns => add('NS', ns));
+  });
+
+  const items = [...counts.entries()]
+    .map(([key, count]) => {
+      const [kind, token] = key.split('::');
+      return { kind, token, count };
+    })
+    .filter(d => d.count >= 2)
+    .sort((a, b) => d3.descending(a.count, b.count) || a.kind.localeCompare(b.kind));
+
+  return items.slice(0, limit);
+}
+
+function shouldIgnoreToken(kind, token, freq) {
+  if (freq < 2 || freq > CONFIG.maxFreq[kind]) return true;
+  if (kind === 'ns' && !token.includes('.')) return true;
+  const generic = CONFIG.genericSubstrings[kind] || [];
+  return generic.some(g => token.includes(g));
+}
+
+function buildPrecomputedPairs(rows) {
+  const postings = new Map();
+  domains = rows.map(r => r.domain);
+
+  function addPosting(kind, token, idx) {
+    const key = `${kind}::${token}`;
+    if (!postings.has(key)) postings.set(key, { kind, token, ids: new Set() });
+    postings.get(key).ids.add(idx);
+  }
+
+  rows.forEach((row, idx) => {
+    const ip = safeString(row.ip);
+    if (ip) addPosting('ip', ip, idx);
+
+    parseList(row.dns_a_records).forEach(a => addPosting('a', a, idx));
+
+    const asn = safeString(row.asn);
+    if (asn) addPosting('asn', asn, idx);
+
+    const rdns = safeString(row.reverse_dns);
+    if (rdns) addPosting('rdns', rdns.replace(/\.$/, ''), idx);
+
+    const registrar = safeString(row.whois_registrar);
+    if (registrar) addPosting('registrar', registrar, idx);
+
+    const nsSet = new Set([
+      ...parseList(row.dns_ns_records),
+      ...parseList(row.whois_name_servers)
+    ]);
+    nsSet.forEach(ns => addPosting('ns', ns, idx));
+  });
+
+  const pairMap = new Map();
+
+  postings.forEach(({ kind, token, ids }) => {
+    const members = [...ids];
+    if (shouldIgnoreToken(kind, token, members.length)) return;
+
+    const weight = CONFIG.weights[kind];
+    for (let i = 0; i < members.length; i++) {
+      for (let j = i + 1; j < members.length; j++) {
+        const a = members[i], b = members[j];
+        const key = a < b ? `${a}|${b}` : `${b}|${a}`;
+        if (!pairMap.has(key)) pairMap.set(key, { a: Math.min(a,b), b: Math.max(a,b), score: 0, evidence: [] });
+        const pair = pairMap.get(key);
+        pair.score += weight;
+        pair.evidence.push({ kind, token, weight });
+      }
+    }
+  });
+
+  return [...pairMap.values()];
+}
+
+function qualifiesEdge(edge, cutoff) {
+  if (edge.score < cutoff) return false;
+  const kinds = new Set(edge.evidence.map(e => e.kind));
+  return kinds.has('ip') || kinds.has('rdns') || kinds.size >= 2;
+}
+
+function buildComponents(rows, cutoff) {
+  const n = rows.length;
+  const parent = Array.from({ length: n }, (_, i) => i);
+  const size = Array.from({ length: n }, () => 1);
+  const edgeStatsByNode = Array.from({ length: n }, () => ({ edgeCount: 0, scoreSum: 0 }));
+
+  function find(x) {
+    while (parent[x] !== x) {
+      parent[x] = parent[parent[x]];
+      x = parent[x];
+    }
+    return x;
+  }
+
+  function union(a, b) {
+    let ra = find(a), rb = find(b);
+    if (ra === rb) return;
+    if (size[ra] < size[rb]) [ra, rb] = [rb, ra];
+    parent[rb] = ra;
+    size[ra] += size[rb];
+  }
+
+  const keptEdges = [];
+  for (const edge of precomputedPairs) {
+    if (!qualifiesEdge(edge, cutoff)) continue;
+    keptEdges.push(edge);
+    union(edge.a, edge.b);
+    edgeStatsByNode[edge.a].edgeCount += 1;
+    edgeStatsByNode[edge.a].scoreSum += edge.score;
+    edgeStatsByNode[edge.b].edgeCount += 1;
+    edgeStatsByNode[edge.b].scoreSum += edge.score;
+  }
+
+  const components = new Map();
+  for (let i = 0; i < n; i++) {
+    const root = find(i);
+    if (!components.has(root)) components.set(root, { nodes: [], edges: [], evidenceKinds: new Map() });
+    components.get(root).nodes.push(i);
+  }
+
+  for (const edge of keptEdges) {
+    const root = find(edge.a);
+    const comp = components.get(root);
+    comp.edges.push(edge);
+    edge.evidence.forEach(ev => {
+      comp.evidenceKinds.set(ev.kind, (comp.evidenceKinds.get(ev.kind) || 0) + 1);
+    });
+  }
+
+  const comps = [...components.values()].map(comp => {
+    const nodeSet = new Set(comp.nodes);
+    const domains = comp.nodes.map(i => rows[i].domain).sort();
+    const avgEdgeScore = comp.edges.length ? d3.mean(comp.edges, d => d.score) : 0;
+    const maxEdgeScore = comp.edges.length ? d3.max(comp.edges, d => d.score) : 0;
+    const evidenceSummary = [...comp.evidenceKinds.entries()]
+      .sort((a,b) => d3.descending(a[1], b[1]))
+      .map(([k, v]) => ({ kind: k, count: v }));
+    return {
+      type: comp.nodes.length === 1 ? 'isolate' : 'component',
+      size: comp.nodes.length,
+      nodes: comp.nodes,
+      domains,
+      edgeCount: comp.edges.length,
+      avgEdgeScore,
+      maxEdgeScore,
+      evidenceSummary,
+      degreeStats: comp.nodes.map(i => edgeStatsByNode[i].edgeCount),
+      rows: comp.nodes.map(i => rows[i])
+    };
+  }).sort((a,b) => d3.descending(a.size, b.size) || d3.descending(a.avgEdgeScore, b.avgEdgeScore));
+
+  const isolates = comps.filter(c => c.size === 1);
+  const networkComps = comps.filter(c => c.size > 1);
+
+  const packedChildren = networkComps.map((c, idx) => ({
+    ...c,
+    id: `comp-${idx+1}`,
+    value: c.size,
+    label: `C${idx+1}`
+  }));
+
+  if (isolates.length) {
+    packedChildren.push({
+      id: 'isolates',
+      type: 'isolatesGroup',
+      value: isolates.length,
+      size: isolates.length,
+      label: 'Isolates',
+      isolateCount: isolates.length,
+      domains: isolates.map(c => c.domains[0]).sort(),
+      rows: isolates.map(c => c.rows[0]),
+      edgeCount: 0,
+      avgEdgeScore: 0,
+      maxEdgeScore: 0,
+      evidenceSummary: []
+    });
+  }
+
+  return {
+    allComponents: comps,
+    networkComponents: networkComps,
+    isolates,
+    keptEdges,
+    packedChildren,
+    nodesInNetworks: d3.sum(networkComps, d => d.size),
+    shareNetworked: d3.sum(networkComps, d => d.size) / n,
+    avgNetworkSize: networkComps.length ? d3.mean(networkComps, d => d.size) : 0,
+    largestComponent: networkComps.length ? networkComps[0].size : 0,
+    totalNodes: n
+  };
+}
+
+function renderMetrics(model) {
+  const cards = [
+    {
+      k: 'Networked domains',
+      v: `${model.nodesInNetworks}`,
+      s: `${d3.format('.1%')(model.shareNetworked)} of all domains are inside components of size ≥ 2`
+    },
+    {
+      k: 'Individual domains',
+      v: `${model.isolates.length}`,
+      s: `${d3.format('.1%')(model.isolates.length / model.totalNodes)} remain isolated`
+    },
+    {
+      k: 'Connected components',
+      v: `${model.networkComponents.length}`,
+      s: `Only components with 2+ domains are counted here`
+    },
+    {
+      k: 'Largest network',
+      v: `${model.largestComponent}`,
+      s: `Domains in the largest connected component`
+    },
+    {
+      k: 'Average network size',
+      v: `${model.networkComponents.length ? d3.format('.1f')(model.avgNetworkSize) : '0.0'}`,
+      s: `Mean size across connected components only`
+    }
+  ];
+
+  metricsEl.innerHTML = cards.map(card => `
+    <div class="metric">
+      <div class="k">${card.k}</div>
+      <div class="v">${card.v}</div>
+      <div class="s">${card.s}</div>
+    </div>
+  `).join('');
+}
+
+function bubbleColor(d, maxSize) {
+  if (d.data.type === 'isolatesGroup') return getComputedStyle(document.documentElement).getPropertyValue('--isolate').trim();
+  const ratio = d.data.size / Math.max(2, maxSize);
+  if (ratio < 0.25) return CONFIG.colors[0];
+  if (ratio < 0.5) return CONFIG.colors[1];
+  if (ratio < 0.75) return CONFIG.colors[2];
+  return CONFIG.colors[3];
+}
+
+function showTooltip(event, d) {
+  const data = d.data;
+  let html = '';
+  if (data.type === 'isolatesGroup') {
+    html = `<strong>Isolates</strong><br>${data.isolateCount} single-domain components`;
+  } else {
+    const evidence = (data.evidenceSummary || []).slice(0, 4).map(e => `${e.kind}: ${e.count}`).join(', ');
+    html = `<strong>${data.label}</strong><br>` +
+      `${data.size} domains<br>` +
+      `${data.edgeCount} kept edges<br>` +
+      `avg edge score: ${d3.format('.1f')(data.avgEdgeScore)}<br>` +
+      (evidence ? `top evidence: ${evidence}` : 'no evidence summary');
+  }
+  tooltipEl.innerHTML = html;
+  tooltipEl.style.opacity = 1;
+  tooltipEl.style.transform = 'translateY(0px)';
+  const rect = chartEl.getBoundingClientRect();
+  tooltipEl.style.left = `${event.clientX - rect.left + 14}px`;
+  tooltipEl.style.top = `${event.clientY - rect.top + 14}px`;
+}
+
+function hideTooltip() {
+  tooltipEl.style.opacity = 0;
+  tooltipEl.style.transform = 'translateY(4px)';
+}
+
+function renderSidebar(data) {
+  if (!data) {
+    sidebarEl.innerHTML = `
+      <div class="sub">Click a bubble to inspect a connected component. Isolates are aggregated into one bubble to make the split between networked vs individual domains easier to read.</div>
+      <div class="chips">
+        <div class="chip" title="Links are formed from shared infrastructure signals only.">Only infrastructure linkage</div>
+        <div class="chip" title="Bubble size is proportional to the number of domains in the component.">Bubble area = domains in component</div>
+      </div>
+      <div class="sub">No component selected yet.</div>`;
+    return;
+  }
+
+  if (data.type === 'isolatesGroup') {
+    sidebarEl.innerHTML = `
+      <h3>Isolates</h3>
+      <div class="sub">${data.isolateCount} domains do not belong to any connected component. They are aggregated into one bubble so the networked / individual split is immediately visible.</div>
+      <div class="chips">
+        <div class="chip">Single-domain components: ${data.isolateCount}</div>
+        <div class="chip">Share of dataset: ${d3.format('.1%')(data.isolateCount / rawRows.length)}</div>
+      </div>
+      <div class="sub">Isolates have no shared infrastructure signals.</div>
+    `;
+    return;
+  }
+
+  const evidenceChips = (data.evidenceSummary || []).slice(0, 6)
+    .map(e => `<div class="chip" title="Count of retained edges that include this evidence type.">${e.kind}: ${e.count}</div>`)
+    .join('');
+  const infra = summarizeInfra(data.rows, 14);
+  const infraHtml = infra.length
+    ? infra.map(d => `
+      <div class="dom">
+        <div class="name">${d.kind} ${d.token}</div>
+        <div class="meta">common for ${d.count} domains</div>
+      </div>`).join('')
+    : `<div class="sub">No shared infrastructure tokens within this component.</div>`;
+
+  sidebarEl.innerHTML = `
+    <h3>${data.label}</h3>
+    <div class="sub">${data.size} domains, ${data.edgeCount} retained edges, average retained edge score ${d3.format('.1f')(data.avgEdgeScore)}. This component was built only from infrastructure evidence.</div>
+    <div class="chips">
+      <div class="chip" title="Number of domains in this component.">domains: ${data.size}</div>
+      <div class="chip" title="Count of retained edges within this component.">edges: ${data.edgeCount}</div>
+      <div class="chip" title="Mean of retained edge scores within this component.">avg score: ${d3.format('.1f')(data.avgEdgeScore)}</div>
+      <div class="chip" title="Highest retained edge score within this component.">max score: ${d3.format('.1f')(data.maxEdgeScore)}</div>
+      ${evidenceChips}
+    </div>
+    <div class="domlist">${infraHtml}</div>
+  `;
+}
+
+function renderPacking(model) {
+  currentData = model;
+  renderMetrics(model);
+
+  chartEl.innerHTML = '';
+  const width = chartEl.clientWidth || 900;
+  const height = Math.max(680, window.innerHeight - 220);
+
+  if (!model.packedChildren.length) {
+    chartEl.innerHTML = `<div class="empty">No components found.</div>`;
+    renderSidebar(null);
+    return;
+  }
+
+  const hierarchy = d3.hierarchy({ children: model.packedChildren })
+    .sum(d => d.value)
+    .sort((a,b) => d3.descending(a.value, b.value));
+
+  d3.pack().size([width - 20, height - 20]).padding(8)(hierarchy);
+  const leaves = hierarchy.leaves();
+  const maxSize = d3.max(model.networkComponents, d => d.size) || 2;
+
+  svg = d3.select('#chart').append('svg')
+    .attr('width', width)
+    .attr('height', height)
+    .style('display', 'block')
+    .style('cursor', 'grab');
+
+  rootGroup = svg.append('g').attr('transform', 'translate(10,10)');
+
+  svg.call(zoom.on('zoom', (event) => {
+    currentTransform = event.transform;
+    rootGroup.attr('transform', `translate(${10 + currentTransform.x},${10 + currentTransform.y}) scale(${currentTransform.k})`);
+  }));
+
+  const bubbles = rootGroup.selectAll('g.node')
+    .data(leaves)
+    .enter()
+    .append('g')
+    .attr('class', 'node')
+    .attr('transform', d => `translate(${d.x},${d.y})`)
+    .style('cursor', 'pointer')
+    .on('mouseenter', function(event, d) { showTooltip(event, d); })
+    .on('mousemove', function(event, d) { showTooltip(event, d); })
+    .on('mouseleave', hideTooltip)
+    .on('click', function(_, d) {
+      rootGroup.selectAll('circle').attr('stroke-width', 1.2).attr('stroke', '#94a3b8');
+      d3.select(this).select('circle').attr('stroke-width', 3).attr('stroke', '#0f172a');
+      renderSidebar(d.data);
+    });
+
+  bubbles.append('circle')
+    .attr('r', d => d.r)
+    .attr('fill', d => bubbleColor(d, maxSize))
+    .attr('stroke', '#94a3b8')
+    .attr('stroke-width', 1.2)
+    .attr('fill-opacity', d => d.data.type === 'isolatesGroup' ? 0.9 : 0.95);
+
+  bubbles.each(function(d) {
+    const g = d3.select(this);
+    const label = d.data.type === 'isolatesGroup' ? 'Isolates' : d.data.label;
+    const size = d.data.type === 'isolatesGroup' ? d.data.isolateCount : d.data.size;
+    const fs1 = Math.max(11, Math.min(28, d.r * 0.32));
+    const fs2 = Math.max(10, Math.min(18, d.r * 0.18));
+
+    if (d.r >= 24) {
+      g.append('text')
+        .attr('class', 'bubble-label')
+        .attr('dy', '-0.12em')
+        .style('font-size', `${fs1}px`)
+        .text(label);
+
+      g.append('text')
+        .attr('class', 'bubble-sub')
+        .attr('dy', '1.2em')
+        .style('font-size', `${fs2}px`)
+        .text(`${size} domain${size === 1 ? '' : 's'}`);
+    } else if (d.r >= 14) {
+      g.append('text')
+        .attr('class', 'bubble-label')
+        .style('font-size', `${Math.max(10, d.r * 0.42)}px`)
+        .attr('dy', '0.32em')
+        .text(size);
+    }
+  });
+
+  renderSidebar(null);
+}
+
+function recomputeAndRender() {
+  const model = buildComponents(rawRows, 6);
+  renderPacking(model);
+}
+
+function displayDomain(value) {
+  if (!value) return '';
+  const raw = String(value).trim();
+  try {
+    const withProto = raw.startsWith('http') ? raw : `https://${raw}`;
+    const host = new URL(withProto).hostname;
+    return host || raw;
+  } catch {
+    return raw.replace(/^https?:\/\//, '').split('/')[0];
+  }
+}
+
+async function loadDataset(path) {
+  try {
+    const response = await fetch(path);
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    rawRows = await response.json();
+    statusEl.textContent = `Loaded ${path} · ${rawRows.length} domains`;
+    precomputedPairs = buildPrecomputedPairs(rawRows);
+    recomputeAndRender();
+  } catch (err) {
+    statusEl.textContent = `Could not load ${path}: ${err.message}`;
+    chartEl.innerHTML = `<div class="empty">Could not load ${path}. Keep this HTML in the same folder as the dataset, or serve both files from the same local web server.</div>`;
+  }
+}
+
+datasetSelectEl.addEventListener('change', () => {
+  const path = datasetSelectEl.value;
+  statusEl.textContent = `Loading ${path}…`;
+  loadDataset(path);
+});
+window.addEventListener('resize', () => {
+  if (rawRows.length) recomputeAndRender();
+});
+
+loadDataset(datasetSelectEl.value);
+</script>
+</body>
+</html>

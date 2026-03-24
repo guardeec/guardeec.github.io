@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FAMOUS Cross-country Coupling Matrix</title>
+  <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+  <style>
+    :root {
+      --bg: #0b0f18;
+      --card: #111827;
+      --border: #1f2937;
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --accent: #3b82f6;
+      --accent-soft: rgba(59, 130, 246, 0.14);
+      --grid: rgba(148, 163, 184, 0.18);
+      --hairline: rgba(148, 163, 184, 0.22);
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #111827 0%, #0b0f18 55%, #0a0e16 100%);
+      color: var(--text);
+    }
+
+    .page {
+      padding: 12px;
+    }
+
+    .panel {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+    }
+
+    .toolbar {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 14px 14px 0 14px;
+    }
+
+    .toolbar-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .toolbar h1 {
+      margin: 0 12px 0 0;
+      font-size: 18px;
+      line-height: 1.2;
+    }
+
+    label {
+      font-size: 13px;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    select, button {
+      font: inherit;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: #0f172a;
+      padding: 9px 12px;
+      color: var(--text);
+    }
+
+    select { min-width: 130px; }
+
+    button {
+      cursor: pointer;
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+      font-weight: 600;
+    }
+
+    button:hover { filter: brightness(0.96); }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 1fr 25%;
+      gap: 12px;
+      align-items: start;
+      padding: 12px;
+    }
+
+    .viz-card {
+      padding: 8px 10px 10px;
+      overflow: auto;
+    }
+
+    .right-rail {
+      display: grid;
+      gap: 12px;
+      align-content: start;
+    }
+
+    .side {
+      padding: 12px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: rgba(15, 23, 42, 0.55);
+    }
+
+    .section-title {
+      margin: 0 0 6px 0;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .legend-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .legend-gradient {
+      width: 100%;
+      height: 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: linear-gradient(90deg, #0f172a 0%, #1e293b 30%, #2563eb 60%, #93c5fd 100%);
+    }
+
+    .legend-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .notes {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+
+    .notes p {
+      margin: 0 0 8px 0;
+    }
+
+    .status {
+      color: var(--muted);
+      font-size: 13px;
+      margin: 6px 0 10px;
+    }
+
+    svg text {
+      font-size: 11px;
+      fill: var(--muted);
+    }
+
+    .row-label, .col-label {
+      cursor: default;
+    }
+
+    .row-label.active, .col-label.active {
+      fill: var(--text);
+      font-weight: 700;
+    }
+
+    .cell {
+      stroke: rgba(15, 23, 42, 0.7);
+      stroke-width: 1px;
+    }
+
+    .cell.active {
+      stroke: #e2e8f0;
+      stroke-width: 1.4px;
+    }
+
+    .gridline {
+      stroke: var(--grid);
+      stroke-width: 1px;
+    }
+
+    .tooltip {
+      position: fixed;
+      pointer-events: none;
+      z-index: 20;
+      min-width: 210px;
+      max-width: 280px;
+      background: rgba(17, 24, 39, 0.96);
+      color: #fff;
+      padding: 10px 12px;
+      border-radius: 10px;
+      font-size: 12px;
+      line-height: 1.45;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+      opacity: 0;
+      transform: translateY(4px);
+      transition: opacity 120ms ease, transform 120ms ease;
+      white-space: normal;
+    }
+
+    .tooltip.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .tooltip b {
+      color: #dbeafe;
+    }
+
+    @media (max-width: 1100px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+      .right-rail {
+        order: 2;
+      }
+      .viz-card {
+        padding: 10px 16px 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="panel">
+      <div class="layout">
+        <div class="viz-card">
+          <div class="status" id="statusLine">Loading…</div>
+          <div id="svgHost"></div>
+        </div>
+        <div class="right-rail">
+          <div class="toolbar">
+            <div class="toolbar-left">
+              <h1>Cross-country Coupling Matrix</h1>
+              <label>
+                Year
+                <select id="yearSelect">
+                  <option value="2025">2025</option>
+                  <option value="2026">2026</option>
+                </select>
+              </label>
+              <button id="sortBtn">Sort current year</button>
+            </div>
+          </div>
+          <aside class="side">
+            <div class="legend-wrap">
+              <div class="section-title">Coupling index</div>
+              <div class="legend-gradient"></div>
+              <div class="legend-labels">
+                <span>0</span>
+                <span>0.5</span>
+                <span>1.0</span>
+              </div>
+              <div class="notes">Darker cells mean stronger overlap between the two country-level domain sets.</div>
+            </div>
+
+            <div class="section-title">Definition</div>
+            <div class="notes">
+              <p><b>Cross-country coupling</b> is the Jaccard overlap between the domain sets observed in two countries:</p>
+              <p><code>shared domains / all unique domains across both countries</code></p>
+              <p>Diagonal cells equal <b>1.0</b> because each country is perfectly coupled with itself.</p>
+              <p>Switching year changes the matrix values while keeping the current country order. Press <b>Sort current year</b> to reorder rows and columns for the selected year so clusters become more visible.</p>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tooltip" id="tooltip"></div>
+
+  <script>
+    const CELL_SIZE = 24;
+    const MARGIN = { top: 90, right: 18, bottom: 18, left: 150 };
+    const TRANSITION_MS = 950;
+
+    const yearSelect = document.getElementById('yearSelect');
+    const sortBtn = document.getElementById('sortBtn');
+    const statusLine = document.getElementById('statusLine');
+    const tooltip = document.getElementById('tooltip');
+
+    let datasets = {};
+    let allCountries = [];
+    let currentYear = '2025';
+    let currentOrder = [];
+    let currentMatrix = [];
+    let svg, rootG, cellLayer, rowLabelLayer, colLabelLayer, gridLayer;
+    let xScale, yScale, colorScale;
+    let activeRow = null;
+    let activeCol = null;
+
+    function normalizeCountry(value) {
+      return (value || '').toString().trim();
+    }
+
+    function normalizeDomain(value) {
+      return (value || '').toString().trim().toLowerCase();
+    }
+
+    function buildCountrySets(records) {
+      const map = new Map();
+      for (const rec of records) {
+        const domain = normalizeDomain(rec.domain);
+        if (!domain) continue;
+        const countries = Array.isArray(rec.countries) ? rec.countries.map(normalizeCountry).filter(Boolean) : [];
+        for (const country of countries) {
+          if (!map.has(country)) map.set(country, new Set());
+          map.get(country).add(domain);
+        }
+      }
+      return map;
+    }
+
+    function buildMatrix(countrySets, countryList) {
+      const matrix = [];
+      for (const rowCountry of countryList) {
+        const rowSet = countrySets.get(rowCountry) || new Set();
+        for (const colCountry of countryList) {
+          const colSet = countrySets.get(colCountry) || new Set();
+          const shared = intersectionSize(rowSet, colSet);
+          const union = rowSet.size + colSet.size - shared;
+          const coupling = union === 0 ? 0 : shared / union;
+          matrix.push({
+            row: rowCountry,
+            col: colCountry,
+            value: coupling,
+            shared,
+            union,
+            rowCount: rowSet.size,
+            colCount: colSet.size
+          });
+        }
+      }
+      return matrix;
+    }
+
+    function intersectionSize(setA, setB) {
+      if (!setA.size || !setB.size) return 0;
+      const [small, large] = setA.size < setB.size ? [setA, setB] : [setB, setA];
+      let count = 0;
+      for (const value of small) {
+        if (large.has(value)) count += 1;
+      }
+      return count;
+    }
+
+    function matrixToSquareMap(matrix, countries) {
+      const lookup = new Map();
+      for (const cell of matrix) {
+        lookup.set(`${cell.row}|||${cell.col}`, cell.value);
+      }
+      return countries.map(r => countries.map(c => lookup.get(`${r}|||${c}`) || 0));
+    }
+
+    function euclideanDistance(a, b) {
+      let sum = 0;
+      for (let i = 0; i < a.length; i += 1) {
+        const d = a[i] - b[i];
+        sum += d * d;
+      }
+      return Math.sqrt(sum);
+    }
+
+    function averageLinkageDistance(clusterA, clusterB, distMatrix) {
+      let total = 0;
+      let count = 0;
+      for (const i of clusterA.leaves) {
+        for (const j of clusterB.leaves) {
+          total += distMatrix[i][j];
+          count += 1;
+        }
+      }
+      return count ? total / count : 0;
+    }
+
+    function buildClusterOrder(squareMatrix, countries) {
+      const n = countries.length;
+      const distMatrix = Array.from({ length: n }, (_, i) =>
+        Array.from({ length: n }, (_, j) => euclideanDistance(squareMatrix[i], squareMatrix[j]))
+      );
+
+      let clusters = countries.map((country, idx) => ({
+        id: `leaf-${idx}`,
+        leaves: [idx],
+        left: null,
+        right: null
+      }));
+
+      while (clusters.length > 1) {
+        let bestI = 0;
+        let bestJ = 1;
+        let bestDist = Infinity;
+
+        for (let i = 0; i < clusters.length; i += 1) {
+          for (let j = i + 1; j < clusters.length; j += 1) {
+            const d = averageLinkageDistance(clusters[i], clusters[j], distMatrix);
+            if (d < bestDist) {
+              bestDist = d;
+              bestI = i;
+              bestJ = j;
+            }
+          }
+        }
+
+        const a = clusters[bestI];
+        const b = clusters[bestJ];
+        const merged = {
+          id: `cluster-${clusters.length}-${a.id}-${b.id}`,
+          leaves: [...a.leaves, ...b.leaves],
+          left: a,
+          right: b
+        };
+
+        clusters = clusters.filter((_, idx) => idx !== bestI && idx !== bestJ);
+        clusters.push(merged);
+      }
+
+      const root = clusters[0];
+      const orderedIndices = orderClusterLeaves(root, distMatrix);
+      return orderedIndices.map(idx => countries[idx]);
+    }
+
+    function orderClusterLeaves(node, distMatrix) {
+      if (!node.left && !node.right) {
+        return [node.leaves[0]];
+      }
+
+      const left = orderClusterLeaves(node.left, distMatrix);
+      const right = orderClusterLeaves(node.right, distMatrix);
+      const leftRev = [...left].reverse();
+      const rightRev = [...right].reverse();
+
+      const candidates = [
+        [...left, ...right],
+        [...leftRev, ...right],
+        [...left, ...rightRev],
+        [...leftRev, ...rightRev],
+        [...right, ...left],
+        [...rightRev, ...left],
+        [...right, ...leftRev],
+        [...rightRev, ...leftRev]
+      ];
+
+      let best = candidates[0];
+      let bestScore = boundaryCost(candidates[0], distMatrix);
+
+      for (let i = 1; i < candidates.length; i += 1) {
+        const score = boundaryCost(candidates[i], distMatrix);
+        if (score < bestScore) {
+          best = candidates[i];
+          bestScore = score;
+        }
+      }
+
+      return best;
+    }
+
+    function boundaryCost(order, distMatrix) {
+      let score = 0;
+      for (let i = 0; i < order.length - 1; i += 1) {
+        score += distMatrix[order[i]][order[i + 1]];
+      }
+      return score;
+    }
+
+    function updateStatus() {
+      const matrixYear = currentYear;
+      const square = matrixToSquareMap(currentMatrix, allCountries);
+      const values = [];
+      for (let i = 0; i < square.length; i += 1) {
+        for (let j = 0; j < square.length; j += 1) {
+          if (i !== j) values.push(square[i][j]);
+        }
+      }
+      const nonZero = values.filter(v => v > 0).length;
+      const maxOffDiag = d3.max(values);
+      statusLine.textContent = `${matrixYear} • ${allCountries.length} countries • max coupling ${maxOffDiag.toFixed(3)}`;
+    }
+
+    function setTooltip(html, x, y) {
+      tooltip.innerHTML = html;
+      tooltip.style.left = `${x + 14}px`;
+      tooltip.style.top = `${y + 14}px`;
+      tooltip.classList.add('show');
+    }
+
+    function hideTooltip() {
+      tooltip.classList.remove('show');
+    }
+
+    function updateHighlights() {
+      d3.selectAll('.row-label').classed('active', d => d === activeRow);
+      d3.selectAll('.col-label').classed('active', d => d === activeCol);
+      d3.selectAll('.cell').classed('active', d => d.row === activeRow || d.col === activeCol);
+    }
+
+    function initSvg() {
+      const width = MARGIN.left + allCountries.length * CELL_SIZE + MARGIN.right;
+      const height = MARGIN.top + allCountries.length * CELL_SIZE + MARGIN.bottom;
+
+      svg = d3.select('#svgHost')
+        .append('svg')
+        .attr('width', width)
+        .attr('height', height)
+        .attr('viewBox', `0 0 ${width} ${height}`);
+
+      rootG = svg.append('g');
+      gridLayer = rootG.append('g');
+      cellLayer = rootG.append('g');
+      rowLabelLayer = rootG.append('g');
+      colLabelLayer = rootG.append('g');
+
+      colorScale = d3.scaleSequential()
+        .domain([0, 1])
+        .interpolator(t => d3.interpolateRgbBasis(['#0f172a', '#1e293b', '#2563eb', '#60a5fa', '#93c5fd'])(t));
+    }
+
+    function render(matrix, animate = true) {
+      currentMatrix = matrix;
+      updateStatus();
+
+      xScale = d3.scaleBand().domain(currentOrder).range([MARGIN.left, MARGIN.left + currentOrder.length * CELL_SIZE]);
+      yScale = d3.scaleBand().domain(currentOrder).range([MARGIN.top, MARGIN.top + currentOrder.length * CELL_SIZE]);
+
+      const t = svg.transition().duration(animate ? TRANSITION_MS : 0).ease(d3.easeCubicInOut);
+
+      const gridData = currentOrder;
+      const rows = gridLayer.selectAll('.gridline.row').data(gridData, d => d);
+      rows.join(
+        enter => enter.append('line')
+          .attr('class', 'gridline row')
+          .attr('x1', MARGIN.left)
+          .attr('x2', MARGIN.left + currentOrder.length * CELL_SIZE)
+          .attr('y1', d => yScale(d) + yScale.bandwidth())
+          .attr('y2', d => yScale(d) + yScale.bandwidth()),
+        update => update,
+        exit => exit.remove()
+      ).transition(t)
+        .attr('x1', MARGIN.left)
+        .attr('x2', MARGIN.left + currentOrder.length * CELL_SIZE)
+        .attr('y1', d => yScale(d) + yScale.bandwidth())
+        .attr('y2', d => yScale(d) + yScale.bandwidth());
+
+      const cols = gridLayer.selectAll('.gridline.col').data(gridData, d => d);
+      cols.join(
+        enter => enter.append('line')
+          .attr('class', 'gridline col')
+          .attr('y1', MARGIN.top)
+          .attr('y2', MARGIN.top + currentOrder.length * CELL_SIZE)
+          .attr('x1', d => xScale(d) + xScale.bandwidth())
+          .attr('x2', d => xScale(d) + xScale.bandwidth()),
+        update => update,
+        exit => exit.remove()
+      ).transition(t)
+        .attr('y1', MARGIN.top)
+        .attr('y2', MARGIN.top + currentOrder.length * CELL_SIZE)
+        .attr('x1', d => xScale(d) + xScale.bandwidth())
+        .attr('x2', d => xScale(d) + xScale.bandwidth());
+
+      const cells = cellLayer.selectAll('.cell').data(matrix, d => `${d.row}|||${d.col}`);
+      cells.join(
+        enter => enter.append('rect')
+          .attr('class', 'cell')
+          .attr('rx', 2)
+          .attr('ry', 2)
+          .attr('width', xScale.bandwidth())
+          .attr('height', yScale.bandwidth())
+          .attr('x', d => xScale(d.col))
+          .attr('y', d => yScale(d.row))
+          .attr('fill', d => colorScale(d.value))
+          .on('mouseenter', function(event, d) {
+            activeRow = d.row;
+            activeCol = d.col;
+            updateHighlights();
+            setTooltip(
+              `<b>${d.row}</b> × <b>${d.col}</b><br>` +
+              `Coupling: <b>${d.value.toFixed(3)}</b><br>` +
+              `Shared domains: <b>${d.shared}</b><br>` +
+              `Union size: <b>${d.union}</b><br>` +
+              `${d.row}: ${d.rowCount} domains<br>` +
+              `${d.col}: ${d.colCount} domains`,
+              event.clientX,
+              event.clientY
+            );
+          })
+          .on('mousemove', function(event) {
+            tooltip.style.left = `${event.clientX + 14}px`;
+            tooltip.style.top = `${event.clientY + 14}px`;
+          })
+          .on('mouseleave', function() {
+            activeRow = null;
+            activeCol = null;
+            updateHighlights();
+            hideTooltip();
+          }),
+        update => update,
+        exit => exit.remove()
+      ).transition(t)
+        .attr('x', d => xScale(d.col))
+        .attr('y', d => yScale(d.row))
+        .attr('width', xScale.bandwidth())
+        .attr('height', yScale.bandwidth())
+        .attr('fill', d => colorScale(d.value));
+
+      const rowLabels = rowLabelLayer.selectAll('.row-label').data(currentOrder, d => d);
+      rowLabels.join(
+        enter => enter.append('text')
+          .attr('class', 'row-label')
+          .attr('text-anchor', 'end')
+          .attr('dominant-baseline', 'middle')
+          .attr('x', MARGIN.left - 10)
+          .attr('y', d => yScale(d) + yScale.bandwidth() / 2)
+          .text(d => d),
+        update => update,
+        exit => exit.remove()
+      ).transition(t)
+        .attr('x', MARGIN.left - 10)
+        .attr('y', d => yScale(d) + yScale.bandwidth() / 2);
+
+      const colLabels = colLabelLayer.selectAll('.col-label').data(currentOrder, d => d);
+      colLabels.join(
+        enter => enter.append('text')
+          .attr('class', 'col-label')
+          .attr('text-anchor', 'start')
+          .attr('transform', d => `translate(${xScale(d) + xScale.bandwidth() / 2}, ${MARGIN.top - 10}) rotate(-60)`)
+          .text(d => d),
+        update => update,
+        exit => exit.remove()
+      ).transition(t)
+        .attr('transform', d => `translate(${xScale(d) + xScale.bandwidth() / 2}, ${MARGIN.top - 10}) rotate(-60)`);
+
+      updateHighlights();
+    }
+
+    function yearData(year) {
+      return datasets[year];
+    }
+
+    function refreshMatrix(animate = true) {
+      const matrix = buildMatrix(yearData(currentYear).countrySets, allCountries);
+      render(matrix, animate);
+    }
+
+    async function loadDatasets() {
+      const [d1, d2] = await Promise.all([
+        fetch('https://guardeec.github.io/FAMOUS/dataset_1.json').then(r => {
+          if (!r.ok) throw new Error('Could not load dataset_1.json');
+          return r.json();
+        }),
+        fetch('https://guardeec.github.io/FAMOUS/dataset_2.json').then(r => {
+          if (!r.ok) throw new Error('Could not load dataset_2.json');
+          return r.json();
+        })
+      ]);
+
+      datasets = {
+        '2025': { label: '2025', records: d1, countrySets: buildCountrySets(d1) },
+        '2026': { label: '2026', records: d2, countrySets: buildCountrySets(d2) }
+      };
+
+      const countryUnion = new Set();
+      Object.values(datasets).forEach(ds => {
+        ds.countrySets.forEach((_, country) => countryUnion.add(country));
+      });
+      allCountries = Array.from(countryUnion).sort(d3.ascending);
+      currentOrder = [...allCountries];
+
+      initSvg();
+      refreshMatrix(false);
+    }
+
+    yearSelect.addEventListener('change', () => {
+      currentYear = yearSelect.value;
+      refreshMatrix(true);
+    });
+
+    sortBtn.addEventListener('click', () => {
+      const matrix = buildMatrix(yearData(currentYear).countrySets, allCountries);
+      const square = matrixToSquareMap(matrix, allCountries);
+      currentOrder = buildClusterOrder(square, allCountries);
+      render(matrix, true);
+    });
+
+    loadDatasets().catch(err => {
+      console.error(err);
+      statusLine.textContent = 'Failed to load dataset_1.json or dataset_2.json.';
+    });
+  </script>
+</body>
+</html>

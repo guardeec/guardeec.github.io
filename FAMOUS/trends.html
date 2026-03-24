@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FAMOUS Market Renewal × Transnationality</title>
+  <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+  <style>
+    :root {
+      --bg: #0b0f18;
+      --panel: #121826;
+      --border: #1f2937;
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --blue: #60a5fa;
+      --green: #34d399;
+      --orange: #f59e0b;
+      --red: #ef4444;
+      --gray: #94a3b8;
+      --shadow: 0 1px 2px rgba(0,0,0,.35), 0 18px 40px rgba(0,0,0,.35);
+      --panel-strong: #0f172a;
+      --panel-soft: #0f1626;
+      --grid: rgba(148,163,184,.18);
+      --hairline: rgba(148,163,184,.22);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #121a2b 0%, #0b0f18 55%, #0a0e16 100%);
+      color: var(--text);
+    }
+    .wrap {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 28px;
+      line-height: 1.15;
+    }
+    .sub {
+      color: var(--muted);
+      max-width: 980px;
+      line-height: 1.5;
+      margin-bottom: 18px;
+    }
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+    }
+    .controls {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      padding: 14px 16px;
+      margin-bottom: 16px;
+    }
+    .control-label {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--muted);
+      letter-spacing: .02em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    select {
+      min-width: 260px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-size: 14px;
+      background: var(--panel-strong);
+      color: var(--text);
+      outline: none;
+    }
+    select:focus {
+      border-color: #5b7cc4;
+      box-shadow: 0 0 0 4px rgba(96,165,250,.2);
+    }
+    .controls-note {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.45;
+      margin-left: auto;
+      text-align: right;
+      max-width: 620px;
+    }
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+    .metrics.all-mode {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+    .metric-card {
+      padding: 16px;
+      min-height: 118px;
+      position: relative;
+    }
+    .metric-card.has-mini {
+      min-height: 320px;
+    }
+    .metric-top {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: .01em;
+    }
+    .metric-value {
+      font-size: 28px;
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 4px;
+    }
+    .metric-sub {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+    .mini-wrap {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid var(--hairline);
+    }
+    .mini-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 8px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .mini-head strong {
+      color: #cbd5f5;
+      font-size: 12px;
+      letter-spacing: .01em;
+    }
+    .mini-scroll {
+      max-height: none;
+      overflow: visible;
+    }
+    .mini-svg {
+      width: 100%;
+      display: block;
+    }
+    .qwrap {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+    }
+    .q {
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+      border: 1px solid #2b3a55;
+      color: #c0d1ff;
+      background: #0e1a2b;
+      cursor: default;
+      user-select: none;
+    }
+    .qtip {
+      position: absolute;
+      left: 0;
+      top: 24px;
+      width: 300px;
+      background: rgba(6,8,12,.97);
+      color: #fff;
+      padding: 10px 12px;
+      border-radius: 10px;
+      font-size: 12px;
+      line-height: 1.45;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(6px);
+      transition: opacity .15s ease, transform .15s ease;
+      z-index: 20;
+      box-shadow: 0 12px 28px rgba(0,0,0,.22);
+    }
+    .qwrap:hover .qtip {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .error {
+      color: #fecaca;
+      background: #2a0f11;
+      border: 1px solid #5f1b1b;
+      padding: 12px 14px;
+      border-radius: 12px;
+      margin-top: 12px;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+    @media (max-width: 1080px) {
+      .metrics, .metrics.all-mode { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .controls { flex-direction: column; align-items: flex-start; }
+      .controls-note { text-align: left; max-width: none; margin-left: 0; }
+    }
+    @media (max-width: 720px) {
+      .wrap { padding: 14px; }
+      .metrics, .metrics.all-mode { grid-template-columns: 1fr; }
+      select { min-width: 100%; width: 100%; }
+      .metric-card.has-mini { min-height: 320px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>FAMOUS market renewal × transnationality</h1>
+
+
+    <div class="panel controls">
+      <div class="control-label">Country filter</div>
+      <select id="countrySelect">
+        <option value="__ALL__">All countries</option>
+      </select>
+      <div class="controls-note" id="controlsNote"></div>
+    </div>
+
+    <div class="metrics" id="metrics"></div>
+    <div class="error" id="error" style="display:none"></div>
+  </div>
+
+  <script>
+  (() => {
+    const CSS = getComputedStyle(document.documentElement);
+    const TEXT = CSS.getPropertyValue('--text') || '#e2e8f0';
+    const MUTED = CSS.getPropertyValue('--muted') || '#94a3b8';
+    const GRID = CSS.getPropertyValue('--grid') || 'rgba(148,163,184,.18)';
+
+    const ALL = '__ALL__';
+    const metricsEl = document.getElementById('metrics');
+    const errorEl = document.getElementById('error');
+    const countrySelect = document.getElementById('countrySelect');
+    const controlsNoteEl = document.getElementById('controlsNote');
+
+    let rawData = null;
+    let cachedStats = null;
+    let allCountries = [];
+    let countryStatsCache = [];
+
+    function pct(x, digits = 1) {
+      if (x == null || Number.isNaN(x)) return '—';
+      return `${(x * 100).toFixed(digits)}%`;
+    }
+
+    function pp(delta, digits = 1) {
+      if (delta == null || Number.isNaN(delta)) return '—';
+      const value = (delta * 100).toFixed(digits);
+      return `${delta >= 0 ? '+' : ''}${value} pp`;
+    }
+
+    function num(x, digits = 2) {
+      if (x == null || Number.isNaN(x)) return '—';
+      return Number(x).toFixed(digits).replace(/\.00$/, '');
+    }
+
+    function extractRecords(raw) {
+      if (Array.isArray(raw)) return raw;
+      if (raw && Array.isArray(raw.data)) return raw.data;
+      if (raw && Array.isArray(raw.records)) return raw.records;
+      if (raw && Array.isArray(raw.items)) return raw.items;
+      return [];
+    }
+
+    function cleanDomain(v) {
+      return typeof v === 'string' ? v.trim().toLowerCase() : null;
+    }
+
+    function getCountrySet(record) {
+      const set = new Set();
+      const push = value => {
+        if (typeof value === 'string' && value.trim()) set.add(value.trim());
+      };
+
+      if (Array.isArray(record.countries)) {
+        record.countries.forEach(push);
+      } else if (record.countries && typeof record.countries === 'object') {
+        Object.entries(record.countries).forEach(([k, v]) => {
+          if (v) push(k);
+        });
+      }
+
+      const byCountry = record.serp && record.serp.by_country;
+      if (byCountry && typeof byCountry === 'object') {
+        Object.keys(byCountry).forEach(push);
+      }
+
+      return set;
+    }
+
+    function getBreadth(record) {
+      return getCountrySet(record).size;
+    }
+
+    function categoryFromBreadth(n) {
+      if (n === 1) return 'Single-country';
+      if (n >= 2 && n <= 5) return '2–5 countries';
+      return '6+ countries';
+    }
+
+    function mean(arr) {
+      return arr.length ? arr.reduce((a, b) => a + b, 0) / arr.length : null;
+    }
+
+    function buildDomainMap(records) {
+      const map = new Map();
+      for (const rec of records) {
+        const domain = cleanDomain(rec.domain);
+        if (!domain) continue;
+        map.set(domain, rec);
+      }
+      return map;
+    }
+
+    function getAllCountries(raw1, raw2) {
+      const countries = new Set();
+      [raw1, raw2].flatMap(extractRecords).forEach(rec => {
+        getCountrySet(rec).forEach(country => countries.add(country));
+      });
+      return [...countries].sort((a, b) => a.localeCompare(b));
+    }
+
+    function compute(raw1, raw2, selectedCountry = ALL) {
+      const records1 = extractRecords(raw1);
+      const records2 = extractRecords(raw2);
+      const map1 = buildDomainMap(records1);
+      const map2 = buildDomainMap(records2);
+
+      const matches = rec => {
+        if (!rec) return false;
+        if (selectedCountry === ALL) return true;
+        return getCountrySet(rec).has(selectedCountry);
+      };
+
+      const d1 = new Set([...map1.entries()].filter(([, rec]) => matches(rec)).map(([domain]) => domain));
+      const d2 = new Set([...map2.entries()].filter(([, rec]) => matches(rec)).map(([domain]) => domain));
+      const overlap = [...d1].filter(d => d2.has(d));
+      const unionCount = new Set([...d1, ...d2]).size;
+
+      const selectedRecords1 = [...map1.entries()].filter(([, rec]) => matches(rec)).map(([, rec]) => rec);
+      const selectedRecords2 = [...map2.entries()].filter(([, rec]) => matches(rec)).map(([, rec]) => rec);
+      const breadths1 = selectedRecords1.map(getBreadth).filter(x => x > 0);
+      const breadths2 = selectedRecords2.map(getBreadth).filter(x => x > 0);
+
+      const validOverlap = overlap.filter(domain => getBreadth(map1.get(domain)) > 0 && getBreadth(map2.get(domain)) > 0);
+      const transitions = d3.rollups(
+        validOverlap,
+        v => v.length,
+        domain => categoryFromBreadth(getBreadth(map1.get(domain))),
+        domain => categoryFromBreadth(getBreadth(map2.get(domain)))
+      ).flatMap(([from, arr]) => arr.map(([to, value]) => ({ from, to, value })));
+
+      return {
+        filterLabel: selectedCountry === ALL ? 'All countries' : selectedCountry,
+        selectedCountry,
+        n1: d1.size,
+        n2: d2.size,
+        overlap: overlap.length,
+        unionCount,
+        turnover: unionCount ? 1 - (overlap.length / unionCount) : 0,
+        survival: d1.size ? overlap.length / d1.size : 0,
+        avgBreadth1: mean(breadths1),
+        avgBreadth2: mean(breadths2),
+        multiShare1: breadths1.length ? breadths1.filter(x => x > 1).length / breadths1.length : 0,
+        multiShare2: breadths2.length ? breadths2.filter(x => x > 1).length / breadths2.length : 0,
+        breadthCoverage1: selectedRecords1.length ? breadths1.length / selectedRecords1.length : 0,
+        breadthCoverage2: selectedRecords2.length ? breadths2.length / selectedRecords2.length : 0,
+        chartCount: validOverlap.length,
+        excludedOverlap: overlap.length - validOverlap.length,
+        transitions
+      };
+    }
+
+    function metricCard(title, value, subtitle, tip, miniId = null, miniCaption = '') {
+      const hasMini = !!miniId;
+      return `
+        <div class="panel metric-card ${hasMini ? 'has-mini' : ''}">
+          <div class="metric-top">
+            <span>${title}</span>
+            <span class="qwrap">
+              <span class="q">?</span>
+              <span class="qtip">${tip}</span>
+            </span>
+          </div>
+          <div class="metric-value">${value}</div>
+          <div class="metric-sub">${subtitle}</div>
+          ${hasMini ? `
+            <div class="mini-wrap">
+              <div class="mini-head">
+                <strong>By country</strong>
+                <span>${miniCaption}</span>
+              </div>
+              <div class="mini-scroll">
+                <svg id="${miniId}" class="mini-svg"></svg>
+              </div>
+            </div>` : ''}
+        </div>
+      `;
+    }
+
+    function buildCountryMiniData() {
+      return countryStatsCache.filter(d => d.unionCount > 0);
+    }
+
+    const lastMetricValues = new Map();
+
+    function formatValue(value, format) {
+      if (value == null || Number.isNaN(value)) return '—';
+      if (format === 'pct') return pct(value);
+      if (format === 'num') return num(value);
+      return value;
+    }
+
+    function renderMetrics(stats, animateNumbers = false) {
+      const showMini = true;
+      metricsEl.classList.toggle('all-mode', false);
+      const scopeText = stats.selectedCountry === ALL ? 'across the full dataset pair' : `within domains observed in ${stats.filterLabel}`;
+      metricsEl.innerHTML = [
+        metricCard(
+          'Turnover intensity',
+          `<span class="count" data-key="turnover" data-format="pct" data-value="${stats.turnover ?? ''}">${pct(stats.turnover)}</span>`,
+          `${stats.overlap} overlapping out of ${stats.unionCount} unique domains ${scopeText}.`,
+          'Formula: 1 − |D2025 ∩ D2026| / |D2025 ∪ D2026|. When a country is selected, D2025 and D2026 contain only domains observed in that country in the corresponding year. Higher values mean stronger market replacement.',
+          showMini ? 'mini-turnover' : null,
+          showMini ? 'Single value per country' : ''
+        ),
+        metricCard(
+          'Survival rate',
+          `<span class="count" data-key="survival" data-format="pct" data-value="${stats.survival ?? ''}">${pct(stats.survival)}</span>`,
+          `${stats.overlap} of ${stats.n1} baseline domains remain present ${scopeText}.`,
+          'Formula: |D2025 ∩ D2026| / |D2025|. When a country is selected, the baseline set contains only domains observed in that selected country in 2025.',
+          showMini ? 'mini-survival' : null,
+          showMini ? 'Single value per country' : ''
+        ),
+        metricCard(
+          'Average country breadth',
+          `<span class="count" data-key="breadth-1" data-format="num" data-value="${stats.avgBreadth1 ?? ''}">${num(stats.avgBreadth1)}</span> → <span class="count" data-key="breadth-2" data-format="num" data-value="${stats.avgBreadth2 ?? ''}">${num(stats.avgBreadth2)}</span>`,
+          `${stats.avgBreadth1 != null && stats.avgBreadth2 != null ? num(stats.avgBreadth2 - stats.avgBreadth1) : '—'} change in mean number of countries per selected domain.`,
+          'For each selected cohort, country breadth is the number of distinct countries linked to a domain through the countries field and SERP by_country field. The metric is the mean breadth among selected domains with observed country data.',
+          showMini ? 'mini-breadth' : null,
+          showMini ? 'Gray = 2025, colored = 2026' : ''
+        ),
+        metricCard(
+          'Multi-country share',
+          `<span class="count" data-key="multi-1" data-format="pct" data-value="${stats.multiShare1 ?? ''}">${pct(stats.multiShare1)}</span> → <span class="count" data-key="multi-2" data-format="pct" data-value="${stats.multiShare2 ?? ''}">${pct(stats.multiShare2)}</span>`,
+          `${pp(stats.multiShare2 - stats.multiShare1)} change in the share of selected domains that appear in more than one country.`,
+          'Formula within each year: number of selected domains with breadth > 1 divided by number of selected domains with observed country data. This captures how cross-border the chosen cohort is.',
+          showMini ? 'mini-multishare' : null,
+          showMini ? 'Gray = 2025, colored = 2026' : ''
+        )
+      ].join('');
+
+      if (showMini) renderCountryMiniCharts(stats);
+      if (animateNumbers) animateCounts();
+    }
+
+    function animateCounts() {
+      const elements = metricsEl.querySelectorAll('.count');
+      const duration = 520;
+      elements.forEach(el => {
+        const key = el.dataset.key || Math.random().toString(36).slice(2);
+        const format = el.dataset.format || 'num';
+        const raw = parseFloat(el.dataset.value);
+        if (Number.isNaN(raw)) {
+          el.textContent = '—';
+          return;
+        }
+        const prev = lastMetricValues.has(key) ? lastMetricValues.get(key) : raw;
+        const start = performance.now();
+        function tick(now) {
+          const t = Math.min(1, (now - start) / duration);
+          const eased = 1 - Math.pow(1 - t, 3);
+          const value = prev + (raw - prev) * eased;
+          el.textContent = formatValue(value, format);
+          if (t < 1) {
+            requestAnimationFrame(tick);
+          } else {
+            lastMetricValues.set(key, raw);
+            el.textContent = formatValue(raw, format);
+          }
+        }
+        requestAnimationFrame(tick);
+      });
+    }
+
+    function renderNotes(stats) {
+      if (stats.selectedCountry === ALL) {
+        controlsNoteEl.textContent = 'Global mode uses all domains from both datasets.';
+      } else {
+        controlsNoteEl.textContent = `Country mode restricts the cohort to domains observed in ${stats.filterLabel} in each year.`;
+      }
+    }
+
+    function renderValueBarMini(svgId, data, options = {}) {
+      const svgSel = d3.select(`#${svgId}`);
+      if (svgSel.empty()) return;
+      svgSel.selectAll('*').remove();
+
+      const rowH = 18;
+      const width = svgSel.node().parentElement.clientWidth - 6;
+      const margin = { top: 6, right: 40, bottom: 10, left: 92 };
+      const height = margin.top + margin.bottom + rowH * data.length;
+      svgSel.attr('viewBox', `0 0 ${width} ${height}`);
+
+      const values = data.map(d => d.value).filter(v => v != null && !Number.isNaN(v));
+      const maxValue = Math.max(options.minMax ?? 0, d3.max(values) || 0);
+      const x = d3.scaleLinear().domain([0, maxValue || 1]).range([margin.left, width - margin.right]);
+
+      const g = svgSel.append('g');
+      const tickCount = options.ticks || 4;
+      const ticks = x.ticks(tickCount);
+
+      g.append('g')
+        .selectAll('line.grid')
+        .data(ticks)
+        .join('line')
+        .attr('x1', d => x(d))
+        .attr('x2', d => x(d))
+        .attr('y1', margin.top - 2)
+        .attr('y2', height - margin.bottom + 2)
+        .attr('stroke', GRID)
+        .attr('stroke-width', 1);
+
+      g.append('g')
+        .attr('transform', `translate(0,${height - margin.bottom})`)
+        .call(d3.axisBottom(x).tickValues(ticks).tickSize(0).tickFormat(options.formatAxis || (d => d)))
+        .call(s => s.select('.domain').remove())
+        .call(s => s.selectAll('text').attr('fill', MUTED).style('font-size', '10px'));
+
+      const row = g.selectAll('g.row')
+        .data(data)
+        .join('g')
+        .attr('transform', (_, i) => `translate(0,${margin.top + i * rowH})`);
+
+      row.append('text')
+        .attr('x', margin.left - 8)
+        .attr('y', rowH / 2)
+        .attr('dy', '0.35em')
+        .attr('text-anchor', 'end')
+        .attr('fill', d => (options.highlight && d.country === options.highlight) ? TEXT : MUTED)
+        .style('font-size', '10.5px')
+        .style('font-weight', d => (options.highlight && d.country === options.highlight) ? '700' : '400')
+        .text(d => d.country);
+
+      row.append('rect')
+        .attr('x', x(0))
+        .attr('y', 5)
+        .attr('height', 10)
+        .attr('rx', 4)
+        .attr('width', d => Math.max(1, x(d.value) - x(0)))
+        .attr('fill', options.color || '#60a5fa')
+        .attr('opacity', d => (options.highlight && d.country !== options.highlight) ? 0.45 : 0.95);
+
+      row.append('text')
+        .attr('x', d => x(d.value) + 6)
+        .attr('y', rowH / 2)
+        .attr('dy', '0.35em')
+        .attr('fill', d => (options.highlight && d.country === options.highlight) ? TEXT : MUTED)
+        .style('font-size', '10px')
+        .style('font-weight', d => (options.highlight && d.country === options.highlight) ? '700' : '400')
+        .text(d => options.formatLabel ? options.formatLabel(d.value) : d.value);
+    }
+
+    function renderDeltaMini(svgId, data, options = {}) {
+      const svgSel = d3.select(`#${svgId}`);
+      if (svgSel.empty()) return;
+      svgSel.selectAll('*').remove();
+
+      const cleanData = data.filter(d => d.from != null && d.to != null && !Number.isNaN(d.from) && !Number.isNaN(d.to));
+      const rowH = 18;
+      const width = svgSel.node().parentElement.clientWidth - 6;
+      const margin = { top: 6, right: 40, bottom: 10, left: 92 };
+      const height = margin.top + margin.bottom + rowH * cleanData.length;
+      svgSel.attr('viewBox', `0 0 ${width} ${height}`);
+
+      let minValue = d3.min(cleanData.flatMap(d => [d.from, d.to]));
+      let maxValue = d3.max(cleanData.flatMap(d => [d.from, d.to]));
+      if (minValue == null || maxValue == null) {
+        minValue = 0;
+        maxValue = 1;
+      }
+      if (minValue === maxValue) {
+        minValue -= 0.5;
+        maxValue += 0.5;
+      }
+      const pad = (maxValue - minValue) * 0.08;
+      const x = d3.scaleLinear().domain([minValue - pad, maxValue + pad]).range([margin.left, width - margin.right]);
+      const g = svgSel.append('g');
+      const ticks = x.ticks(options.ticks || 4);
+
+      g.append('g')
+        .selectAll('line.grid')
+        .data(ticks)
+        .join('line')
+        .attr('x1', d => x(d))
+        .attr('x2', d => x(d))
+        .attr('y1', margin.top - 2)
+        .attr('y2', height - margin.bottom + 2)
+        .attr('stroke', GRID)
+        .attr('stroke-width', 1);
+
+      g.append('g')
+        .attr('transform', `translate(0,${height - margin.bottom})`)
+        .call(d3.axisBottom(x).tickValues(ticks).tickSize(0).tickFormat(options.formatAxis || (d => d)))
+        .call(s => s.select('.domain').remove())
+        .call(s => s.selectAll('text').attr('fill', MUTED).style('font-size', '10px'));
+
+      const row = g.selectAll('g.row')
+        .data(cleanData)
+        .join('g')
+        .attr('transform', (_, i) => `translate(0,${margin.top + i * rowH})`);
+
+      row.append('text')
+        .attr('x', margin.left - 8)
+        .attr('y', rowH / 2)
+        .attr('dy', '0.35em')
+        .attr('text-anchor', 'end')
+        .attr('fill', d => (options.highlight && d.country === options.highlight) ? TEXT : MUTED)
+        .style('font-size', '10.5px')
+        .style('font-weight', d => (options.highlight && d.country === options.highlight) ? '700' : '400')
+        .text(d => d.country);
+
+      row.append('line')
+        .attr('x1', d => x(d.from))
+        .attr('x2', d => x(d.to))
+        .attr('y1', rowH / 2)
+        .attr('y2', rowH / 2)
+        .attr('stroke', d => {
+          const base = d.to > d.from ? '#16a34a' : d.to < d.from ? '#dc2626' : '#94a3b8';
+          return (options.highlight && d.country !== options.highlight) ? '#4b5563' : base;
+        })
+        .attr('stroke-width', 4)
+        .attr('stroke-linecap', 'round')
+        .attr('opacity', d => (options.highlight && d.country !== options.highlight) ? 0.45 : 1);
+
+      row.append('circle')
+        .attr('cx', d => x(d.from))
+        .attr('cy', rowH / 2)
+        .attr('r', 3.4)
+        .attr('fill', '#64748b')
+        .attr('opacity', d => (options.highlight && d.country !== options.highlight) ? 0.45 : 1);
+
+      row.append('circle')
+        .attr('cx', d => x(d.to))
+        .attr('cy', rowH / 2)
+        .attr('r', 3.8)
+        .attr('fill', d => d.to > d.from ? '#16a34a' : d.to < d.from ? '#dc2626' : '#64748b')
+        .attr('opacity', d => (options.highlight && d.country !== options.highlight) ? 0.45 : 1);
+
+      row.append('text')
+        .attr('x', d => Math.max(x(d.from), x(d.to)) + 7)
+        .attr('y', rowH / 2)
+        .attr('dy', '0.35em')
+        .attr('fill', d => (options.highlight && d.country === options.highlight) ? TEXT : MUTED)
+        .style('font-size', '10px')
+        .style('font-weight', d => (options.highlight && d.country === options.highlight) ? '700' : '400')
+        .text(d => options.formatDelta ? options.formatDelta(d.to - d.from) : (d.to - d.from));
+    }
+
+    function renderCountryMiniCharts(stats) {
+      const countryData = buildCountryMiniData();
+      const highlight = stats && stats.selectedCountry !== ALL ? stats.filterLabel : null;
+
+      renderValueBarMini(
+        'mini-turnover',
+        countryData
+          .map(d => ({ country: d.filterLabel, value: d.turnover }))
+          .sort((a, b) => d3.descending(a.value, b.value)),
+        {
+          color: '#7c9cf5',
+          minMax: 1,
+          formatAxis: d => `${Math.round(d * 100)}%`,
+          formatLabel: v => `${Math.round(v * 100)}%`,
+          highlight
+        }
+      );
+
+      renderValueBarMini(
+        'mini-survival',
+        countryData
+          .filter(d => d.n1 > 0)
+          .map(d => ({ country: d.filterLabel, value: d.survival }))
+          .sort((a, b) => d3.descending(a.value, b.value)),
+        {
+          color: '#34d399',
+          minMax: 1,
+          formatAxis: d => `${Math.round(d * 100)}%`,
+          formatLabel: v => `${Math.round(v * 100)}%`,
+          highlight
+        }
+      );
+
+      renderDeltaMini(
+        'mini-breadth',
+        countryData
+          .filter(d => d.avgBreadth1 != null && d.avgBreadth2 != null)
+          .map(d => ({ country: d.filterLabel, from: d.avgBreadth1, to: d.avgBreadth2 }))
+          .sort((a, b) => d3.descending(Math.abs(a.to - a.from), Math.abs(b.to - b.from))),
+        {
+          formatAxis: d => num(d, 1),
+          formatDelta: d => `${d >= 0 ? '+' : ''}${num(d, 1)}`,
+          highlight
+        }
+      );
+
+      renderDeltaMini(
+        'mini-multishare',
+        countryData
+          .filter(d => d.multiShare1 != null && d.multiShare2 != null)
+          .map(d => ({ country: d.filterLabel, from: d.multiShare1, to: d.multiShare2 }))
+          .sort((a, b) => d3.descending(Math.abs(a.to - a.from), Math.abs(b.to - b.from))),
+        {
+          formatAxis: d => `${Math.round(d * 100)}%`,
+          formatDelta: d => `${(d >= 0 ? '+' : '')}${(d * 100).toFixed(0)} pp`,
+          highlight
+        }
+      );
+    }
+
+    function renderForSelection() {
+      if (!rawData) return;
+      cachedStats = compute(rawData.j1, rawData.j2, countrySelect.value);
+      renderMetrics(cachedStats, true);
+      renderNotes(cachedStats);
+    }
+
+    function populateCountrySelector(countries) {
+      const frag = document.createDocumentFragment();
+      countries.forEach(country => {
+        const option = document.createElement('option');
+        option.value = country;
+        option.textContent = country;
+        frag.appendChild(option);
+      });
+      countrySelect.appendChild(frag);
+    }
+
+    async function load() {
+      try {
+        const [r1, r2] = await Promise.all([fetch('https://guardeec.github.io/FAMOUS/dataset_1.json'), fetch('https://guardeec.github.io/FAMOUS/dataset_2.json')]);
+        if (!r1.ok || !r2.ok) throw new Error('Could not fetch dataset_1.json and dataset_2.json from the same folder as this HTML file.');
+        const [j1, j2] = await Promise.all([r1.json(), r2.json()]);
+        rawData = { j1, j2 };
+        allCountries = getAllCountries(j1, j2);
+        populateCountrySelector(allCountries);
+        countryStatsCache = allCountries.map(country => compute(j1, j2, country)).filter(d => d.unionCount > 0);
+        renderForSelection();
+      } catch (err) {
+        errorEl.style.display = 'block';
+        errorEl.textContent = `Autoload failed: ${err.message}`;
+      }
+    }
+
+    countrySelect.addEventListener('change', renderForSelection);
+
+    window.addEventListener('resize', () => {
+      if (cachedStats) {
+        renderMetrics(cachedStats, false);
+      }
+    });
+
+    load();
+  })();
+  </script>
+</body>
+</html>
